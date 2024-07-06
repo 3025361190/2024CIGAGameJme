@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: d8294bbece3f9654d98b755558ca6cc9
+  - enabled: 1
+    path: Assets/Scenes/xiaotutest.unity
+    guid: 1a7d5656e617f71429f6c5a8092a7e93
   m_configObjects: {}
