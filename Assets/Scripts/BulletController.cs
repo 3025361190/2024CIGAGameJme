@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
+
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
+
 
 public class BulletController : MonoBehaviour
 {
     //子弹预制体
     public GameObject bullet;
     //子弹的渲染器
-    public SpriteRenderer sprite;
+    public SpriteRenderer sprite = null;
     //子弹的刚体
     public Rigidbody2D rb;
 
@@ -32,6 +37,9 @@ public class BulletController : MonoBehaviour
     public Sprite[] sprites;
     //子弹颜色变量
     public ColorType bulletCollor;
+
+    //image的Transform
+    public Transform imageTransform;
 
 
     // Start is called before the first frame update
@@ -59,6 +67,7 @@ public class BulletController : MonoBehaviour
     //设置子弹颜色
     public void SetColor(ColorType color)
     {
+        Debug.Log(color);
         bulletCollor = color;
         sprite.sprite = sprites[(int)bulletCollor];
     }
@@ -81,6 +90,7 @@ public class BulletController : MonoBehaviour
     void Fire(Vector2 direction)
     {
         rb.velocity = direction.normalized * speed;
+        matchdirection();
     }
 
 
@@ -102,6 +112,30 @@ public class BulletController : MonoBehaviour
         {
             state = true;
         }
+    }
+
+    // 将二元组映射成360度的角度
+    float GetAngleFromVector2(Vector2 vector)
+    {
+        // 使用Mathf.Atan2计算弧度
+        float angle = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
+
+        // 确保角度在0到360度之间
+        if (angle < 0)
+        {
+            angle += 360;
+        }
+
+        return angle;
+    }
+
+
+    //根据速度方向更改子弹朝向
+    public void matchdirection()
+    {
+        Vector2 direction = rb.velocity.normalized;
+        float angle = GetAngleFromVector2(direction) + 90;
+        imageTransform.rotation = UnityEngine.Quaternion.Euler(0, 0, angle);
     }
 
 
@@ -127,12 +161,14 @@ public class BulletController : MonoBehaviour
             Debug.Log(rb.velocity);
             //水平速度反向
             rb.velocity = new Vector2(rb.velocity.x * -1, rb.velocity.y);
+            matchdirection();
         }
         else if (collision.gameObject.CompareTag("AirWall_Y"))
         {
             Debug.Log(rb.velocity);
             //垂直速度反向
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -1);
+            matchdirection();
         }
 
 
@@ -144,7 +180,9 @@ public class BulletController : MonoBehaviour
             {
                 nextBullet[childNum] = Instantiate(bullet, transform.position, transform.rotation);
                 SetRandomDirection();
+                matchdirection();
                 nextBullet[childNum].GetComponent<BulletController>().SetRandomDirection();
+                nextBullet[childNum].GetComponent<BulletController>().matchdirection();
                 nextBullet[childNum].GetComponent<BulletController>().SetColor(bulletCollor);
                 childNum++;
             }
