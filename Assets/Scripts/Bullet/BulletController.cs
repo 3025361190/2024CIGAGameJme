@@ -197,7 +197,7 @@ public class BulletController : MonoBehaviour
         Debug.Log(rb.velocity);
         
         //×²Ç½·´µ¯
-        if (collision.gameObject.CompareTag("AirWall_X"))
+        if (collision.gameObject.CompareTag("AirWall_X") && state == true)
         {
             Debug.Log(rb.velocity);
             //Destroy(this);
@@ -205,7 +205,7 @@ public class BulletController : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x * -1, rb.velocity.y);
             //matchdirection();
         }
-        else if (collision.gameObject.CompareTag("AirWall_Y"))
+        else if (collision.gameObject.CompareTag("AirWall_Y") && state == true)
         {
             Debug.Log(rb.velocity);
             //Destroy(this);
