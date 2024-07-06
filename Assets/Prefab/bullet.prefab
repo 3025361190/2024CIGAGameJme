@@ -55,6 +55,7 @@ MonoBehaviour:
   normalSpeed: 10
   furySpeed: 20
   state: 0
+  nextBullet: []
   childNum: 0
   sprites:
   - {fileID: 21300000, guid: db7f45985c3cba04985de08f8c20f21a, type: 3}
@@ -66,8 +67,7 @@ MonoBehaviour:
   imageTransform: {fileID: 4848442166988188935}
   Turret: {fileID: 0}
   is_trace: 0
-  sceneManager: {fileID: 1082448979531292413, guid: 82b60412a12268b4c985da4891ed9ebc, type: 3}
-  CDflag: 0
+  sceneManager: {fileID: 5243535884141549003, guid: d38e3ed882169d947abc31bc3c39418c, type: 3}
 --- !u!50 &9158584880856814100
 Rigidbody2D:
   serializedVersion: 4
