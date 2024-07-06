@@ -197,20 +197,37 @@ public class BulletController : MonoBehaviour
         Debug.Log(rb.velocity);
         
         //撞墙反弹
-        if (collision.gameObject.CompareTag("AirWall_X") && state == true)
+        if (collision.gameObject.CompareTag("AirWall_X"))
         {
+            if(state)
+            {
+                rb.velocity = new Vector2(rb.velocity.x * -1, rb.velocity.y);
+            }
+            else
+            {
+                Destroy(bullet);
+            }
             Debug.Log(rb.velocity);
             //Destroy(this);
             //水平速度反向
-            rb.velocity = new Vector2(rb.velocity.x * -1, rb.velocity.y);
+            
             //matchdirection();
         }
-        else if (collision.gameObject.CompareTag("AirWall_Y") && state == true)
+        else if (collision.gameObject.CompareTag("AirWall_Y"))
         {
+
+            if (state)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -1);
+            }
+            else
+            {
+                Destroy(bullet);
+            }
             Debug.Log(rb.velocity);
             //Destroy(this);
             //垂直速度反向
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -1);
+            
             //matchdirection();
         }
 
