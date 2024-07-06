@@ -62,6 +62,9 @@ public class BulletController : MonoBehaviour
         state = true;
         //初始化子弹颜色（随机）
         SetColor((ColorType)Random.Range(0, 5));
+
+        //根据场景状态初始化子弹状态
+
     }
 
     // Update is called once per frame
