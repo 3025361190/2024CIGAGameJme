@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 5528570348199262849}
   - component: {fileID: 5056653589600453385}
   m_Layer: 0
-  m_Name: GameObject (4)
+  m_Name: feiniu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
