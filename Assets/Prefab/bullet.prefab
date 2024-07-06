@@ -224,6 +224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5105366962267005401}
   - component: {fileID: 7949211402530880000}
+  - component: {fileID: 7324960414452436541}
   m_Layer: 0
   m_Name: "\u62D6\u5C3E"
   m_TagString: zidan
@@ -359,3 +360,17 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &7324960414452436541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6204315003587637074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed322ee9a3639243a78f27e590362c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 1195119044060703672}
+  trailRanderer: {fileID: 7949211402530880000}
