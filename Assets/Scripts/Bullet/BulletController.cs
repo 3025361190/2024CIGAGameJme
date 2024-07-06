@@ -83,6 +83,10 @@ public class BulletController : MonoBehaviour
         SetColor((ColorType)Random.Range(0, 5));
 
         Turret =  GameObject.FindGameObjectsWithTag("Turret")[0];
+        if(Turret == null)
+        {
+            Debug.Log("cant find turret");
+        }
     }
 
     void Start()
@@ -131,7 +135,7 @@ public class BulletController : MonoBehaviour
         {
             // 计算新的位置
             Vector3 newPosition = Vector3.MoveTowards(rb.position, Turret.transform.position, recycleSpeed * Time.fixedDeltaTime);
-            Debug.Log(newPosition);
+            // Debug.Log(newPosition);
             // 使用 MovePosition 方法移动刚体
             rb.MovePosition(newPosition);
         }
@@ -172,7 +176,7 @@ public class BulletController : MonoBehaviour
     {
         Vector2 temp = Random.insideUnitCircle.normalized;
         rb.velocity = temp * speed;
-        Debug.Log(temp);
+        // Debug.Log(temp);
     }
 
 
@@ -219,12 +223,15 @@ public class BulletController : MonoBehaviour
     {
         is_trace = true;
         speed = recycleSpeed;
-        Debug.Log("回收");
-        for (int i = 0; i < childNum; i++)
+        Debug.Log("回收 by bullet");
+        // for (int i = 0; i < childNum; i++)
+        // {
+        //     nextBullet.Pop().GetComponent<BulletController>().Recycle();
+        // }
+        foreach (var bullet in nextBullet)
         {
-            nextBullet.Pop().GetComponent<BulletController>().Recycle();
+            bullet.GetComponent<BulletController>().Recycle();
         }
-        
     }
 
 
@@ -299,6 +306,7 @@ public class BulletController : MonoBehaviour
 
             collision.gameObject.GetComponent<Enemy>().HandleHit(bulletCollor);
             Destroy(bullet);
+
         }
 
 
@@ -310,9 +318,10 @@ public class BulletController : MonoBehaviour
             //............
             //............
 
-            sprite.enabled = false;
-            StartCoroutine(WaitSomeSeconds(3.0f));
+            // sprite.enabled = false;
+            // StartCoroutine(WaitSomeSecondsToDestory(100.0f));
             Destroy(bullet);
+            
         }
     }
 
@@ -324,6 +333,7 @@ public class BulletController : MonoBehaviour
 
             if(!CDflag)
             {
+                // Debug.Log("try to split bullet");
                 GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
                 if(temp == null)
                 {
@@ -361,11 +371,11 @@ public class BulletController : MonoBehaviour
 
     }
 
-    IEnumerator WaitSomeSeconds(float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-
-    }
+    // IEnumerator WaitSomeSecondsToDestory(float waitTime)
+    // {
+    //     yield return new WaitForSeconds(waitTime);
+    //     Destroy(bullet);
+    // }
 
 
 
