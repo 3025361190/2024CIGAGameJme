@@ -1,9 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-public enum SceneType{
-    Hot,
-    Cold
-}
+
 public class ShootBullet : MonoBehaviour
 {
     public ObjectPool bulletPool; // 对象池实例
@@ -55,7 +52,7 @@ public class ShootBullet : MonoBehaviour
         return bulletMount;
     }
 
-    private void RecycleBullet(){
+    public void RecycleBullet(){
         foreach (var bullet in Bullets)
         {
             // bullet
@@ -68,8 +65,8 @@ public class ShootBullet : MonoBehaviour
         if(!isEnraged)  bulletMount--;
 
         GameObject bullet = bulletPool.GetObjectFromPool(); // 从对象池获取子弹
-        
-        if(sceneType == SceneType.Cold){
+
+        if(sceneType == SceneType.QingTang){
             Bullets.Add(bullet);
         }
 
