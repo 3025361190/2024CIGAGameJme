@@ -215,7 +215,7 @@ public class BulletController : MonoBehaviour
     {
         for (int i = 0; i < childNum; i++)
         {
-            nextBullet.Pop().GetComponent<BulletController>().Recycle(positioin);
+            nextBullet.Pop().GetComponent<BulletController>().Recycle();
         }
 
         is_trace = true;
