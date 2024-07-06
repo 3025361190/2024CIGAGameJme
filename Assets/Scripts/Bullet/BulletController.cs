@@ -103,7 +103,7 @@ public class BulletController : MonoBehaviour
     //设置子弹颜色
     public void SetColor(ColorType color)
     {
-        Debug.Log(color);
+        //Debug.Log(color);
         bulletCollor = color;
         sprite.sprite = sprites[(int)bulletCollor];
     }
@@ -193,8 +193,8 @@ public class BulletController : MonoBehaviour
     //碰撞函数
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
-        Debug.Log(rb.velocity);
+        //Debug.Log(collision.gameObject.tag);
+        //Debug.Log(rb.velocity);
         
         //撞墙反弹
         if (collision.gameObject.CompareTag("AirWall_X"))
@@ -207,7 +207,7 @@ public class BulletController : MonoBehaviour
             {
                 Destroy(bullet);
             }
-            Debug.Log(rb.velocity);
+            //Debug.Log(rb.velocity);
             //Destroy(this);
             //水平速度反向
             
@@ -224,7 +224,7 @@ public class BulletController : MonoBehaviour
             {
                 Destroy(bullet);
             }
-            Debug.Log(rb.velocity);
+            //Debug.Log(rb.velocity);
             //Destroy(this);
             //垂直速度反向
             
