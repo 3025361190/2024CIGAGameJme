@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour
@@ -104,6 +105,16 @@ public class BulletController : MonoBehaviour
     }
 
 
+    //回收函数
+    void Recycle(Vector3 positioin)
+    {
+        
+    }
+
+
+
+
+
     //碰撞函数
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -140,7 +151,8 @@ public class BulletController : MonoBehaviour
             else if(!state)
             {
                 //打怪场景的碰撞操作
-                //collision.gameObject.GetComponent<Enemy>().HandleHit();
+                collision.gameObject.GetComponent<Enemy>().HandleHit(bulletCollor);
+                Destroy(this);
             }
         }
     }

@@ -7,6 +7,6 @@ public enum ColorType
     Red,
     Yellow,
     Blue,
-    Black,
+    Purple,
     White,
 }
