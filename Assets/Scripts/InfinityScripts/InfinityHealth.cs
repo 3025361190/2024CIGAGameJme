@@ -24,6 +24,7 @@ public class InfinityHealth : MonoBehaviour
 
     private float lastDamageTime;               // 记录最后一次受到伤害的时间
     private bool isHealing;                     // 是否正在恢复血量
+    public GameObject defeat;//失败窗口
 
     void Start()
     {
@@ -56,8 +57,7 @@ public class InfinityHealth : MonoBehaviour
         if (currentHealth < 0)
         {
             currentHealth = 0;
-            // 调用游戏结束的函数
-            // ...
+            Gameover();
         }
 
         lastDamageTime = Time.time; // 更新最后一次受到伤害的时间
@@ -91,5 +91,9 @@ public class InfinityHealth : MonoBehaviour
         }
 
         isHealing = false;
+    }
+    private void Gameover()
+    {
+        defeat.SetActive(true);
     }
 }
