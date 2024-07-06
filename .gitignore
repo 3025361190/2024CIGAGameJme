@@ -70,3 +70,8 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+
+# Fortunate瑞添加的sense ignore
+test1.unity
+test1.unity.meta
