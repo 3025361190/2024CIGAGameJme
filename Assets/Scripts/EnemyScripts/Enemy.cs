@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     public ColorType enemyColor;                // 敌人颜色
     public int amount;                          // 敌人伤害值
     public float ChainEffectRadius = 2.0f;      // 连锁效果半径
+    public GameObject baozha;
+    private GameObject currentEnemy;
 
     // Start is called before the first frame update
     private void Start() {
@@ -59,8 +61,17 @@ public class Enemy : MonoBehaviour
     // 敌人死亡和注销
     public void Die()
     {
-        GameObject.Find("EnemySpawnerObject").GetComponent<EnemySpawner>().RemoveEnemy(gameObject);
-        Destroy(gameObject);
+        Vector3 currentPosition = transform.position; // 使用 transform.position 获取当前对象的位置
+        GameObject newPrefabInstance = Instantiate(baozha, currentPosition, Quaternion.identity);
+
+        // 获取 EnemySpawner 的引用并调用 RemoveEnemy 方法
+        EnemySpawner enemySpawner = GameObject.Find("EnemySpawnerObject")?.GetComponent<EnemySpawner>();
+        if (enemySpawner != null)
+        {
+            enemySpawner.RemoveEnemy(gameObject); // 将当前敌人移除
+        }
+
+        Destroy(gameObject); // 销毁当前敌人对象
     }
 
     // 敌人被子弹击中时,处理击中事件,由子弹调用

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3500825259082668504}
   - component: {fileID: 7929400126248636518}
   - component: {fileID: 3855766145303607568}
+  - component: {fileID: 8794080464995457970}
   - component: {fileID: 7351371721810698467}
   m_Layer: 0
   m_Name: baozha2
@@ -107,6 +108,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8794080464995457970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581044435470829640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 085ef04623a43bf42a24a62b4e52482c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &7351371721810698467
 AudioSource:
   m_ObjectHideFlags: 0
