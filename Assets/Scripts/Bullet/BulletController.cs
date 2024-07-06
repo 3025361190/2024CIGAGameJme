@@ -79,6 +79,8 @@ public class BulletController : MonoBehaviour
         state = false;
         //初始化子弹颜色（随机）
         SetColor((ColorType)Random.Range(0, 5));
+
+        Turret =  GameObject.FindGameObjectsWithTag("Turret")[0];
     }
 
     void Start()
@@ -127,7 +129,7 @@ public class BulletController : MonoBehaviour
         {
             // 计算新的位置
             Vector3 newPosition = Vector3.MoveTowards(rb.position, Turret.transform.position, recycleSpeed * Time.fixedDeltaTime);
-
+            Debug.Log(newPosition);
             // 使用 MovePosition 方法移动刚体
             rb.MovePosition(newPosition);
         }
@@ -211,8 +213,9 @@ public class BulletController : MonoBehaviour
 
 
     //回收函数
-    void Recycle()
+    public void Recycle()
     {
+        Debug.Log("回收");
         for (int i = 0; i < childNum; i++)
         {
             nextBullet.Pop().GetComponent<BulletController>().Recycle();

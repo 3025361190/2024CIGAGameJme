@@ -470,9 +470,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acb24f41bb10f0f438f3c675646c0526, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPool: {fileID: 613562738}
+  bulletPrefab: {fileID: 1195119044060703672, guid: e5b9fdfc7576a2d4c805a49001533457, type: 3}
   bulletSpeed: 10
   currentTime: 0.3
+  Bullets: []
+  bulletMount: 0
   isEnraged: 1
   bulletCountText: {fileID: 7676343005426422169}
 --- !u!212 &206246619
@@ -1324,6 +1326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 1195119044060703672, guid: e5b9fdfc7576a2d4c805a49001533457, type: 3}
   poolSize: 200
+  pool: []
 --- !u!4 &613562739
 Transform:
   m_ObjectHideFlags: 0

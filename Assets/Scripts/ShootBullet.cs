@@ -4,15 +4,18 @@ using UnityEngine.UI; // 引入Unity UI命名空间
 
 public class ShootBullet : MonoBehaviour
 {
-    public ObjectPool bulletPool; // 对象池实例
+    [SerializeField]
+    private GameObject bulletPrefab;
     public float bulletSpeed = 10f; // 子弹速度
     public float currentTime = 0.1f; // 弹幕间隔时间
-    private Animator animator;
+    // private Animator animator;
 
     private float invokeTime; // 弹幕计时
 
+    [SerializeField]
     private List<GameObject> Bullets = new List<GameObject>();
 
+    [SerializeField]
     private int bulletMount;
     public bool isEnraged;
     private SceneType sceneType;
@@ -23,7 +26,7 @@ public class ShootBullet : MonoBehaviour
     {
         invokeTime = currentTime;
         UpdateBulletCountUI(); // 初始更新一次UI
-        animator = GetComponent<Animator>();
+        // animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -42,6 +45,10 @@ public class ShootBullet : MonoBehaviour
         {
             invokeTime = currentTime;
         }
+
+        if(Input.GetKeyDown(KeyCode.F)){
+            RecycleBullet();
+        }
     }
 
     private void UpdateBulletCountUI()
@@ -56,12 +63,12 @@ public class ShootBullet : MonoBehaviour
     {
         if (!isEnraged) bulletMount--;
 
-        GameObject bullet = bulletPool.GetObjectFromPool(); // 从对象池获取子弹
+        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
-        if (sceneType == SceneType.QingTang)
-        {
+        // if (sceneType == SceneType.QingTang)
+        // {
             Bullets.Add(bullet);
-        }
+        // }
 
         bullet.transform.position = transform.position;
 
@@ -75,7 +82,7 @@ public class ShootBullet : MonoBehaviour
         bulletRb.velocity = shootDirection * bulletSpeed;
 
         UpdateBulletCountUI(); // 更新UI显示
-        animator.SetTrigger("Switch");
+        // animator.SetTrigger("Switch");
     }
 
     public void AddBulletMount()
@@ -92,9 +99,12 @@ public class ShootBullet : MonoBehaviour
 
     public void RecycleBullet()
     {
+        Debug.Log("回收");
         foreach (var bullet in Bullets)
         {
             // 处理回收子弹的逻辑
+            bullet.GetComponent<BulletController>().Recycle();
         }
+        Bullets.Clear();
     }
 }
