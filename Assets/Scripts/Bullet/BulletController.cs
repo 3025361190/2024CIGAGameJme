@@ -52,7 +52,8 @@ public class BulletController : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+
+    public void Awake()
     {
         //初始化速度
         speed = normalSpeed;
@@ -62,23 +63,33 @@ public class BulletController : MonoBehaviour
         state = true;
         //初始化子弹颜色（随机）
         SetColor((ColorType)Random.Range(0, 5));
+    }
+
+    void Start()
+    {
+        
+
+        Fire(new Vector2(2, -1));
+
 
         //根据场景状态初始化子弹状态
-
+        //..............
+        //..............
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.V))
-        {
-            Fire(new Vector2(2, -1));
-        }
+        
         //实时更新子弹朝向
         matchdirection();
     }
     public void FixedUpdate()
     {
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    Fire(new Vector2(2, -1));
+        //}
         if (is_trace)
         {
             // 计算新的位置
@@ -222,7 +233,7 @@ public class BulletController : MonoBehaviour
             {
                 //打怪场景的碰撞操作
                 collision.gameObject.GetComponent<Enemy>().HandleHit(bulletCollor);
-                Destroy(this);
+                Destroy(bullet);
             }
         }
 
@@ -234,7 +245,7 @@ public class BulletController : MonoBehaviour
             //调用炮台子弹数量+1的函数
             //............
             //............
-            Destroy(this);
+            Destroy(bullet);
         }
     }
 

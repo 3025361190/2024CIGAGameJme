@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - zidan
   - Turret
+  - Enemy
   layers:
   - Default
   - TransparentFX
