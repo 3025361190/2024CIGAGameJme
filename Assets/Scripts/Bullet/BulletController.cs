@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
@@ -50,6 +50,9 @@ public class BulletController : MonoBehaviour
     //追踪状态标志
     public bool is_trace = false;
 
+    //场景实例
+    
+
 
     // Start is called before the first frame update
 
@@ -60,7 +63,7 @@ public class BulletController : MonoBehaviour
         //绑定刚体
         rb = GetComponent<Rigidbody2D>();
         //初始化子弹状态
-        state = true;
+        state = false;
         //初始化子弹颜色（随机）
         SetColor((ColorType)Random.Range(0, 5));
     }

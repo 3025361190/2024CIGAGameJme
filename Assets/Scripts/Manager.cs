@@ -8,7 +8,7 @@ using UnityEngine;
 public class Manager : MonoBehaviour
 {
     public GameObject turret;
-    private SceneType currentSceneType = SceneType.QingTang;
+    private SceneType currentSceneType = SceneType.HongYou;
 
     public SceneType GetCurrentSceneType(){
         return currentSceneType;
