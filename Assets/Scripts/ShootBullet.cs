@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI; // 引入Unity UI命名空间
 
 public class ShootBullet : MonoBehaviour
 {
@@ -11,15 +12,16 @@ public class ShootBullet : MonoBehaviour
 
     private List<GameObject> Bullets = new List<GameObject>();
 
-
     private int bulletMount;
     public bool isEnraged;
-
     private SceneType sceneType;
+
+    public Text bulletCountText; // UI Text 对象
 
     private void Start()
     {
         invokeTime = currentTime;
+        UpdateBulletCountUI(); // 初始更新一次UI
     }
 
     private void Update()
@@ -31,6 +33,7 @@ public class ShootBullet : MonoBehaviour
             {
                 invokeTime = 0;
                 Shoot();
+                UpdateBulletCountUI(); // 射击后更新UI
             }
         }
         if (Input.GetMouseButtonUp(0))
@@ -39,34 +42,22 @@ public class ShootBullet : MonoBehaviour
         }
     }
 
-    private void ChangeFrequency(float f){
-        currentTime = f;
-    }
-    private void ChangeSpeed(float v){
-        bulletSpeed = v;
-    }
-    public void AddBulletMount(){
-        bulletMount++;
-    }
-    public int GetBulletMount(){
-        return bulletMount;
-    }
-
-    public void RecycleBullet(){
-        foreach (var bullet in Bullets)
+    private void UpdateBulletCountUI()
+    {
+        if (bulletCountText != null)
         {
-            // bullet
+            bulletCountText.text = "Bullet Count: " + bulletMount.ToString();
         }
-
     }
-    
+
     private void Shoot()
     {
-        if(!isEnraged)  bulletMount--;
+        if (!isEnraged) bulletMount--;
 
         GameObject bullet = bulletPool.GetObjectFromPool(); // 从对象池获取子弹
 
-        if(sceneType == SceneType.QingTang){
+        if (sceneType == SceneType.QingTang)
+        {
             Bullets.Add(bullet);
         }
 
@@ -80,5 +71,26 @@ public class ShootBullet : MonoBehaviour
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
 
         bulletRb.velocity = shootDirection * bulletSpeed;
+
+        UpdateBulletCountUI(); // 更新UI显示
+    }
+
+    public void AddBulletMount()
+    {
+        bulletMount++;
+        UpdateBulletCountUI(); // 增加子弹后更新UI显示
+    }
+
+    public int GetBulletMount()
+    {
+        return bulletMount;
+    }
+
+    public void RecycleBullet()
+    {
+        foreach (var bullet in Bullets)
+        {
+            // 处理回收子弹的逻辑
+        }
     }
 }

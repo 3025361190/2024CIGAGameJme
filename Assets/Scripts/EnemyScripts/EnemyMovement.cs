@@ -56,8 +56,9 @@ public class EnemyMovement : MonoBehaviour
     }
 
     // 碰撞检测,当敌人碰撞到Infinity时触发
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
+        Debug.Log("Collision detected");
         if (collision.gameObject.CompareTag("Infinity"))
         {
             // 获取第一个碰撞点
