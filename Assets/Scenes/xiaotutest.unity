@@ -405,6 +405,7 @@ GameObject:
   - component: {fileID: 206246619}
   - component: {fileID: 206246618}
   - component: {fileID: 206246617}
+  - component: {fileID: 206246622}
   m_Layer: 0
   m_Name: Player (1)
   m_TagString: Turret
@@ -473,6 +474,7 @@ MonoBehaviour:
   bulletSpeed: 10
   currentTime: 0.3
   isEnraged: 1
+  bulletCountText: {fileID: 7676343005426422169}
 --- !u!212 &206246619
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -554,6 +556,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &206246622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206246616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2f02706464f7994c866426ecfca2a07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &221809807
 GameObject:
   m_ObjectHideFlags: 0
@@ -3274,6 +3288,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
+--- !u!114 &7676343005426422169 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1495493933908606235, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
+  m_PrefabInstance: {fileID: 7676343005426422168}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
