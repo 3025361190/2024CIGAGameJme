@@ -10,3 +10,7 @@ public enum ColorType
     Purple,
     White,
 }
+public enum SceneType{
+    HongYou,
+    QingTang
+}
