@@ -8,6 +8,7 @@ TagManager:
   - AirWall_Y
   - Bullet
   - zidan
+  - Turret
   layers:
   - Default
   - TransparentFX

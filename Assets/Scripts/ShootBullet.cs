@@ -1,5 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
-
+public enum SceneType{
+    Hot,
+    Cold
+}
 public class ShootBullet : MonoBehaviour
 {
     public ObjectPool bulletPool; // 对象池实例
@@ -8,9 +12,13 @@ public class ShootBullet : MonoBehaviour
 
     private float invokeTime; // 弹幕计时
 
+    private List<GameObject> Bullets = new List<GameObject>();
 
-    public int bulletMount;
+
+    private int bulletMount;
     public bool isEnraged;
+
+    private SceneType sceneType;
 
     private void Start()
     {
@@ -40,12 +48,31 @@ public class ShootBullet : MonoBehaviour
     private void ChangeSpeed(float v){
         bulletSpeed = v;
     }
+    public void AddBulletMount(){
+        bulletMount++;
+    }
+    public int GetBulletMount(){
+        return bulletMount;
+    }
+
+    private void RecycleBullet(){
+        foreach (var bullet in Bullets)
+        {
+            // bullet
+        }
+
+    }
     
     private void Shoot()
     {
         if(!isEnraged)  bulletMount--;
 
         GameObject bullet = bulletPool.GetObjectFromPool(); // 从对象池获取子弹
+        
+        if(sceneType == SceneType.Cold){
+            Bullets.Add(bullet);
+        }
+
         bullet.transform.position = transform.position;
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
