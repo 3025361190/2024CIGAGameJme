@@ -56,7 +56,12 @@ MonoBehaviour:
   state: 0
   nextBullet: []
   childNum: 0
-  sprites: []
+  sprites:
+  - {fileID: 21300000, guid: db7f45985c3cba04985de08f8c20f21a, type: 3}
+  - {fileID: 21300000, guid: 4633e91a026c25541a902cfd239a9371, type: 3}
+  - {fileID: 21300000, guid: b3fefd9cd8883fd4faf00d36510be9e4, type: 3}
+  - {fileID: 21300000, guid: 9c11bf35025b76b48a42d249f0beade2, type: 3}
+  - {fileID: 21300000, guid: 486aa350cbceec142abc56f5c56c3211, type: 3}
   bulletCollor: 0
 --- !u!50 &9158584880856814100
 Rigidbody2D:
