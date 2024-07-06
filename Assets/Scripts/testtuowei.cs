@@ -25,20 +25,22 @@ public class MoveTrailsRandomly : MonoBehaviour
             float waitTime = Random.Range(minWaitTime, maxWaitTime);
             yield return new WaitForSeconds(waitTime);
 
+            // 让拖尾特效朝向屏幕中心点
+            Vector3 screenCenter = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2f, Screen.height / 2f, Camera.main.nearClipPlane));
+            Vector3 direction = (screenCenter - trail.transform.position).normalized;
+            trail.transform.up = direction; // 将拖尾特效的上方向设为朝向中心点的方向
+
             // 同时启动移动协程，并等待移动完成
-            StartCoroutine(MoveTrailToCenter(trail));
+            StartCoroutine(MoveTrailToCenter(trail, screenCenter));
         }
     }
 
-    IEnumerator MoveTrailToCenter(TrailRenderer trail)
+    IEnumerator MoveTrailToCenter(TrailRenderer trail, Vector3 targetPosition)
     {
-        // 计算屏幕中心点的世界坐标
-        Vector3 screenCenter = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2f, Screen.height / 2f, Camera.main.nearClipPlane));
-
         while (true)
         {
             // 计算拖尾特效当前位置和目标位置的方向向量
-            Vector3 direction = (screenCenter - trail.transform.position).normalized;
+            Vector3 direction = (targetPosition - trail.transform.position).normalized;
 
             // 计算拖尾特效移动的位移量
             Vector3 moveAmount = direction * moveSpeed * Time.deltaTime;
@@ -47,7 +49,7 @@ public class MoveTrailsRandomly : MonoBehaviour
             trail.transform.position += moveAmount;
 
             // 在某个条件下退出循环，例如到达目标位置
-            if (Vector3.Distance(trail.transform.position, screenCenter) < 0.01f)
+            if (Vector3.Distance(trail.transform.position, targetPosition) < 0.01f)
             {
                 break;
             }

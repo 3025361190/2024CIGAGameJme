@@ -6,7 +6,6 @@ public class TriggerZidanCollision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("111");
         // 检查碰撞的物体是否具有 "zidan" 标签
         if (other.CompareTag("zidan"))
         {
