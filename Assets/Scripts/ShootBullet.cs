@@ -7,6 +7,7 @@ public class ShootBullet : MonoBehaviour
     public ObjectPool bulletPool; // 对象池实例
     public float bulletSpeed = 10f; // 子弹速度
     public float currentTime = 0.1f; // 弹幕间隔时间
+    private Animator animator;
 
     private float invokeTime; // 弹幕计时
 
@@ -22,6 +23,7 @@ public class ShootBullet : MonoBehaviour
     {
         invokeTime = currentTime;
         UpdateBulletCountUI(); // 初始更新一次UI
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -46,7 +48,7 @@ public class ShootBullet : MonoBehaviour
     {
         if (bulletCountText != null)
         {
-            bulletCountText.text = "Bullet Count: " + bulletMount.ToString();
+            bulletCountText.text =bulletMount.ToString();
         }
     }
 
@@ -73,12 +75,14 @@ public class ShootBullet : MonoBehaviour
         bulletRb.velocity = shootDirection * bulletSpeed;
 
         UpdateBulletCountUI(); // 更新UI显示
+        animator.SetTrigger("Switch");
     }
 
     public void AddBulletMount()
     {
         bulletMount++;
         UpdateBulletCountUI(); // 增加子弹后更新UI显示
+       
     }
 
     public int GetBulletMount()
