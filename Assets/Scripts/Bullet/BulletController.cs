@@ -240,7 +240,7 @@ public class BulletController : MonoBehaviour
 
 
         //碰撞炮台触发函数
-        else if(collision.gameObject.CompareTag("Turret"))
+        else if(collision.gameObject.CompareTag("Turret") && is_trace == true)
         {
             //调用炮台子弹数量+1的函数
             //............
