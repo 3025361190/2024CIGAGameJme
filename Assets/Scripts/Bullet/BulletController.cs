@@ -32,7 +32,7 @@ public class BulletController : MonoBehaviour
     public bool state;
 
     //分裂出来的子弹数组
-    public GameObject[] nextBullet;
+    public Stack<GameObject> nextBullet = new();
     //分裂出来的子弹数量
     public int childNum = 0;
 
@@ -51,7 +51,20 @@ public class BulletController : MonoBehaviour
     public bool is_trace = false;
 
     //场景实例
-    
+    public GameObject sceneManager;
+
+    //分裂上限
+    //public int splitLimit = 1;
+
+
+
+    //// 技能冷却时间（秒）
+    //public float cooldownTime = 1f;
+    //// 下次可以使用技能的时间
+    //private float nextUseTime = Time.time; 
+
+    //分裂CD标志
+    public bool CDflag = false;
 
 
     // Start is called before the first frame update
@@ -70,14 +83,22 @@ public class BulletController : MonoBehaviour
 
     void Start()
     {
-        
+
 
         //Fire(new Vector2(2, -1));
 
 
         //根据场景状态初始化子弹状态
-        //..............
-        //..............
+        SceneType sceneType = sceneManager.GetComponent<Manager>().GetCurrentSceneType();
+
+        if(sceneType == SceneType.QingTang)
+        {
+            state = true;
+        }
+        else
+        {
+            state = false;
+        }
     }
 
     // Update is called once per frame
@@ -136,7 +157,9 @@ public class BulletController : MonoBehaviour
     //随即方向发射子弹
     public void SetRandomDirection()
     {
-        this.rb.velocity = Random.insideUnitCircle.normalized * speed;
+        Vector2 temp = Random.insideUnitCircle.normalized;
+        rb.velocity = temp * speed;
+        Debug.Log(temp);
     }
 
 
@@ -183,11 +206,14 @@ public class BulletController : MonoBehaviour
     {
         for (int i = 0; i < childNum; i++)
         {
-            nextBullet[i].GetComponent<BulletController>().Recycle(positioin);
+            nextBullet.Pop().GetComponent<BulletController>().Recycle(positioin);
         }
 
         is_trace = true;
     }
+
+
+
 
 
 
@@ -236,25 +262,28 @@ public class BulletController : MonoBehaviour
 
 
         //碰撞敌人触发函数
-        else if(collision.gameObject.CompareTag("Enemy"))
+        else if(collision.gameObject.CompareTag("Enemy") && !state)
         {
-            //增加子弹场景中，碰撞相同颜色的敌人，子弹分裂
-            if(state && collision.gameObject.GetComponent<Enemy>().enemyColor == bulletCollor) 
-            {
-                nextBullet[childNum] = Instantiate(bullet, transform.position, transform.rotation);
-                SetRandomDirection();
-                //matchdirection();
-                nextBullet[childNum].GetComponent<BulletController>().SetRandomDirection();
-                nextBullet[childNum].GetComponent<BulletController>().matchdirection();
-                nextBullet[childNum].GetComponent<BulletController>().SetColor(bulletCollor);
-                childNum++;
-            }
-            else if(!state)
-            {
-                //打怪场景的碰撞操作
-                collision.gameObject.GetComponent<Enemy>().HandleHit(bulletCollor);
-                Destroy(bullet);
-            }
+            ////增加子弹场景中，碰撞相同颜色的敌人，子弹分裂
+            //if(state && collision.gameObject.GetComponent<Enemy>().enemyColor == bulletCollor) 
+            //{
+            //    nextBullet[childNum] = Instantiate(bullet, transform.position, transform.rotation);
+            //    SetRandomDirection();
+            //    //matchdirection();
+            //    nextBullet[childNum].GetComponent<BulletController>().SetRandomDirection();
+            //    nextBullet[childNum].GetComponent<BulletController>().matchdirection();
+            //    nextBullet[childNum].GetComponent<BulletController>().SetColor(bulletCollor);
+            //    childNum++;
+            //}
+            //else if(!state)
+            //{
+            //    //打怪场景的碰撞操作
+            //    collision.gameObject.GetComponent<Enemy>().HandleHit(bulletCollor);
+            //    Destroy(bullet);
+            //}
+
+            collision.gameObject.GetComponent<Enemy>().HandleHit(bulletCollor);
+            Destroy(bullet);
         }
 
 
@@ -270,5 +299,50 @@ public class BulletController : MonoBehaviour
     }
 
 
-    
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy") && state && collision.gameObject.GetComponent<Enemy>().enemyColor == bulletCollor)
+        {
+
+            if(!CDflag)
+            {
+                GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
+                if(temp == null)
+                {
+                    Debug.Log("cant split bullet");
+                }
+                nextBullet.Push(temp);
+                SetRandomDirection();
+                temp.GetComponent<BulletController>().SetRandomDirection();
+                childNum++;
+
+                temp.GetComponent<BulletController>().WaitTwoSeconds();
+                WaitTwoSeconds();
+            }
+            
+
+            //nextUseTime = Time.time + cooldownTime;
+            //temp.GetComponent<BulletController>().nextUseTime = Time.time + cooldownTime;
+        }
+    }
+
+    // 定义协程
+    IEnumerator WaitTwoSeconds()
+    {
+        CDflag = true;
+
+        //GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
+        //nextBullet.Push(temp);
+        //SetRandomDirection();
+        //temp.GetComponent<BulletController>().SetRandomDirection();
+        //childNum++;
+        // 等待两秒
+        yield return new WaitForSeconds(2.0f);
+
+        CDflag = false;
+
+    }
+
+
+
 }

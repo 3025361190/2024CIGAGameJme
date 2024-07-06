@@ -1382,7 +1382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1195119044060703672, guid: e5b9fdfc7576a2d4c805a49001533457, type: 3}
-  poolSize: 200
+  poolSize: 20000
 --- !u!4 &613562739
 Transform:
   m_ObjectHideFlags: 0

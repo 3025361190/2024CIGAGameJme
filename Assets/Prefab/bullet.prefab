@@ -67,6 +67,7 @@ MonoBehaviour:
   imageTransform: {fileID: 4848442166988188935}
   Turret: {fileID: 0}
   is_trace: 0
+  sceneManager: {fileID: 5243535884141549003, guid: d38e3ed882169d947abc31bc3c39418c, type: 3}
 --- !u!50 &9158584880856814100
 Rigidbody2D:
   serializedVersion: 4
