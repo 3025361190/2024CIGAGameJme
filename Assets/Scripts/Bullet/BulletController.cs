@@ -316,8 +316,8 @@ public class BulletController : MonoBehaviour
                 temp.GetComponent<BulletController>().SetRandomDirection();
                 childNum++;
 
-                temp.GetComponent<BulletController>().WaitTwoSeconds();
-                WaitTwoSeconds();
+                StartCoroutine(temp.GetComponent<BulletController>().WaitTwoSeconds());
+                StartCoroutine(WaitTwoSeconds());
             }
             
 
@@ -337,7 +337,7 @@ public class BulletController : MonoBehaviour
         //temp.GetComponent<BulletController>().SetRandomDirection();
         //childNum++;
         // µÈ´ýÁ½Ãë
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.5f);
 
         CDflag = false;
 
