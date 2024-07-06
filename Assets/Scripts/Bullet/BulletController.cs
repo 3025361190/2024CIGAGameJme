@@ -4,6 +4,7 @@ using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.U2D;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
 
@@ -21,7 +22,7 @@ public class BulletController : MonoBehaviour
     public float speed;
 
     //子弹回收的速度
-    public float recycleSpeed = 15.0f;
+    public float recycleSpeed = 25.0f;
 
     //子弹正常的速度
     public float normalSpeed = 10.0f;
@@ -217,6 +218,7 @@ public class BulletController : MonoBehaviour
     public void Recycle()
     {
         is_trace = true;
+        speed = recycleSpeed;
         Debug.Log("回收");
         for (int i = 0; i < childNum; i++)
         {
@@ -307,6 +309,9 @@ public class BulletController : MonoBehaviour
             //调用炮台子弹数量+1的函数
             //............
             //............
+
+            sprite.enabled = false;
+            StartCoroutine(WaitSomeSeconds(3.0f));
             Destroy(bullet);
         }
     }
@@ -353,6 +358,12 @@ public class BulletController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         CDflag = false;
+
+    }
+
+    IEnumerator WaitSomeSeconds(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
 
     }
 
