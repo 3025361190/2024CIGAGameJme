@@ -554,11 +554,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &208469380 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5431722583439510489, guid: e7ce947f02011674bab0f124c73aa7b9, type: 3}
-  m_PrefabInstance: {fileID: 1954491921}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &221809807
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,7 +620,7 @@ GameObject:
   - component: {fileID: 262775462}
   - component: {fileID: 262775465}
   m_Layer: 0
-  m_Name: GameObject (2)
+  m_Name: trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1414,6 +1409,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
+  maxHealth: 30
+  timeSinceLastDamage: 0
+  damageThreshold: 15
+  regenTimeThreshold: 5
+  regenRate: 1
   quanquan: {fileID: 0}
   defeat: {fileID: 0}
 --- !u!4 &694200191
@@ -1495,7 +1495,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 5beb74d303e2b2f418bbc44d548516e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1655,7 +1655,7 @@ GameObject:
   - component: {fileID: 1303272678}
   - component: {fileID: 1303272677}
   m_Layer: 0
-  m_Name: "\u8B66\u544A"
+  m_Name: "\u5708\u5708"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1743,11 +1743,11 @@ Transform:
   m_GameObject: {fileID: 1303272676}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0.71139574, w: 0.70279175}
-  m_LocalPosition: {x: -7.4017577, y: -0.22860298, z: -0.08455178}
-  m_LocalScale: {x: 1.2680994, y: 1.2680994, z: 1.2680994}
+  m_LocalPosition: {x: 0.09596014, y: -0.019191995, z: 0.0045546964}
+  m_LocalScale: {x: 1.2680998, y: 1.2680998, z: 1.2680994}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 208469380}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90.697}
 --- !u!1 &1305297211
 GameObject:
@@ -2442,10 +2442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5431722583439510489, guid: e7ce947f02011674bab0f124c73aa7b9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1303272679}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7ce947f02011674bab0f124c73aa7b9, type: 3}
 --- !u!1 &2064359007
@@ -2727,3 +2724,4 @@ SceneRoots:
   - {fileID: 694200191}
   - {fileID: 206246621}
   - {fileID: 613562739}
+  - {fileID: 1303272679}
