@@ -55,10 +55,10 @@ public class EnemyMovement : MonoBehaviour
         currentDirection = (directionToTarget + randomDirection * randomRange).normalized;
     }
 
-    // 碰撞检测,当敌人碰撞到home时触发
+    // 碰撞检测,当敌人碰撞到Infinity时触发
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("home"))
+        if (collision.gameObject.CompareTag("Infinity"))
         {
             // 获取第一个碰撞点
             ContactPoint2D contact = collision.GetContact(0);
