@@ -58,6 +58,7 @@ public class BulletController : MonoBehaviour
 
 
 
+
     //// 技能冷却时间（秒）
     //public float cooldownTime = 1f;
     //// 下次可以使用技能的时间
@@ -215,13 +216,13 @@ public class BulletController : MonoBehaviour
     //回收函数
     public void Recycle()
     {
+        is_trace = true;
         Debug.Log("回收");
         for (int i = 0; i < childNum; i++)
         {
             nextBullet.Pop().GetComponent<BulletController>().Recycle();
         }
-
-        is_trace = true;
+        
     }
 
 
@@ -313,7 +314,7 @@ public class BulletController : MonoBehaviour
 
     public void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy") && state && collision.gameObject.GetComponent<Enemy>().enemyColor == bulletCollor)
+        if (collision.gameObject.CompareTag("Enemy") && state && collision.gameObject.GetComponent<Enemy>().enemyColor == bulletCollor && !is_trace)
         {
 
             if(!CDflag)
