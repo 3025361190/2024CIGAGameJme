@@ -39,7 +39,6 @@ public class AlongPathMove : MonoBehaviour
             float segmentLength = (pathPoints[(i + dir + pointCount) % pointCount] - pathPoints[i]).magnitude;
             if (currentDistance <= segmentLength)
             {
-                Debug.Log("Lerp");
                 currentIndex = i;
                 moveDirection = dir*((pathPoints[(i + dir + pointCount) % pointCount] - pathPoints[i])*dir).normalized;
                 targetPosition = pathPoints[i] + moveDirection * currentDistance;

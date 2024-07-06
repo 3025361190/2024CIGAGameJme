@@ -1025,7 +1025,7 @@ GameObject:
   - component: {fileID: 1621541267}
   - component: {fileID: 1621541268}
   m_Layer: 5
-  m_Name: SeetingsMenuMenu
+  m_Name: SettingsMenuMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -22,10 +22,16 @@ public class ShootBullet : MonoBehaviour
 
     public Text bulletCountText; // UI Text 对象
 
+
+    public GameObject currentBullet;
+
     private void Start()
     {
         invokeTime = currentTime;
         UpdateBulletCountUI(); // 初始更新一次UI
+        currentBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        currentBullet.SetActive(false);
+
         // animator = GetComponent<Animator>();
     }
 
@@ -49,6 +55,8 @@ public class ShootBullet : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.F)){
             RecycleBullet();
         }
+
+        Debug.Log(GetBulletColor());
     }
 
     private void UpdateBulletCountUI()
@@ -59,11 +67,17 @@ public class ShootBullet : MonoBehaviour
         }
     }
 
+
+    public ColorType GetBulletColor(){
+        return currentBullet.GetComponent<BulletController>().bulletCollor;
+    }
+
     private void Shoot()
     {
         if (!isEnraged) bulletMount--;
 
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        GameObject bullet = currentBullet;
+        currentBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
         // if (sceneType == SceneType.QingTang)
         // {
