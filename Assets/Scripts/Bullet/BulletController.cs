@@ -69,7 +69,7 @@ public class BulletController : MonoBehaviour
     {
         
 
-        Fire(new Vector2(2, -1));
+        //Fire(new Vector2(2, -1));
 
 
         //根据场景状态初始化子弹状态
