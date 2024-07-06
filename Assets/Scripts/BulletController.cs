@@ -20,6 +20,9 @@ public class BulletController : MonoBehaviour
     //子弹目前的速度
     public float speed;
 
+    //子弹回收的速度
+    public float recycleSpeed = 15.0f;
+
     //子弹正常的速度
     public float normalSpeed = 10.0f;
     //子弹狂暴的速度
@@ -41,6 +44,12 @@ public class BulletController : MonoBehaviour
     //image的Transform
     public Transform imageTransform;
 
+    //炮台实例，用于回收子弹时追踪
+    public GameObject Turret;
+
+    //追踪状态标志
+    public bool is_trace = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +70,19 @@ public class BulletController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.V))
         {
             Fire(new Vector2(2, -1));
+        }
+        //实时更新子弹朝向
+        matchdirection();
+    }
+    public void FixedUpdate()
+    {
+        if (is_trace)
+        {
+            // 计算新的位置
+            Vector3 newPosition = Vector3.MoveTowards(rb.position, Turret.transform.position, recycleSpeed * Time.fixedDeltaTime);
+
+            // 使用 MovePosition 方法移动刚体
+            rb.MovePosition(newPosition);
         }
     }
 
@@ -90,7 +112,7 @@ public class BulletController : MonoBehaviour
     void Fire(Vector2 direction)
     {
         rb.velocity = direction.normalized * speed;
-        matchdirection();
+        //matchdirection();
     }
 
 
@@ -142,7 +164,12 @@ public class BulletController : MonoBehaviour
     //回收函数
     void Recycle(Vector3 positioin)
     {
-        
+        for (int i = 0; i < childNum; i++)
+        {
+            nextBullet[i].GetComponent<BulletController>().Recycle(positioin);
+        }
+
+        is_trace = true;
     }
 
 
@@ -159,16 +186,18 @@ public class BulletController : MonoBehaviour
         if (collision.gameObject.CompareTag("AirWall_X"))
         {
             Debug.Log(rb.velocity);
+            //Destroy(this);
             //水平速度反向
             rb.velocity = new Vector2(rb.velocity.x * -1, rb.velocity.y);
-            matchdirection();
+            //matchdirection();
         }
         else if (collision.gameObject.CompareTag("AirWall_Y"))
         {
             Debug.Log(rb.velocity);
+            //Destroy(this);
             //垂直速度反向
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * -1);
-            matchdirection();
+            //matchdirection();
         }
 
 
@@ -180,7 +209,7 @@ public class BulletController : MonoBehaviour
             {
                 nextBullet[childNum] = Instantiate(bullet, transform.position, transform.rotation);
                 SetRandomDirection();
-                matchdirection();
+                //matchdirection();
                 nextBullet[childNum].GetComponent<BulletController>().SetRandomDirection();
                 nextBullet[childNum].GetComponent<BulletController>().matchdirection();
                 nextBullet[childNum].GetComponent<BulletController>().SetColor(bulletCollor);
@@ -192,6 +221,17 @@ public class BulletController : MonoBehaviour
                 collision.gameObject.GetComponent<Enemy>().HandleHit(bulletCollor);
                 Destroy(this);
             }
+        }
+
+
+
+        //碰撞炮台触发函数
+        else if(collision.gameObject.CompareTag("Turret"))
+        {
+            //调用炮台子弹数量+1的函数
+            //............
+            //............
+            Destroy(this);
         }
     }
 
