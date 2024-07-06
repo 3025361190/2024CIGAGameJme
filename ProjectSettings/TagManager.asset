@@ -4,12 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - AirWall_X
+  - AirWall_Y
+  - Bullet
   - zidan
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Airwall
   - Water
   - UI
   - 
