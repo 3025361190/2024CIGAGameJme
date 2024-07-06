@@ -11,6 +11,7 @@ TagManager:
   - Turret
   - Enemy
   - Infinity
+  - SwitchEntry
   layers:
   - Default
   - TransparentFX
