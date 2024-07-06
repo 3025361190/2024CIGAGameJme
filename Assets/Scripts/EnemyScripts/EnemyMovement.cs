@@ -16,10 +16,15 @@ public class EnemyMovement : MonoBehaviour
     public float moveSpeed = 1f;                // 移动速度
     public float randomRange = 1f;              // 随机移动的幅度
     public float changeDirectionInterval = 2f;  // 改变随机方向的时间间隔
+    public float knockbackDistance = 1f;        // 退后的距离
+    public float knockbackTime = 0.5f;          // 退后持续时间
+    public float bufferTime = 1f;               // 缓冲时间
+    public float moveBackTime = 1f;             // 移动回目标的时间
 
     private Vector2 currentDirection;           // 当前移动方向
     private float timeSinceLastChange;          // 上次改变随机方向的时间
-    private float knockbackDistance = 1f;       // 退后的距离
+     private bool isKnockedBack = false;        // 是否正在被击退
+    
 
     void Start()
     {
@@ -58,31 +63,50 @@ public class EnemyMovement : MonoBehaviour
     // 碰撞检测,当敌人碰撞到Infinity时触发
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("Collision detected");
+        // Debug.Log("Collision detected");
         if (collision.gameObject.CompareTag("Infinity"))
         {
-            // 获取第一个碰撞点
-            ContactPoint2D contact = collision.GetContact(0);
-
-            // 计算退后的方向
-            Vector2 knockbackDirection = (transform.position - (Vector3)contact.point).normalized;
-            // 可以增加反弹的方向啥的
-            // ...
-
-            // 检查退后路径是否被阻挡
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, knockbackDirection, knockbackDistance);
-            if (hit.collider == null)
+            if (collision.gameObject.CompareTag("Infinity") && !isKnockedBack)
             {
-                // 没有障碍物，安全退后
-                transform.position += (Vector3)knockbackDirection * knockbackDistance;
-            }
-            else
-            {
-                // 有障碍物，调整退后距离为距离障碍物的距离减去一个小量
-                float adjustedDistance = hit.distance - 0.1f;
-                transform.position += (Vector3)knockbackDirection * adjustedDistance;
+                ContactPoint2D contact = collision.GetContact(0);
+                Vector2 knockbackDirection = (transform.position - (Vector3)contact.point).normalized;
+
+                // 启动退后协程
+                StartCoroutine(KnockbackRoutine(knockbackDirection));
             }
         }
+    }
+
+    private IEnumerator KnockbackRoutine(Vector2 direction)
+    {
+        isKnockedBack = true;
+        Vector2 startPosition = transform.position;
+        Vector2 knockbackPosition = startPosition + direction * knockbackDistance;
+
+        // 平滑退后
+        float elapsedTime = 0f;
+        while (elapsedTime < knockbackTime)
+        {
+            transform.position = Vector2.Lerp(startPosition, knockbackPosition, elapsedTime / knockbackTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = knockbackPosition;
+
+        // 缓冲时间
+        yield return new WaitForSeconds(bufferTime);
+
+        // 平滑移动回原位置
+        elapsedTime = 0f;
+        while (elapsedTime < moveBackTime)
+        {
+            transform.position = Vector2.Lerp(knockbackPosition, startPosition, elapsedTime / moveBackTime);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        transform.position = startPosition;
+
+        isKnockedBack = false;
     }
 
 }

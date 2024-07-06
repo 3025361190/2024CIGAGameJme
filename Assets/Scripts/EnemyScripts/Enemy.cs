@@ -24,11 +24,31 @@ public class Enemy : MonoBehaviour
     private void Start() {
         // 设置敌人颜色
         enemyColor = (ColorType)Random.Range(0, 5);
+        // 根据颜色设置资源颜色
+        Transform childTransform = transform.Find("body");
+        switch (enemyColor)
+        {
+            case ColorType.Red:
+                childTransform.GetComponent<SpriteRenderer>().color = Color.red;
+                break;
+            case ColorType.Yellow:
+                childTransform.GetComponent<SpriteRenderer>().color = Color.yellow;
+                break;
+            case ColorType.Blue:
+                childTransform.GetComponent<SpriteRenderer>().color = Color.blue;
+                break;
+            case ColorType.White:
+                childTransform.GetComponent<SpriteRenderer>().color = Color.white;
+                break;
+            case ColorType.Purple:
+                childTransform.GetComponent<SpriteRenderer>().color = new Color(0.5f, 0, 0.5f);
+                break;
+        }
         amount = 1;
     }
 
     // 碰撞检测,当敌人碰撞到Infinity时触发,造成伤害
-    private void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Infinity"))
         {
@@ -46,6 +66,7 @@ public class Enemy : MonoBehaviour
     // 敌人被子弹击中时,处理击中事件,由子弹调用
     public void HandleHit(ColorType bulletColor)
     {
+        Debug.Log("Enemy hit by bullet");
         if (bulletColor == enemyColor)
         {
             TriggerChainEffect(enemyColor);
