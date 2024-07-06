@@ -211,7 +211,7 @@ public class BulletController : MonoBehaviour
 
 
     //»ØÊÕº¯Êý
-    void Recycle()
+    public void Recycle()
     {
         for (int i = 0; i < childNum; i++)
         {
