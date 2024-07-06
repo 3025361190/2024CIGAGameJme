@@ -13,9 +13,9 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;          // 敌人预制体, 在unity编辑器中拖动赋值
-    public float spawnInterval = 2.0f;      // 生成敌人的间隔时间
+    public float spawnInterval = 0.5f;      // 生成敌人的间隔时间
     private float timer = 0.0f;             // 计时器
-    public float radius = 10f;              // 圆的半径
+    public float radius = 50.0f;              // 圆的半径
 
     private List<GameObject> enemyList = new();    // 用于注册enemy实例
 

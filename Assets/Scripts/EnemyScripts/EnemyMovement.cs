@@ -19,7 +19,6 @@ public class EnemyMovement : MonoBehaviour
     public float knockbackDistance = 1f;        // 退后的距离
     public float knockbackTime = 0.5f;          // 退后持续时间
     public float bufferTime = 1f;               // 缓冲时间
-    public float moveBackTime = 1f;             // 移动回目标的时间
 
     private Vector2 currentDirection;           // 当前移动方向
     private float timeSinceLastChange;          // 上次改变随机方向的时间
@@ -71,6 +70,14 @@ public class EnemyMovement : MonoBehaviour
                 ContactPoint2D contact = collision.GetContact(0);
                 Vector2 knockbackDirection = (transform.position - (Vector3)contact.point).normalized;
 
+            // 检查退后路径
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, knockbackDirection, knockbackDistance);
+            if (hit.collider != null)
+            {
+                // 如果退后路径被阻挡，调整退后距离为距离障碍物的距离减去一个小量
+                knockbackDistance = hit.distance - 0.1f;
+            }
+
                 // 启动退后协程
                 StartCoroutine(KnockbackRoutine(knockbackDirection));
             }
@@ -95,16 +102,6 @@ public class EnemyMovement : MonoBehaviour
 
         // 缓冲时间
         yield return new WaitForSeconds(bufferTime);
-
-        // 平滑移动回原位置
-        elapsedTime = 0f;
-        while (elapsedTime < moveBackTime)
-        {
-            transform.position = Vector2.Lerp(knockbackPosition, startPosition, elapsedTime / moveBackTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        transform.position = startPosition;
 
         isKnockedBack = false;
     }

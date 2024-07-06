@@ -54,6 +54,9 @@ MonoBehaviour:
   moveSpeed: 1
   randomRange: 1
   changeDirectionInterval: 2
+  knockbackDistance: 1
+  knockbackTime: 0.5
+  bufferTime: 1
 --- !u!114 &3297812194761331955
 MonoBehaviour:
   m_ObjectHideFlags: 0
