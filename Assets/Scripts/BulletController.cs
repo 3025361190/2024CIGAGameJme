@@ -19,6 +19,8 @@ public class BulletController : MonoBehaviour
     public GameObject[] nextBullet;
     public int childNum = 0;
 
+    public Sprite[] sprites;
+
 
     // Start is called before the first frame update
     void Start()
@@ -98,7 +100,7 @@ public class BulletController : MonoBehaviour
             else
             {
                 //打怪场景的碰撞操作
-
+                //collision.gameObject.GetComponent<Enemy>().HandleHit();
             }
         }
     }
