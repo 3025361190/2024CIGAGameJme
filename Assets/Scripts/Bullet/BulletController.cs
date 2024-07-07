@@ -237,7 +237,7 @@ public class BulletController : MonoBehaviour
     {
         is_trace = true;
         speed = recycleSpeed;
-        Debug.Log("回收 by bullet");
+        // Debug.Log("回收 by bullet");
         // for (int i = 0; i < childNum; i++)
         // {
         //     nextBullet.Pop().GetComponent<BulletController>().Recycle();
