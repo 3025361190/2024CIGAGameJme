@@ -1148,7 +1148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b57f01609bbdb84097085962ec70ff6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: xiaotutest
+  sceneName: 6666666
 --- !u!95 &1964537332
 Animator:
   serializedVersion: 5

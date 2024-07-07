@@ -51,9 +51,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0}
-  moveSpeed: 1
-  randomRange: 1
-  changeDirectionInterval: 2
+  moveSpeed: 0.4
+  randomRange: 0.4
+  changeDirectionInterval: 4
   knockbackDistance: 1
   knockbackTime: 0.5
   bufferTime: 1
