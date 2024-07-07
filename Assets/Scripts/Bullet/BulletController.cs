@@ -251,6 +251,17 @@ public class BulletController : MonoBehaviour
 
     public void SetAcFlag()
     {
+        SceneType sceneType = sceneManager.GetComponent<Manager>().currentSceneType;
+
+        if (sceneType == SceneType.QingTang)
+        {
+            state = true;
+        }
+        else
+        {
+            state = false;
+        }
+
         ACFlag = true;
     }
 
