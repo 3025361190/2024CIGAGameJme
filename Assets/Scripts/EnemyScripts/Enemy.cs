@@ -30,19 +30,19 @@ public class Enemy : MonoBehaviour
         switch (enemyColor)
         {
             case ColorType.Red:
-                childTransform.GetComponent<SpriteRenderer>().color = new Color(251f / 255f, 47f / 255f, 144f / 255f);
+                childTransform.GetComponent<SpriteRenderer>().color = new Color(255f / 255f, 126f / 255f, 191f / 255f);
                 break;
             case ColorType.Yellow:
                 childTransform.GetComponent<SpriteRenderer>().color = new Color(234f / 255f, 253f / 255f, 3f / 255f);
                 break;
             case ColorType.Blue:
-                childTransform.GetComponent<SpriteRenderer>().color = new Color(39f / 255f, 237f / 255f, 250f / 255f);
+                childTransform.GetComponent<SpriteRenderer>().color = new Color(151f / 255f, 255f / 255f, 239f / 255f);
                 break;
             case ColorType.White:
                 childTransform.GetComponent<SpriteRenderer>().color = new Color(253f / 255f, 255f / 255f, 255f / 255f);
                 break;
             case ColorType.Purple:
-                childTransform.GetComponent<SpriteRenderer>().color = new Color(109f / 255f, 80f / 255f, 248f / 255f);
+                childTransform.GetComponent<SpriteRenderer>().color = new Color(197f / 255f, 156f / 255f, 255f / 255f);
                 break;
         }
         amount = 1;
