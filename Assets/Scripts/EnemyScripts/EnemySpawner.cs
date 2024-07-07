@@ -19,16 +19,16 @@ public class EnemySpawner : MonoBehaviour
     // 预定义的生成点
     public Vector2[] spawnPoints = new Vector2[]
     {
-        new(-5, 5),
-        new(5, 5),
-        new(5, -5),
-        new(-5, -5),
-        new(0, 5),
+        new(-5, -10),
+        new(5, 10),
+        new(-5, 10),
+        new(5, -10),
         new(0, -5),
-        new(-5, 0),
-        new(5, 0),
-        new(10, 10),
-        new(-10, -10)  
+        new(0, 5),
+        new(-10, 0),
+        new(10, 0),
+        new(0, 10),
+        new(0, -10)  
     };       
 
     private List<GameObject> enemyList = new();    // 用于注册enemy实例
