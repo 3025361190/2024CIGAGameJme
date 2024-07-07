@@ -6,7 +6,6 @@
 */
 
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 // 区分unity中不同库中的Vector2

@@ -345,7 +345,7 @@ Transform:
   m_GameObject: {fileID: 6269226507917693890}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.345, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -477,12 +477,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0}
-  moveSpeed: 1
-  randomRange: 1
+  moveSpeed: 0.3
+  randomRange: 0.3
   changeDirectionInterval: 2
   knockbackDistance: 1
-  knockbackTime: 0.5
-  bufferTime: 1
+  knockbackTime: 1
+  bufferTime: 2
 --- !u!114 &7750317228755511999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,6 +498,7 @@ MonoBehaviour:
   enemyColor: 0
   amount: 0
   ChainEffectRadius: 2
+  cooldownTime: 1
   baozha: {fileID: 581044435470829640, guid: 340067860597b17468819cdd2d13842b, type: 3}
 --- !u!50 &3958139960787047922
 Rigidbody2D:

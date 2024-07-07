@@ -25,6 +25,7 @@ public class Manager : MonoBehaviour
     public GameObject effect;
     private Animator beijing1;
     private Animator beijing2;
+    public AudioSource audioSource;//音效
 
     // public Sprite[] sceneResource;      // 在unity中拖拽设置场景资源
     // Start is called before the first frame update
@@ -70,7 +71,7 @@ public class Manager : MonoBehaviour
             // 清汤切红油动画
             beijing1.SetBool("background",true);
             beijing2.SetTrigger("change");
-
+            audioSource.Play();//音效
         }
         else if(currentSceneType == SceneType.HongYou)
         {
@@ -81,6 +82,7 @@ public class Manager : MonoBehaviour
                 //红油切清汤动画
                 beijing1.SetBool("background", false);
                 beijing2.SetTrigger("change");
+                audioSource.Play();//音效
             }
             else
             {
