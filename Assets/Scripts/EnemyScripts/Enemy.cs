@@ -92,22 +92,22 @@ public class Enemy : MonoBehaviour
     // 实现连锁击杀效果,对附近的全部敌人调用TriggerChainEffect方法,传入该敌人自己的颜色实现连锁效果
     void TriggerChainEffect(ColorType enemyColor)
     {
-        // 获取附近范围内所有碰撞体
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, ChainEffectRadius);
-        foreach (var collider in colliders)
-        {
-            if(collider != null)
-            {
-                if (collider.CompareTag("Enemy"))
-                {
-                    // 后期可增加发射闪电特效等
-                    // ...
-                    // 调用敌人的TriggerChainEffect方法,传入当前敌人的颜色,实现连锁效果
-                    collider.GetComponent<Enemy>().TriggerChainEffect(enemyColor);
-                }
-            }
-        }
-        // 敌人死亡
+        // // 获取附近范围内所有碰撞体
+        // Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, ChainEffectRadius);
+        // foreach (var collider in colliders)
+        // {
+        //     if(collider != null)
+        //     {
+        //         if (collider.CompareTag("Enemy"))
+        //         {
+        //             // 后期可增加发射闪电特效等
+        //             // ...
+        //             // 调用敌人的TriggerChainEffect方法,传入当前敌人的颜色,实现连锁效果
+        //             collider.GetComponent<Enemy>().TriggerChainEffect(enemyColor);
+        //         }
+        //     }
+        // }
+        // // 敌人死亡
         Die();
     }
 }

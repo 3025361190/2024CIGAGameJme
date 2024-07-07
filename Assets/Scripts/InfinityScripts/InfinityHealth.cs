@@ -24,7 +24,7 @@ public class InfinityHealth : MonoBehaviour
 
     private float lastDamageTime;               // 记录最后一次受到伤害的时间
     private bool isHealing;                     // 是否正在恢复血量
-    public GameObject defeat;//失败窗口
+    // public GameObject defeat;//失败窗口
 
     void Start()
     {
@@ -94,6 +94,6 @@ public class InfinityHealth : MonoBehaviour
     }
     private void Gameover()
     {
-        defeat.SetActive(true);
+        // defeat.SetActive(true);
     }
 }

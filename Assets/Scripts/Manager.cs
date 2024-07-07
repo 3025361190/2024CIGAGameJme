@@ -6,7 +6,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+// using System.Diagnostics;
 using System.Threading;
 using UnityEngine;
 
@@ -15,17 +15,17 @@ using UnityEngine;
 public class Manager : MonoBehaviour
 {
     public GameObject turret;
-    private SceneType currentSceneType;
+    public SceneType currentSceneType;
     private bool cdFlag = false;
     private float cdTime = 5.0f;
     private float cdTimer = 0.0f;
 
-    public Sprite[] sceneResource;
+    // public Sprite[] sceneResource;
     // Start is called before the first frame update
     void Start()
     {
         currentSceneType = SceneType.QingTang;
-        GetComponent<SpriteRenderer>().sprite = sceneResource[1];
+        // GetComponent<SpriteRenderer>().sprite = sceneResource[1];
         // currentSceneType = SceneType.HongYou;
         // GetComponent<SpriteRenderer>().sprite = sceneResource[0];
         turret =  GameObject.FindGameObjectsWithTag("Turret")[0];
@@ -43,6 +43,7 @@ public class Manager : MonoBehaviour
         }
     }
     public SceneType GetCurrentSceneType(){
+        Debug.Log("currentSceneType in manager is " + currentSceneType);
         return currentSceneType;
     }
 

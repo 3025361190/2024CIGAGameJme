@@ -63,7 +63,7 @@ public class ShootBullet : MonoBehaviour
             RecycleBullet();
         }
 
-        Debug.Log(GetBulletColor());
+        // Debug.Log(GetBulletColor());
     }
 
     private void UpdateBulletCountUI()
@@ -88,10 +88,10 @@ public class ShootBullet : MonoBehaviour
         GameObject bullet = currentBullet;
         currentBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
-        // if (sceneType == SceneType.QingTang)
-        // {
+        if (sceneType == SceneType.QingTang)
+        {
             Bullets.Add(bullet);
-        // }
+        }
 
         bullet.transform.position = transform.position;
 
