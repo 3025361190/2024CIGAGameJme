@@ -7,7 +7,6 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 // 区分unity中不同库中的Vector2
@@ -19,6 +18,9 @@ public class Enemy : MonoBehaviour
     public ColorType enemyColor;                // 敌人颜色
     public int amount;                          // 敌人伤害值
     public float ChainEffectRadius = 2.0f;      // 连锁效果半径
+
+    private bool canTakeDamage = true;          // 是否可以造成伤害的标志位
+    public float cooldownTime = 1.0f;           // 冷却时间
     public GameObject baozha;
     private GameObject currentEnemy;
 
@@ -31,19 +33,19 @@ public class Enemy : MonoBehaviour
         switch (enemyColor)
         {
             case ColorType.Red:
-                childTransform.GetComponent<SpriteRenderer>().color = new Color(251f / 255f, 47f / 255f, 144f / 255f);
+                childTransform.GetComponent<SpriteRenderer>().color = new Color(255f / 255f, 126f / 255f, 191f / 255f);
                 break;
             case ColorType.Yellow:
                 childTransform.GetComponent<SpriteRenderer>().color = new Color(234f / 255f, 253f / 255f, 3f / 255f);
                 break;
             case ColorType.Blue:
-                childTransform.GetComponent<SpriteRenderer>().color = new Color(39f / 255f, 237f / 255f, 250f / 255f);
+                childTransform.GetComponent<SpriteRenderer>().color = new Color(151f / 255f, 255f / 255f, 239f / 255f);
                 break;
             case ColorType.White:
                 childTransform.GetComponent<SpriteRenderer>().color = new Color(253f / 255f, 255f / 255f, 255f / 255f);
                 break;
             case ColorType.Purple:
-                childTransform.GetComponent<SpriteRenderer>().color = new Color(109f / 255f, 80f / 255f, 248f / 255f);
+                childTransform.GetComponent<SpriteRenderer>().color = new Color(197f / 255f, 156f / 255f, 255f / 255f);
                 break;
         }
         amount = 1;
@@ -52,9 +54,15 @@ public class Enemy : MonoBehaviour
     // 碰撞检测,当敌人碰撞到Infinity时触发,造成伤害
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Infinity"))
+        // 加个协程，防止短时间内多次碰撞
+        // if (collision.gameObject.CompareTag("Infinity"))
+        // {
+        //     collision.gameObject.GetComponent<InfinityHealth>().TakeDamage(1);
+        // }
+        if (collision.gameObject.CompareTag("Infinity") && canTakeDamage)
         {
             collision.gameObject.GetComponent<InfinityHealth>().TakeDamage(1);
+            StartCoroutine(CollisionCooldown());  // 开始冷却协程
         }
     }
 
@@ -109,5 +117,12 @@ public class Enemy : MonoBehaviour
         // }
         // // 敌人死亡
         Die();
+    }
+
+    private IEnumerator CollisionCooldown()
+    {
+        canTakeDamage = false;  // 设置不能造成伤害
+        yield return new WaitForSeconds(cooldownTime);  // 等待冷却时间
+        canTakeDamage = true;  // 冷却完毕，可以再次造成伤害
     }
 }
