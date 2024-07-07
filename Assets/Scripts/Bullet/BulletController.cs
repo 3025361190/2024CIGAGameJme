@@ -67,6 +67,7 @@ public class BulletController : MonoBehaviour
 
     //∑÷¡—CD±Í÷æ
     public bool CDflag = false;
+    public GameObject prefabToSpawn;//xiaotude
 
 
     // Start is called before the first frame update
@@ -320,7 +321,8 @@ public class BulletController : MonoBehaviour
 
             // sprite.enabled = false;
             // StartCoroutine(WaitSomeSecondsToDestory(100.0f));
-            Destroy(bullet);
+            Instantiate(prefabToSpawn, transform.position, transform.rotation);
+           Destroy(bullet);
             
         }
     }

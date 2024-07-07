@@ -22,13 +22,12 @@ public class ShootBullet : MonoBehaviour
 
     public Text bulletCountText; // UI Text 对象
 
-
+    //小途弄的以下，动画用
     public GameObject currentBullet;
     public GameObject effect;
     public GameObject huanEffect;
     private Animator animator;
     private Animator huan;
-
     public AudioSource audioSource;//子弹音效
     private void Start()
     {
