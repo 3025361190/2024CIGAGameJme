@@ -506,6 +506,10 @@ PrefabInstance:
       propertyPath: bulletMount
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 4698663745313577492, guid: a56f7e99c0da7e646ab86ba832d094f9, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6360832964888087653, guid: a56f7e99c0da7e646ab86ba832d094f9, type: 3}
       propertyPath: m_Sprite
       value: 
