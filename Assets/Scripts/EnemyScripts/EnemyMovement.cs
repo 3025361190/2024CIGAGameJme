@@ -13,9 +13,9 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public Vector2 targetPosition;              // 目标位置
-    public float moveSpeed = 1f;                // 移动速度
-    public float randomRange = 1f;              // 随机移动的幅度
-    public float changeDirectionInterval = 2f;  // 改变随机方向的时间间隔
+    public float moveSpeed = 0.3f;                // 移动速度
+    public float randomRange = 0.3f;              // 随机移动的幅度
+    public float changeDirectionInterval = 4f;  // 改变随机方向的时间间隔
     public float knockbackDistance = 1f;        // 退后的距离
     public float knockbackTime = 0.5f;          // 退后持续时间
     public float bufferTime = 1f;               // 缓冲时间
