@@ -6,7 +6,7 @@ using UnityEngine.UI; // 引入Unity UI命名空间
 public class ShootBullet : MonoBehaviour
 {
     [SerializeField]
-    private int thresholds = 50;
+    private int thresholds;
     [SerializeField]
     private GameObject bulletPrefab;
     public float bulletSpeed = 10f; // 子弹速度
@@ -58,6 +58,8 @@ public class ShootBullet : MonoBehaviour
         animator = effect.GetComponent<Animator>();
         huan = huanEffect.GetComponent<Animator>();
         zidan = number.GetComponent<Animator>();
+
+        currentEnragedTime = enragedDuration;
     }
 
     private void Update()
@@ -85,6 +87,7 @@ public class ShootBullet : MonoBehaviour
             if (currentEnragedTime <= 0)
             {
                 isEnraged = false;
+                currentEnragedTime = enragedDuration;
             }
         }
         //if(Input.GetKeyDown(KeyCode.F)){
@@ -176,9 +179,10 @@ public class ShootBullet : MonoBehaviour
         int recycleBulletAmount = bulletMount - preBulletAmount;
         if (recycleBulletAmount >= thresholds)
         {
+            Debug.Log("狂暴");
             isEnraged = true;
         }
-        Debug.Log(preBulletAmount + " " + bulletMount);
+        Debug.Log(preBulletAmount + " " + bulletMount + " " + recycleBulletAmount);
         Bullets.Clear();
     }
 
