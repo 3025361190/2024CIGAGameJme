@@ -68,7 +68,7 @@ public class InfinityHealth : MonoBehaviour
 
     private IEnumerator HealOverTime()
     {
-        isHealing = true;
+        //isHealing = true;
 
         while (currentHealth < maxHealth)
         {
@@ -83,11 +83,11 @@ public class InfinityHealth : MonoBehaviour
             yield return new WaitForSeconds(healInterval);
 
             // 如果在恢复期间受到了伤害，停止恢复
-            if (Time.time - lastDamageTime < damageCooldown)
-            {
-                isHealing = false;
-                yield break;
-            }
+           // if (Time.time - lastDamageTime < damageCooldown)
+            //{
+             //   isHealing = false;
+              //  yield break;
+           // }
         }
 
         isHealing = false;

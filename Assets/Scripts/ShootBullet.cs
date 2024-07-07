@@ -31,13 +31,14 @@ public class ShootBullet : MonoBehaviour
     public GameObject currentBullet;
     public Vector3 currentBulletPosition;
     public GameObject effect;
+    public GameObject kuangbao;
     public GameObject huanEffect;
     public GameObject number;
     private Animator animator;
     private Animator huan;
     private Animator zidan;
     private GameObject sceneManager;
-
+    private Animator bao;
     public AudioSource audioSource;//×Óµ¯ÒôÐ§
     private void Start()
     {
@@ -58,7 +59,7 @@ public class ShootBullet : MonoBehaviour
         animator = effect.GetComponent<Animator>();
         huan = huanEffect.GetComponent<Animator>();
         zidan = number.GetComponent<Animator>();
-
+        bao = kuangbao.GetComponent<Animator>();
         currentEnragedTime = enragedDuration;
     }
 
@@ -83,6 +84,7 @@ public class ShootBullet : MonoBehaviour
         //¿ñ±©³ÖÀm•rég
         if (isEnraged)
         {
+            bao.SetBool("kuangbao", true);
             currentEnragedTime -= Time.deltaTime;
             if (currentEnragedTime <= 0)
             {
