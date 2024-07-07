@@ -63,7 +63,7 @@ public class InfinityHealth : MonoBehaviour
         lastDamageTime = Time.time; // 更新最后一次受到伤害的时间
         StopCoroutine(HealOverTime()); // 如果正在恢复，停止恢复
         isHealing = false;
-        Debug.Log("Took damage, current health: " + currentHealth);
+        // Debug.Log("Took damage, current health: " + currentHealth);
     }
 
     private IEnumerator HealOverTime()
@@ -78,7 +78,7 @@ public class InfinityHealth : MonoBehaviour
                 currentHealth = maxHealth;
             }
 
-            Debug.Log("Healing, current health: " + currentHealth);
+            // Debug.Log("Healing, current health: " + currentHealth);
 
             yield return new WaitForSeconds(healInterval);
 

@@ -14,18 +14,31 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     private GameObject manager;
+    private bool canTrigger = true;  // 是否可以触发的标志位
+    private float cooldownTime = 1.0f;  // 冷却时间
 
     void Start() {
         manager = GameObject.Find("SceneManagerObject");
     }
     // 当有物体进入触发器区域时调用
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        // 检查进入触发器的物体是否有 "Turret" 标签
-        if (other.CompareTag("Turret"))
+        if (canTrigger)
         {
-            // 调用触发函数
-            manager.GetComponent<Manager>().SwitchSceneType();
+            // 检查进入触发器的物体是否有 "Turret" 标签
+            if (other.gameObject.CompareTag("Turret"))
+            {
+                // 调用触发函数
+                manager.GetComponent<Manager>().SwitchSceneType();
+                StartCoroutine(Cooldown());  // 开始冷却协程
+            }
         }
+    }
+
+    private IEnumerator Cooldown()
+    {
+        canTrigger = false;  // 设置不能触发
+        yield return new WaitForSeconds(cooldownTime);  // 等待冷却时间
+        canTrigger = true;  // 冷却完毕，可以再次触发
     }
 }
