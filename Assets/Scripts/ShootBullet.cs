@@ -36,7 +36,7 @@ public class ShootBullet : MonoBehaviour
     public AudioSource audioSource;//子弹音效
     private void Start()
     {
-        currentBulletPosition = new Vector3(-8f, 4.25f, 0.2f);
+        currentBulletPosition = new Vector3(7f, 3.7f, 0.2f);
         //音效
         audioSource = GetComponent<AudioSource>();
 
@@ -46,6 +46,7 @@ public class ShootBullet : MonoBehaviour
         UpdateBulletCountUI(); // 初始更新一次UI
         currentBullet = Instantiate(bulletPrefab, currentBulletPosition, Quaternion.identity);
         //currentBullet.transform.localScale = new Vector3(2f, 2f, 1f);
+        //currentBullet.transform.rotation = Quaternion.Euler(0, 0, 0);
         currentBullet.SetActive(false);
 
         // animator = GetComponent<Animator>();
@@ -71,9 +72,9 @@ public class ShootBullet : MonoBehaviour
             invokeTime = currentTime;
         }
 
-        if(Input.GetKeyDown(KeyCode.F)){
-            RecycleBullet();
-        }
+        //if(Input.GetKeyDown(KeyCode.F)){
+        //    RecycleBullet();
+        //}
 
         // 获取场景类型
         sceneType = sceneManager.GetComponent<Manager>().currentSceneType;
