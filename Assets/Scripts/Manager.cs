@@ -72,15 +72,33 @@ public class Manager : MonoBehaviour
             beijing2.SetTrigger("change");
 
         }
-        else if(cdFlag == false && currentSceneType == SceneType.HongYou)
+        else if(currentSceneType == SceneType.HongYou)
         {
-            Debug.Log("switch scene to 清汤");
-            currentSceneType = SceneType.QingTang;
-            // GetComponent<SpriteRenderer>().sprite = sceneResource[1];
-            //红油切清汤动画
-            beijing1.SetBool("background", false);
-            beijing2.SetTrigger("change");
+            if(cdFlag == false){
+                Debug.Log("switch scene to 清汤");
+                currentSceneType = SceneType.QingTang;
+                Recovery();
+                cdFlag = true;
+                // GetComponent<SpriteRenderer>().sprite = sceneResource[1];
+                //红油切清汤动画
+                beijing1.SetBool("background", false);
+                beijing2.SetTrigger("change");
+            }
+            else
+            {
+                Debug.Log("红油to清汤is in cd");
+            
+            }
         }
+        // else if(cdFlag == false && currentSceneType == SceneType.HongYou)
+        // {
+        //     Debug.Log("switch scene to 清汤");
+        //     currentSceneType = SceneType.QingTang;
+        //     // GetComponent<SpriteRenderer>().sprite = sceneResource[1];
+        //     //红油切清汤动画
+        //     beijing1.SetBool("background", false);
+        //     beijing2.SetTrigger("change");
+        // }
     }
 
     private void Recovery(){
