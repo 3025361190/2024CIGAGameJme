@@ -66,7 +66,7 @@ MonoBehaviour:
   imageTransform: {fileID: 4848442166988188935}
   Turret: {fileID: 0}
   is_trace: 0
-  sceneManager: {fileID: 1082448979531292413, guid: 82b60412a12268b4c985da4891ed9ebc, type: 3}
+  sceneManager: {fileID: 0}
   CDflag: 0
   prefabToSpawn: {fileID: 581044435470829640, guid: 340067860597b17468819cdd2d13842b, type: 3}
 --- !u!50 &9158584880856814100

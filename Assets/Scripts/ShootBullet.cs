@@ -28,12 +28,16 @@ public class ShootBullet : MonoBehaviour
     public GameObject huanEffect;
     private Animator animator;
     private Animator huan;
+    private GameObject sceneManager;
+
     public AudioSource audioSource;//子弹音效
     private void Start()
     {
         //音效
         audioSource = GetComponent<AudioSource>();
 
+        // 获取场景管理实例
+        sceneManager = GameObject.Find("SceneManageObject");
         invokeTime = currentTime;
         UpdateBulletCountUI(); // 初始更新一次UI
         currentBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
@@ -65,9 +69,8 @@ public class ShootBullet : MonoBehaviour
             RecycleBullet();
         }
 
-        // 增加getSceneType方法
-        // ...
-        // Debug.Log(GetBulletColor());
+        // 获取场景类型
+        sceneType = sceneManager.GetComponent<Manager>().currentSceneType;
     }
 
     private void UpdateBulletCountUI()

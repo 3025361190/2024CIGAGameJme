@@ -15,18 +15,18 @@ using UnityEngine;
 public class Manager : MonoBehaviour
 {
     public GameObject turret;
-    private SceneType currentSceneType;
+    public SceneType currentSceneType;
     private bool cdFlag = false;
     private float cdTime = 5.0f;
     private float cdTimer = 0.0f;
 
-    // public Sprite[] sceneResource;
+    public Sprite[] sceneResource;      // 在unity中拖拽设置场景资源
     // Start is called before the first frame update
     void Awake()
     {
         currentSceneType = SceneType.QingTang;
         Debug.Log("currentSceneType in manager AWAKE is " + currentSceneType);
-        // GetComponent<SpriteRenderer>().sprite = sceneResource[1];
+        GetComponent<SpriteRenderer>().sprite = sceneResource[1];
         // currentSceneType = SceneType.HongYou;
         // GetComponent<SpriteRenderer>().sprite = sceneResource[0];
         turret =  GameObject.FindGameObjectsWithTag("Turret")[0];
@@ -55,12 +55,12 @@ public class Manager : MonoBehaviour
             Recovery();
             cdFlag = true;
             // 切换美术资源
-            // GetComponent<SpriteRenderer>().sprite = sceneResource[0];
+            GetComponent<SpriteRenderer>().sprite = sceneResource[0];
         }
         else if(cdFlag == false && currentSceneType == SceneType.HongYou)
         {
             currentSceneType = SceneType.QingTang;
-            // GetComponent<SpriteRenderer>().sprite = sceneResource[1];
+            GetComponent<SpriteRenderer>().sprite = sceneResource[1];
         }
     }
 

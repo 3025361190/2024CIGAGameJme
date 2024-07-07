@@ -74,6 +74,8 @@ public class BulletController : MonoBehaviour
 
     public void Awake()
     {
+        //获取manager实例
+        sceneManager = GameObject.Find("SceneManagerObject");
         //初始化速度
         speed = normalSpeed;
         //绑定刚体
@@ -98,7 +100,7 @@ public class BulletController : MonoBehaviour
 
 
         //根据场景状态初始化子弹状态
-        SceneType sceneType = sceneManager.GetComponent<Manager>().GetCurrentSceneType();
+        SceneType sceneType = sceneManager.GetComponent<Manager>().currentSceneType;
 
         if(sceneType == SceneType.QingTang)
         {
