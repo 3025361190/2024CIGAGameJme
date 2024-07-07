@@ -15,7 +15,7 @@ public class Portal : MonoBehaviour
 {
     private GameObject manager;
     private bool canTrigger = true;  // 是否可以触发的标志位
-    private float cooldownTime = 1.0f;  // 冷却时间
+    private float cooldownTime = 2.0f;  // 冷却时间
 
     void Start() {
         manager = GameObject.Find("SceneManagerObject");

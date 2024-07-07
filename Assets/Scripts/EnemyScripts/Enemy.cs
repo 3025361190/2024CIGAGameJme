@@ -77,7 +77,7 @@ public class Enemy : MonoBehaviour
     // 敌人被子弹击中时,处理击中事件,由子弹调用
     public void HandleHit(ColorType bulletColor)
     {
-        Debug.Log("Enemy hit by bullet");
+        // Debug.Log("Enemy hit by bullet");
         if (bulletColor == enemyColor)
         {
             TriggerChainEffect(enemyColor);

@@ -18,7 +18,7 @@ public class Manager : MonoBehaviour
     public SceneType currentSceneType;
     private bool cdFlag = false;
     private float cdTime = 5.0f;
-    private float cdTimer = 0.0f;
+    private float cdTimer;
 
     //小途的
     public GameObject background;
@@ -38,6 +38,7 @@ public class Manager : MonoBehaviour
         turret =  GameObject.FindGameObjectsWithTag("Turret")[0];
         beijing1 = background.GetComponent<Animator>();
         beijing2 = effect.GetComponent<Animator>();
+        cdTimer = 0.0f;
     }
 
     // Update is called once per frame
@@ -57,8 +58,10 @@ public class Manager : MonoBehaviour
     }
 
     public void SwitchSceneType(){
-        Debug.Log("change scene to"+currentSceneType);
-        if(currentSceneType == SceneType.QingTang){
+        Debug.Log("switch be called");
+        if(currentSceneType == SceneType.QingTang)
+        {
+            Debug.Log("switch scene to 红油");
             currentSceneType = SceneType.HongYou;
             Recovery();
             cdFlag = true;
@@ -71,6 +74,7 @@ public class Manager : MonoBehaviour
         }
         else if(cdFlag == false && currentSceneType == SceneType.HongYou)
         {
+            Debug.Log("switch scene to 清汤");
             currentSceneType = SceneType.QingTang;
             // GetComponent<SpriteRenderer>().sprite = sceneResource[1];
             //红油切清汤动画
@@ -80,6 +84,7 @@ public class Manager : MonoBehaviour
     }
 
     private void Recovery(){
+        Debug.Log("触发回收");
         turret.GetComponent<ShootBullet>().RecycleBullet();
     }
 
