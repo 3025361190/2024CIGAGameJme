@@ -24,7 +24,9 @@ public class ShootBullet : MonoBehaviour
 
 
     public GameObject currentBullet;
+    public GameObject effect;
 
+    private Animator animator; 
     private void Start()
     {
         invokeTime = currentTime;
@@ -33,6 +35,7 @@ public class ShootBullet : MonoBehaviour
         currentBullet.SetActive(false);
 
         // animator = GetComponent<Animator>();
+        animator = effect.GetComponent<Animator>();
     }
 
     private void Update()
@@ -74,6 +77,7 @@ public class ShootBullet : MonoBehaviour
 
     private void Shoot()
     {
+        animator.SetTrigger("kaihuo");
         if (!isEnraged) bulletMount--;
 
         GameObject bullet = currentBullet;
