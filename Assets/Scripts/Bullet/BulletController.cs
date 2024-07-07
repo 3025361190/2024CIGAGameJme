@@ -369,6 +369,7 @@ public class BulletController : MonoBehaviour
                 // Debug.Log("try to split bullet");
                 GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
                 temp.transform.localScale = new Vector3(1f, 1f, 1f);
+                temp.GetComponent<BulletController>().trailRenderer.enabled = true;
                 if (temp == null)
                 {
                     Debug.Log("cant split bullet");
