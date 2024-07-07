@@ -26,9 +26,13 @@ public class ShootBullet : MonoBehaviour
     public GameObject currentBullet;
     public GameObject effect;
 
-    private Animator animator; 
+    private Animator animator;
+    public AudioSource audioSource;//子弹音效
     private void Start()
     {
+        //音效
+        audioSource = GetComponent<AudioSource>();
+
         invokeTime = currentTime;
         UpdateBulletCountUI(); // 初始更新一次UI
         currentBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
@@ -77,6 +81,7 @@ public class ShootBullet : MonoBehaviour
 
     private void Shoot()
     {
+        audioSource.Play();//音效
         animator.SetTrigger("kaihuo");
         if (!isEnraged) bulletMount--;
 
