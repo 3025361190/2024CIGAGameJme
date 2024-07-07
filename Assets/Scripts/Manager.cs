@@ -15,16 +15,17 @@ using UnityEngine;
 public class Manager : MonoBehaviour
 {
     public GameObject turret;
-    public SceneType currentSceneType;
+    private SceneType currentSceneType;
     private bool cdFlag = false;
     private float cdTime = 5.0f;
     private float cdTimer = 0.0f;
 
     // public Sprite[] sceneResource;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         currentSceneType = SceneType.QingTang;
+        Debug.Log("currentSceneType in manager AWAKE is " + currentSceneType);
         // GetComponent<SpriteRenderer>().sprite = sceneResource[1];
         // currentSceneType = SceneType.HongYou;
         // GetComponent<SpriteRenderer>().sprite = sceneResource[0];
@@ -43,11 +44,12 @@ public class Manager : MonoBehaviour
         }
     }
     public SceneType GetCurrentSceneType(){
-        Debug.Log("currentSceneType in manager is " + currentSceneType);
+        Debug.Log("currentSceneType in manager GET is " + currentSceneType);
         return currentSceneType;
     }
 
     public void SwitchSceneType(){
+        Debug.Log("change scene to"+currentSceneType);
         if(currentSceneType == SceneType.QingTang){
             currentSceneType = SceneType.HongYou;
             Recovery();

@@ -66,6 +66,8 @@ public class ShootBullet : MonoBehaviour
             RecycleBullet();
         }
 
+        // 增加getSceneType方法
+        // ...
         // Debug.Log(GetBulletColor());
     }
 

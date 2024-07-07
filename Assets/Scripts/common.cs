@@ -11,6 +11,6 @@ public enum ColorType
     White,
 }
 public enum SceneType{
-    QingTang,
-    HongYou
+    HongYou,
+    QingTang
 }
