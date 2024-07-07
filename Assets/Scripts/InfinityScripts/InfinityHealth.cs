@@ -13,7 +13,7 @@ using UnityEngine;
 public class InfinityHealth : MonoBehaviour
 {
 
-    
+    public GameObject defeat;//失败场景
     public GameObject quanquan;                 // 圈圈
     public float damageThreshold = 15f;         // 伤害阈值
     public int maxHealth = 30;                  // 最大血量
@@ -94,6 +94,6 @@ public class InfinityHealth : MonoBehaviour
     }
     private void Gameover()
     {
-        // defeat.SetActive(true);
+        defeat.SetActive(true);
     }
 }
