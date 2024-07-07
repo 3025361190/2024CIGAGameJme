@@ -20,6 +20,12 @@ public class Manager : MonoBehaviour
     private float cdTime = 5.0f;
     private float cdTimer = 0.0f;
 
+    //小途的
+    public GameObject background;
+    public GameObject effect;
+    private Animator beijing1;
+    private Animator beijing2;
+
     // public Sprite[] sceneResource;      // 在unity中拖拽设置场景资源
     // Start is called before the first frame update
     void Awake()
@@ -30,6 +36,8 @@ public class Manager : MonoBehaviour
         // currentSceneType = SceneType.HongYou;
         // GetComponent<SpriteRenderer>().sprite = sceneResource[0];
         turret =  GameObject.FindGameObjectsWithTag("Turret")[0];
+        beijing1 = background.GetComponent<Animator>();
+        beijing2 = effect.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -56,11 +64,18 @@ public class Manager : MonoBehaviour
             cdFlag = true;
             // 切换美术资源
             // GetComponent<SpriteRenderer>().sprite = sceneResource[0];
+            //清汤切红油动画
+            beijing1.SetBool("background",true);
+            beijing2.SetTrigger("change");
+
         }
         else if(cdFlag == false && currentSceneType == SceneType.HongYou)
         {
             currentSceneType = SceneType.QingTang;
             // GetComponent<SpriteRenderer>().sprite = sceneResource[1];
+            //红油切清汤动画
+            beijing1.SetBool("background", false);
+            beijing2.SetTrigger("change");
         }
     }
 
