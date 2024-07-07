@@ -67,19 +67,26 @@ public class Manager : MonoBehaviour
             cdFlag = true;
             // 切换美术资源
             // GetComponent<SpriteRenderer>().sprite = sceneResource[0];
-            //清汤切红油动画
+            // 清汤切红油动画
             beijing1.SetBool("background",true);
             beijing2.SetTrigger("change");
 
         }
-        else if(cdFlag == false && currentSceneType == SceneType.HongYou)
+        else if(currentSceneType == SceneType.HongYou)
         {
-            Debug.Log("switch scene to 清汤");
-            currentSceneType = SceneType.QingTang;
-            // GetComponent<SpriteRenderer>().sprite = sceneResource[1];
-            //红油切清汤动画
-            beijing1.SetBool("background", false);
-            beijing2.SetTrigger("change");
+            if(cdFlag == false){
+                Debug.Log("switch scene to 清汤");
+                currentSceneType = SceneType.QingTang;
+                // GetComponent<SpriteRenderer>().sprite = sceneResource[1];
+                //红油切清汤动画
+                beijing1.SetBool("background", false);
+                beijing2.SetTrigger("change");
+            }
+            else
+            {
+                Debug.Log("红油to清汤is in cd");
+            
+            }
         }
     }
 
