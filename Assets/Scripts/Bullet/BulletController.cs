@@ -95,11 +95,12 @@ public class BulletController : MonoBehaviour
         {
             Debug.Log("cant find turret");
         }
+        trailRenderer.enabled = false;
     }
 
     void Start()
     {
-        trailRenderer.enabled = false;
+        
 
         //Fire(new Vector2(2, -1));
         bullet.transform.localScale = new Vector3(2f, 2f, 1f);
