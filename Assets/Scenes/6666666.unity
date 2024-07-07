@@ -745,9 +745,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7481358359037676835, guid: a56f7e99c0da7e646ab86ba832d094f9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1083854222}
-    - targetCorrespondingSourceObject: {fileID: 7481358359037676835, guid: a56f7e99c0da7e646ab86ba832d094f9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1083854234}
   m_SourcePrefab: {fileID: 100100000, guid: a56f7e99c0da7e646ab86ba832d094f9, type: 3}
 --- !u!1001 &568454105
 PrefabInstance:
@@ -1475,33 +1472,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!50 &1083854234
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430015867}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &1092539394 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1082448979531292413, guid: 82b60412a12268b4c985da4891ed9ebc, type: 3}
@@ -1718,6 +1688,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1220350304}
   - component: {fileID: 1220350303}
+  - component: {fileID: 1220350305}
   m_Layer: 0
   m_Name: EnemySpawnerObject
   m_TagString: Untagged
@@ -1739,7 +1710,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 3747182641045328299, guid: e7ce947f02011674bab0f124c73aa7b9, type: 3}
   spawnInterval: 1
-  radius: 5
+  spawnPoints:
+  - {x: -10, y: 10}
+  - {x: 10, y: 10}
+  - {x: 10, y: -10}
+  - {x: -10, y: -10}
+  - {x: 0, y: 10}
+  - {x: 0, y: -10}
+  - {x: -10, y: 0}
+  - {x: 10, y: 0}
+  - {x: 15, y: 15}
+  - {x: -15, y: -15}
 --- !u!4 &1220350304
 Transform:
   m_ObjectHideFlags: 0
@@ -1755,6 +1736,31 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1220350305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220350302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef7f0bf13884d144eb1306775ec86ec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefab: {fileID: 6728352704617954252, guid: fada65bbbddc6d5419d70c7ab6e586cd, type: 3}
+  spawnInterval: 1
+  spawnPoints:
+  - {x: -10, y: 10}
+  - {x: 10, y: 10}
+  - {x: 10, y: -10}
+  - {x: -10, y: -10}
+  - {x: 0, y: 10}
+  - {x: 0, y: -10}
+  - {x: -10, y: 0}
+  - {x: 10, y: 0}
+  - {x: 15, y: 15}
+  - {x: -15, y: -15}
 --- !u!1 &1220759191
 GameObject:
   m_ObjectHideFlags: 0
