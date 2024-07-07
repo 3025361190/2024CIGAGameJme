@@ -7,7 +7,6 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
@@ -22,32 +21,9 @@ public class Enemy : MonoBehaviour
     public float ChainEffectRadius = 2.0f;      // 连锁效果半径
     public GameObject baozha;
     private GameObject currentEnemy;
-    public GameObject[] animations;
-
-    
 
     // Start is called before the first frame update
     private void Start() {
-        int randomInt = Random.Range(0, 10);
-        if(randomInt < 5)
-        {
-            animations[0].GetComponent<SpriteRenderer>().enabled = true;
-            animations[0].GetComponent<Animator>().enabled = true;
-            animations[1].GetComponent<SpriteRenderer>().enabled = true;
-            animations[1].GetComponent<Animator>().enabled = true;
-            animations[2].GetComponent<SpriteRenderer>().enabled = true;
-            animations[2].GetComponent<Animator>().enabled = true;
-            animations[3].GetComponent<SpriteRenderer>().enabled = true;
-            animations[3].GetComponent<Animator>().enabled = true;
-        }
-        else
-        {
-            animations[4].GetComponent<SpriteRenderer>().enabled = true;
-            animations[4].GetComponent<Animator>().enabled = true;
-            animations[5].GetComponent<SpriteRenderer>().enabled = true;
-            animations[5].GetComponent<Animator>().enabled = true;
-        }
-
         // 设置敌人颜色
         enemyColor = (ColorType)Random.Range(0, 5);
         // 根据颜色设置资源颜色
