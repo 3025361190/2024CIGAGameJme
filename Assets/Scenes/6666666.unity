@@ -2241,6 +2241,10 @@ PrefabInstance:
       propertyPath: quanquan
       value: 
       objectReference: {fileID: 1303272676}
+    - target: {fileID: 4025895434374410723, guid: 62a7ce6ac84d8204d9946856e68d0b95, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 487ce882eb6ae6146ad7ce4a09d5c89e, type: 3}
     - target: {fileID: 4504177872564388644, guid: 62a7ce6ac84d8204d9946856e68d0b95, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

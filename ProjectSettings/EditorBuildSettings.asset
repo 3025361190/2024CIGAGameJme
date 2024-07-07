@@ -6,12 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: d8294bbece3f9654d98b755558ca6cc9
   - enabled: 1
-    path: Assets/Scenes/xiaotutest.unity
-    guid: 1a7d5656e617f71429f6c5a8092a7e93
+    path: Assets/Scenes/6666666.unity
+    guid: 9c9c896bec4867a48b6e291c57947c31
   m_configObjects: {}

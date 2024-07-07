@@ -7,7 +7,6 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 // 区分unity中不同库中的Vector2
