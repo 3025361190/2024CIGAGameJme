@@ -15,7 +15,21 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab;          // 敌人预制体, 在unity编辑器中拖动赋值
     public float spawnInterval = 0.5f;      // 生成敌人的间隔时间
     private float timer = 0.0f;             // 计时器
-    public float radius = 50.0f;              // 圆的半径
+    // public float radius = 8.0f;              // 圆的半径
+    // 预定义的生成点
+    public Vector2[] spawnPoints = new Vector2[]
+    {
+        new(-10, 10),
+        new(10, 10),
+        new(10, -10),
+        new(-10, -10),
+        new(0, 10),
+        new(0, -10),
+        new(-10, 0),
+        new(10, 0),
+        new(15, 15),
+        new(-15, -15)  
+    };       
 
     private List<GameObject> enemyList = new();    // 用于注册enemy实例
 
@@ -34,10 +48,12 @@ public class EnemySpawner : MonoBehaviour
     // 生成敌人
     void SpawnEnemy()
     {
-        Vector2 spawnPosition = GetRandomPositionOutsideCircle(radius);
+        // Vector2 spawnPosition = GetRandomPositionOutsideCircle(radius);
+        // 随机选择一个生成点
+        Vector2 spawnPosition = spawnPoints[Random.Range(0, spawnPoints.Length)];
         // 实例化敌人并注册到enemyList
         GameObject instantiate = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-        // 随机出现颜色扎堆
+        // 颜色扎堆
         // ...
 
         enemyList.Add(instantiate);
