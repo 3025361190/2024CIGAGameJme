@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; // 引入Unity UI命名空间
@@ -156,16 +157,29 @@ public class ShootBullet : MonoBehaviour
     {
         huan.SetTrigger("huishou");
         int preBulletAmount = bulletMount;
+        StartCoroutine(RecycleBulletsCoroutine(preBulletAmount));
+    }
+
+    private IEnumerator RecycleBulletsCoroutine(int preBulletAmount)
+    {
+        // 逐个回收子弹
         foreach (var bullet in Bullets)
         {
-            // 处理回收子弹的逻辑
             bullet.GetComponent<BulletController>().Recycle();
-        }
-        int recycleBulletAmount = bulletMount - preBulletAmount;
-        if(recycleBulletAmount >= thresholds){
-            isEnraged = true;
+            yield return new WaitForEndOfFrame(); // 等待当前帧结束
         }
 
+        // 等待所有子弹回收完成
+        yield return new WaitForSeconds(1f);
+
+        // 所有子弹回收完成后执行后续逻辑
+        int recycleBulletAmount = bulletMount - preBulletAmount;
+        if (recycleBulletAmount >= thresholds)
+        {
+            isEnraged = true;
+        }
+        Debug.Log(preBulletAmount + " " + bulletMount);
         Bullets.Clear();
     }
+
 }
