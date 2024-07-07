@@ -15,7 +15,7 @@ using UnityEngine;
 public class Manager : MonoBehaviour
 {
     public GameObject turret;
-    private SceneType currentSceneType;
+    private SceneType currentSceneType ;
     private bool cdFlag = false;
     private float cdTime = 5.0f;
     private float cdTimer = 0.0f;
@@ -25,7 +25,7 @@ public class Manager : MonoBehaviour
     void Start()
     {
         currentSceneType = SceneType.QingTang;
-        GetComponent<SpriteRenderer>().sprite = sceneResource[1];
+        //GetComponent<SpriteRenderer>().sprite = sceneResource[1];
         // currentSceneType = SceneType.HongYou;
         // GetComponent<SpriteRenderer>().sprite = sceneResource[0];
         turret =  GameObject.FindGameObjectsWithTag("Turret")[0];
