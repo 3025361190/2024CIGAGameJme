@@ -25,8 +25,10 @@ public class ShootBullet : MonoBehaviour
 
     public GameObject currentBullet;
     public GameObject effect;
-
+    public GameObject huanEffect;
     private Animator animator;
+    private Animator huan;
+
     public AudioSource audioSource;//子弹音效
     private void Start()
     {
@@ -40,6 +42,7 @@ public class ShootBullet : MonoBehaviour
 
         // animator = GetComponent<Animator>();
         animator = effect.GetComponent<Animator>();
+        huan = huanEffect.GetComponent<Animator>();
     }
 
     private void Update()
@@ -122,6 +125,7 @@ public class ShootBullet : MonoBehaviour
 
     public void RecycleBullet()
     {
+        huan.SetTrigger("huishou");
         Debug.Log("回收");
         foreach (var bullet in Bullets)
         {
