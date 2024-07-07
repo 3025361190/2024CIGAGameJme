@@ -348,6 +348,7 @@ public class BulletController : MonoBehaviour
             //调用炮台子弹数量+1的函数
             //............
             //............
+            Turret.GetComponent<ShootBullet>().AddBulletMount();
 
             // sprite.enabled = false;
             // StartCoroutine(WaitSomeSecondsToDestory(100.0f));

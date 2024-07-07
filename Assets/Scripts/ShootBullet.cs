@@ -141,8 +141,6 @@ public class ShootBullet : MonoBehaviour
     public void RecycleBullet()
     {
         huan.SetTrigger("huishou");
-        
-        Debug.Log("回收");
         foreach (var bullet in Bullets)
         {
             // 处理回收子弹的逻辑
