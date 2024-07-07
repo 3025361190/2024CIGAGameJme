@@ -2232,6 +2232,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3274232590010249128, guid: 62a7ce6ac84d8204d9946856e68d0b95, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 6.98
+      objectReference: {fileID: 0}
     - target: {fileID: 3923851748713189775, guid: 62a7ce6ac84d8204d9946856e68d0b95, type: 3}
       propertyPath: defeat
       value: 
@@ -2310,6 +2314,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1143987077387933307, guid: dd0dea413b74c764c98685c53e041b7b, type: 3}
+      propertyPath: m_SortingOrder
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1143987077387933307, guid: dd0dea413b74c764c98685c53e041b7b, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
@@ -2360,6 +2368,10 @@ PrefabInstance:
     - target: {fileID: 7907751207514412309, guid: dd0dea413b74c764c98685c53e041b7b, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7956132437529845977, guid: dd0dea413b74c764c98685c53e041b7b, type: 3}
+      propertyPath: m_SortingOrder
+      value: -3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
