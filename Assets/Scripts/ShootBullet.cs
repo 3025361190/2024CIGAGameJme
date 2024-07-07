@@ -24,6 +24,7 @@ public class ShootBullet : MonoBehaviour
 
     //小途弄的以下，动画用
     public GameObject currentBullet;
+    public Vector3 currentBulletPosition;
     public GameObject effect;
     public GameObject huanEffect;
     public GameObject number;
@@ -35,6 +36,7 @@ public class ShootBullet : MonoBehaviour
     public AudioSource audioSource;//子弹音效
     private void Start()
     {
+        currentBulletPosition = new Vector3(-8f, 4.25f, 0.2f);
         //音效
         audioSource = GetComponent<AudioSource>();
 
@@ -42,7 +44,8 @@ public class ShootBullet : MonoBehaviour
         sceneManager = GameObject.Find("SceneManagerObject");
         invokeTime = currentTime;
         UpdateBulletCountUI(); // 初始更新一次UI
-        currentBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        currentBullet = Instantiate(bulletPrefab, currentBulletPosition, Quaternion.identity);
+        //currentBullet.transform.localScale = new Vector3(2f, 2f, 1f);
         currentBullet.SetActive(false);
 
         // animator = GetComponent<Animator>();
@@ -98,7 +101,7 @@ public class ShootBullet : MonoBehaviour
         if (!isEnraged) bulletMount--;
 
         GameObject bullet = currentBullet;
-        currentBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        currentBullet = Instantiate(bulletPrefab, currentBulletPosition, Quaternion.identity);
 
         if (sceneType == SceneType.QingTang)
         {
@@ -106,6 +109,8 @@ public class ShootBullet : MonoBehaviour
         }
 
         bullet.transform.position = transform.position;
+        bullet.GetComponent<BulletController>().trailRenderer.enabled = true;
+        bullet.GetComponent<BulletController>().SetAcFlag();
 
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;

@@ -57,6 +57,9 @@ public class BulletController : MonoBehaviour
     //分裂上限
     //public int splitLimit = 1;
 
+    //拖尾渲染器
+    public TrailRenderer trailRenderer;
+
 
 
 
@@ -68,6 +71,8 @@ public class BulletController : MonoBehaviour
     //分裂CD标志
     public bool CDflag = false;
     public GameObject prefabToSpawn;//xiaotude
+
+    public bool ACFlag = false;
 
 
     // Start is called before the first frame update
@@ -94,9 +99,10 @@ public class BulletController : MonoBehaviour
 
     void Start()
     {
-
+        trailRenderer.enabled = false;
 
         //Fire(new Vector2(2, -1));
+        bullet.transform.localScale = new Vector3(2f, 2f, 1f);
 
 
         //根据场景状态初始化子弹状态
@@ -115,13 +121,18 @@ public class BulletController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(ACFlag == true)
+        {
+            bullet.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+        
         //测试用
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //if (Input.GetKeyDown(KeyCode.V))
         //{
-            
+
         //}
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -238,6 +249,12 @@ public class BulletController : MonoBehaviour
     }
 
 
+    public void SetAcFlag()
+    {
+        ACFlag = true;
+    }
+
+
 
 
 
@@ -324,7 +341,7 @@ public class BulletController : MonoBehaviour
             // sprite.enabled = false;
             // StartCoroutine(WaitSomeSecondsToDestory(100.0f));
             Instantiate(prefabToSpawn, transform.position, transform.rotation);
-           Destroy(bullet);
+            Destroy(bullet);
             
         }
     }
@@ -339,12 +356,14 @@ public class BulletController : MonoBehaviour
             {
                 // Debug.Log("try to split bullet");
                 GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
-                if(temp == null)
+                temp.transform.localScale = new Vector3(1f, 1f, 1f);
+                if (temp == null)
                 {
                     Debug.Log("cant split bullet");
                 }
                 nextBullet.Push(temp);
                 SetRandomDirection();
+                bullet.transform.localScale = new Vector3(1f, 1f, 1f);
                 temp.GetComponent<BulletController>().SetRandomDirection();
                 childNum++;
 
