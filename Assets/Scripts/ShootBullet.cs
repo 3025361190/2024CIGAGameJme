@@ -5,6 +5,8 @@ using UnityEngine.UI; // 引入Unity UI命名空间
 public class ShootBullet : MonoBehaviour
 {
     [SerializeField]
+    private int thresholds = 50;
+    [SerializeField]
     private GameObject bulletPrefab;
     public float bulletSpeed = 10f; // 子弹速度
     public float currentTime = 0.1f; // 弹幕间隔时间
@@ -18,6 +20,8 @@ public class ShootBullet : MonoBehaviour
     [SerializeField]
     private int bulletMount;
     public bool isEnraged;
+    public float enragedDuration = 10f; // 狂暴状态持续时间为10秒钟
+    public float currentEnragedTime = 0f; // 当前狂暴状态已经持续的时间
     private SceneType sceneType;
 
     public Text bulletCountText; // UI Text 对象
@@ -72,6 +76,16 @@ public class ShootBullet : MonoBehaviour
             invokeTime = currentTime;
         }
 
+
+        //狂暴持續時間
+        if (isEnraged)
+        {
+            currentEnragedTime -= Time.deltaTime;
+            if (currentEnragedTime <= 0)
+            {
+                isEnraged = false;
+            }
+        }
         //if(Input.GetKeyDown(KeyCode.F)){
         //    RecycleBullet();
         //}
@@ -141,11 +155,17 @@ public class ShootBullet : MonoBehaviour
     public void RecycleBullet()
     {
         huan.SetTrigger("huishou");
+        int preBulletAmount = bulletMount;
         foreach (var bullet in Bullets)
         {
             // 处理回收子弹的逻辑
             bullet.GetComponent<BulletController>().Recycle();
         }
+        int recycleBulletAmount = bulletMount - preBulletAmount;
+        if(recycleBulletAmount >= thresholds){
+            isEnraged = true;
+        }
+
         Bullets.Clear();
     }
 }
