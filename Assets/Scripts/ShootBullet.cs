@@ -26,8 +26,10 @@ public class ShootBullet : MonoBehaviour
     public GameObject currentBullet;
     public GameObject effect;
     public GameObject huanEffect;
+    public GameObject number;
     private Animator animator;
     private Animator huan;
+    private Animator zidan;
     private GameObject sceneManager;
 
     public AudioSource audioSource;//子弹音效
@@ -37,7 +39,7 @@ public class ShootBullet : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
 
         // 获取场景管理实例
-        sceneManager = GameObject.Find("SceneManageObject");
+        sceneManager = GameObject.Find("SceneManagerObject");
         invokeTime = currentTime;
         UpdateBulletCountUI(); // 初始更新一次UI
         currentBullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
