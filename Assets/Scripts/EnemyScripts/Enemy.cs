@@ -18,6 +18,9 @@ public class Enemy : MonoBehaviour
     public ColorType enemyColor;                // 敌人颜色
     public int amount;                          // 敌人伤害值
     public float ChainEffectRadius = 2.0f;      // 连锁效果半径
+
+    private bool canTakeDamage = true;          // 是否可以造成伤害的标志位
+    public float cooldownTime = 1.0f;           // 冷却时间
     public GameObject baozha;
     private GameObject currentEnemy;
 
@@ -51,9 +54,15 @@ public class Enemy : MonoBehaviour
     // 碰撞检测,当敌人碰撞到Infinity时触发,造成伤害
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Infinity"))
+        // 加个协程，防止短时间内多次碰撞
+        // if (collision.gameObject.CompareTag("Infinity"))
+        // {
+        //     collision.gameObject.GetComponent<InfinityHealth>().TakeDamage(1);
+        // }
+        if (collision.gameObject.CompareTag("Infinity") && canTakeDamage)
         {
             collision.gameObject.GetComponent<InfinityHealth>().TakeDamage(1);
+            StartCoroutine(CollisionCooldown());  // 开始冷却协程
         }
     }
 
@@ -108,5 +117,12 @@ public class Enemy : MonoBehaviour
         // }
         // // 敌人死亡
         Die();
+    }
+
+    private IEnumerator CollisionCooldown()
+    {
+        canTakeDamage = false;  // 设置不能造成伤害
+        yield return new WaitForSeconds(cooldownTime);  // 等待冷却时间
+        canTakeDamage = true;  // 冷却完毕，可以再次造成伤害
     }
 }
