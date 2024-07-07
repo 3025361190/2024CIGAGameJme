@@ -46,6 +46,7 @@ public class ShootBullet : MonoBehaviour
         // animator = GetComponent<Animator>();
         animator = effect.GetComponent<Animator>();
         huan = huanEffect.GetComponent<Animator>();
+        zidan = number.GetComponent<Animator>();
     }
 
     private void Update()
@@ -90,6 +91,8 @@ public class ShootBullet : MonoBehaviour
     {
         audioSource.Play();//“Ù–ß
         animator.SetTrigger("kaihuo");
+        zidan.SetTrigger("Switch");
+
         if (!isEnraged) bulletMount--;
 
         GameObject bullet = currentBullet;
@@ -130,6 +133,7 @@ public class ShootBullet : MonoBehaviour
     public void RecycleBullet()
     {
         huan.SetTrigger("huishou");
+        
         Debug.Log("ªÿ ’");
         foreach (var bullet in Bullets)
         {
