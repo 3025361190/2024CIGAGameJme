@@ -1,0 +1,84 @@
+{
+    "buffs":
+    [
+        {
+            "buffId" : 0,
+            "buffName" : "none",
+            "buffDescription" : "none"
+        },
+        {
+            "buffId" : 1,
+            "buffName" : "buff1",
+            "buffDescription" : "增加子弹发射速度"
+        },
+        {
+            "buffId" : 2,
+            "buffName" : "buff2",
+            "buffDescription" : "减少怪移动速度"
+        },
+        {
+            "buffId" : 3,
+            "buffName" : "buff3",
+            "buffDescription" : "子弹有概率暴击，无视颜色直接连爆"
+        },
+        {
+            "buffId" : 4,
+            "buffName" : "buff4",
+            "buffDescription" : "增加人物移动速度"
+        },
+        {
+            "buffId" : 5,
+            "buffName" : "buff5",
+            "buffDescription" : "连爆范围更大（爆一个变为爆两个）"
+        },
+        {
+            "buffId" : 6,
+            "buffName" : "buff6",
+            "buffDescription" : "子弹分裂后速度大幅增加"
+        },
+        {
+            "buffId" : 7,
+            "buffName" : "buff7",
+            "buffDescription" : "增加狂暴模式时间"
+        },
+        {
+            "buffId" : 8,
+            "buffName" : "buff8",
+            "buffDescription" : "人物血量增加"
+        },
+        {
+            "buffId" : 9,
+            "buffName" : "buff9",
+            "buffDescription" : "再次翻牌：重新刷新三个buff"
+        },
+        {
+            "buffId" : 10,
+            "buffName" : "buff10",
+            "buffDescription" : "我nb，我不需要buff：选择此buff三次后，通关游戏可获得来自开发组的特殊礼包"
+        },
+
+
+
+        
+        {
+            "buffId" : 11,
+            "buffName" : "buff11",
+            "buffDescription" : "子弹变为散射，增加一个方向射出"
+        },
+        {
+            "buffId" : 12,
+            "buffName" : "buff12",
+            "buffDescription" : "储备子弹模式，相同颜色子弹分裂变为多倍"
+        },
+        {
+            "buffId" : 13,
+            "buffName" : "buff13",
+            "buffDescription" : "子弹清0后，立刻获得100子弹"
+        },
+        {
+            "buffId" : 14,
+            "buffName" : "buff14",
+            "buffDescription" : "每次切换到清汤锅只有5秒的时间，但是分裂倍率变成5倍"
+        }
+    ]
+}
