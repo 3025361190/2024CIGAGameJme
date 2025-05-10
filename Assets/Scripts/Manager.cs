@@ -16,9 +16,9 @@ public class Manager : MonoBehaviour
 {
     public GameObject turret;
     public SceneType currentSceneType;
-    private bool cdFlag = false;
-    private float cdTime = 5.0f;
-    private float cdTimer;
+    private bool cdFlag = false;      // 冷却标志
+    private float cdTime = 5.0f;      // 冷却时间设置为5秒
+    private float cdTimer;            // 冷却计时器
 
     //小途的
     public GameObject background;
@@ -39,15 +39,18 @@ public class Manager : MonoBehaviour
         turret =  GameObject.FindGameObjectsWithTag("Turret")[0];
         beijing1 = background.GetComponent<Animator>();
         beijing2 = effect.GetComponent<Animator>();
-        cdTimer = 0.0f;
+        cdTimer = 0.0f;              // 初始化计时器
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(cdFlag){
+        // 处理冷却时间
+        if(cdFlag)
+        {
             cdTimer += Time.deltaTime;
-            if(cdTimer >= cdTime){
+            if(cdTimer >= cdTime)
+            {
                 cdFlag = false;
                 cdTimer = 0.0f;
             }
@@ -60,36 +63,47 @@ public class Manager : MonoBehaviour
 
     public void SwitchSceneType(){
         Debug.Log("switch be called");
+        
+        // 如果在冷却中，则不允许切换
+        if(cdFlag)
+        {
+            Debug.Log($"场景切换正在冷却中，剩余时间：{cdTime - cdTimer:F1}秒");
+            return;
+        }
+
         if(currentSceneType == SceneType.QingTang)
         {
             Debug.Log("switch scene to 红油");
             currentSceneType = SceneType.HongYou;
             Recovery();
-            cdFlag = true;
-            // 切换美术资源
-            // GetComponent<SpriteRenderer>().sprite = sceneResource[0];
-            // 清汤切红油动画
+            cdFlag = true;            // 设置冷却标志
+            
+            // 切换动画和音效
             beijing1.SetBool("background",true);
             beijing2.SetTrigger("change");
-            audioSource.Play();//音效
+            audioSource.Play();
         }
         else if(currentSceneType == SceneType.HongYou)
         {
-            if(cdFlag == false){
-                Debug.Log("switch scene to 清汤");
-                currentSceneType = SceneType.QingTang;
-                // GetComponent<SpriteRenderer>().sprite = sceneResource[1];
-                //红油切清汤动画
-                beijing1.SetBool("background", false);
-                beijing2.SetTrigger("change");
-                audioSource.Play();//音效
-            }
-            else
-            {
-                Debug.Log("红油to清汤is in cd");
+            Debug.Log("switch scene to 清汤");
+            currentSceneType = SceneType.QingTang;
+            cdFlag = true;            // 设置冷却标志
             
-            }
+            // 切换动画和音效
+            beijing1.SetBool("background", false);
+            beijing2.SetTrigger("change");
+            audioSource.Play();
         }
+    }
+
+    // 获取剩余冷却时间
+    public float GetCooldownRemaining()
+    {
+        if (cdFlag)
+        {
+            return cdTime - cdTimer;
+        }
+        return 0f;
     }
 
     private void Recovery(){

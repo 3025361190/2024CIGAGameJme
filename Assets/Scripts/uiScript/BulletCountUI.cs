@@ -4,15 +4,15 @@ using UnityEngine.UI;
 public class BulletCountUI : MonoBehaviour
 {
     public Text bulletCountText;  // 引用 UI Text 组件
-    public GameObject targetGameObject;  // 引用包含 ShootBullet 组件的目标 GameObject
-    private ShootBullet shootBullet;  // 引用 ShootBullet 脚本
+    public GameObject targetGameObject;  // 引用包含 PlayerController 组件的目标 GameObject
+    private PlayerController PlayerController;  // 引用 PlayerController 脚本
 
     void Start()
     {
-        // 获取目标 GameObject 上的 ShootBullet 组件
+        // 获取目标 GameObject 上的 PlayerController 组件
         if (targetGameObject != null)
         {
-            shootBullet = targetGameObject.GetComponent<ShootBullet>();
+            PlayerController = targetGameObject.GetComponent<PlayerController>();
         }
         else
         {
@@ -26,10 +26,10 @@ public class BulletCountUI : MonoBehaviour
     void Update()
     {
         // 每帧更新显示的子弹数量
-        if (shootBullet != null && bulletCountText != null)
+        if (PlayerController != null && bulletCountText != null)
         {
             // 从 ShootBullet 脚本的 GetBulletMount 函数获取子弹数量
-            int bulletCount = shootBullet.GetBulletMount();
+            int bulletCount = PlayerController.GetRemainingBullets();
 
             // 更新 UI Text 显示的文本内容
             bulletCountText.text = bulletCount.ToString();
