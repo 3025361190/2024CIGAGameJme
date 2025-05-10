@@ -434,3 +434,6 @@ public class BulletController : MonoBehaviour
 
 
 }
+
+
+// TODO: 还有bug，白汤红汤切换几次，都发射子弹，有时候切换回红汤后，一开枪也报错，也是访问已销毁对象。子弹多的时候容易出现（200+）
