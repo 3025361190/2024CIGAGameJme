@@ -26,9 +26,13 @@ public class PlayerController : MonoBehaviour
     public GameObject currentBullet;
     public Vector3 currentBulletPosition;
 
+    private SceneType sceneType;
+    private GameObject sceneManager;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sceneManager = GameObject.Find("SceneManagerObject");
         spriteRenderer = GetComponent<SpriteRenderer>();
         remainingBullets = 10;    // 初始化子弹数量为10
         UpdateBulletCount();     
@@ -41,6 +45,8 @@ public class PlayerController : MonoBehaviour
     {
         HandleMovement();
         HandleShooting();
+        // 获取场景类型
+        sceneType = sceneManager.GetComponent<Manager>().currentSceneType;
     }
 
     // 处理移动逻辑
@@ -71,7 +77,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // 清理已销毁的子弹
-        CleanupBullets();
+        //CleanupBullets();
     }
 
     // 旋转角色
@@ -93,6 +99,7 @@ public class PlayerController : MonoBehaviour
             UpdateBulletCount();
         }
     }
+    
 
     // 生成子弹
     private void SpawnBullet(Vector2 direction)
@@ -108,7 +115,10 @@ public class PlayerController : MonoBehaviour
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         bulletRb.velocity = direction * bulletSpeed;
         
-        activeBullets.Add(bullet);
+        if (sceneType == SceneType.QingTang)
+        {
+            activeBullets.Add(bullet);
+        }
         nextFireTime = Time.time + fireRate;
     }
 
@@ -119,6 +129,17 @@ public class PlayerController : MonoBehaviour
         {
             bulletCountText.text = remainingBullets.ToString();
         }
+    }
+
+    public void RecycleBullet()
+    {
+        foreach (var bullet in activeBullets)
+        {
+            // 处理回收子弹的逻辑
+            bullet.GetComponent<BulletController>().Recycle();
+        }
+        
+        activeBullets.Clear();
     }
 
     // 清理已销毁的子弹

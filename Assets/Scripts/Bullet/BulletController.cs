@@ -344,12 +344,29 @@ public class BulletController : MonoBehaviour
 
 
         //碰撞炮台触发函数
-        else if(collision.gameObject.CompareTag("Turret") && is_trace == true)
+        // else if(collision.gameObject.CompareTag("Turret") && is_trace == true)
+        // {
+        //     //调用炮台子弹数量+1的函数
+        //     //............
+        //     //............
+        //     Turret.GetComponent<PlayerController>().AddBullets(1);
+
+        //     // sprite.enabled = false;
+        //     // StartCoroutine(WaitSomeSecondsToDestory(100.0f));
+        //     Instantiate(prefabToSpawn, transform.position, transform.rotation);
+        //     Destroy(bullet);
+            
+        // }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Turret") && is_trace == true)
         {
             //调用炮台子弹数量+1的函数
             //............
             //............
-            Turret.GetComponent<ShootBullet>().AddBulletMount();
+            Turret.GetComponent<PlayerController>().AddBullets(1);
 
             // sprite.enabled = false;
             // StartCoroutine(WaitSomeSecondsToDestory(100.0f));
