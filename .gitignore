@@ -72,6 +72,19 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 
 
+
+
 # Fortunate瑞添加的sense ignore
 test1.unity
 test1.unity.meta
+
+# taptap插件
+# Ignore a specific folder
+/Assets/TapTapMiniGame/
+/Assets/TapTapMiniGame.meta
+/Assets/TJ-WASM-SDK-V2/
+/Assets/TJ-WASM-SDK-V2.meta
+/Assets/WebGLTemplates/
+/Assets/WebGLTemplates.meta
+/Packages/
+/Packages.meta
