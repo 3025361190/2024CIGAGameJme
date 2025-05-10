@@ -1,0 +1,77 @@
+{
+    "levels":
+    [
+        {
+            "levelId" : 0,
+            "isBoss" : 0,
+            "bossNum" : 0,
+            "monsNum" : 0,
+            "bossTime" : 0,
+            "buffId" : [],
+            "time" : 0
+        },
+        {
+            "levelId" : 1,
+            "isBoss" : 0,
+            "bossNum" : 0,
+            "monsNum" : 100,
+            "bossTime" : 30,
+            "buffId" : [1,2,3],
+            "time" : 100
+        },
+        {
+            "levelId" : 2,
+            "isBoss" : 1,
+            "bossNum" : 1,
+            "monsNum" : 101,
+            "bossTime" : 31,
+            "buffId" : [1,2,4],
+            "time" : 101
+        },
+        {
+            "levelId" : 3,
+            "isBoss" : 1,
+            "bossNum" : 2,
+            "monsNum" : 102,
+            "bossTime" : 32,
+            "buffId" : [1,2,5],
+            "time" : 102
+        },
+        {
+            "levelId" : 4,
+            "isBoss" : 1,
+            "bossNum" : 3,
+            "monsNum" : 103,
+            "bossTime" : 33,
+            "buffId" : [1,2,6],
+            "time" : 103
+        },
+        {
+            "levelId" : 5,
+            "isBoss" : 1,
+            "bossNum" : 4,
+            "monsNum" : 104,
+            "bossTime" : 34,
+            "buffId" : [1,2,7],
+            "time" : 104
+        },
+        {
+            "levelId" : 6,
+            "isBoss" : 1,
+            "bossNum" : 5,
+            "monsNum" : 105,
+            "bossTime" : 35,
+            "buffId" : [1,2,8],
+            "time" : 105
+        },
+        {
+            "levelId" : 7,
+            "isBoss" : 1,
+            "bossNum" : 6,
+            "monsNum" : 106,
+            "bossTime" : 36,
+            "buffId" : [1,2,9],
+            "time" : 106
+        }
+    ]
+}
