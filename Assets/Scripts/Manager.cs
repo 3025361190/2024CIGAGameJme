@@ -1,13 +1,13 @@
 /*
 文件名：Manager.cs
 编辑人：豪哥，fortunate瑞，没道理啊
-文件描述：Manager类，用于管理游戏的场景切换，ui界面，游戏流程等
+文件描述：Manager类，用于管理游戏的场景切换，ui界面，游戏流程，关卡等
 */
 
 using System.Collections;
 using System.Collections.Generic;
 // using System.Diagnostics;
-using System.Threading;
+// using System.Threading;
 using UnityEngine;
 
 
