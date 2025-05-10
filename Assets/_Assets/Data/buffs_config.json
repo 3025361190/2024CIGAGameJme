@@ -2,83 +2,166 @@
     "buffs":
     [
         {
-            "buffId" : 0,
-            "buffName" : "none",
-            "buffDescription" : "none"
+            "buffId": 0,
+            "buffName": "none",
+            "buffDescription": "none",
+            "buffDuration": -1,
+            "buffStackable": false,
+            "maxStack": 1,
+            "stackType": 0
         },
         {
-            "buffId" : 1,
-            "buffName" : "buff1",
-            "buffDescription" : "增加子弹发射速度"
+            "buffId": 1,
+            "buffName": "增加子弹发射速度",
+            "buffDescription": "增加子弹发射速度",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "maxStack": 3,
+            "stackType": 0,
+            "firingRateMultiplier": 1.2,
+            "stackValue": 0.2
         },
         {
-            "buffId" : 2,
-            "buffName" : "buff2",
-            "buffDescription" : "减少怪移动速度"
+            "buffId": 2,
+            "buffName": "减少怪移动速度",
+            "buffDescription": "减少怪物移动速度",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "maxStack": 3,
+            "stackType": 0,
+            "enemySpeedMultiplier": 0.8,
+            "stackValue": 0.1
         },
         {
-            "buffId" : 3,
-            "buffName" : "buff3",
-            "buffDescription" : "子弹有概率暴击，无视颜色直接连爆"
+            "buffId": 3,
+            "buffName": "子弹暴击",
+            "buffDescription": "子弹有概率暴击，无视颜色直接连爆",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "maxStack": 3,
+            "stackType": 0,
+            "criticalChance": 0.15,
+            "stackValue": 0.1
         },
         {
-            "buffId" : 4,
-            "buffName" : "buff4",
-            "buffDescription" : "增加人物移动速度"
+            "buffId": 4,
+            "buffName": "增加人物移动速度",
+            "buffDescription": "增加人物移动速度",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "maxStack": 3,
+            "stackType": 0,
+            "playerSpeedMultiplier": 1.2,
+            "stackValue": 0.1
         },
         {
-            "buffId" : 5,
-            "buffName" : "buff5",
-            "buffDescription" : "连爆范围更大（爆一个变为爆两个）"
+            "buffId": 5,
+            "buffName": "连爆范围增大",
+            "buffDescription": "连爆范围更大（爆一个变为爆两个）",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "maxStack": 3,
+            "stackType": 0,
+            "chainExplosionRange": 2,
+            "stackValue": 1
         },
         {
-            "buffId" : 6,
-            "buffName" : "buff6",
-            "buffDescription" : "子弹分裂后速度大幅增加"
+            "buffId": 6,
+            "buffName": "子弹分裂后速度增加",
+            "buffDescription": "子弹分裂后速度大幅增加",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "maxStack": 3,
+            "stackType": 0,
+            "splitBulletSpeedMultiplier": 1.5,
+            "stackValue": 0.2
         },
         {
-            "buffId" : 7,
-            "buffName" : "buff7",
-            "buffDescription" : "增加狂暴模式时间"
+            "buffId": 7,
+            "buffName": "增加狂暴模式时间",
+            "buffDescription": "增加狂暴模式时间",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "maxStack": 3,
+            "stackType": 0,
+            "splitModeDurationBonus": 5.0,
+            "stackValue": 2.0
         },
         {
-            "buffId" : 8,
-            "buffName" : "buff8",
-            "buffDescription" : "人物血量增加"
+            "buffId": 8,
+            "buffName": "人物血量增加",
+            "buffDescription": "人物血量增加",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "maxStack": 3,
+            "stackType": 0,
+            "healthBonus": 1,
+            "stackValue": 1
         },
         {
-            "buffId" : 9,
-            "buffName" : "buff9",
-            "buffDescription" : "再次翻牌：重新刷新三个buff"
+            "buffId": 9,
+            "buffName": "再次翻牌",
+            "buffDescription": "再次翻牌：重新刷新三个buff",
+            "buffDuration": -1,
+            "buffStackable": false,
+            "maxStack": 1,
+            "stackType": 0
         },
         {
-            "buffId" : 10,
-            "buffName" : "buff10",
-            "buffDescription" : "我nb，我不需要buff：选择此buff三次后，通关游戏可获得来自开发组的特殊礼包"
-        },
-
-
-
-        
-        {
-            "buffId" : 11,
-            "buffName" : "buff11",
-            "buffDescription" : "子弹变为散射，增加一个方向射出"
+            "buffId": 10,
+            "buffName": "我nb，我不需要buff",
+            "buffDescription": "我nb，我不需要buff：选择此buff三次后，通关游戏可获得来自开发组的特殊礼包",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "maxStack": 3,
+            "stackType": 0,
+            "requiredCount": 3
         },
         {
-            "buffId" : 12,
-            "buffName" : "buff12",
-            "buffDescription" : "储备子弹模式，相同颜色子弹分裂变为多倍"
+            "buffId": 11,
+            "buffName": "子弹散射",
+            "buffDescription": "子弹变为散射，增加一个方向射出",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "maxStack": 3,
+            "stackType": 0,
+            "extraBulletDirections": 1,
+            "spreadAngle": 30.0,
+            "stackValue": 1
         },
         {
-            "buffId" : 13,
-            "buffName" : "buff13",
-            "buffDescription" : "子弹清0后，立刻获得100子弹"
+            "buffId": 12,
+            "buffName": "储备子弹模式",
+            "buffDescription": "储备子弹模式，相同颜色子弹分裂变为多倍",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "maxStack": 3,
+            "stackType": 0,
+            "sameColorMultiplier": 2.0,
+            "stackValue": 0.5
         },
         {
-            "buffId" : 14,
-            "buffName" : "buff14",
-            "buffDescription" : "每次切换到清汤锅只有5秒的时间，但是分裂倍率变成5倍"
+            "buffId": 13,
+            "buffName": "起死回生",
+            "buffDescription": "子弹清0后，立刻获得100子弹",
+            "buffDuration": -1,
+            "buffStackable": false,
+            "maxStack": 1,
+            "stackType": 0,
+            "emergencyBulletCount": 100,
+            "triggerThreshold": 0,
+            "cooldown": 60.0
+        },
+        {
+            "buffId": 14,
+            "buffName": "赌狗",
+            "buffDescription": "每次切换到清汤锅只有5秒的时间，但是分裂倍率变成5倍",
+            "buffDuration": -1,
+            "buffStackable": false,
+            "maxStack": 1,
+            "stackType": 0,
+            "reducedSplitModeDuration": 5.0,
+            "splitMultiplierBoost": 5.0
         }
     ]
 }

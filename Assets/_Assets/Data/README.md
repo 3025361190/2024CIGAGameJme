@@ -24,12 +24,15 @@
   | `splitModeDuration` | 分裂模式最长持续时间 |
 
 ### 3. `buffs_config.json` ：
-  | 参数 | 说明 |
-  | --- | --- |
-  | `buffId` | Buff ID |
-  | `buffName` | Buff名称 | 
-  | `buffDescription` | Buff描述 |
+  | 属性 | 类型 | 说明 |
+  | --- | --- | --- |
+  | `buffId` | int | Buff 唯一标识符 |
+  | `buffName` | string | Buff 名称 |
+  | `buffDescription` | string | Buff 描述文本 |
+  | `buffDuration` | float | Buff 持续时间（-1表示永久） |
+  | `buffStackable` | bool | 是否可叠加 |
+  | `maxStack` | int | 最大叠加层数 |
+  | `buffIcon` | sprite | Buff 图标 |
+  | `stackType` | int | 叠加方式（"0"表示加法叠加，"1"表示乘法叠加） |
 
-  其他详细参数见[buff说明文档](../../../Docs/Buff说明文档.md)
-
-### 4.
+其他详细参数见[buff说明文档](../../../Docs/Buff说明文档.md)
