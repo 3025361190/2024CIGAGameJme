@@ -1,0 +1,6 @@
+{
+    "firingRate" : 1.0,
+    "bulletSpeed" : 1.0,
+    "splitModeCD" : 5.0,
+    "splitModeDuration" : 20.0
+}
