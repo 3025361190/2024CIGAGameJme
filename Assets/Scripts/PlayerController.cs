@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.Playables;
 
 public class PlayerController : MonoBehaviour
 {
@@ -29,12 +30,15 @@ public class PlayerController : MonoBehaviour
     private SceneType sceneType;
     private GameObject sceneManager;
 
+    public PlayableDirector director;//tl相关，策划加的
+    private bool ispause=true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sceneManager = GameObject.Find("SceneManagerObject");
         spriteRenderer = GetComponent<SpriteRenderer>();
-        remainingBullets = 10;    // 初始化子弹数量为10
+        remainingBullets = 60;    // 初始化子弹数量为10
         UpdateBulletCount();     
         currentBulletPosition = new Vector3(7f, 3.7f, 0.2f);    
         currentBullet = Instantiate(bulletPrefab, currentBulletPosition, Quaternion.identity);
@@ -47,6 +51,10 @@ public class PlayerController : MonoBehaviour
         HandleShooting();
         // 获取场景类型
         sceneType = sceneManager.GetComponent<Manager>().currentSceneType;
+        if (ispause)
+        {
+            NewMountSmall();
+        }
     }
 
     // 处理移动逻辑
@@ -159,5 +167,17 @@ public class PlayerController : MonoBehaviour
     public void AddBullets(int amount)
     {
         remainingBullets = Mathf.Min(remainingBullets + amount, maxBullets);
+    }
+
+    //tl相关，策划加的
+    void NewMountSmall()
+    {
+        if (remainingBullets <= 50 )
+        {
+
+            director.playableGraph.GetRootPlayable(0).SetSpeed(1);
+            Debug.Log("时间轴恢复播放");
+            ispause = false;
+        }
     }
 }
