@@ -4373,9 +4373,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8755640138561057549, guid: 82b60412a12268b4c985da4891ed9ebc, type: 3}
+      propertyPath: isNew
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8755640138561057549, guid: 82b60412a12268b4c985da4891ed9ebc, type: 3}
       propertyPath: effect
       value: 
       objectReference: {fileID: 1222688029}
+    - target: {fileID: 8755640138561057549, guid: 82b60412a12268b4c985da4891ed9ebc, type: 3}
+      propertyPath: plableNew
+      value: 
+      objectReference: {fileID: 1329081626}
     - target: {fileID: 8755640138561057549, guid: 82b60412a12268b4c985da4891ed9ebc, type: 3}
       propertyPath: background
       value: 

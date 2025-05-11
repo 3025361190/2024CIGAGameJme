@@ -26,6 +26,9 @@ public class Manager : MonoBehaviour
     private Animator beijing1;
     private Animator beijing2;
     public AudioSource audioSource;//音效
+    public GameObject plableNew;
+    [Header("是否开启新手教学")]
+    public bool isNew = true;
 
     // public Sprite[] sceneResource;      // 在unity中拖拽设置场景资源
     // Start is called before the first frame update
@@ -40,6 +43,10 @@ public class Manager : MonoBehaviour
         beijing1 = background.GetComponent<Animator>();
         beijing2 = effect.GetComponent<Animator>();
         cdTimer = 0.0f;              // 初始化计时器
+        if (!isNew)
+        {
+            plableNew.SetActive(false);
+        }
     }
 
     // Update is called once per frame
