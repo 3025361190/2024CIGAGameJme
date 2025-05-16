@@ -1,50 +1,55 @@
 /*
 文件名：jsonLoader.cs
 编辑人：fortunate瑞
-文件描述：用于加载static_json文件，并返回一个对象
+文件描述：用于加载staticData文件夹下的json文件，并返回json数据 
 */
 
+// 使用JsonLoader时，不需要using，直接使用JsonLoader.LoadJsonText("fileName")或JsonLoader.LoadJson<T>("fileName")即可
+
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-using System;
 
-public class JsonLoader
+public static class JsonLoader
 {
     /// <summary>
-    /// 从Resources文件夹加载JSON文件并转换为指定类型的对象
+    /// 从Resources/StaticData文件夹加载指定的JSON文件
     /// </summary>
     /// <typeparam name="T">要转换成的目标类型</typeparam>
-    /// <param name="fileName">JSON文件名称（不需要.json后缀）</param>
-    /// <returns>转换后的对象</returns>
-    public static T LoadJsonFromResources<T>(string fileName)
+    /// <param name="fileName">不带扩展名的文件名</param>
+    /// <returns>解析后的对象</returns>
+    public static T LoadJson<T>(string fileName)
     {
-        try
+        string path = "StaticData/" + fileName;
+        TextAsset textAsset = Resources.Load<TextAsset>(path);
+        
+        if (textAsset == null)
         {
-            // 从Resources文件夹加载文本文件
-            TextAsset jsonFile = Resources.Load<TextAsset>(fileName);
-            
-            if (jsonFile == null)
-            {
-                Debug.LogError($"无法找到JSON文件: {fileName}");
-                return default(T);
-            }
-
-            // 将JSON文本转换为对象
-            T result = JsonUtility.FromJson<T>(jsonFile.text);
-            
-            if (result == null)
-            {
-                Debug.LogError($"JSON转换失败: {fileName}");
-                return default(T);
-            }
-
-            return result;
-        }
-        catch (Exception e)
-        {
-            Debug.LogError($"加载JSON文件时发生错误: {fileName}\n{e.Message}");
+            Debug.LogError($"无法加载JSON文件: {path}");
             return default(T);
         }
+        
+        return JsonUtility.FromJson<T>(textAsset.text);
+    }
+    
+    /// <summary>
+    /// 从Resources/StaticData文件夹加载指定的JSON文件并返回原始文本
+    /// </summary>
+    /// <param name="fileName">不带扩展名的文件名</param>
+    /// <returns>JSON文本内容</returns>
+    public static string LoadJsonText(string fileName)
+    {
+        string path = "StaticData/" + fileName;
+        TextAsset textAsset = Resources.Load<TextAsset>(path);
+        
+        if (textAsset == null)
+        {
+            Debug.LogError($"无法加载JSON文件: {path}");
+            return null;
+        }
+        
+        return textAsset.text;
     }
 }
 
