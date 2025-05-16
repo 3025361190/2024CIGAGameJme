@@ -89,4 +89,5 @@ test1.unity.meta
 /Packages/
 /Packages.meta
 
-ProjectSettings/ProjectVersion.txt
+# 忽略ProjectSettings下的版本文件
+/ProjectSettings/ProjectVersion.txt
