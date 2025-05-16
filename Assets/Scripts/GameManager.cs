@@ -44,6 +44,12 @@ public class GameManager : MonoBehaviour
     // 游戏设置
     public GameSettings gameSettings;
 
+    // 关卡配置数组
+    public LevelConfigList levelList;
+
+    // 是否是新手
+    public bool isNewPlayer = false;
+
     private void Awake()
     {
         // 确保单例
@@ -54,9 +60,10 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
+        // 标记为切换场景时，不会被销毁的对象
         DontDestroyOnLoad(gameObject);
 
-        // 初始化数据路径
+        // 初始化终端设备数据路径
         InitializePaths();
         
         // 加载游戏数据
@@ -75,9 +82,8 @@ public class GameManager : MonoBehaviour
             
             Debug.Log("GameData文件夹不存在，默认为新玩家");
             Directory.CreateDirectory(saveDataPath);
-
-            // TODO: 触发新手教程
-
+            isNewPlayer = true;
+            // TODO: 在合适的位置触发新手教程
         }
     }
 
@@ -109,6 +115,14 @@ public class GameManager : MonoBehaviour
             gameSettings = new GameSettings();
             SaveGameSettings();
         }
+
+        // 加载levels_config.json
+        // 访问方式：levelList.levels[levelId]
+        levelList = JsonLoader.LoadJson<LevelConfigList>("levels_config");
+
+        // 加载global_config.json
+        
+        
     }
 
     // 保存玩家数据
@@ -164,12 +178,12 @@ public class PlayerData
 [System.Serializable]
 public class GameSettings
 {
-    public float musicVolume = 1f;
-    public float soundVolume = 1f;
+    public float musicVolume = 1.00f;
+    public float soundVolume = 1.00f;
     public bool isFullscreen = true;
     public bool isVibration = true;
     // 可以添加更多游戏设置
 }
 
-// TODO: 增加config.json的读取，可能要新建多个类
+// TODO: 增加config.json的读取
 // TODO: 关卡管理函数，例如nextLevel()等
