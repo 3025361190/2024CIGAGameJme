@@ -83,5 +83,9 @@ test1.unity.meta
 /Assets/TJ-WASM-SDK-V2.meta
 /Assets/WebGLTemplates/
 /Assets/WebGLTemplates.meta
+
+
+# 忽略Packages文件夹
 /Packages/
 /Packages.meta
+
