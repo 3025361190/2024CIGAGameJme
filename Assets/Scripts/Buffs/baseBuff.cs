@@ -58,7 +58,7 @@ public abstract class BaseBuff : MonoBehaviour
     public virtual void InitBuffFromConfig(int buffId)
     {
         // // 获取JSON文本
-        string jsonText = JsonLoader.LoadJsonText("buffs_config");
+        // string jsonText = JsonLoader.LoadJsonText("buffs_config");
         // if (string.IsNullOrEmpty(jsonText))
         // {
         //     Debug.LogError("无法加载buff配置文件");

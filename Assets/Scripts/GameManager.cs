@@ -13,6 +13,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Assets.Scripts.Data;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,40 +37,59 @@ public class GameManager : MonoBehaviour
 
     // 数据存储路径
     private string saveDataPath;
-    
-    // 当前关卡，0为MainMenu
-    public int currentLevel = 0;
+
+    // 关卡列表
+    private List<levelConfig> levelList;
+    // 当前关卡的配置
+    private levelConfig currentLevelConfig;
     
     // 玩家数据
-    public PlayerData playerData;
+    private PlayerData playerData;
+    public PlayerData PlayerData => playerData;
 
     // 游戏设置
-    public GameSettings gameSettings;
+    private GameSettings gameSettings;
+    public GameSettings GameSettings => gameSettings;
 
-    // 关卡配置数组
-    public LevelConfigList levelList;
+    // global_config.json中的数据
+    private int initialBulletCount; // 初始子弹数量
+    private float firingRate; // 射击频率
+    private float bulletSpeed; // 子弹速度
+    private float splitModeCD; // 分裂模式CD
+    private float splitModeDuration; // 分裂模式最大持续时间
 
-    // 是否是新手
-    public bool isNewPlayer = false;
+    // 当前关卡，0为MainMenu
+    public int currentLevel = 0;
+
+    // 当前子弹数量
+    public int currentBulletCount;
+
 
     private void Awake()
     {
         // 确保单例
         if (instance != null && instance != this)
         {
+            Debug.Log("销毁重复的GameManager实例");
             Destroy(gameObject);
             return;
         }
 
         instance = this;
+        Debug.Log("GameManager初始化");
         // 标记为切换场景时，不会被销毁的对象
         DontDestroyOnLoad(gameObject);
 
         // 初始化终端设备数据路径
         InitializePaths();
         
-        // 加载游戏数据
-        LoadGameData();
+        // 加载静态游戏数据
+        LoadStaticGameData();
+
+        // 初始化动态游戏数据
+        InitializeGameData();
+        
+        Debug.Log("GameManager初始化完成");
     }
 
     // 初始化数据路径
@@ -77,28 +99,34 @@ public class GameManager : MonoBehaviour
         // Application.persistentDataPath是Unity提供的跨平台本地存储路径
         // 在这里我们创建一个名为"GameData"的子文件夹来存储所有游戏相关数据
         saveDataPath = System.IO.Path.Combine(Application.persistentDataPath, "GameData");
+        Debug.Log($"数据存储路径: {saveDataPath}");
+        
         if (!Directory.Exists(saveDataPath))
         {
-            
-            Debug.Log("GameData文件夹不存在，默认为新玩家");
+            Debug.Log("GameData文件夹不存在，创建新文件夹");
             Directory.CreateDirectory(saveDataPath);
-            isNewPlayer = true;
-            // TODO: 在合适的位置触发新手教程
         }
     }
 
-    // 加载全部游戏数据
-    private void LoadGameData()
+    // 加载全部静态游戏数据
+    private void LoadStaticGameData()
     {
+        Debug.Log("开始加载静态游戏数据...");
+        
         // 加载玩家数据
         string playerDataPath = System.IO.Path.Combine(saveDataPath, "player_data.json");
         if (File.Exists(playerDataPath))
         {
+            Debug.Log("加载已存在的玩家数据");
             string json = File.ReadAllText(playerDataPath);
-            playerData = JsonUtility.FromJson<PlayerData>(json);
+            playerData = JsonConvert.DeserializeObject<PlayerData>(json);
+            // 访问方法：
+            // playerData.GrandPrize;
+            // playerData.isNewPlayer;
         }
         else
         {
+            Debug.Log("创建新的玩家数据");
             playerData = new PlayerData();
             SavePlayerData();
         }
@@ -107,35 +135,62 @@ public class GameManager : MonoBehaviour
         string settingsPath = System.IO.Path.Combine(saveDataPath, "game_settings.json");
         if (File.Exists(settingsPath))
         {
+            Debug.Log("加载已存在的游戏设置");
             string json = File.ReadAllText(settingsPath);
-            gameSettings = JsonUtility.FromJson<GameSettings>(json);
+            gameSettings = JsonConvert.DeserializeObject<GameSettings>(json);
         }
         else
         {
+            Debug.Log("创建新的游戏设置");
             gameSettings = new GameSettings();
             SaveGameSettings();
         }
 
         // 加载levels_config.json
-        // 访问方式：levelList.levels[levelId]
-        levelList = JsonLoader.LoadJson<LevelConfigList>("levels_config");
+        Debug.Log("加载关卡配置...");
+        levelList = JsonLoader.LoadJsonAsJObject("StaticData/levels_config")["levels"].ToObject<List<levelConfig>>();
+        Debug.Log($"成功加载 {levelList.Count} 个关卡配置");
 
         // 加载global_config.json
-        
-        
+        Debug.Log("加载全局配置...");
+        var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
+        if (globalConfig != null)
+        {   
+            // 获取global_config.json中的数据
+            initialBulletCount = globalConfig["initialBulletCount"].ToObject<int>();
+            firingRate = globalConfig["firingRate"].ToObject<float>();
+            bulletSpeed = globalConfig["bulletSpeed"].ToObject<float>();
+            splitModeCD = globalConfig["splitModeCD"].ToObject<float>();
+            splitModeDuration = globalConfig["splitModeDuration"].ToObject<float>();
+            
+            Debug.Log($"全局配置加载完成: 初始子弹={initialBulletCount}, 射击频率={firingRate}, 子弹速度={bulletSpeed}");
+        }
+        else
+        {
+            Debug.LogError("加载全局配置失败！");
+        }
+    }
+
+    // 初始化游戏数据
+    private void InitializeGameData()
+    {
+        Debug.Log("初始化游戏数据...");
+        // 初始化子弹数量
+        currentBulletCount = initialBulletCount;
+        Debug.Log($"初始化完成: 当前子弹数量={currentBulletCount}");
     }
 
     // 保存玩家数据
     public void SavePlayerData()
     {
-        string json = JsonUtility.ToJson(playerData, true);
+        string json = JsonConvert.SerializeObject(playerData, Formatting.Indented);
         File.WriteAllText(System.IO.Path.Combine(saveDataPath, "player_data.json"), json);
     }
 
     // 保存游戏设置
     public void SaveGameSettings()
     {
-        string json = JsonUtility.ToJson(gameSettings, true);
+        string json = JsonConvert.SerializeObject(gameSettings, Formatting.Indented);
         File.WriteAllText(System.IO.Path.Combine(saveDataPath, "game_settings.json"), json);
     }
 
@@ -144,12 +199,63 @@ public class GameManager : MonoBehaviour
     {
         SavePlayerData();
         SaveGameSettings();
+
     }
+
+    // 设置当前关卡的配置
+    public void setCurrentLevelConfig(int level)
+    {
+        // 根据level获取当前关卡的配置
+        // 获取当前关卡的配置
+        currentLevelConfig = levelList[level];
+    }
+
+    // 跳转至指定关卡
+    public void jumpToLevel(int level)
+    {
+        Debug.Log($"尝试跳转到关卡 {level}");
+        
+        // 检查关卡是否有效
+        if (level < 0 || level > levelList.Count)
+        {
+            Debug.LogError($"无效的关卡编号: {level}");
+            return;
+        }
+        
+        // 更新当前关卡
+        currentLevel = level;
+        Debug.Log($"更新当前关卡为: {level}");
+        
+        // 保存当前数据
+        SaveAllData();
+        
+        // 加载场景
+        if(level == 0)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        }
+        else
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("level_scene");
+        }
+        setCurrentLevelConfig(level);
+        Debug.Log($"关卡 {level} 配置已设置");
+    }
+
+    // 跳转至下一关
+    public void nextLevel()
+    {
+        jumpToLevel(currentLevel + 1);
+    }
+
+
+
 
 
     // 在应用退出时保存数据
     private void OnApplicationQuit()
     {
+        Debug.Log("游戏退出，保存所有数据");
         SaveAllData();
     }
 
@@ -166,24 +272,5 @@ public class GameManager : MonoBehaviour
     }
 }
 
-// 玩家数据类
-[System.Serializable]
-public class PlayerData
-{
-    public int grandPrize = 0;
-    // 可以添加更多玩家相关数据
-}
 
-// 游戏设置类
-[System.Serializable]
-public class GameSettings
-{
-    public float musicVolume = 1.00f;
-    public float soundVolume = 1.00f;
-    public bool isFullscreen = true;
-    public bool isVibration = true;
-    // 可以添加更多游戏设置
-}
-
-// TODO: 增加config.json的读取
-// TODO: 关卡管理函数，例如nextLevel()等
+// TODO: 将现有manager中的功能迁移到GameManager中

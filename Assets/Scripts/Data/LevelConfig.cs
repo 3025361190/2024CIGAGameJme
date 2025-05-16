@@ -1,22 +1,25 @@
 /*
 文件名：LevelConfig.cs
 编辑人：fortunate瑞
-文件描述：关卡配置类，用于将json中的数据转换为对象
+文件描述：关卡配置类，用于存储关卡的配置信息
 */
 
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
-using UnityEngine;
-
-[System.Serializable]
-public class LevelConfig
+namespace Assets.Scripts.Data
 {
-    public int levelId;                    // 关卡ID
-    public int isBoss;                     // 是否是Boss关卡
-    public int bossNum;                    // Boss数量
-    public int monsNum;                    // 小怪数量
-    public int bossTime;                   // Boss出现时间
-    public int[] buffId;                   // BuffID列表
-    public int time;                       // 关卡时间
+    [Serializable]
+    public class levelConfig
+    {
+        public int levelId { get; set; }
+        public int isBoss { get; set; }
+        public int bossNum { get; set; }
+        public int monsNum { get; set; }
+        public int bossTime { get; set; }
+        public List<int> buffId { get; set; }
+        public int time { get; set; }
+    }
+}
 
-
-} 
