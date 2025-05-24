@@ -11,64 +11,64 @@ using Vector3 = UnityEngine.Vector3;
 
 public class BulletController : MonoBehaviour
 {
-    //×Óµ¯Ô¤ÖÆÌå
+    //ï¿½Óµï¿½Ô¤ï¿½ï¿½ï¿½ï¿½
     public GameObject bullet;
-    //×Óµ¯µÄäÖÈ¾Æ÷
+    //ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½È¾ï¿½ï¿½
     public SpriteRenderer sprite = null;
-    //×Óµ¯µÄ¸ÕÌå
+    //ï¿½Óµï¿½ï¿½Ä¸ï¿½ï¿½ï¿½
     public Rigidbody2D rb;
 
-    //×Óµ¯Ä¿Ç°µÄËÙ¶È
+    //ï¿½Óµï¿½Ä¿Ç°ï¿½ï¿½ï¿½Ù¶ï¿½
     public float speed;
 
-    //×Óµ¯»ØÊÕµÄËÙ¶È
+    //ï¿½Óµï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½Ù¶ï¿½
     public float recycleSpeed = 25.0f;
 
-    //×Óµ¯Õý³£µÄËÙ¶È
+    //ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½
     public float normalSpeed = 10.0f;
-    //×Óµ¯¿ñ±©µÄËÙ¶È
+    //ï¿½Óµï¿½ï¿½ñ±©µï¿½ï¿½Ù¶ï¿½
     public float furySpeed = 20.0f;
 
-    //¼Ó×Óµ¯Ä£Ê½£ºtrue   ´ò¹ÖÄ£Ê½£ºfalse
+    //ï¿½ï¿½ï¿½Óµï¿½Ä£Ê½ï¿½ï¿½true   ï¿½ï¿½ï¿½Ä£Ê½ï¿½ï¿½false
     public bool state;
 
-    //·ÖÁÑ³öÀ´µÄ×Óµ¯Êý×é
+    //ï¿½ï¿½ï¿½Ñ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
     public Stack<GameObject> nextBullet = new();
-    //·ÖÁÑ³öÀ´µÄ×Óµ¯ÊýÁ¿
+    //ï¿½ï¿½ï¿½Ñ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
     public int childNum = 0;
 
-    //×Óµ¯ÑÕÉ«ËØ²ÄÊý×é
+    //ï¿½Óµï¿½ï¿½ï¿½É«ï¿½Ø²ï¿½ï¿½ï¿½ï¿½ï¿½
     public Sprite[] sprites;
-    //×Óµ¯ÑÕÉ«±äÁ¿
+    //ï¿½Óµï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
     public ColorType bulletCollor;
 
-    //imageµÄTransform
+    //imageï¿½ï¿½Transform
     public Transform imageTransform;
 
-    //ÅÚÌ¨ÊµÀý£¬ÓÃÓÚ»ØÊÕ×Óµ¯Ê±×·×Ù
+    //ï¿½ï¿½Ì¨Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½ï¿½Óµï¿½Ê±×·ï¿½ï¿½
     public GameObject Turret;
 
-    //×·×Ù×´Ì¬±êÖ¾
+    //×·ï¿½ï¿½×´Ì¬ï¿½ï¿½Ö¾
     public bool is_trace = false;
 
-    //³¡¾°ÊµÀý
-    public GameObject sceneManager;
+    //ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
+    public GameObject skillButton;
 
-    //·ÖÁÑÉÏÏÞ
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     //public int splitLimit = 1;
 
-    //ÍÏÎ²äÖÈ¾Æ÷
+    //ï¿½ï¿½Î²ï¿½ï¿½È¾ï¿½ï¿½
     public TrailRenderer trailRenderer;
 
 
 
 
-    //// ¼¼ÄÜÀäÈ´Ê±¼ä£¨Ãë£©
+    //// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È´Ê±ï¿½ä£¨ï¿½ë£©
     //public float cooldownTime = 1f;
-    //// ÏÂ´Î¿ÉÒÔÊ¹ÓÃ¼¼ÄÜµÄÊ±¼ä
+    //// ï¿½Â´Î¿ï¿½ï¿½ï¿½Ê¹ï¿½Ã¼ï¿½ï¿½Üµï¿½Ê±ï¿½ï¿½
     //private float nextUseTime = Time.time; 
 
-    //·ÖÁÑCD±êÖ¾
+    //ï¿½ï¿½ï¿½ï¿½CDï¿½ï¿½Ö¾
     public bool CDflag = false;
     public GameObject prefabToSpawn;//xiaotude
 
@@ -79,15 +79,15 @@ public class BulletController : MonoBehaviour
 
     public void Awake()
     {
-        //»ñÈ¡managerÊµÀý
-        sceneManager = GameObject.Find("SceneManagerObject");
-        //³õÊ¼»¯ËÙ¶È
+        //ï¿½ï¿½È¡managerÊµï¿½ï¿½
+        skillButton = GameObject.Find("SkillButton");
+        //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ù¶ï¿½
         speed = normalSpeed;
-        //°ó¶¨¸ÕÌå
+        //ï¿½ó¶¨¸ï¿½ï¿½ï¿½
         rb = GetComponent<Rigidbody2D>();
-        //³õÊ¼»¯×Óµ¯×´Ì¬
+        //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Óµï¿½×´Ì¬
         state = false;
-        //³õÊ¼»¯×Óµ¯ÑÕÉ«£¨Ëæ»ú£©
+        //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         SetColor((ColorType)Random.Range(0, 5));
 
         Turret =  GameObject.FindGameObjectsWithTag("Turret")[0];
@@ -106,8 +106,8 @@ public class BulletController : MonoBehaviour
         bullet.transform.localScale = new Vector3(2f, 2f, 1f);
 
 
-        //¸ù¾Ý³¡¾°×´Ì¬³õÊ¼»¯×Óµ¯×´Ì¬
-        SceneType sceneType = sceneManager.GetComponent<Manager>().currentSceneType;
+        //ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Óµï¿½×´Ì¬
+        SceneType sceneType = skillButton.GetComponent<SkillButton>().currentSceneType;
 
         if(sceneType == SceneType.QingTang)
         {
@@ -127,7 +127,7 @@ public class BulletController : MonoBehaviour
             bullet.transform.localScale = new Vector3(1f, 1f, 1f);
         }
         
-        //²âÊÔÓÃ
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         /// //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ///  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -137,7 +137,7 @@ public class BulletController : MonoBehaviour
         //}
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //ÊµÊ±¸üÐÂ×Óµ¯³¯Ïò
+        //ÊµÊ±ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
         matchdirection();
     }
     public void FixedUpdate()
@@ -148,15 +148,15 @@ public class BulletController : MonoBehaviour
         //}
         if (is_trace)
         {
-            // ¼ÆËãÐÂµÄÎ»ÖÃ
+            // ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½Î»ï¿½ï¿½
             Vector3 newPosition = Vector3.MoveTowards(rb.position, Turret.transform.position, recycleSpeed * Time.fixedDeltaTime);
             // Debug.Log(newPosition);
-            // Ê¹ÓÃ MovePosition ·½·¨ÒÆ¶¯¸ÕÌå
+            // Ê¹ï¿½ï¿½ MovePosition ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½
             rb.MovePosition(newPosition);
         }
     }
 
-    //ÉèÖÃ×Óµ¯ÑÕÉ«
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½É«
     public void SetColor(ColorType color)
     {
         //Debug.Log(color);
@@ -164,21 +164,21 @@ public class BulletController : MonoBehaviour
         sprite.sprite = sprites[(int)bulletCollor];
     }
 
-    //½«×Óµ¯ËÙ¶ÈÉèÖÃÎªÕý³£
+    //ï¿½ï¿½ï¿½Óµï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
     void SetNormalSpeed()
     {
         speed = normalSpeed;
     }
 
 
-    //½«×Óµ¯ËÙ¶ÈÉèÖÃÎª¿ñ±©
+    //ï¿½ï¿½ï¿½Óµï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½
     void SetFurySpeed()
     {
         speed = furySpeed;
     }
 
 
-    //Ö¸¶¨·½Ïò·¢Éä×Óµ¯
+    //Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½
     void Fire(Vector2 direction)
     {
         rb.velocity = direction.normalized * speed;
@@ -186,7 +186,7 @@ public class BulletController : MonoBehaviour
     }
 
 
-    //Ëæ¼´·½Ïò·¢Éä×Óµ¯
+    //ï¿½æ¼´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½
     public void SetRandomDirection()
     {
         Vector2 temp = Random.insideUnitCircle.normalized;
@@ -195,7 +195,7 @@ public class BulletController : MonoBehaviour
     }
 
 
-    //ÇÐ»»×Óµ¯×´Ì¬
+    //ï¿½Ð»ï¿½ï¿½Óµï¿½×´Ì¬
     void SwitchState()
     {
         if(state) 
@@ -208,13 +208,13 @@ public class BulletController : MonoBehaviour
         }
     }
 
-    // ½«¶þÔª×éÓ³Éä³É360¶ÈµÄ½Ç¶È
+    // ï¿½ï¿½ï¿½ï¿½Ôªï¿½ï¿½Ó³ï¿½ï¿½ï¿½360ï¿½ÈµÄ½Ç¶ï¿½
     float GetAngleFromVector2(Vector2 vector)
     {
-        // Ê¹ÓÃMathf.Atan2¼ÆËã»¡¶È
+        // Ê¹ï¿½ï¿½Mathf.Atan2ï¿½ï¿½ï¿½ã»¡ï¿½ï¿½
         float angle = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
 
-        // È·±£½Ç¶ÈÔÚ0µ½360¶ÈÖ®¼ä
+        // È·ï¿½ï¿½ï¿½Ç¶ï¿½ï¿½ï¿½0ï¿½ï¿½360ï¿½ï¿½Ö®ï¿½ï¿½
         if (angle < 0)
         {
             angle += 360;
@@ -224,7 +224,7 @@ public class BulletController : MonoBehaviour
     }
 
 
-    //¸ù¾ÝËÙ¶È·½Ïò¸ü¸Ä×Óµ¯³¯Ïò
+    //ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
     public void matchdirection()
     {
         Vector2 direction = rb.velocity.normalized;
@@ -233,12 +233,12 @@ public class BulletController : MonoBehaviour
     }
 
 
-    //»ØÊÕº¯Êý
+    //ï¿½ï¿½ï¿½Õºï¿½ï¿½ï¿½
     public void Recycle()
     {
         is_trace = true;
         speed = recycleSpeed;
-        // Debug.Log("»ØÊÕ by bullet");
+        // Debug.Log("ï¿½ï¿½ï¿½ï¿½ by bullet");
         // for (int i = 0; i < childNum; i++)
         // {
         //     nextBullet.Pop().GetComponent<BulletController>().Recycle();
@@ -252,7 +252,7 @@ public class BulletController : MonoBehaviour
 
     public void SetAcFlag()
     {
-        SceneType sceneType = sceneManager.GetComponent<Manager>().currentSceneType;
+        SceneType sceneType = skillButton.GetComponent<SkillButton>().currentSceneType;
 
         if (sceneType == SceneType.QingTang)
         {
@@ -273,13 +273,13 @@ public class BulletController : MonoBehaviour
 
 
 
-    //Åö×²º¯Êý
+    //ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
     public void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log(collision.gameObject.tag);
         //Debug.Log(rb.velocity);
         
-        //×²Ç½·´µ¯
+        //×²Ç½ï¿½ï¿½ï¿½ï¿½
         if (collision.gameObject.CompareTag("AirWall_X"))
         {
             if(state)
@@ -292,7 +292,7 @@ public class BulletController : MonoBehaviour
             }
             //Debug.Log(rb.velocity);
             //Destroy(this);
-            //Ë®Æ½ËÙ¶È·´Ïò
+            //Ë®Æ½ï¿½Ù¶È·ï¿½ï¿½ï¿½
             
             //matchdirection();
         }
@@ -309,16 +309,16 @@ public class BulletController : MonoBehaviour
             }
             //Debug.Log(rb.velocity);
             //Destroy(this);
-            //´¹Ö±ËÙ¶È·´Ïò
+            //ï¿½ï¿½Ö±ï¿½Ù¶È·ï¿½ï¿½ï¿½
             
             //matchdirection();
         }
 
 
-        //Åö×²µÐÈË´¥·¢º¯Êý
+        //ï¿½ï¿½×²ï¿½ï¿½ï¿½Ë´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         else if(collision.gameObject.CompareTag("Enemy") && !state)
         {
-            ////Ôö¼Ó×Óµ¯³¡¾°ÖÐ£¬Åö×²ÏàÍ¬ÑÕÉ«µÄµÐÈË£¬×Óµ¯·ÖÁÑ
+            ////ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð£ï¿½ï¿½ï¿½×²ï¿½ï¿½Í¬ï¿½ï¿½É«ï¿½Äµï¿½ï¿½Ë£ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½
             //if(state && collision.gameObject.GetComponent<Enemy>().enemyColor == bulletCollor) 
             //{
             //    nextBullet[childNum] = Instantiate(bullet, transform.position, transform.rotation);
@@ -331,7 +331,7 @@ public class BulletController : MonoBehaviour
             //}
             //else if(!state)
             //{
-            //    //´ò¹Ö³¡¾°µÄÅö×²²Ù×÷
+            //    //ï¿½ï¿½Ö³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½
             //    collision.gameObject.GetComponent<Enemy>().HandleHit(bulletCollor);
             //    Destroy(bullet);
             //}
@@ -343,10 +343,10 @@ public class BulletController : MonoBehaviour
 
 
 
-        //Åö×²ÅÚÌ¨´¥·¢º¯Êý
+        //ï¿½ï¿½×²ï¿½ï¿½Ì¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         // else if(collision.gameObject.CompareTag("Turret") && is_trace == true)
         // {
-        //     //µ÷ÓÃÅÚÌ¨×Óµ¯ÊýÁ¿+1µÄº¯Êý
+        //     //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½+1ï¿½Äºï¿½ï¿½ï¿½
         //     //............
         //     //............
         //     Turret.GetComponent<PlayerController>().AddBullets(1);
@@ -363,7 +363,7 @@ public class BulletController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Turret") && is_trace == true)
         {
-            //µ÷ÓÃÅÚÌ¨×Óµ¯ÊýÁ¿+1µÄº¯Êý
+            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½+1ï¿½Äºï¿½ï¿½ï¿½
             //............
             //............
             Turret.GetComponent<PlayerController>().AddBullets(1);
@@ -408,7 +408,7 @@ public class BulletController : MonoBehaviour
         }
     }
 
-    // ¶¨ÒåÐ­³Ì
+    // ï¿½ï¿½ï¿½ï¿½Ð­ï¿½ï¿½
     IEnumerator WaitTwoSeconds()
     {
         CDflag = true;
@@ -418,7 +418,7 @@ public class BulletController : MonoBehaviour
         //SetRandomDirection();
         //temp.GetComponent<BulletController>().SetRandomDirection();
         //childNum++;
-        // µÈ´ýÁ½Ãë
+        // ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½
         yield return new WaitForSeconds(1.5f);
 
         CDflag = false;
@@ -436,4 +436,4 @@ public class BulletController : MonoBehaviour
 }
 
 
-// TODO: »¹ÓÐbug£¬°×ÌÀºìÌÀÇÐ»»¼¸´Î£¬¶¼·¢Éä×Óµ¯£¬ÓÐÊ±ºòÇÐ»»»ØºìÌÀºó£¬Ò»¿ªÇ¹Ò²±¨´í£¬Ò²ÊÇ·ÃÎÊÒÑÏú»Ù¶ÔÏó¡£×Óµ¯¶àµÄÊ±ºòÈÝÒ×³öÏÖ£¨200+£©
+// TODO: ï¿½ï¿½ï¿½ï¿½bugï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð»ï¿½ï¿½ï¿½ï¿½Î£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ð»ï¿½ï¿½Øºï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ç¹Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½×³ï¿½ï¿½Ö£ï¿½200+ï¿½ï¿½
