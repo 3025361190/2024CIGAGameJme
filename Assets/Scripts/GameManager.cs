@@ -248,9 +248,15 @@ public class GameManager : MonoBehaviour
         jumpToLevel(currentLevel + 1);
     }
 
+    // 游戏暂停
+    public void PauseGame(){
+        Time.timeScale = 0;
+    }
 
-
-
+    // 游戏继续
+    public void ResumeGame(){
+        Time.timeScale = 1;
+    }
 
     // 在应用退出时保存数据
     private void OnApplicationQuit()

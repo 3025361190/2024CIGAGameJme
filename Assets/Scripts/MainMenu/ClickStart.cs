@@ -1,3 +1,13 @@
+/*
+文件名：ClickStart.cs
+编辑人：fortunate瑞
+文件描述：点击开始按钮，跳转到第一关
+
+绑定：
+1. 在场景中添加ClickStart对象
+2. 绑定ClickStart脚本
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
