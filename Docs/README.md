@@ -1,6 +1,9 @@
 ## `Resources/StaticData`目录结构：
 - `levels_config.json` ：用于管理每个关卡的难度，该文件以静态方式管理，只读不可写，打包后不暴露
 - `global_config.json` ：用于管理全局配置，该文件以静态方式管理，只读不可写，打包后不暴露
+- `bullet_config.json` ：用于管理全局配置，该文件以静态方式管理，只读不可写，打包后不暴露
+- `mode_config.json` ：用于管理全局配置，该文件以静态方式管理，只读不可写，打包后不暴露
+- `rage_config.json` ：用于管理全局配置，该文件以静态方式管理，只读不可写，打包后不暴露
 - `buffs_config.json` ：用于管理每个buff的属性，该文件以静态方式管理，只读不可写，打包后不暴露
 
 ## 详细说明：
@@ -19,11 +22,6 @@
   | 参数 | 说明 |
   | --- | --- |
   | `initialBulletCount` | 初始子弹数量 |
-  | `maxBullets` | 最大子弹数量 |
-  | `firingRate` | 射击频率 |
-  | `bulletSpeed` | 子弹速度 |
-  | `splitModeCD` | 分裂模式（进入白汤）的技能CD（白汤进红汤不需要CD） |
-  | `splitModeDuration` | 分裂模式最长持续时间 |
 
 ### 3. `buffs_config.json` ：
   | 属性 | 类型 | 说明 |
@@ -36,6 +34,29 @@
   | `maxStack` | int | 最大叠加层数 |
   | `buffIcon` | sprite | Buff 图标 |
   | `stackType` | int | 叠加方式（"0"表示加法叠加，"1"表示乘法叠加） |
+
+### 4. `mode_config.json` ：
+  | 参数 | 说明 |
+  | --- | --- |
+  | `splitModeCD` | 分裂模式（进入白汤）的技能CD（白汤进红汤不需要CD） |
+  | `splitModeDuration` | 分裂模式最长持续时间 |
+
+
+### 5. `rage_config.json` ：
+  | 参数 | 说明 |
+  | --- | --- |
+  | `rageFiringRate` | 狂暴模式下子弹的射速 |
+  | `rageThreshold` | 进入狂暴模式的阈值（清汤结束时收回的子弹数量与清汤持续时发射的子弹数量的比值） |
+  | `rageActivateTime` | 尝试进入狂暴状态的时间（等待子弹收回的时间） |
+  | `rageDuration` | 狂暴模式持续的时间 |
+
+
+### 6. `bullet_config.json` ：
+  | 参数 | 说明 |
+  | --- | --- |
+  | `maxBullets` | 最大子弹数量 |
+  | `firingRate` | 射击频率 |
+  | `bulletSpeed` | 子弹速度 |
 
 其他详细参数见[buff说明文档](./Buff说明文档.md)
 
