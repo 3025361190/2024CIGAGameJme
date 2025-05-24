@@ -321,6 +321,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad702e26996b6ce4eb30f64b3d4a483a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  canTrigger: 1
+  cooldownTime: 2
 --- !u!50 &449317367
 Rigidbody2D:
   serializedVersion: 4
@@ -1089,8 +1092,9 @@ GameObject:
   - component: {fileID: 1065978076}
   - component: {fileID: 1065978075}
   - component: {fileID: 1065978074}
+  - component: {fileID: 1065978077}
   m_Layer: 5
-  m_Name: Button
+  m_Name: SkillButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1160,8 +1164,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1092539399}
-        m_TargetAssemblyTypeName: Manager, Assembly-CSharp
+      - m_Target: {fileID: 1065978077}
+        m_TargetAssemblyTypeName: SkillButton, Assembly-CSharp
         m_MethodName: SwitchSceneType
         m_Mode: 1
         m_Arguments:
@@ -1210,6 +1214,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1065978072}
   m_CullTransparentMesh: 1
+--- !u!114 &1065978077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065978072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f26838cf1254164cb746c8dfc20de8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turret: {fileID: 0}
+  currentSceneType: 0
+  background: {fileID: 2115002507}
+  effect: {fileID: 1222688029}
+  audioSource: {fileID: 1092539401}
 --- !u!82 &1083854222
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1328,6 +1349,7 @@ MonoBehaviour:
   bulletCountText: {fileID: 0}
   currentBullet: {fileID: 0}
   currentBulletPosition: {x: 0, y: 0, z: 0}
+  director: {fileID: 0}
 --- !u!50 &1083854230
 Rigidbody2D:
   serializedVersion: 4
@@ -1519,6 +1541,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32a4bccb73e2bf4c8c841b1c7374a59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!82 &1092539401 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5728146754265537603, guid: 82b60412a12268b4c985da4891ed9ebc, type: 3}
+  m_PrefabInstance: {fileID: 7089060824075236106}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1168470040
 GameObject:
   m_ObjectHideFlags: 0
@@ -2604,6 +2631,7 @@ MonoBehaviour:
   bulletCountText: {fileID: 0}
   currentBullet: {fileID: 0}
   currentBulletPosition: {x: 0, y: 0, z: 0}
+  director: {fileID: 0}
 --- !u!50 &1993969577
 Rigidbody2D:
   serializedVersion: 4
