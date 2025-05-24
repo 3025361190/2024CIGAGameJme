@@ -57,13 +57,13 @@
         {
             "buffId": 5,
             "buffName": "连爆范围增大",
-            "buffDescription": "连爆范围更大（爆一个变为爆两个）",
+            "buffDescription": "连爆范围更大",
             "buffDuration": -1,
             "buffStackable": true,
             "maxStack": 3,
             "stackType": 0,
-            "chainExplosionRange": 2,
-            "stackValue": 1
+            "chainExplosionRange": 2.0,
+            "stackValue": 0.1
         },
         {
             "buffId": 6,

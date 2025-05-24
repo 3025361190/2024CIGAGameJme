@@ -44,8 +44,8 @@
 ### 5. 连爆范围增大 (Buff ID: 5)
 | 参数 | 类型 | 说明 |
 | --- | --- | --- |
-| `chainExplosionRange` | int | 连爆数量 |
-| `stackValue` | int | 叠加增幅 |
+| `chainExplosionRange` | float | 连爆范围 |
+| `stackValue` | float | 叠加增幅 |
 
 ### 6. 子弹分裂后速度增加 (Buff ID: 6)
 | 参数 | 类型 | 说明 |

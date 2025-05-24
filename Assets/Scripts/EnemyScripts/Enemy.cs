@@ -15,13 +15,13 @@ public class Enemy : MonoBehaviour
 {
     
     public ColorType enemyColor;                // 敌人颜色
-    public int amount;                          // 敌人伤害值
-    public float ChainEffectRadius = 2.0f;      // 连锁效果半径
+    public int damage;                          // 敌人伤害值
+    public float ChainEffectRadius;             // 连锁效果半径
 
     private bool canTakeDamage = true;          // 是否可以造成伤害的标志位
-    public float cooldownTime = 1.0f;           // 冷却时间
+    public float cooldownTime;                  // 伤害冷却时间，由spawner赋值
     public GameObject baozha;
-    private GameObject currentEnemy;
+    // private GameObject currentEnemy;
 
     // Start is called before the first frame update
     private void Start() {
@@ -47,9 +47,10 @@ public class Enemy : MonoBehaviour
                 childTransform.GetComponent<SpriteRenderer>().color = new Color(197f / 255f, 156f / 255f, 255f / 255f);
                 break;
         }
-        amount = 1;
     }
 
+
+    // TODO: 瑞，修改为对炮台的攻击
     // 碰撞检测,当敌人碰撞到Infinity时触发,造成伤害
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -60,7 +61,7 @@ public class Enemy : MonoBehaviour
         // }
         if (collision.gameObject.CompareTag("Infinity") && canTakeDamage)
         {
-            collision.gameObject.GetComponent<InfinityHealth>().TakeDamage(1);
+            collision.gameObject.GetComponent<InfinityHealth>().TakeDamage(damage);
             StartCoroutine(CollisionCooldown());  // 开始冷却协程
         }
     }

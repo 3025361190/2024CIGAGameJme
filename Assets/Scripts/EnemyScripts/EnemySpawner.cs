@@ -16,11 +16,14 @@ public class EnemySpawner : MonoBehaviour
     public float spawnInterval;             // 生成敌人的间隔时间
     // 敌人移动参数,生成enemy后，赋值给enemy的EnemyMovement组件中的成员
     public float moveSpeed;                 // 移动速度
+    public int damage;                      // 敌人伤害值
     public float randomRange;               // 随机移动的幅度
     public float changeDirectionInterval;   // 改变随机方向的时间间隔
     public float knockbackDistance;         // 退后的距离
     public float knockbackTime;             // 退后持续时间
     public float bufferTime;                // 缓冲时间
+    public float attackCooldownTime;        // 伤害冷却时间
+    public float chainExplosionRange;       // 连锁爆炸范围
 
 
     private float timer = 0.0f;             // 计时器
@@ -53,12 +56,15 @@ public class EnemySpawner : MonoBehaviour
             // 获取enemy_config.json中的数据
             spawnInterval = enemyConfig["spawnInterval"].ToObject<float>();
             moveSpeed = enemyConfig["moveSpeed"].ToObject<float>();
+            damage = enemyConfig["damage"].ToObject<int>();
             randomRange = enemyConfig["randomRange"].ToObject<float>();
             changeDirectionInterval = enemyConfig["changeDirectionInterval"].ToObject<float>();
             knockbackDistance = enemyConfig["knockbackDistance"].ToObject<float>();
             knockbackTime = enemyConfig["knockbackTime"].ToObject<float>();
             bufferTime = enemyConfig["bufferTime"].ToObject<float>();
-            Debug.Log($"全局配置加载完成");
+            attackCooldownTime = enemyConfig["attackCooldownTime"].ToObject<float>();
+            chainExplosionRange = enemyConfig["chainExplosionRange"].ToObject<float>();
+            Debug.Log($"敌人配置加载完成");
         }
         else
         {
@@ -98,6 +104,14 @@ public class EnemySpawner : MonoBehaviour
         enemyMovement.knockbackTime = knockbackTime;
         enemyMovement.bufferTime = bufferTime;
 
+        // 获取Enemy组件
+        Enemy enemy = instantiate.GetComponent<Enemy>();
+        // 赋值给Enemy组件中的成员
+        enemy.damage = damage;
+        enemy.cooldownTime = attackCooldownTime;
+        enemy.ChainEffectRadius = chainExplosionRange;
+
+
 
         // TODO: 瑞，颜色扎堆?
 
@@ -110,20 +124,23 @@ public class EnemySpawner : MonoBehaviour
         enemyList.Remove(enemy);
     }
 
-    // 生成一个随机位置,在一个半径为r的圆外
-    Vector2 GetRandomPositionOutsideCircle(float r)
-    {
-        // 生成一个随机角度（0 到 360 度）
-        float theta = Random.Range(0, Mathf.PI * 2);
+    // // 生成一个随机位置,在一个半径为r的圆外
+    // Vector2 GetRandomPositionOutsideCircle(float r)
+    // {
+    //     // 生成一个随机角度（0 到 360 度）
+    //     float theta = Random.Range(0, Mathf.PI * 2);
 
-        // 生成一个半径 r 之外的随机距离
-        float distance = Random.Range(r, r+1); // 或者更大范围
+    //     // 生成一个半径 r 之外的随机距离
+    //     float distance = Random.Range(r, r+1); // 或者更大范围
 
-        // 将极坐标转换为笛卡尔坐标
-        float x = distance * Mathf.Cos(theta);
-        float y = distance * Mathf.Sin(theta);
+    //     // 将极坐标转换为笛卡尔坐标
+    //     float x = distance * Mathf.Cos(theta);
+    //     float y = distance * Mathf.Sin(theta);
 
-        return new Vector2(x, y);
-    }
+    //     return new Vector2(x, y);
+    // }
+
+
+    // TODO: 瑞，维护enemyList的时候同时维护一个计数器，当计数器达到一定数量时，不再生成敌人。然后当list被清空时，达成关卡结束条件
     
 }
