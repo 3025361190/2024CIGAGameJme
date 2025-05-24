@@ -80,7 +80,10 @@ public class PlayerController : MonoBehaviour
         if(isRageActive)
         {
             rageTimer += Time.deltaTime;
-            if(rageTimer >= rageDuration)
+            currentValue -= Time.deltaTime;
+            currentValue = Mathf.Clamp(currentValue, 0, maxValue);
+            progressBar.value = currentValue / maxValue;
+            if(currentValue <= 0.0f)
             {
                 ExitRage();
             }
@@ -95,7 +98,10 @@ public class PlayerController : MonoBehaviour
             }
             if(rageActivateTimer >= rageActivateTime)
             {
-                progressBar.gameObject.SetActive(false);
+                if(!isRageActive)
+                {
+                    progressBar.gameObject.SetActive(false);
+                }
                 tryActivateRage = false;
                 rageActivateTimer = 0.0f;
             }
@@ -250,6 +256,9 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
+        maxValue = rageDuration;
+        minValue = 0.0f;
+        currentValue = maxValue;
         fireRate = rageFiringRate;
         isRageActive = true;
         rageTimer = 0.0f;
@@ -258,6 +267,7 @@ public class PlayerController : MonoBehaviour
     // 退出狂暴
     private void ExitRage()
     {
+        progressBar.gameObject.SetActive(false);
         fireRate = normalFireRate;
         isRageActive = false;
         rageTimer = 0.0f;
