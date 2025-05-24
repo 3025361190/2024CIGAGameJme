@@ -53,17 +53,11 @@ public class GameManager : MonoBehaviour
 
     // global_config.json中的数据
     private int initialBulletCount; // 初始子弹数量
-    private float firingRate; // 射击频率
-    private float bulletSpeed; // 子弹速度
-    private float splitModeCD; // 分裂模式CD
-    private float splitModeDuration; // 分裂模式最大持续时间
-
-    // 当前关卡，0为MainMenu
-    public int currentLevel = 0;
-
     // 当前子弹数量
     public int currentBulletCount;
 
+    // 当前关卡，0为MainMenu
+    public int currentLevel = 0;
 
     private void Awake()
     {
@@ -158,12 +152,7 @@ public class GameManager : MonoBehaviour
         {   
             // 获取global_config.json中的数据
             initialBulletCount = globalConfig["initialBulletCount"].ToObject<int>();
-            firingRate = globalConfig["firingRate"].ToObject<float>();
-            bulletSpeed = globalConfig["bulletSpeed"].ToObject<float>();
-            splitModeCD = globalConfig["splitModeCD"].ToObject<float>();
-            splitModeDuration = globalConfig["splitModeDuration"].ToObject<float>();
-            
-            Debug.Log($"全局配置加载完成: 初始子弹={initialBulletCount}, 射击频率={firingRate}, 子弹速度={bulletSpeed}");
+            Debug.Log($"全局配置加载完成: 初始子弹={initialBulletCount}");
         }
         else
         {
@@ -199,7 +188,6 @@ public class GameManager : MonoBehaviour
     {
         SavePlayerData();
         SaveGameSettings();
-
     }
 
     // 设置当前关卡的配置
@@ -279,4 +267,7 @@ public class GameManager : MonoBehaviour
 }
 
 
-// TODO: 将现有manager中的功能迁移到GameManager中
+// TODO: playerData.isNewPlayer在完成新手引导后，需要设置为false
+
+
+// TODO：https://docs.qq.com/smartsheet/DWGdycUdPSmN0cmJj?groupUin=9dK6NFNlciGjyOzFoy3%252FTQ%253D%253D&ADUIN=1754594226&ADSESSION=1748067384&ADTAG=CLIENT.QQ.6067_.0&ADPUBNO=27427&jumpuin=1754594226&tab=t00i2h&viewId=v2JKhc
