@@ -1,0 +1,5 @@
+{
+    "rageFiringRate" : 0.05,
+    "rageThreshold" : 2.0,
+    "rageDuration" : 5.0
+}
