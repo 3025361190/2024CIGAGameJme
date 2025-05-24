@@ -7,7 +7,9 @@ using Newtonsoft.Json.Linq;
 public class PlayerController : MonoBehaviour
 {
     public FixedJoystick joystick;            // 移动摇杆
+    private Vector2 moveDirection;
     public FixedJoystick shootJoystick;       // 射击摇杆
+    private Vector2 shootDirection;
     public GameObject bulletPrefab;            // 子弹预制体
     public float moveSpeed = 5f;
     public float bulletSpeed;           // 子弹速度
@@ -77,6 +79,18 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        moveDirection = new Vector2(joystick.Horizontal, joystick.Vertical);
+        shootDirection = new Vector2(shootJoystick.Horizontal, shootJoystick.Vertical);
+
+        if (shootDirection != Vector2.zero)
+        {
+            //RotatePlayer(shootDirection.x, shootDirection.y);
+        }else if(moveDirection != Vector2.zero)
+        {
+            //RotatePlayer(moveDirection.x, moveDirection.y);
+        }
+        
         if(isRageActive)
         {
             rageTimer += Time.deltaTime;
@@ -136,6 +150,13 @@ public class PlayerController : MonoBehaviour
     // 处理射击逻辑
     private void HandleShooting()
     {
+        float movehorizontal = joystick.Horizontal;
+        float movevertical = joystick.Vertical;
+        if (movehorizontal != 0 || movevertical != 0)
+        {
+            RotatePlayer(movehorizontal, movevertical);
+        }
+
         float shootHorizontal = shootJoystick.Horizontal;
         float shootVertical = shootJoystick.Vertical;
 
