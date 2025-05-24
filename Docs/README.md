@@ -1,9 +1,9 @@
 ## `Resources/StaticData`目录结构：
 - `levels_config.json` ：用于管理每个关卡的难度，该文件以静态方式管理，只读不可写，打包后不暴露
-- `global_config.json` ：用于管理全局配置，该文件以静态方式管理，只读不可写，打包后不暴露
-- `bullet_config.json` ：用于管理全局配置，该文件以静态方式管理，只读不可写，打包后不暴露
-- `mode_config.json` ：用于管理全局配置，该文件以静态方式管理，只读不可写，打包后不暴露
-- `rage_config.json` ：用于管理全局配置，该文件以静态方式管理，只读不可写，打包后不暴露
+- `global_config.json` ：用于管理全局初始化配置，该文件以静态方式管理，只读不可写，打包后不暴露
+- `bullet_config.json` ：用于管理子弹配置，该文件以静态方式管理，只读不可写，打包后不暴露
+- `mode_config.json` ：用于管理分裂模式配置，该文件以静态方式管理，只读不可写，打包后不暴露
+- `rage_config.json` ：用于管理狂暴模式配置，该文件以静态方式管理，只读不可写，打包后不暴露
 - `buffs_config.json` ：用于管理每个buff的属性，该文件以静态方式管理，只读不可写，打包后不暴露
 
 ## 详细说明：
@@ -35,6 +35,8 @@
   | `buffIcon` | sprite | Buff 图标 |
   | `stackType` | int | 叠加方式（"0"表示加法叠加，"1"表示乘法叠加） |
 
+  其他详细参数见[buff说明文档](./Buff说明文档.md)
+
 ### 4. `mode_config.json` ：
   | 参数 | 说明 |
   | --- | --- |
@@ -59,10 +61,25 @@
   | `bulletSpeed` | 子弹速度 |
   | `bulletCountInScreenMax` | 屏幕中子弹的最大存在数量 |
 
-其他详细参数见[buff说明文档](./Buff说明文档.md)
+### 7. `enemy_config.json` ：
+  | 参数 | 类型 | 说明 |
+  | --- | --- | --- |
+  | `moveSpeed` | float | 敌人基础移动速度 |
+  | `damage` | int | 敌人伤害值 |
+  | `randomRange` | float | 敌人随机移动范围 |
+  | `changeDirectionInterval` | float | 敌人改变方向的间隔时间 |
+  | `knockbackDistance` | float | 被击退的距离 |
+  | `knockbackTime` | float | 击退持续时间 |
+  | `bufferTime` | float | 击退后的缓冲时间 |
+  | `spawnInterval` | float | 敌人生成的时间间隔 |
+  | `attackCooldownTime` | float | 敌人伤害冷却时间 |
+  | `chainExplosionRange` | float | 连锁爆炸范围半径 |
+  | `chainExplosionDelay` | float | 连锁爆炸的传递延迟时间 |
 
 
-### 4. 关于玩家个人数据（如金币、角色等级、关卡进度）应该缓存在哪里？
+
+
+### 999. 关于玩家个人数据（如金币、角色等级、关卡进度）应该缓存在哪里？
 
 推荐的本地缓存位置：Application.persistentDataPath
 
