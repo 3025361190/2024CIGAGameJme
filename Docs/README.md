@@ -57,6 +57,7 @@
   | `maxBullets` | 最大子弹数量 |
   | `firingRate` | 射击频率 |
   | `bulletSpeed` | 子弹速度 |
+  | `bulletCountInScreenMax` | 屏幕中子弹的最大存在数量 |
 
 其他详细参数见[buff说明文档](./Buff说明文档.md)
 
