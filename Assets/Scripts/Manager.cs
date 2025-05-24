@@ -26,7 +26,7 @@ public class Manager : MonoBehaviour
     private Animator beijing1;
     private Animator beijing2;
     public AudioSource audioSource;//音效
-    public GameObject plableNew;
+    // public GameObject plableNew;
     // [Header("是否开启新手教学")]
     // public bool isNew = true;
 
@@ -52,9 +52,11 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("冷却计时器更换：" + cdTimer);
         // 处理冷却时间
         if(cdFlag)
         {
+            Debug.Log("冷却计时器更换：" + cdTimer);
             cdTimer += Time.deltaTime;
             if(cdTimer >= cdTime)
             {
