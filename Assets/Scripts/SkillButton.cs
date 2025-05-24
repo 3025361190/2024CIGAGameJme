@@ -34,9 +34,9 @@ public class SkillButton : MonoBehaviour
         beijing2 = effect.GetComponent<Animator>();
         cdTimer = 0.0f;              // 初始化计时器
         durationTimer = 0.0f;       // 初始化持续时间计时器
-        var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
-        cdTime = globalConfig["splitModeCD"].ToObject<float>();
-        durationTime = globalConfig["splitModeDuration"].ToObject<float>();
+        var modeConfig = JsonLoader.LoadJsonAsJObject("StaticData/mode_config");
+        cdTime = modeConfig["splitModeCD"].ToObject<float>();
+        durationTime = modeConfig["splitModeDuration"].ToObject<float>();
         
     }
 

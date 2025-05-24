@@ -55,14 +55,15 @@ public class PlayerController : MonoBehaviour
         currentBulletPosition = new Vector3(7f, 3.7f, 0.2f);    
         currentBullet = Instantiate(bulletPrefab, currentBulletPosition, Quaternion.identity);
         //currentBullet.SetActive(false);
-        var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
-        maxBullets = globalConfig["maxBullets"].ToObject<int>();
-        normalFireRate = globalConfig["firingRate"].ToObject<float>();
+        var bulletConfig = JsonLoader.LoadJsonAsJObject("StaticData/bullet_config");
+        maxBullets = bulletConfig["maxBullets"].ToObject<int>();
+        normalFireRate = bulletConfig["firingRate"].ToObject<float>();
         fireRate = normalFireRate;
-        bulletSpeed = globalConfig["bulletSpeed"].ToObject<float>();
-        rageFiringRate = globalConfig["rageFiringRate"].ToObject<float>();
-        rageThreshold = globalConfig["rageThreshold"].ToObject<float>();
-        rageDuration = globalConfig["rageDuration"].ToObject<float>();
+        bulletSpeed = bulletConfig["bulletSpeed"].ToObject<float>();
+        var rageConfig = JsonLoader.LoadJsonAsJObject("StaticData/rage_config");
+        rageFiringRate = rageConfig["rageFiringRate"].ToObject<float>();
+        rageThreshold = rageConfig["rageThreshold"].ToObject<float>();
+        rageDuration = rageConfig["rageDuration"].ToObject<float>();
     }
 
     void FixedUpdate()
