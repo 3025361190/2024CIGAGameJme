@@ -88,6 +88,10 @@ public class PlayerController : MonoBehaviour
         {
             rageActivateTimer += Time.deltaTime;
             progressBar.value = (GameManager.Instance.currentBulletCount - minValue) / maxValue;
+            if (progressBar.value >= 1.0f && !isRageActive)
+            {
+                TriggerRage();
+            }
             if(rageActivateTimer >= rageActivateTime)
             {
                 progressBar.gameObject.SetActive(false);
