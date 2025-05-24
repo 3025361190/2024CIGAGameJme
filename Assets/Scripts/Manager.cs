@@ -52,11 +52,11 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("冷却计时器更换：" + cdTimer);
+        // Debug.Log("冷却计时器更换：" + cdTimer);
         // 处理冷却时间
         if(cdFlag)
         {
-            Debug.Log("冷却计时器更换：" + cdTimer);
+            // Debug.Log("冷却计时器更换：" + cdTimer);
             cdTimer += Time.deltaTime;
             if(cdTimer >= cdTime)
             {
