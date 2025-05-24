@@ -51,10 +51,11 @@ public class PlayerController : MonoBehaviour
         HandleShooting();
         // 获取场景类型
         sceneType = sceneManager.GetComponent<Manager>().currentSceneType;
-        if (ispause)
-        {
-            NewMountSmall();
-        }
+        // TODO：有bug,先注释2
+        // if (ispause)
+        // {
+        //     NewMountSmall();
+        // }
     }
 
     // 处理移动逻辑
@@ -169,15 +170,16 @@ public class PlayerController : MonoBehaviour
         remainingBullets = Mathf.Min(remainingBullets + amount, maxBullets);
     }
 
-    //tl相关，策划加的
-    void NewMountSmall()
-    {
-        if (remainingBullets <= 50 )
-        {
+    // TODO：有报错，暂时注释掉1
+    // //tl相关，策划加的
+    // void NewMountSmall()
+    // {
+    //     if (remainingBullets <= 50 )
+    //     {
 
-            director.playableGraph.GetRootPlayable(0).SetSpeed(1);
-            Debug.Log("时间轴恢复播放");
-            ispause = false;
-        }
-    }
+    //         director.playableGraph.GetRootPlayable(0).SetSpeed(1);
+    //         Debug.Log("时间轴恢复播放");
+    //         ispause = false;
+    //     }
+    // }
 }
