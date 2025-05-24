@@ -6,12 +6,18 @@ public class SkillButton : MonoBehaviour
 {
     public GameObject turret;
     public SceneType currentSceneType;
+
+    // 技能冷却相关
     private bool cdFlag = false;      // 冷却标志
-    private float cdTime = 5.0f;      // 冷却时间设置为5秒
+    private float cdTime;      // 冷却时间设置为5秒
     private float cdTimer;            // 冷却计时器
+
+    // 清汤持续时间相关
     private float durationTimer;
-    private float durationTime = 10.0f; // 持续时间设置为2秒
+    private float durationTime; // 持续时间设置为2秒
     private bool isDurationActive = false; // 持续时间标志
+
+
 
     public GameObject background;
     public GameObject effect;
@@ -28,6 +34,10 @@ public class SkillButton : MonoBehaviour
         beijing2 = effect.GetComponent<Animator>();
         cdTimer = 0.0f;              // 初始化计时器
         durationTimer = 0.0f;       // 初始化持续时间计时器
+        var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
+        cdTime = globalConfig["splitModeCD"].ToObject<float>();
+        durationTime = globalConfig["splitModeDuration"].ToObject<float>();
+        
     }
 
 
@@ -115,6 +125,8 @@ public class SkillButton : MonoBehaviour
         Debug.Log("触发回收");
         turret.GetComponent<PlayerController>().RecycleBullet();
     }
+
+    
 }
 
 

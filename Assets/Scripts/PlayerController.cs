@@ -10,8 +10,17 @@ public class PlayerController : MonoBehaviour
     public FixedJoystick shootJoystick;       // 射击摇杆
     public GameObject bulletPrefab;            // 子弹预制体
     public float moveSpeed = 5f;
-    public float bulletSpeed = 10f;           // 子弹速度
-    public float fireRate = 0.2f;             // 射击间隔
+    public float bulletSpeed;           // 子弹速度
+    public float fireRate;             // 射击间隔
+    public float normalFireRate;
+
+    // 狂暴模式相关
+    private int baseBulletCount;            //清汤时发射的子弹数量
+    private float rageFiringRate;           //狂暴射速
+    private float rageThreshold;            //狂暴触发阈值
+    private bool isRageActive = false;      // 狂暴模式标志
+    private float rageDuration;             //狂暴持续时间
+    private float rageTimer = 0.0f;         // 狂暴模式计时器
 
     [SerializeField]
     private int maxBullets;           // 最大子弹数量
@@ -48,10 +57,25 @@ public class PlayerController : MonoBehaviour
         //currentBullet.SetActive(false);
         var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
         maxBullets = globalConfig["maxBullets"].ToObject<int>();
+        normalFireRate = globalConfig["firingRate"].ToObject<float>();
+        fireRate = normalFireRate;
+        bulletSpeed = globalConfig["bulletSpeed"].ToObject<float>();
+        rageFiringRate = globalConfig["rageFiringRate"].ToObject<float>();
+        rageThreshold = globalConfig["rageThreshold"].ToObject<float>();
+        rageDuration = globalConfig["rageDuration"].ToObject<float>();
     }
 
     void FixedUpdate()
     {
+        if(isRageActive)
+        {
+            rageTimer += Time.deltaTime;
+            if(rageTimer >= rageDuration)
+            {
+                ExitRage();
+            }
+        }
+
         HandleMovement();
         HandleShooting();
         // 获取场景类型
@@ -109,7 +133,10 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 shootDirection = new Vector2(horizontal, vertical).normalized;
             SpawnBullet(shootDirection);
-            GameManager.Instance.currentBulletCount--;
+            if(!isRageActive)
+            {
+                GameManager.Instance.currentBulletCount--;
+            }
             UpdateBulletCount();
         }
     }
@@ -131,7 +158,11 @@ public class PlayerController : MonoBehaviour
         
         if (sceneType == SceneType.QingTang)
         {
+            baseBulletCount++;
             activeBullets.Add(bullet);
+        }else
+        {
+            baseBulletCount = 0;
         }
         nextFireTime = Time.time + fireRate;
     }
@@ -147,12 +178,20 @@ public class PlayerController : MonoBehaviour
 
     public void RecycleBullet()
     {
+        int beforeRecycleBulletCount = GameManager.Instance.currentBulletCount;
         foreach (var bullet in activeBullets)
         {
             // 处理回收子弹的逻辑
             bullet.GetComponent<BulletController>().Recycle();
         }
-        
+        // 增加的子弹数量
+        int addedBullets = GameManager.Instance.currentBulletCount - beforeRecycleBulletCount;
+        Debug.Log("增加的子弹数量： " + addedBullets);
+        Debug.Log("发射的子弹数量： " + baseBulletCount);
+        if(addedBullets >= rageThreshold * baseBulletCount)
+        {
+            TriggerRage();
+        }
         activeBullets.Clear();
     }
 
@@ -174,6 +213,30 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.Instance.currentBulletCount = Mathf.Min(GameManager.Instance.currentBulletCount + amount, maxBullets);
     }
+
+    // 触发狂暴
+    private void TriggerRage()
+    {
+        if (isRageActive)
+        {
+            Debug.Log("狂暴模式已激活，无法再次触发");
+            return;
+        }
+
+        fireRate = rageFiringRate;
+        isRageActive = true;
+        rageTimer = 0.0f;
+    }
+
+    // 退出狂暴
+    private void ExitRage()
+    {
+        fireRate = normalFireRate;
+        isRageActive = false;
+        rageTimer = 0.0f;
+    }
+
+    // TODO：控制子弹分裂次数
 
     // TODO：有报错，暂时注释掉1
     // //tl相关，策划加的

@@ -19,6 +19,7 @@
   | 参数 | 说明 |
   | --- | --- |
   | `initialBulletCount` | 初始子弹数量 |
+  | `maxBullets` | 最大子弹数量 |
   | `firingRate` | 射击频率 |
   | `bulletSpeed` | 子弹速度 |
   | `splitModeCD` | 分裂模式（进入白汤）的技能CD（白汤进红汤不需要CD） |
