@@ -1,5 +1,6 @@
 {
     "initialBulletCount" : 60,
+    "maxBullets" : 10000,
     "firingRate" : 1.0,
     "bulletSpeed" : 1.0,
     "splitModeCD" : 5.0,

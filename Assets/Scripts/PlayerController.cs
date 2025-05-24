@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Playables;
+using Newtonsoft.Json.Linq;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,10 +14,12 @@ public class PlayerController : MonoBehaviour
     public float fireRate = 0.2f;             // 射击间隔
 
     [SerializeField]
-    private int maxBullets = 10000;           // 最大子弹数量
-    private int remainingBullets;             // 剩余子弹数量
+    private int maxBullets;           // 最大子弹数量
 
-    // TODO: 从GameManager获取剩余子弹数量
+    //JObject globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
+    //private int remainingBullets;             // 剩余子弹数量
+
+    
     private List<GameObject> activeBullets = new List<GameObject>(); // 添加子弹列表
 
     private Rigidbody2D rb;
@@ -39,11 +42,12 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         skillButton = GameObject.Find("SkillButton");
         spriteRenderer = GetComponent<SpriteRenderer>();
-        remainingBullets = 60;    // 初始化子弹数量为10
         UpdateBulletCount();     
         currentBulletPosition = new Vector3(7f, 3.7f, 0.2f);    
         currentBullet = Instantiate(bulletPrefab, currentBulletPosition, Quaternion.identity);
         //currentBullet.SetActive(false);
+        var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
+        maxBullets = globalConfig["maxBullets"].ToObject<int>();
     }
 
     void FixedUpdate()
@@ -101,11 +105,11 @@ public class PlayerController : MonoBehaviour
     // 尝试发射子弹
     private void TryShoot(float horizontal, float vertical)
     {
-        if (remainingBullets > 0 && Time.time >= nextFireTime)
+        if (GameManager.Instance.currentBulletCount > 0 && Time.time >= nextFireTime)
         {
             Vector2 shootDirection = new Vector2(horizontal, vertical).normalized;
             SpawnBullet(shootDirection);
-            remainingBullets--;
+            GameManager.Instance.currentBulletCount--;
             UpdateBulletCount();
         }
     }
@@ -137,7 +141,7 @@ public class PlayerController : MonoBehaviour
     {
         if (bulletCountText != null)
         {
-            bulletCountText.text = remainingBullets.ToString();
+            bulletCountText.text = GameManager.Instance.currentBulletCount.ToString();
         }
     }
 
@@ -162,13 +166,13 @@ public class PlayerController : MonoBehaviour
     // 获取剩余子弹数量
     public int GetRemainingBullets()
     {
-        return remainingBullets;
+        return GameManager.Instance.currentBulletCount;
     }
 
     // 添加子弹
     public void AddBullets(int amount)
     {
-        remainingBullets = Mathf.Min(remainingBullets + amount, maxBullets);
+        GameManager.Instance.currentBulletCount = Mathf.Min(GameManager.Instance.currentBulletCount + amount, maxBullets);
     }
 
     // TODO：有报错，暂时注释掉1
