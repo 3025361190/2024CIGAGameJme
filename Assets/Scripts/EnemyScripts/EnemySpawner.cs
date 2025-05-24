@@ -157,6 +157,6 @@ public class EnemySpawner : MonoBehaviour
     // }
 
 
-    // TODO: 瑞，维护enemyList的时候同时维护一个计数器，当计数器达到一定数量时，不再生成敌人。然后当list被清空时，达成关卡结束条件
+    // TODO: 瑞，维护enemyList的时候同时维护一个计数器，当计数器达到一定数量时，不再生成敌人。然后当list被清空时，达成关卡结束条件之一，是否通关应该由GameManager来判断
     
 }
