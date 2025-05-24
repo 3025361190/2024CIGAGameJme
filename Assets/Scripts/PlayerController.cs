@@ -21,6 +21,12 @@ public class PlayerController : MonoBehaviour
     private bool isRageActive = false;      // 狂暴模式标志
     private float rageDuration;             //狂暴持续时间
     private float rageTimer = 0.0f;         // 狂暴模式计时器
+    private bool tryActivateRage = false; // 尝试激活狂暴模式？
+    private float rageActivateTime;      // 狂暴激活时间
+    private float rageActivateTimer = 0.0f; // 狂暴激活计时器
+    public Slider progressBar;              // 进度条
+    private float maxValue;
+    private float minValue;
 
     [SerializeField]
     private int maxBullets;           // 最大子弹数量
@@ -52,8 +58,9 @@ public class PlayerController : MonoBehaviour
         skillButton = GameObject.Find("SkillButton");
         spriteRenderer = GetComponent<SpriteRenderer>();
         UpdateBulletCount();     
-        currentBulletPosition = new Vector3(7f, 3.7f, 0.2f);    
+        currentBulletPosition = new Vector3(7f, 3.7f, 1.0f);    
         currentBullet = Instantiate(bulletPrefab, currentBulletPosition, Quaternion.identity);
+        currentBullet.GetComponent<Collider2D>().enabled = false;
         //currentBullet.SetActive(false);
         var bulletConfig = JsonLoader.LoadJsonAsJObject("StaticData/bullet_config");
         maxBullets = bulletConfig["maxBullets"].ToObject<int>();
@@ -64,6 +71,7 @@ public class PlayerController : MonoBehaviour
         rageFiringRate = rageConfig["rageFiringRate"].ToObject<float>();
         rageThreshold = rageConfig["rageThreshold"].ToObject<float>();
         rageDuration = rageConfig["rageDuration"].ToObject<float>();
+        rageActivateTime = rageConfig["rageActivateTime"].ToObject<float>();
     }
 
     void FixedUpdate()
@@ -74,6 +82,17 @@ public class PlayerController : MonoBehaviour
             if(rageTimer >= rageDuration)
             {
                 ExitRage();
+            }
+        }
+        if(tryActivateRage)
+        {
+            rageActivateTimer += Time.deltaTime;
+            progressBar.value = (GameManager.Instance.currentBulletCount - minValue) / maxValue;
+            if(rageActivateTimer >= rageActivateTime)
+            {
+                progressBar.gameObject.SetActive(false);
+                tryActivateRage = false;
+                rageActivateTimer = 0.0f;
             }
         }
 
@@ -150,8 +169,10 @@ public class PlayerController : MonoBehaviour
         float bulletAngle = angle + 90f;
         
         GameObject bullet = currentBullet;
+        bullet.GetComponent<Collider2D>().enabled = true;
         bullet.transform.position = transform.position;
         currentBullet = Instantiate(bulletPrefab, currentBulletPosition, Quaternion.Euler(0, 0, bulletAngle));
+        currentBullet.GetComponent<Collider2D>().enabled = false;
         bullet.GetComponent<BulletController>().trailRenderer.enabled = true;
         bullet.GetComponent<BulletController>().SetAcFlag();
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
@@ -179,20 +200,16 @@ public class PlayerController : MonoBehaviour
 
     public void RecycleBullet()
     {
-        int beforeRecycleBulletCount = GameManager.Instance.currentBulletCount;
         foreach (var bullet in activeBullets)
         {
             // 处理回收子弹的逻辑
             bullet.GetComponent<BulletController>().Recycle();
         }
-        // 增加的子弹数量
-        int addedBullets = GameManager.Instance.currentBulletCount - beforeRecycleBulletCount;
-        Debug.Log("增加的子弹数量： " + addedBullets);
-        Debug.Log("发射的子弹数量： " + baseBulletCount);
-        if(addedBullets >= rageThreshold * baseBulletCount)
-        {
-            TriggerRage();
-        }
+        tryActivateRage = true;
+        minValue = GameManager.Instance.currentBulletCount;
+        maxValue = baseBulletCount * rageThreshold;
+        progressBar.value = 0.0f;
+        progressBar.gameObject.SetActive(true);
         activeBullets.Clear();
     }
 
@@ -220,7 +237,6 @@ public class PlayerController : MonoBehaviour
     {
         if (isRageActive)
         {
-            Debug.Log("狂暴模式已激活，无法再次触发");
             return;
         }
 
