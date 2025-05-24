@@ -13,7 +13,16 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;          // 敌人预制体, 在unity编辑器中拖动赋值
-    public float spawnInterval = 0.5f;      // 生成敌人的间隔时间
+    public float spawnInterval;             // 生成敌人的间隔时间
+    // 敌人移动参数,生成enemy后，赋值给enemy的EnemyMovement组件中的成员
+    public float moveSpeed;                 // 移动速度
+    public float randomRange;               // 随机移动的幅度
+    public float changeDirectionInterval;   // 改变随机方向的时间间隔
+    public float knockbackDistance;         // 退后的距离
+    public float knockbackTime;             // 退后持续时间
+    public float bufferTime;                // 缓冲时间
+
+
     private float timer = 0.0f;             // 计时器
     // public float radius = 8.0f;              // 圆的半径
     // 预定义的生成点
@@ -32,6 +41,31 @@ public class EnemySpawner : MonoBehaviour
     };       
 
     private List<GameObject> enemyList = new();    // 用于注册enemy实例
+
+
+    // 初始化
+    void Start()
+    {
+        // 从enemy_config.json中获取spawnInterval
+        var enemyConfig = JsonLoader.LoadJsonAsJObject("StaticData/enemy_config");
+        if (enemyConfig != null)
+        {   
+            // 获取enemy_config.json中的数据
+            spawnInterval = enemyConfig["spawnInterval"].ToObject<float>();
+            moveSpeed = enemyConfig["moveSpeed"].ToObject<float>();
+            randomRange = enemyConfig["randomRange"].ToObject<float>();
+            changeDirectionInterval = enemyConfig["changeDirectionInterval"].ToObject<float>();
+            knockbackDistance = enemyConfig["knockbackDistance"].ToObject<float>();
+            knockbackTime = enemyConfig["knockbackTime"].ToObject<float>();
+            bufferTime = enemyConfig["bufferTime"].ToObject<float>();
+            Debug.Log($"全局配置加载完成");
+        }
+        else
+        {
+            Debug.LogError("加载敌人生成配置失败！");
+        }
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -53,8 +87,19 @@ public class EnemySpawner : MonoBehaviour
         Vector2 spawnPosition = spawnPoints[Random.Range(0, spawnPoints.Length)];
         // 实例化敌人并注册到enemyList
         GameObject instantiate = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-        // 颜色扎堆
-        // ...
+
+        // 获取EnemyMovement组件
+        EnemyMovement enemyMovement = instantiate.GetComponent<EnemyMovement>();
+        // 赋值给EnemyMovement组件中的成员
+        enemyMovement.moveSpeed = moveSpeed;
+        enemyMovement.randomRange = randomRange;
+        enemyMovement.changeDirectionInterval = changeDirectionInterval;
+        enemyMovement.knockbackDistance = knockbackDistance;
+        enemyMovement.knockbackTime = knockbackTime;
+        enemyMovement.bufferTime = bufferTime;
+
+
+        // TODO: 瑞，颜色扎堆?
 
         enemyList.Add(instantiate);
     }

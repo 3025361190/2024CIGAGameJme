@@ -3,6 +3,8 @@
 编辑人：Fortunate瑞
 文件描述：敌人移动脚本,挂载在敌人预制体上,用于控制敌人的移动
 组件依赖：Rigidbody2D, CircleCollider2D
+绑定：
+通过“Turret”标签查找炮台并触发碰撞检测
 */
 
 
@@ -13,12 +15,13 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public Vector2 targetPosition;              // 目标位置
-    public float moveSpeed = 0.3f;                // 移动速度
-    public float randomRange = 0.3f;              // 随机移动的幅度
-    public float changeDirectionInterval = 4f;  // 改变随机方向的时间间隔
-    public float knockbackDistance = 1f;        // 退后的距离
-    public float knockbackTime = 0.5f;          // 退后持续时间
-    public float bufferTime = 1f;               // 缓冲时间
+    // 由enemySpawner赋值以下属性
+    public float moveSpeed;                 // 移动速度
+    public float randomRange;               // 随机移动的幅度
+    public float changeDirectionInterval;   // 改变随机方向的时间间隔
+    public float knockbackDistance;         // 退后的距离
+    public float knockbackTime;             // 退后持续时间
+    public float bufferTime;                // 缓冲时间
 
     private Vector2 currentDirection;           // 当前移动方向
     private float timeSinceLastChange;          // 上次改变随机方向的时间
@@ -34,6 +37,10 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
+        // 更新目标位置
+        targetPosition = GameObject.FindGameObjectWithTag("Turret").transform.position;
+        
+
         timeSinceLastChange += Time.deltaTime;
 
         // 每隔一段时间改变一次随机方向
@@ -59,13 +66,13 @@ public class EnemyMovement : MonoBehaviour
         currentDirection = (directionToTarget + randomDirection * randomRange).normalized;
     }
 
-    // 碰撞检测,当敌人碰撞到Infinity时触发
+    // 碰撞检测,当敌人碰撞到炮台时触发
     public void OnCollisionEnter2D(Collision2D collision)
     {
         // Debug.Log("Collision detected");
-        if (collision.gameObject.CompareTag("Infinity"))
+        if (collision.gameObject.CompareTag("Turret"))
         {
-            if (collision.gameObject.CompareTag("Infinity") && !isKnockedBack)
+            if (collision.gameObject.CompareTag("Turret") && !isKnockedBack)
             {
                 ContactPoint2D contact = collision.GetContact(0);
                 Vector2 knockbackDirection = (transform.position - (Vector3)contact.point).normalized;

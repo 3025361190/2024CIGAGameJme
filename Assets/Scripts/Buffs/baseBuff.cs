@@ -173,7 +173,7 @@ public abstract class BaseBuff : MonoBehaviour
 }
 
 
-// TODO: buff的细节还需定夺
+// TODO: 瑞，buff的细节还需定夺
 // 如：
 // 1.buff直接加在生效的物体上，还是加在buff管理器上？
 // 2.buff的管理方式，是否销毁？还是用对象池的方式管理？

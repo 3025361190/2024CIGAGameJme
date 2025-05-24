@@ -1,0 +1,9 @@
+{
+    "moveSpeed": 0.3,
+    "randomRange": 0.3,
+    "changeDirectionInterval": 4.0,
+    "knockbackDistance": 1.0,
+    "knockbackTime": 0.5,
+    "bufferTime": 1.0,
+    "spawnInterval": 2.0
+}
