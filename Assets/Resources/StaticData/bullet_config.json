@@ -1,5 +1,6 @@
 {
     "maxBullets" : 10000,
     "firingRate" : 0.2,
-    "bulletSpeed" : 10.0
+    "bulletSpeed" : 10.0,
+    "bulletCountInScreenMax" : 100
 }

@@ -54,6 +54,8 @@ public class BulletController : MonoBehaviour
     //����ʵ��
     public GameObject skillButton;
 
+    private int bulletCountInScreenMax; // 屏幕内子弹数量上限
+
     //��������
     //public int splitLimit = 1;
 
@@ -96,6 +98,8 @@ public class BulletController : MonoBehaviour
             Debug.Log("cant find turret");
         }
         trailRenderer.enabled = false;
+        var bulletConfig = JsonLoader.LoadJsonAsJObject("StaticData/bullet_config");
+        bulletCountInScreenMax = bulletConfig["bulletCountInScreenMax"].ToObject<int>();
     }
 
     void Start()
@@ -382,8 +386,9 @@ public class BulletController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy") && state && collision.gameObject.GetComponent<Enemy>().enemyColor == bulletCollor && !is_trace)
         {
 
-            if(!CDflag)
+            if(!CDflag && Turret.GetComponent<PlayerController>().bulletCountInScreen < bulletCountInScreenMax)
             {
+                Turret.GetComponent<PlayerController>().bulletCountInScreen++;
                 // Debug.Log("try to split bullet");
                 GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
                 temp.transform.localScale = new Vector3(1f, 1f, 1f);
@@ -400,6 +405,7 @@ public class BulletController : MonoBehaviour
 
                 StartCoroutine(temp.GetComponent<BulletController>().WaitTwoSeconds());
                 StartCoroutine(WaitTwoSeconds());
+
             }
             
 

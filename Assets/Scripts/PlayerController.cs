@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public float bulletSpeed;           // 子弹速度
     public float fireRate;             // 射击间隔
     public float normalFireRate;
+    public int bulletCountInScreen = 0;    //屏幕中存在的子弹数量
+    
 
     // 狂暴模式相关
     private int baseBulletCount;            //清汤时发射的子弹数量
@@ -213,6 +215,7 @@ public class PlayerController : MonoBehaviour
         if (sceneType == SceneType.QingTang)
         {
             baseBulletCount++;
+            bulletCountInScreen++;
             activeBullets.Add(bullet);
         }else
         {
@@ -244,6 +247,7 @@ public class PlayerController : MonoBehaviour
         progressBar.value = 0.0f;
         progressBar.gameObject.SetActive(true);
         activeBullets.Clear();
+        bulletCountInScreen = 0;
     }
 
     // 清理已销毁的子弹
@@ -294,7 +298,7 @@ public class PlayerController : MonoBehaviour
         rageTimer = 0.0f;
     }
 
-    // TODO：控制子弹分裂次数
+    // TODO：控制子弹分裂次数（不写了.................）
 
     // TODO：有报错，暂时注释掉1
     // //tl相关，策划加的
