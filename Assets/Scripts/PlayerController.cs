@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private int maxBullets = 10000;           // 最大子弹数量
     private int remainingBullets;             // 剩余子弹数量
 
+    // TODO: 从GameManager获取剩余子弹数量
     private List<GameObject> activeBullets = new List<GameObject>(); // 添加子弹列表
 
     private Rigidbody2D rb;
@@ -28,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public Vector3 currentBulletPosition;
 
     private SceneType sceneType;
-    private GameObject sceneManager;
+    private GameObject skillButton;
 
     public PlayableDirector director;//tl相关，策划加的
     private bool ispause=true;
@@ -36,7 +37,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        sceneManager = GameObject.Find("SceneManagerObject");
+        skillButton = GameObject.Find("SkillButton");
         spriteRenderer = GetComponent<SpriteRenderer>();
         remainingBullets = 60;    // 初始化子弹数量为10
         UpdateBulletCount();     
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
         HandleMovement();
         HandleShooting();
         // 获取场景类型
-        sceneType = sceneManager.GetComponent<Manager>().currentSceneType;
+        sceneType = skillButton.GetComponent<SkillButton>().currentSceneType;
         // TODO：有bug,先注释2
         // if (ispause)
         // {
