@@ -142,8 +142,15 @@ public class GameManager : MonoBehaviour
 
         // 加载levels_config.json
         Debug.Log("加载关卡配置...");
-        levelList = JsonLoader.LoadJsonAsJObject("StaticData/levels_config")["levels"].ToObject<List<levelConfig>>();
-        Debug.Log($"成功加载 {levelList.Count} 个关卡配置");
+        try
+        {
+            levelList = JsonLoader.LoadJsonAsJObject("StaticData/levels_config")["levels"].ToObject<List<levelConfig>>();
+            Debug.Log($"成功加载 {levelList.Count} 个关卡配置");
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"读取关卡配置数据失败: {e.Message}");
+        }
 
         // 加载global_config.json
         Debug.Log("加载全局配置...");
@@ -151,7 +158,14 @@ public class GameManager : MonoBehaviour
         if (globalConfig != null)
         {   
             // 获取global_config.json中的数据
-            initialBulletCount = globalConfig["initialBulletCount"].ToObject<int>();
+            try
+            {
+                initialBulletCount = globalConfig["initialBulletCount"].ToObject<int>();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"读取初始子弹数量失败: {e.Message}");
+            }
             Debug.Log($"全局配置加载完成: 初始子弹={initialBulletCount}");
         }
         else

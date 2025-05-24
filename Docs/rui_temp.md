@@ -14,4 +14,5 @@
   | `bufferTime` | float | 击退后的缓冲时间 |
   | `spawnInterval` | float | 敌人生成的时间间隔 |
   | `attackCooldownTime` | float | 敌人伤害冷却时间 |
-  | `chainExplosionRange` | float | 连锁爆炸范围 |
+  | `chainExplosionRange` | float | 连锁爆炸范围半径 |
+  | `chainExplosionDelay` | float | 连锁爆炸的传递延迟时间 |

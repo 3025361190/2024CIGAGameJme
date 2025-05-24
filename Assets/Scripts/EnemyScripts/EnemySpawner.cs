@@ -3,7 +3,7 @@
 编辑人：Fortunate瑞
 文件描述：敌人生成器,单独挂载在一个空物体EnemySpawnerObject上,用于生成敌人
 组件依赖：无
-需要在unity编辑器中拖动赋值的属性：“enemyPrefab:敌人预制体”
+需要在unity编辑器中拖动赋值的属性："enemyPrefab:敌人预制体"
 */
 
 using System.Collections;
@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
     public float bufferTime;                // 缓冲时间
     public float attackCooldownTime;        // 伤害冷却时间
     public float chainExplosionRange;       // 连锁爆炸范围
-
+    public float chainExplosionDelay;       // 连锁爆炸延迟
 
     private float timer = 0.0f;             // 计时器
     // public float radius = 8.0f;              // 圆的半径
@@ -54,16 +54,24 @@ public class EnemySpawner : MonoBehaviour
         if (enemyConfig != null)
         {   
             // 获取enemy_config.json中的数据
-            spawnInterval = enemyConfig["spawnInterval"].ToObject<float>();
-            moveSpeed = enemyConfig["moveSpeed"].ToObject<float>();
-            damage = enemyConfig["damage"].ToObject<int>();
-            randomRange = enemyConfig["randomRange"].ToObject<float>();
-            changeDirectionInterval = enemyConfig["changeDirectionInterval"].ToObject<float>();
-            knockbackDistance = enemyConfig["knockbackDistance"].ToObject<float>();
-            knockbackTime = enemyConfig["knockbackTime"].ToObject<float>();
-            bufferTime = enemyConfig["bufferTime"].ToObject<float>();
-            attackCooldownTime = enemyConfig["attackCooldownTime"].ToObject<float>();
-            chainExplosionRange = enemyConfig["chainExplosionRange"].ToObject<float>();
+            try
+            {
+                spawnInterval = enemyConfig["spawnInterval"].ToObject<float>();
+                moveSpeed = enemyConfig["moveSpeed"].ToObject<float>();
+                damage = enemyConfig["damage"].ToObject<int>();
+                randomRange = enemyConfig["randomRange"].ToObject<float>();
+                changeDirectionInterval = enemyConfig["changeDirectionInterval"].ToObject<float>();
+                knockbackDistance = enemyConfig["knockbackDistance"].ToObject<float>();
+                knockbackTime = enemyConfig["knockbackTime"].ToObject<float>();
+                bufferTime = enemyConfig["bufferTime"].ToObject<float>();
+                attackCooldownTime = enemyConfig["attackCooldownTime"].ToObject<float>();
+                chainExplosionRange = enemyConfig["chainEffectRadius"].ToObject<float>();
+                chainExplosionDelay = enemyConfig["chainExplosionDelay"].ToObject<float>();
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError($"读取敌人配置数据失败: {e.Message}");
+            }
             Debug.Log($"敌人配置加载完成");
         }
         else
@@ -93,9 +101,16 @@ public class EnemySpawner : MonoBehaviour
         Vector2 spawnPosition = spawnPoints[Random.Range(0, spawnPoints.Length)];
         // 实例化敌人并注册到enemyList
         GameObject instantiate = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-
+        if(instantiate == null)
+        {
+            Debug.Log("未找到instantiate");
+        }
         // 获取EnemyMovement组件
         EnemyMovement enemyMovement = instantiate.GetComponent<EnemyMovement>();
+        if(enemyMovement == null)
+        {
+            Debug.Log("未找到EnemyMovement组件");
+        }
         // 赋值给EnemyMovement组件中的成员
         enemyMovement.moveSpeed = moveSpeed;
         enemyMovement.randomRange = randomRange;
@@ -106,14 +121,15 @@ public class EnemySpawner : MonoBehaviour
 
         // 获取Enemy组件
         Enemy enemy = instantiate.GetComponent<Enemy>();
+        if(enemy == null)
+        {
+            Debug.Log("未找到Enemy组件");
+        }
         // 赋值给Enemy组件中的成员
         enemy.damage = damage;
         enemy.cooldownTime = attackCooldownTime;
         enemy.ChainEffectRadius = chainExplosionRange;
-
-
-
-        // TODO: 瑞，颜色扎堆?
+        enemy.chainExplosionDelay = chainExplosionDelay;
 
         enemyList.Add(instantiate);
     }

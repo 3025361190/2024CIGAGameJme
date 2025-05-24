@@ -17,9 +17,13 @@ public class Enemy : MonoBehaviour
     public ColorType enemyColor;                // 敌人颜色
     public int damage;                          // 敌人伤害值
     public float ChainEffectRadius;             // 连锁效果半径
+    public float chainExplosionDelay;           // 连锁爆炸延迟
+    public float cooldownTime;                  // 伤害冷却时间，由spawner赋值
+
+
 
     private bool canTakeDamage = true;          // 是否可以造成伤害的标志位
-    public float cooldownTime;                  // 伤害冷却时间，由spawner赋值
+    private bool isChaining = false;           // 是否正在连锁中
     public GameObject baozha;
     // private GameObject currentEnemy;
 
@@ -50,19 +54,16 @@ public class Enemy : MonoBehaviour
     }
 
 
-    // TODO: 瑞，修改为对炮台的攻击
-    // 碰撞检测,当敌人碰撞到Infinity时触发,造成伤害
+    // 碰撞检测,当敌人碰撞到Turret时触发,造成伤害
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        // 加个协程，防止短时间内多次碰撞
-        // if (collision.gameObject.CompareTag("Infinity"))
-        // {
-        //     collision.gameObject.GetComponent<InfinityHealth>().TakeDamage(1);
-        // }
-        if (collision.gameObject.CompareTag("Infinity") && canTakeDamage)
+        // TODO: 瑞，炮台和敌人碰撞会导致敌人飞走很远且不会回来，需要处理
+        if (collision.gameObject.CompareTag("Turret") && canTakeDamage)
         {
-            collision.gameObject.GetComponent<InfinityHealth>().TakeDamage(damage);
-            StartCoroutine(CollisionCooldown());  // 开始冷却协程
+            // TODO: 瑞，修改为对炮台的攻击,等炮台的health逻辑写完
+            // collision.gameObject.GetComponent<TurretHealth>().TakeDamage(damage);
+            // Debug.Log("Enemy hit Turret");
+            StartCoroutine(CollisionCooldown());  // 开始冷却协程,防止短时间内多次碰撞
         }
     }
 
@@ -73,10 +74,14 @@ public class Enemy : MonoBehaviour
         GameObject newPrefabInstance = Instantiate(baozha, currentPosition, Quaternion.identity);
 
         // 获取 EnemySpawner 的引用并调用 RemoveEnemy 方法
-        EnemySpawner enemySpawner = GameObject.Find("EnemySpawnerObject")?.GetComponent<EnemySpawner>();
-        if (enemySpawner != null)
+        GameObject spawnerObject = GameObject.Find("EnemySpawnerObject");
+        if (spawnerObject != null)
         {
-            enemySpawner.RemoveEnemy(gameObject); // 将当前敌人移除
+            EnemySpawner enemySpawner = spawnerObject.GetComponent<EnemySpawner>();
+            if (enemySpawner != null)
+            {
+                enemySpawner.RemoveEnemy(gameObject); // 将当前敌人移除
+            }
         }
 
         Destroy(gameObject); // 销毁当前敌人对象
@@ -86,37 +91,55 @@ public class Enemy : MonoBehaviour
     public void HandleHit(ColorType bulletColor)
     {
         // Debug.Log("Enemy hit by bullet");
-        if (bulletColor == enemyColor)
+        if (bulletColor == enemyColor && !isChaining)
         {
             TriggerChainEffect(enemyColor);
         }
         else
         {
-            // 敌人被击中,但是颜色不匹配,不触发连锁效果,敌人消失
+            // 敌人被击中,但是颜色不匹配,或者已经触发过连锁。则不触发连锁效果,敌人立即死亡
             Die();
         }
     }
 
     // 实现连锁击杀效果,对附近的全部敌人调用TriggerChainEffect方法,传入该敌人自己的颜色实现连锁效果
-    void TriggerChainEffect(ColorType enemyColor)
+    void TriggerChainEffect(ColorType enemyColor, float deltaTime = 0)
     {
-        // // 获取附近范围内所有碰撞体
-        // Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, ChainEffectRadius);
-        // foreach (var collider in colliders)
-        // {
-        //     if(collider != null)
-        //     {
-        //         if (collider.CompareTag("Enemy"))
-        //         {
-        //             // 后期可增加发射闪电特效等
-        //             // ...
-        //             // 调用敌人的TriggerChainEffect方法,传入当前敌人的颜色,实现连锁效果
-        //             collider.GetComponent<Enemy>().TriggerChainEffect(enemyColor);
-        //         }
-        //     }
-        // }
-        // // 敌人死亡
-        Die();
+        // Debug.Log("触发连锁爆炸");
+        isChaining = true;
+
+        // 获取附近范围内所有碰撞体
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, ChainEffectRadius);
+        // Debug.Log($"找到 {colliders.Length} 个碰撞体");
+        foreach (var collider in colliders)
+        {
+            if (collider != null && collider.CompareTag("Enemy"))
+            {
+                // Debug.Log("找到敌人");
+                Enemy nearbyEnemy = collider.GetComponent<Enemy>();
+                if (nearbyEnemy != null && nearbyEnemy.enemyColor == enemyColor && !nearbyEnemy.isChaining)
+                {
+                    // Debug.Log("找到敌人，且颜色匹配！");
+                    // 递归调用，传递当前延迟时间加上延迟间隔
+                    nearbyEnemy.TriggerChainEffect(enemyColor, deltaTime + chainExplosionDelay);
+                }
+            }
+        }
+
+        // 启动延迟死亡的协程
+        StartCoroutine(DelayedDeath(deltaTime));
+    }
+
+    private IEnumerator DelayedDeath(float deltaTime)
+    {
+        // 等待延迟时间
+        yield return new WaitForSeconds(chainExplosionDelay * deltaTime);
+        
+        // 检查对象是否还存在
+        if (gameObject != null)
+        {
+            Die();
+        }
     }
 
     private IEnumerator CollisionCooldown()
@@ -124,5 +147,23 @@ public class Enemy : MonoBehaviour
         canTakeDamage = false;  // 设置不能造成伤害
         yield return new WaitForSeconds(cooldownTime);  // 等待冷却时间
         canTakeDamage = true;  // 冷却完毕，可以再次造成伤害
+    }
+
+    // 在Scene视图中绘制连爆范围
+    void OnDrawGizmos()
+    {
+        // Debug.Log("OnDrawGizmos");
+        // 在Scene视图中绘制探测范围
+        Gizmos.color = new Color(1f, 0f, 0f, 0.5f); // 半透明的红色
+        Gizmos.DrawWireSphere(transform.position, ChainEffectRadius);
+        
+        // 添加一个实心球体使范围更容易看到
+        Gizmos.color = new Color(1f, 0f, 0f, 0.1f); // 非常淡的红色
+        Gizmos.DrawSphere(transform.position, ChainEffectRadius);
+        
+        // 在Scene视图中显示半径值
+        #if UNITY_EDITOR
+        UnityEditor.Handles.Label(transform.position, $"Radius: {ChainEffectRadius}");
+        #endif
     }
 }

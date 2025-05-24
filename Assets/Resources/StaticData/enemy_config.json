@@ -8,5 +8,6 @@
     "bufferTime": 1.0,
     "spawnInterval": 2.0,
     "attackCooldownTime": 1.0,
-    "chainEffectRadius": 2.0
+    "chainEffectRadius": 1.8,
+    "chainExplosionDelay": 0.5
 }
