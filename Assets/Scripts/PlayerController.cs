@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private float rageActivateTimer = 0.0f; // 狂暴激活计时器
     public Slider progressBar;              // 进度条
     private float maxValue;
+    private float currentValue;
     private float minValue;
 
     [SerializeField]
@@ -87,7 +88,7 @@ public class PlayerController : MonoBehaviour
         if(tryActivateRage)
         {
             rageActivateTimer += Time.deltaTime;
-            progressBar.value = (GameManager.Instance.currentBulletCount - minValue) / maxValue;
+            progressBar.value = (currentValue - minValue) / maxValue;
             if (progressBar.value >= 1.0f && !isRageActive)
             {
                 TriggerRage();
@@ -211,6 +212,7 @@ public class PlayerController : MonoBehaviour
         }
         tryActivateRage = true;
         minValue = GameManager.Instance.currentBulletCount;
+        currentValue = GameManager.Instance.currentBulletCount;
         maxValue = baseBulletCount * rageThreshold;
         progressBar.value = 0.0f;
         progressBar.gameObject.SetActive(true);
@@ -233,6 +235,10 @@ public class PlayerController : MonoBehaviour
     // 添加子弹
     public void AddBullets(int amount)
     {
+        if(tryActivateRage)
+        {
+            currentValue += amount;
+        }
         GameManager.Instance.currentBulletCount = Mathf.Min(GameManager.Instance.currentBulletCount + amount, maxBullets);
     }
 
