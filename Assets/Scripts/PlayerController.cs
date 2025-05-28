@@ -128,10 +128,10 @@ public class PlayerController : MonoBehaviour
         // 获取场景类型
         sceneType = skillButton.GetComponent<SkillButton>().currentSceneType;
         // TODO：有bug,先注释2
-        // if (ispause)
-        // {
-        //     NewMountSmall();
-        // }
+        if (ispause)
+        {
+            NewMountSmall();
+        }
     }
 
     // 处理移动逻辑
@@ -299,17 +299,16 @@ public class PlayerController : MonoBehaviour
     }
 
     // TODO：控制子弹分裂次数（不写了.................）
-
-    // TODO：有报错，暂时注释掉1
-    // //tl相关，策划加的
-    // void NewMountSmall()
-    // {
-    //     if (remainingBullets <= 50 )
-    //     {
-
-    //         director.playableGraph.GetRootPlayable(0).SetSpeed(1);
-    //         Debug.Log("时间轴恢复播放");
-    //         ispause = false;
-    //     }
-    // }
+    
+   //  TODO：有报错，暂时注释掉1
+     //tl相关，策划加的
+     void NewMountSmall()
+     {
+         if (GameManager.Instance.currentBulletCount <= 50 )
+         {
+    
+             director.playableGraph.GetRootPlayable(0).SetSpeed(1);
+             ispause = false;
+         }
+     }
 }
