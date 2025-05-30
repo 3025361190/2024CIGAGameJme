@@ -75,6 +75,7 @@
   | `attackCooldownTime` | float | 敌人伤害冷却时间 |
   | `chainExplosionRange` | float | 连锁爆炸范围半径 |
   | `chainExplosionDelay` | float | 连锁爆炸的传递延迟时间 |
+  | `chainKnockbackForceMultiplier` | float | 连锁击退的力系数 |
 
 
 

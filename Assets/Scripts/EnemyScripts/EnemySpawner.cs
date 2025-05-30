@@ -25,6 +25,7 @@ public class EnemySpawner : MonoBehaviour
     public float attackCooldownTime;        // 伤害冷却时间
     public float chainExplosionRange;       // 连锁爆炸范围
     public float chainExplosionDelay;       // 连锁爆炸延迟
+    public float chainKnockbackForceMultiplier;           // 连锁击退的力系数
 
     private float timer = 0.0f;             // 计时器
     // public float radius = 8.0f;              // 圆的半径
@@ -67,6 +68,7 @@ public class EnemySpawner : MonoBehaviour
                 attackCooldownTime = enemyConfig["attackCooldownTime"].ToObject<float>();
                 chainExplosionRange = enemyConfig["chainEffectRadius"].ToObject<float>();
                 chainExplosionDelay = enemyConfig["chainExplosionDelay"].ToObject<float>();
+                chainKnockbackForceMultiplier = enemyConfig["chainKnockbackForceMultiplier"].ToObject<float>();
             }
             catch (System.Exception e)
             {
@@ -118,6 +120,7 @@ public class EnemySpawner : MonoBehaviour
         enemyMovement.knockbackBaseForce = knockbackBaseForce;
         enemyMovement.knockbackTime = knockbackTime;
         enemyMovement.bufferTime = bufferTime;
+        enemyMovement.chainKnockbackForceMultiplier = chainKnockbackForceMultiplier;
 
         // 获取Enemy组件
         Enemy enemy = instantiate.GetComponent<Enemy>();

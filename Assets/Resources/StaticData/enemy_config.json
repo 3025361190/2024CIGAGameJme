@@ -1,5 +1,5 @@
 {
-    "moveSpeed": 0.5,
+    "moveSpeed": 0.6,
     "damage":1,
     "randomRange": 0.3,
     "changeDirectionInterval": 1.0,
@@ -9,5 +9,6 @@
     "spawnInterval": 2.0,
     "attackCooldownTime": 1.0,
     "chainEffectRadius": 1.8,
-    "chainExplosionDelay": 0.5
+    "chainExplosionDelay": 0.5,
+    "chainKnockbackForceMultiplier": 0.9
 }
