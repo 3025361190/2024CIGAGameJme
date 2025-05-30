@@ -19,8 +19,8 @@ public class EnemySpawner : MonoBehaviour
     public int damage;                      // 敌人伤害值
     public float randomRange;               // 随机移动的幅度
     public float changeDirectionInterval;   // 改变随机方向的时间间隔
-    public float knockbackDistance;         // 退后的距离
-    public float knockbackTime;             // 退后持续时间
+    public float knockbackBaseForce;        // 击退力基础值
+    public float knockbackTime;             // 击退持续时间
     public float bufferTime;                // 缓冲时间
     public float attackCooldownTime;        // 伤害冷却时间
     public float chainExplosionRange;       // 连锁爆炸范围
@@ -61,7 +61,7 @@ public class EnemySpawner : MonoBehaviour
                 damage = enemyConfig["damage"].ToObject<int>();
                 randomRange = enemyConfig["randomRange"].ToObject<float>();
                 changeDirectionInterval = enemyConfig["changeDirectionInterval"].ToObject<float>();
-                knockbackDistance = enemyConfig["knockbackDistance"].ToObject<float>();
+                knockbackBaseForce = enemyConfig["knockbackBaseForce"].ToObject<float>();
                 knockbackTime = enemyConfig["knockbackTime"].ToObject<float>();
                 bufferTime = enemyConfig["bufferTime"].ToObject<float>();
                 attackCooldownTime = enemyConfig["attackCooldownTime"].ToObject<float>();
@@ -115,7 +115,7 @@ public class EnemySpawner : MonoBehaviour
         enemyMovement.moveSpeed = moveSpeed;
         enemyMovement.randomRange = randomRange;
         enemyMovement.changeDirectionInterval = changeDirectionInterval;
-        enemyMovement.knockbackDistance = knockbackDistance;
+        enemyMovement.knockbackBaseForce = knockbackBaseForce;
         enemyMovement.knockbackTime = knockbackTime;
         enemyMovement.bufferTime = bufferTime;
 

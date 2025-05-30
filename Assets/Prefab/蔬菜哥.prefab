@@ -480,7 +480,7 @@ MonoBehaviour:
   moveSpeed: 0.3
   randomRange: 0.3
   changeDirectionInterval: 2
-  knockbackDistance: 1
+  knockbackBaseForce: 0
   knockbackTime: 1
   bufferTime: 2
 --- !u!114 &7750317228755511999
@@ -496,8 +496,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyColor: 0
-  amount: 0
+  damage: 0
   ChainEffectRadius: 2
+  chainExplosionDelay: 0
   cooldownTime: 1
   baozha: {fileID: 581044435470829640, guid: 340067860597b17468819cdd2d13842b, type: 3}
 --- !u!50 &3958139960787047922
@@ -512,8 +513,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.0001
-  m_LinearDrag: 0
+  m_Mass: 1
+  m_LinearDrag: 1
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}

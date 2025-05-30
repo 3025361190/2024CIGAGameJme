@@ -4,7 +4,7 @@
 文件描述：敌人移动脚本,挂载在敌人预制体上,用于控制敌人的移动
 组件依赖：Rigidbody2D, CircleCollider2D
 绑定：
-通过“Turret”标签查找炮台并触发碰撞检测
+通过"Turret"标签查找炮台并触发碰撞检测
 */
 
 
@@ -19,29 +19,42 @@ public class EnemyMovement : MonoBehaviour
     public float moveSpeed;                 // 移动速度
     public float randomRange;               // 随机移动的幅度
     public float changeDirectionInterval;   // 改变随机方向的时间间隔
-    public float knockbackDistance;         // 退后的距离
-    public float knockbackTime;             // 退后持续时间
+    public float knockbackBaseForce;        // 击退力基础值
+    public float knockbackTime;             // 击退持续时间
     public float bufferTime;                // 缓冲时间
 
     private Vector2 currentDirection;           // 当前移动方向
     private float timeSinceLastChange;          // 上次改变随机方向的时间
-     private bool isKnockedBack = false;        // 是否正在被击退
-    
+    private bool isKnockedBack = false;        // 是否正在被击退
+    private Rigidbody2D rb;                     // Rigidbody2D组件引用
 
     void Start()
     {
+        // 获取Rigidbody2D组件
+        rb = GetComponent<Rigidbody2D>();
+        if (rb == null)
+        {
+            Debug.LogError("EnemyMovement requires a Rigidbody2D component!");
+            return;
+        }
+
+        // 冻结旋转
+       rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        
+
         // 初始化方向为朝向目标位置的方向
         currentDirection = (targetPosition - (Vector2)transform.position).normalized;
         timeSinceLastChange = 0f;
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        if (rb == null) return;
+
         // 更新目标位置
         targetPosition = GameObject.FindGameObjectWithTag("Turret").transform.position;
-        
 
-        timeSinceLastChange += Time.deltaTime;
+        timeSinceLastChange += Time.fixedDeltaTime;
 
         // 每隔一段时间改变一次随机方向
         if (timeSinceLastChange >= changeDirectionInterval)
@@ -50,8 +63,11 @@ public class EnemyMovement : MonoBehaviour
             timeSinceLastChange = 0f;
         }
 
-        // 移动对象
-        transform.position += (Vector3)(currentDirection * moveSpeed * Time.deltaTime);
+        // 使用velocity进行移动
+        if (!isKnockedBack)
+        {
+            rb.velocity = currentDirection * moveSpeed;
+        }
     }
 
     void ChangeRandomDirection()
@@ -66,50 +82,48 @@ public class EnemyMovement : MonoBehaviour
         currentDirection = (directionToTarget + randomDirection * randomRange).normalized;
     }
 
-    // 碰撞检测,当敌人碰撞到炮台时触发
+    // 碰撞检测,当敌人碰撞到collision时触发
     public void OnCollisionEnter2D(Collision2D collision)
     {
-        // Debug.Log("Collision detected");
+        // 碰撞到炮台
         if (collision.gameObject.CompareTag("Turret"))
         {
-            if (collision.gameObject.CompareTag("Turret") && !isKnockedBack)
-            {
-                ContactPoint2D contact = collision.GetContact(0);
-                Vector2 knockbackDirection = (transform.position - (Vector3)contact.point).normalized;
+            // 计算从炮台到敌人的方向作为击退方向
+            Vector2 knockbackDirection = ((Vector2)transform.position - (Vector2)collision.transform.position).normalized;
+            
+            // 根据碰撞速度计算击退力，增加一个系数使效果更明显，最小值为基础值
+            float knockbackForce = Mathf.Max(collision.relativeVelocity.magnitude * knockbackBaseForce, knockbackBaseForce);
+            
+            rb.velocity = Vector2.zero;  // 先清除当前速度
+            // Debug.Log("击退力：" + knockbackForce + " 方向：" + knockbackDirection);
+            rb.AddForce(knockbackDirection * knockbackForce, ForceMode2D.Impulse);
 
-            // 检查退后路径
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, knockbackDirection, knockbackDistance);
-            if (hit.collider != null)
-            {
-                // 如果退后路径被阻挡，调整退后距离为距离障碍物的距离减去一个小量
-                knockbackDistance = hit.distance - 0.1f;
-            }
-
-                // 启动退后协程
-                StartCoroutine(KnockbackRoutine(knockbackDirection));
-            }
+            // 启动击退状态协程
+            StartCoroutine(KnockbackStateRoutine());
         }
+        // 处理与其他击退状态的敌人的碰撞
+        else if (collision.gameObject.CompareTag("Enemy") && collision.gameObject.GetComponent<EnemyMovement>().isKnockedBack)
+        {
+            // 获取碰撞点
+            ContactPoint2D contact = collision.GetContact(0);
+            // 计算推开方向（从被击退敌人中心指向碰撞点）
+            Vector2 pushDirection = (contact.point - (Vector2)transform.position).normalized;
+            // 施加一个较小的推开力
+            float pushForce = knockbackBaseForce * 0.9f; // 使用基础击退力乘以系数
+            rb.AddForce(pushDirection * pushForce, ForceMode2D.Impulse);
+        }
+        
     }
 
-    private IEnumerator KnockbackRoutine(Vector2 direction)
+    private IEnumerator KnockbackStateRoutine()
     {
         isKnockedBack = true;
-        Vector2 startPosition = transform.position;
-        Vector2 knockbackPosition = startPosition + direction * knockbackDistance;
-
-        // 平滑退后
-        float elapsedTime = 0f;
-        while (elapsedTime < knockbackTime)
-        {
-            transform.position = Vector2.Lerp(startPosition, knockbackPosition, elapsedTime / knockbackTime);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-        transform.position = knockbackPosition;
-
+        // 等待击退时间
+        yield return new WaitForSeconds(knockbackTime);
+        // 原地缓冲
+        rb.velocity = Vector2.zero;
         // 缓冲时间
-        yield return new WaitForSeconds(bufferTime);
-
+        yield return new WaitForSeconds(bufferTime);        
         isKnockedBack = false;
     }
 
