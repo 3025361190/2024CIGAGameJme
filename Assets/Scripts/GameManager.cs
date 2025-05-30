@@ -287,9 +287,11 @@ public class GameManager : MonoBehaviour
 // TODO：https://docs.qq.com/smartsheet/DWGdycUdPSmN0cmJj?groupUin=9dK6NFNlciGjyOzFoy3%252FTQ%253D%253D&ADUIN=1754594226&ADSESSION=1748067384&ADTAG=CLIENT.QQ.6067_.0&ADPUBNO=27427&jumpuin=1754594226&tab=t00i2h&viewId=v2JKhc
 // TODO：强哥：炮台的health脚本
 // TODO：瑞：关卡结束的判断，是否通关应该由GameManager来判断
+// TODO：瑞：关卡计时
 // TODO：复活
 // TODO：每一关结束的结算界面和选buff界面（场景？）
 // TODO：强哥，炮台受伤闪白
 // TODO：各种buff的实现
 // TODO：项目改名
+// TODO：强。技能CD的可视化
 
