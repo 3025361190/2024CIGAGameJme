@@ -7,6 +7,7 @@
 绑定：
 1. 在场景中添加GameManager对象
 2. 绑定GameManager脚本
+3. 绑定plableNew对象，并绑定timeline
 */
 
 using System.Collections;
@@ -51,6 +52,11 @@ public class GameManager : MonoBehaviour
     private GameSettings gameSettings;
     public GameSettings GameSettings => gameSettings;
 
+    // 新手引导,绑定timeline
+    public GameObject plableNew;
+
+
+
     // global_config.json中的数据
     private int initialBulletCount; // 初始子弹数量
     // 当前子弹数量
@@ -58,6 +64,7 @@ public class GameManager : MonoBehaviour
 
     // 当前关卡，0为MainMenu
     public int currentLevel = 0;
+    
 
     private void Awake()
     {
@@ -75,6 +82,8 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameManager初始化");
         // 标记为切换场景时，不会被销毁的对象
         DontDestroyOnLoad(gameObject);
+
+        
 
         // 注册场景加载完成的事件监听，并绑定回调方法OnSceneLoaded
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
@@ -118,8 +127,17 @@ public class GameManager : MonoBehaviour
         if(scene.name == "level_scene" && currentLevel == 1 && playerData.isNewPlayer)
         {
             // TODO：瑞，播放新手教程
-            // ...
+            // 获取teachMgr物体
+            GameObject teachMgr = GameObject.Find("teachMgr");
+            if (teachMgr == null)
+            {
+                Debug.LogError("未找到teachMgr物体");
+            }
+            teachMgr.SetActive(true);
             // playerData.isNewPlayer在完成新手引导后，需要设置为false，然后调用SavePlayerData()保存
+            Debug.Log("完成新手引导");
+            playerData.isNewPlayer = false;
+            SavePlayerData();
         }
 
     }
