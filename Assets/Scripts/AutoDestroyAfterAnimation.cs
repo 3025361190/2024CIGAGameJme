@@ -2,49 +2,49 @@ using UnityEngine;
 
 public class AutoDestroyAfterAnimation : MonoBehaviour
 {
-    private Animator animator; // Animator×é¼şµÄÒıÓÃ
-    private Renderer renderer; // äÖÈ¾Æ÷×é¼şµÄÒıÓÃ
+    private Animator animator; // Animatorç»„ä»¶å¼•ç”¨
+    private new Renderer renderer; // æ¸²æŸ“å™¨ç»„ä»¶å¼•ç”¨
 
     void Start()
     {
-        animator = GetComponent<Animator>(); // »ñÈ¡Animator×é¼ş
-        renderer = GetComponent<Renderer>(); // »ñÈ¡Renderer×é¼ş
+        animator = GetComponent<Animator>(); // è·å–Animatorç»„ä»¶
+        renderer = GetComponent<Renderer>(); // è·å–Rendererç»„ä»¶
 
         if (animator == null)
         {
             Debug.LogError("No Animator component found on this GameObject.");
-            Destroy(gameObject); // Èç¹ûÃ»ÓĞAnimator×é¼ş£¬ÔòÖ±½ÓÏú»Ù¸Ã¶ÔÏó
+            Destroy(gameObject); // å¦‚æœæ²¡æœ‰Animatorç»„ä»¶ï¼Œç›´æ¥é”€æ¯è¿™ä¸ªæ¸¸æˆå¯¹è±¡
             return;
         }
 
-        // ¶©ÔÄ¶¯»­×´Ì¬»úµÄ¶¯»­²¥·ÅÍê³ÉÊÂ¼ş
+        // è·å–å½“å‰åŠ¨ç”»çŠ¶æ€çš„åŠ¨ç”»ä¿¡æ¯
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        float clipLength = stateInfo.length; // »ñÈ¡µ±Ç°¶¯»­Æ¬¶ÎµÄ³¤¶È
+        float clipLength = stateInfo.length; // è·å–å‰ä¸€å¸§åŠ¨ç”»ç‰‡æ®µçš„é•¿åº¦
 
-        Invoke("DestroyAfterAnimation", clipLength); // ÑÓ³ÙÏú»Ù
+        Invoke("DestroyAfterAnimation", clipLength); // å»¶è¿Ÿè°ƒç”¨
 
-        // Ëæ»ú¸Ä±äÑÕÉ«
+        // æ”¹å˜é¢œè‰²
         ChangeColorRandomly();
     }
 
     void DestroyAfterAnimation()
     {
-        Destroy(gameObject); // Ïú»ÙÔ¤ÖÆÌå¶ÔÏó
+        Destroy(gameObject); // é¢„å…ˆé”€æ¯è¿™ä¸ªæ¸¸æˆå¯¹è±¡
     }
 
     void ChangeColorRandomly()
     {
         if (renderer != null && renderer.material != null)
         {
-            // Éú³ÉËæ»úÇ³É«
-            float h = Random.Range(0f, 1f); // Ëæ»úÉ«µ÷
-            float s = Random.Range(0.3f, 0.7f); // Ëæ»ú±¥ºÍ¶È£¨½ÏµÍµÄÖµ»á¸ü½Ó½ü»ÒÉ«£©
-            float v = Random.Range(0.7f, 1f); // Ëæ»úÁÁ¶È£¨½Ï¸ßµÄÖµ»á¸ü½Ó½ü°×É«£©
+            // éšæœºç”Ÿæˆé¢œè‰²
+            float h = Random.Range(0f, 1f); // è‰²ç›¸
+            float s = Random.Range(0.3f, 0.7f); // é¥±å’Œåº¦ï¼Œå–å€¼è¶Šä½è¶Šæ¥è¿‘ç°è‰²
+            float v = Random.Range(0.7f, 1f); // äº®åº¦ï¼Œå–å€¼è¶Šé«˜è¶Šæ¥è¿‘ç™½è‰²
 
-            // ×ª»»HSVµ½RGB
+            // å°†HSVè½¬æ¢ä¸ºRGB
             Color randomColor = Color.HSVToRGB(h, s, v);
 
-            // ÉèÖÃäÖÈ¾Æ÷²ÄÖÊµÄÑÕÉ«
+            // å°†æ¸²æŸ“å™¨æè´¨çš„é¢œè‰²æ”¹ä¸ºéšæœºé¢œè‰²
             renderer.material.color = randomColor;
         }
         else

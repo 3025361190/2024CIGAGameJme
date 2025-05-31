@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
 
     // global_config.json中的数据
     private int initialBulletCount; // 初始子弹数量
+    private int initialHealth; // 初始生命值
 
 
     // 计时器,每次加载完场景后代码绑定level_scene中的timer物体中的Timer脚本
@@ -62,6 +63,8 @@ public class GameManager : MonoBehaviour
 
     // 当前子弹数量
     public int currentBulletCount;
+    // 当前生命值
+    public int currentHealth;
     // 当前关卡，0为MainMenu
     public int currentLevel = 0;
 
@@ -181,7 +184,7 @@ public class GameManager : MonoBehaviour
     // 加载全部静态游戏数据
     private void LoadStaticGameData()
     {
-        Debug.Log("开始加载静态游戏数据...");
+        // Debug.Log("开始加载静态游戏数据...");
         
         // 加载玩家数据
         string playerDataPath = System.IO.Path.Combine(saveDataPath, "player_data.json");
@@ -217,7 +220,7 @@ public class GameManager : MonoBehaviour
         }
 
         // 加载levels_config.json
-        Debug.Log("加载关卡配置...");
+        // Debug.Log("加载关卡配置...");
         try
         {
             levelList = JsonLoader.LoadJsonAsJObject("StaticData/levels_config")["levels"].ToObject<List<levelConfig>>();
@@ -229,7 +232,6 @@ public class GameManager : MonoBehaviour
         }
 
         // 加载global_config.json
-        Debug.Log("加载全局配置...");
         var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
         if (globalConfig != null)
         {   
@@ -237,12 +239,13 @@ public class GameManager : MonoBehaviour
             try
             {
                 initialBulletCount = globalConfig["initialBulletCount"].ToObject<int>();
+                initialHealth = globalConfig["initialHealth"].ToObject<int>();
             }
             catch (System.Exception e)
             {
                 Debug.LogError($"读取初始子弹数量失败: {e.Message}");
             }
-            Debug.Log($"全局配置加载完成: 初始子弹={initialBulletCount}");
+            Debug.Log("全局配置加载完成");
         }
         else
         {
@@ -256,7 +259,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("初始化游戏数据...");
         // 初始化子弹数量
         currentBulletCount = initialBulletCount;
-        Debug.Log($"初始化完成: 当前子弹数量={currentBulletCount}");
+        // 初始化生命值
+        currentHealth = initialHealth;
+        Debug.Log($"初始化完成: 当前子弹数量={currentBulletCount}, 当前生命值={currentHealth}");
     }
 
     // 保存玩家数据
@@ -368,7 +373,7 @@ public class GameManager : MonoBehaviour
     // 判断关卡是否结束
     public void IsLevelEnd()
     {
-        if((isAllEnemyDead && isAllBossDead) || isTimeOut)
+        if((isAllEnemyDead || isTimeOut) && isAllBossDead)
         {
             LevelSuccess();
         }
@@ -418,10 +423,7 @@ public class GameManager : MonoBehaviour
 
 // TODO：https://docs.qq.com/smartsheet/DWGdycUdPSmN0cmJj?groupUin=9dK6NFNlciGjyOzFoy3%252FTQ%253D%253D&ADUIN=1754594226&ADSESSION=1748067384&ADTAG=CLIENT.QQ.6067_.0&ADPUBNO=27427&jumpuin=1754594226&tab=t00i2h&viewId=v2JKhc
 // TODO：强哥：炮台的health脚本
-// TODO：瑞：关卡结束的判断，是否通关应该由GameManager来判断
-// TODO：瑞：关卡计时
 // TODO：复活
-// TODO：每一关结束的结算界面和选buff界面（场景？）
 // TODO：强哥，炮台受伤闪白
 // TODO：各种buff的实现
 // TODO：项目改名

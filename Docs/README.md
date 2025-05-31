@@ -22,6 +22,8 @@
   | 参数 | 说明 |
   | --- | --- |
   | `initialBulletCount` | 初始子弹数量 |
+  | `initialHealth` | int | 玩家初始生命值 |
+  | `maxMoveSpeed` | float | 玩家最大移动速度 |
 
 ### 3. `buffs_config.json` ：
   | 属性 | 类型 | 说明 |

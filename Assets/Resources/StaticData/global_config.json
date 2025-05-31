@@ -1,3 +1,5 @@
 {
-    "initialBulletCount" : 60
+    "initialBulletCount" : 60,
+    "initialHealth" : 100,
+    "maxMoveSpeed" : 5
 }

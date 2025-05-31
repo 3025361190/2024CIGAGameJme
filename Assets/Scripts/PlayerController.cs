@@ -17,16 +17,16 @@ using Newtonsoft.Json.Linq;
 
 public class PlayerController : MonoBehaviour
 {
-    public FixedJoystick joystick;            // 移动摇杆
-    private Vector2 moveDirection;
-    public FixedJoystick shootJoystick;       // 射击摇杆
-    private Vector2 shootDirection;
-    public GameObject bulletPrefab;            // 子弹预制体
-    public float moveSpeed = 5f;
-    public float bulletSpeed;           // 子弹速度
-    public float fireRate;             // 射击间隔
-    public float normalFireRate;
-    public int bulletCountInScreen = 0;    //屏幕中存在的子弹数量
+    public FixedJoystick joystick;              // 移动摇杆
+    // private Vector2 moveDirection;
+    public FixedJoystick shootJoystick;         // 射击摇杆
+    // private Vector2 shootDirection;
+    public GameObject bulletPrefab;             // 子弹预制体
+    public float moveSpeed;                     // 移动速度
+    public float bulletSpeed;                   // 子弹速度
+    public float fireRate;                      // 射击间隔
+    public float normalFireRate;                // 正常射击间隔
+    public int bulletCountInScreen = 0;         //屏幕中存在的子弹数量
     
 
     // 狂暴模式相关
@@ -88,21 +88,23 @@ public class PlayerController : MonoBehaviour
         rageThreshold = rageConfig["rageThreshold"].ToObject<float>();
         rageDuration = rageConfig["rageDuration"].ToObject<float>();
         rageActivateTime = rageConfig["rageActivateTime"].ToObject<float>();
+        var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
+        moveSpeed = globalConfig["maxMoveSpeed"].ToObject<float>();
     }
 
     void FixedUpdate()
     {
 
-        moveDirection = new Vector2(joystick.Horizontal, joystick.Vertical);
-        shootDirection = new Vector2(shootJoystick.Horizontal, shootJoystick.Vertical);
+        // moveDirection = new Vector2(joystick.Horizontal, joystick.Vertical);
+        // shootDirection = new Vector2(shootJoystick.Horizontal, shootJoystick.Vertical);
 
-        if (shootDirection != Vector2.zero)
-        {
-            //RotatePlayer(shootDirection.x, shootDirection.y);
-        }else if(moveDirection != Vector2.zero)
-        {
-            //RotatePlayer(moveDirection.x, moveDirection.y);
-        }
+        // if (shootDirection != Vector2.zero)
+        // {
+        //     //RotatePlayer(shootDirection.x, shootDirection.y);
+        // }else if(moveDirection != Vector2.zero)
+        // {
+        //     //RotatePlayer(moveDirection.x, moveDirection.y);
+        // }
         
         if(isRageActive)
         {
@@ -151,27 +153,30 @@ public class PlayerController : MonoBehaviour
         float horizontal = joystick.Horizontal;
         float vertical = joystick.Vertical;
 
+        float fixedHorizontal = horizontal;
+        float fixedVertical = vertical;
+
         
         // 设置x边界
         if(transform.position.x <= -8.2f)
         {
-            horizontal = Mathf.Max(horizontal, 0);
+            fixedHorizontal = Mathf.Max(horizontal, 0);
         }
         else if(transform.position.x >= 8.3f)
         {
-            horizontal = Mathf.Min(horizontal, 0);
+            fixedHorizontal = Mathf.Min(horizontal, 0);
         }
         // 设置y边界
         if(transform.position.y <= -4.3f)
         {
-            vertical = Mathf.Max(vertical, 0);
+            fixedVertical = Mathf.Max(vertical, 0);
         }
         else if(transform.position.y >= 4.3f)
         {
-            vertical = Mathf.Min(vertical, 0);
+            fixedVertical = Mathf.Min(vertical, 0);
         }
 
-        Vector2 movement = new Vector2(horizontal, vertical);
+        Vector2 movement = new(fixedHorizontal, fixedVertical);
         rb.velocity = movement * moveSpeed;
         if (horizontal != 0 || vertical != 0)
         {
