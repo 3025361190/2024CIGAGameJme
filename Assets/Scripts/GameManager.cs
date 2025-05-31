@@ -370,12 +370,35 @@ public class GameManager : MonoBehaviour
     {
         if((isAllEnemyDead && isAllBossDead) || isTimeOut)
         {
-            NextLevel();
+            LevelSuccess();
         }
         // TODO: 失败结算
     }
 
+    // 关卡成功结束
+    public void LevelSuccess()
+    {
+        // 当前场景如果是白汤，则先主动调用回收子弹
+        SkillButton skillButton = GameObject.Find("skillButton").GetComponent<SkillButton>();
+        if(skillButton.currentSceneType == SceneType.QingTang)
+        {
+            skillButton.SwitchSceneType();
+            // TODO: 应该先进入选buff界面
+            // 等待1秒后，再调用NextLevel
+            Invoke(nameof(NextLevel), 1.5f);
+        }
+        else
+        {
+            // TODO: 应该先进入选buff界面
+            NextLevel();
+        }
+    }
 
+    // 关卡失败结束
+    public void LevelFail()
+    {
+        // TODO: 进入结算界面
+    }
 
     // Start is called before the first frame update
     void Start()

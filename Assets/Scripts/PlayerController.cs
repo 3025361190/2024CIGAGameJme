@@ -151,24 +151,45 @@ public class PlayerController : MonoBehaviour
         float horizontal = joystick.Horizontal;
         float vertical = joystick.Vertical;
 
+        
+        // 设置x边界
+        if(transform.position.x <= -8.2f)
+        {
+            horizontal = Mathf.Max(horizontal, 0);
+        }
+        else if(transform.position.x >= 8.3f)
+        {
+            horizontal = Mathf.Min(horizontal, 0);
+        }
+        // 设置y边界
+        if(transform.position.y <= -4.3f)
+        {
+            vertical = Mathf.Max(vertical, 0);
+        }
+        else if(transform.position.y >= 4.3f)
+        {
+            vertical = Mathf.Min(vertical, 0);
+        }
+
         Vector2 movement = new Vector2(horizontal, vertical);
         rb.velocity = movement * moveSpeed;
-
-        if (horizontal != 0)
+        if (horizontal != 0 || vertical != 0)
         {
-            spriteRenderer.flipX = horizontal < 0;
+            RotatePlayer(horizontal, vertical);
         }
+
+        // if (horizontal != 0)
+        // {
+        //     spriteRenderer.flipX = horizontal < 0;
+        // }
     }
 
     // 处理射击逻辑
     private void HandleShooting()
     {
-        float movehorizontal = joystick.Horizontal;
-        float movevertical = joystick.Vertical;
-        if (movehorizontal != 0 || movevertical != 0)
-        {
-            RotatePlayer(movehorizontal, movevertical);
-        }
+        // float movehorizontal = joystick.Horizontal;
+        // float movevertical = joystick.Vertical;
+        
 
         float shootHorizontal = shootJoystick.Horizontal;
         float shootVertical = shootJoystick.Vertical;

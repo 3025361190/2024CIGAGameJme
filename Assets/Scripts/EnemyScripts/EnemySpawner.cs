@@ -91,7 +91,7 @@ public class EnemySpawner : MonoBehaviour
     {
         // 间隔时间生成敌人
         timer += Time.deltaTime;
-        if (timer >= spawnInterval && enemyCount <= maxEnemyCount)
+        if (timer >= spawnInterval && enemyCount < maxEnemyCount)
         {
             SpawnEnemy();
             timer = 0.0f;
