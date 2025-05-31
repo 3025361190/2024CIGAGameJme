@@ -57,11 +57,14 @@ public class Enemy : MonoBehaviour
     // 碰撞检测,当敌人碰撞到Turret时触发,造成伤害
     public void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.CompareTag("Turret"))
+        {
+            // Debug.Log("Enemy hit Turret but not damage");
+        }
         if (collision.gameObject.CompareTag("Turret") && canTakeDamage)
         {
-            // TODO: 瑞，修改为对炮台的攻击,等炮台的health逻辑写完
-            // collision.gameObject.GetComponent<TurretHealth>().TakeDamage(damage);
-            // Debug.Log("Enemy hit Turret");
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+            // Debug.Log("Enemy hit Turret and damage");
             StartCoroutine(CollisionCooldown());  // 开始冷却协程,防止短时间内多次造成伤害
         }
     }

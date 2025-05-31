@@ -1,12 +1,9 @@
-// TODO:强，补充文件描述
 /*
 文件名：PlayerController.cs
 编辑人：没道理啊
 文件描述：玩家控制脚本,挂载在玩家预制体上,用于控制玩家移动和射击
 组件依赖：Rigidbody2D, SpriteRenderer, Collider2D, TrailRenderer,?????
 rigidbody2d组件需要设置为Kinematic
-绑定：
-??????
 */
 
 using UnityEngine;

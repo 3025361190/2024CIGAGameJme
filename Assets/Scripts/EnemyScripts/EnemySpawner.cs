@@ -31,18 +31,16 @@ public class EnemySpawner : MonoBehaviour
     private float timer = 0.0f;             // 计时器
     // public float radius = 8.0f;              // 圆的半径
     // 预定义的生成点
-    public Vector2[] spawnPoints = new Vector2[]
+    private readonly Vector2[] spawnPoints = new Vector2[]
     {
-        new(-5, -10),
-        new(5, 10),
-        new(-5, 10),
-        new(5, -10),
-        new(0, -5),
-        new(0, 5),
-        new(-10, 0),
-        new(10, 0),
-        new(0, 10),
-        new(0, -10)  
+        new(-10, -5),    // 左下
+        new(10, -5),     // 右下
+        new(-10, 5),     // 左上
+        new(10, 5),      // 右上
+        new(-10, 0),    // 左中
+        new(10, 0),     // 右中
+        new(0, -6),    // 下中
+        new(0, 6)      // 上中
     };       
 
     private List<GameObject> enemyList = new();    // 用于注册enemy实例
@@ -179,7 +177,20 @@ public class EnemySpawner : MonoBehaviour
     //     return new Vector2(x, y);
     // }
 
-
-    
-    
+    // 在Scene视图中绘制生成点
+    void OnDrawGizmos()
+    {
+        
+        // 绘制所有生成点
+        foreach (Vector2 point in spawnPoints)
+        {
+            Gizmos.color = new Color(0f, 0.5f, 0f, 0.5f); // 半透明的绿色
+            // 绘制一个实心球体表示生成点
+            Gizmos.DrawSphere(point, 0.3f);
+            // 在Scene视图中显示坐标值
+            #if UNITY_EDITOR
+            UnityEditor.Handles.Label(point, $"({point.x}, {point.y})");
+            #endif
+        }
+    }
 }

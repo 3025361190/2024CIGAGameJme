@@ -299,9 +299,16 @@ public class GameManager : MonoBehaviour
         Debug.Log($"尝试跳转到关卡 {level}");
         
         // 检查关卡是否有效
-        if (level < 0 || level > levelList.Count)
+        if (level < 0 )
         {
             Debug.LogError($"无效的关卡编号: {level}");
+            return;
+        }
+        if (level > levelList.Count)
+        {
+            Debug.LogWarning("成功通关所有关卡！");
+            // TODO: 进入通关结算界面
+            RestartGame();
             return;
         }
         
@@ -318,6 +325,7 @@ public class GameManager : MonoBehaviour
         // 重置关卡相关数据
         isAllEnemyDead = false;
         isAllBossDead = false;
+        enemyTypeDeadCount = 0;
         if(currentLevelConfig.isBoss == 0)
         {
             isAllBossDead = true;
@@ -339,7 +347,6 @@ public class GameManager : MonoBehaviour
     // 跳转至下一关
     public void NextLevel()
     {
-        enemyTypeDeadCount = 0;
         JumpToLevel(currentLevel + 1);
     }
 
@@ -353,10 +360,17 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    // 重新开始
+    public void RestartGame(){
+        JumpToLevel(0);
+        // 重新初始化动态游戏数据
+        InitializeGameData();
+    }
+
     // 在应用退出时保存数据
     private void OnApplicationQuit()
     {
-        Debug.Log("游戏退出，保存所有数据");
+        Debug.LogWarning("游戏退出，保存所有数据");
         SaveAllData();
     }
 
@@ -373,18 +387,42 @@ public class GameManager : MonoBehaviour
     // 判断关卡是否结束
     public void IsLevelEnd()
     {
-        if((isAllEnemyDead || isTimeOut) && isAllBossDead)
+        // boss全死，且当前生命值大于0时，时间结束或敌人全死即关卡成功
+        if((isAllEnemyDead || isTimeOut) && isAllBossDead && currentHealth > 0)
         {
             LevelSuccess();
         }
-        // TODO: 失败结算
+        // 当前生命值小于0时，关卡失败
+        else if(currentHealth <= 0)
+        {
+            LevelFail();
+        }
+        // 时间结束，且boss未死，关卡失败
+        else if(isTimeOut && !isAllBossDead)
+        {
+            LevelFail();
+        }
     }
 
     // 关卡成功结束
     public void LevelSuccess()
     {
+        Debug.LogWarning("关卡成功");
         // 当前场景如果是白汤，则先主动调用回收子弹
-        SkillButton skillButton = GameObject.Find("skillButton").GetComponent<SkillButton>();
+        GameObject skillButtonObj = GameObject.Find("SkillButton");
+        if (skillButtonObj == null)
+        {
+            Debug.LogError("未找到skillButton对象！");
+            return;
+        }
+        
+        SkillButton skillButton = skillButtonObj.GetComponent<SkillButton>();
+        if (skillButton == null)
+        {
+            Debug.LogError("skillButton对象上未找到SkillButton组件！");
+            return;
+        }
+        
         if(skillButton.currentSceneType == SceneType.QingTang)
         {
             skillButton.SwitchSceneType();
@@ -402,7 +440,9 @@ public class GameManager : MonoBehaviour
     // 关卡失败结束
     public void LevelFail()
     {
-        // TODO: 进入结算界面
+        Debug.LogWarning("关卡失败");
+        // TODO: 进入失败结算界面
+        RestartGame();
     }
 
     // Start is called before the first frame update
@@ -422,9 +462,8 @@ public class GameManager : MonoBehaviour
 
 
 // TODO：https://docs.qq.com/smartsheet/DWGdycUdPSmN0cmJj?groupUin=9dK6NFNlciGjyOzFoy3%252FTQ%253D%253D&ADUIN=1754594226&ADSESSION=1748067384&ADTAG=CLIENT.QQ.6067_.0&ADPUBNO=27427&jumpuin=1754594226&tab=t00i2h&viewId=v2JKhc
-// TODO：强哥：炮台的health脚本
 // TODO：复活
-// TODO：强哥，炮台受伤闪白
+
 // TODO：各种buff的实现
 // TODO：项目改名
 // TODO：强。技能CD的可视化

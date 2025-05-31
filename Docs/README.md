@@ -24,6 +24,7 @@
   | `initialBulletCount` | 初始子弹数量 |
   | `initialHealth` | int | 玩家初始生命值 |
   | `maxMoveSpeed` | float | 玩家最大移动速度 |
+  | `flashDuration` | float | 玩家受伤闪烁持续时间 |
 
 ### 3. `buffs_config.json` ：
   | 属性 | 类型 | 说明 |
