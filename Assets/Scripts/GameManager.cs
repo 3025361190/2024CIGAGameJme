@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
         {
             if (instance == null)
             {
-                GameObject go = new GameObject("GameManager");
+                GameObject go = new GameObject("GameManagerCreatedInDynamic");
                 instance = go.AddComponent<GameManager>();
                 DontDestroyOnLoad(go);
             }
@@ -68,11 +68,16 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        // Debug.Log($"[GameManager] 挂载在对象: {gameObject.name}");
+
 
         instance = this;
         Debug.Log("GameManager初始化");
         // 标记为切换场景时，不会被销毁的对象
         DontDestroyOnLoad(gameObject);
+
+        // 注册场景加载完成的事件监听，并绑定回调方法OnSceneLoaded
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
 
         // 初始化终端设备数据路径
         InitializePaths();
@@ -85,6 +90,40 @@ public class GameManager : MonoBehaviour
         
         Debug.Log("GameManager初始化完成");
     }
+
+    // 每次场景加载完成时，都会执行的回调方法
+    private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
+    {
+        Debug.Log($"场景 {scene.name} 加载完成");
+        // TODO：瑞，为场景中的对象赋值（如levelconfig中的参数）
+        // 为场景中的EnemySpawner对象赋值
+        if(scene.name == "level_scene")
+        {
+            // 获取EnemySpawner对象
+            EnemySpawner[] enemySpawners = GameObject.Find("EnemySpawnerObject").GetComponents<EnemySpawner>();
+            if(enemySpawners.Length == 0)
+            {
+                Debug.LogError("未找到EnemySpawner对象");
+                return;
+            }
+            // 将敌人数量平均分配给每个EnemySpawner
+            foreach (var enemySpawner in enemySpawners)
+            {
+                enemySpawner.maxEnemyCount = currentLevelConfig.monsNum/enemySpawners.Length;
+            }
+        }
+        // ...
+
+        // 如果场景是level_scene，level为1,，且isNewPlayer为true，则播放新手教程
+        if(scene.name == "level_scene" && currentLevel == 1 && playerData.isNewPlayer)
+        {
+            // TODO：瑞，播放新手教程
+            // ...
+            // playerData.isNewPlayer在完成新手引导后，需要设置为false，然后调用SavePlayerData()保存
+        }
+
+    }
+    
 
     // 初始化数据路径
     private void InitializePaths()
@@ -205,7 +244,7 @@ public class GameManager : MonoBehaviour
     }
 
     // 设置当前关卡的配置
-    public void setCurrentLevelConfig(int level)
+    public void SetCurrentLevelConfig(int level)
     {
         // 根据level获取当前关卡的配置
         // 获取当前关卡的配置
@@ -213,7 +252,7 @@ public class GameManager : MonoBehaviour
     }
 
     // 跳转至指定关卡
-    public void jumpToLevel(int level)
+    public void JumpToLevel(int level)
     {
         Debug.Log($"尝试跳转到关卡 {level}");
         
@@ -231,6 +270,9 @@ public class GameManager : MonoBehaviour
         // 保存当前数据
         SaveAllData();
         
+        SetCurrentLevelConfig(level);
+        Debug.Log($"关卡 {level} 配置已设置");
+
         // 加载场景
         if(level == 0)
         {
@@ -240,14 +282,13 @@ public class GameManager : MonoBehaviour
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("level_scene");
         }
-        setCurrentLevelConfig(level);
-        Debug.Log($"关卡 {level} 配置已设置");
+        
     }
 
     // 跳转至下一关
-    public void nextLevel()
+    public void NextLevel()
     {
-        jumpToLevel(currentLevel + 1);
+        JumpToLevel(currentLevel + 1);
     }
 
     // 游戏暂停
@@ -281,7 +322,6 @@ public class GameManager : MonoBehaviour
 }
 
 
-// TODO: 瑞，新手教程。playerData.isNewPlayer在完成新手引导后，需要设置为false
 
 
 // TODO：https://docs.qq.com/smartsheet/DWGdycUdPSmN0cmJj?groupUin=9dK6NFNlciGjyOzFoy3%252FTQ%253D%253D&ADUIN=1754594226&ADSESSION=1748067384&ADTAG=CLIENT.QQ.6067_.0&ADPUBNO=27427&jumpuin=1754594226&tab=t00i2h&viewId=v2JKhc
