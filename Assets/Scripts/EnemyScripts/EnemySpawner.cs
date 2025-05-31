@@ -82,6 +82,7 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.LogError("加载敌人生成配置失败！");
         }
+        Debug.Log($"将会生成 {maxEnemyCount}个{enemyPrefab.name}");
     }
 
 
@@ -150,7 +151,7 @@ public class EnemySpawner : MonoBehaviour
             if(enemyList.Count == 0 && enemyCount >= maxEnemyCount)
             {
                 // 该类敌人已全部死亡
-                // TODO：瑞，达成关卡结束条件之一，是否通关应该由GameManager来判断
+                GameManager.Instance.AKindOfEnemyAllDead();
             }
         }
         else
@@ -158,6 +159,7 @@ public class EnemySpawner : MonoBehaviour
             // 因为我在同一个EnemySpawnerObject中添加了多个EnemySpawner.cs脚本，分别生成蔬菜哥和敌人
             // 调用remove时直接暴力的都调用了，所以需要判断是否包含enemy
             // Debug.Log("未找到匹配的enemy");
+            return;
         }
     }
 
@@ -178,6 +180,6 @@ public class EnemySpawner : MonoBehaviour
     // }
 
 
-    // TODO: 瑞，维护enemyList的时候同时维护一个计数器，当计数器达到一定数量时，不再生成敌人。然后当list被清空时，达成关卡结束条件之一，是否通关应该由GameManager来判断
+    
     
 }

@@ -7,7 +7,6 @@
 绑定：
 1. 在场景中添加GameManager对象
 2. 绑定GameManager脚本
-3. 绑定plableNew对象，并绑定timeline
 */
 
 using System.Collections;
@@ -43,7 +42,7 @@ public class GameManager : MonoBehaviour
     // 关卡列表
     private List<levelConfig> levelList;
     // 当前关卡的配置
-    private levelConfig currentLevelConfig;
+    public levelConfig currentLevelConfig;
     
     // 玩家数据
     private PlayerData playerData;
@@ -53,19 +52,31 @@ public class GameManager : MonoBehaviour
     private GameSettings gameSettings;
     public GameSettings GameSettings => gameSettings;
 
-    // 新手引导,绑定timeline
-    public GameObject plableNew;
-
-
 
     // global_config.json中的数据
     private int initialBulletCount; // 初始子弹数量
+
+
+    // 计时器,每次加载完场景后代码绑定level_scene中的timer物体中的Timer脚本
+    private Timer timer;
+
     // 当前子弹数量
     public int currentBulletCount;
-
     // 当前关卡，0为MainMenu
     public int currentLevel = 0;
-    
+
+
+    // 敌人总类总数
+    public int enemyTypeTotalCount;
+    // 已消灭的敌人种类数量
+    public int enemyTypeDeadCount;
+    // 当前关卡敌人是否全部消灭
+    public bool isAllEnemyDead = false;
+    // 当前关卡boss是否全部消灭
+    public bool isAllBossDead = false;
+    // 当前关卡计时是否结束
+    public bool isTimeOut = false;
+
 
     private void Awake()
     {
@@ -105,12 +116,12 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
     {
         Debug.Log($"场景 {scene.name} 加载完成");
-        // TODO：瑞，为场景中的对象赋值（如levelconfig中的参数）
-        // 为场景中的EnemySpawner对象赋值
+        // 每个关卡加载后的初始化
         if(scene.name == "level_scene")
         {
             // 获取EnemySpawner对象
             EnemySpawner[] enemySpawners = GameObject.Find("EnemySpawnerObject").GetComponents<EnemySpawner>();
+            enemyTypeTotalCount = enemySpawners.Length;
             if(enemySpawners == null)
             {
                 Debug.LogError("未找到EnemySpawner对象");
@@ -119,16 +130,16 @@ public class GameManager : MonoBehaviour
             // 将敌人数量平均分配给每个EnemySpawner
             foreach (var enemySpawner in enemySpawners)
             {
-                enemySpawner.maxEnemyCount = currentLevelConfig.monsNum/enemySpawners.Length;
+                enemySpawner.maxEnemyCount = currentLevelConfig.monsNum/enemyTypeTotalCount;
             }
+            // 绑定计时器
+            timer = GameObject.Find("timer").GetComponent<Timer>();
         }
-        // ...
 
         // 如果场景是level_scene，level为1,，且isNewPlayer为true，则播放新手教程
         if(scene.name == "level_scene" && currentLevel == 1 && playerData.isNewPlayer)
         {
             // Debug.Log("进入新手引导");
-            // TODO：瑞，播放新手教程
             // 获取teachMgr物体
             GameObject teach = GameObject.Find("teach");
             if (teach == null)
@@ -297,7 +308,16 @@ public class GameManager : MonoBehaviour
         SaveAllData();
         
         SetCurrentLevelConfig(level);
-        Debug.Log($"关卡 {level} 配置已设置");
+        // Debug.Log($"关卡 {level} 配置已设置");
+
+        // 重置关卡相关数据
+        isAllEnemyDead = false;
+        isAllBossDead = false;
+        if(currentLevelConfig.isBoss == 0)
+        {
+            isAllBossDead = true;
+        }
+        isTimeOut = false;
 
         // 加载场景
         if(level == 0)
@@ -314,6 +334,7 @@ public class GameManager : MonoBehaviour
     // 跳转至下一关
     public void NextLevel()
     {
+        enemyTypeDeadCount = 0;
         JumpToLevel(currentLevel + 1);
     }
 
@@ -334,6 +355,28 @@ public class GameManager : MonoBehaviour
         SaveAllData();
     }
 
+    // 计算以消灭的敌人比例
+    public void AKindOfEnemyAllDead()
+    {
+        enemyTypeDeadCount++;
+        if(enemyTypeDeadCount >= enemyTypeTotalCount)
+        {
+            isAllEnemyDead = true;
+        }
+    }
+
+    // 判断关卡是否结束
+    public void IsLevelEnd()
+    {
+        if((isAllEnemyDead && isAllBossDead) || isTimeOut)
+        {
+            NextLevel();
+        }
+        // TODO: 失败结算
+    }
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -343,7 +386,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        IsLevelEnd();
     }
 }
 
