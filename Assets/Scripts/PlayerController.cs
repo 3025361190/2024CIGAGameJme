@@ -331,7 +331,7 @@ public class PlayerController : MonoBehaviour
         rageTimer = 0.0f;
     }
 
-    // TODO：控制子弹分裂次数（不写了.................）
+    // 控制子弹分裂次数（不写了.................）
     
      // 新手教程相关（2）
      void NewMountSmall()
