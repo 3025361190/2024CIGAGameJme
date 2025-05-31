@@ -26,6 +26,7 @@ public class EnemySpawner : MonoBehaviour
     public float chainExplosionRange;       // 连锁爆炸范围
     public float chainExplosionDelay;       // 连锁爆炸延迟
     public float chainKnockbackForceMultiplier;           // 连锁击退的力系数
+    public int maxEnemyCount;                // 最大敌人数量
 
     private float timer = 0.0f;             // 计时器
     // public float radius = 8.0f;              // 圆的半径
@@ -45,6 +46,7 @@ public class EnemySpawner : MonoBehaviour
     };       
 
     private List<GameObject> enemyList = new();    // 用于注册enemy实例
+    private int enemyCount = 0;                   // 敌人数量计数器
 
 
     // 初始化
@@ -88,7 +90,7 @@ public class EnemySpawner : MonoBehaviour
     {
         // 间隔时间生成敌人
         timer += Time.deltaTime;
-        if (timer >= spawnInterval)
+        if (timer >= spawnInterval && enemyCount <= maxEnemyCount)
         {
             SpawnEnemy();
             timer = 0.0f;
@@ -108,10 +110,10 @@ public class EnemySpawner : MonoBehaviour
             Debug.Log("未找到instantiate");
         }
         // 获取EnemyMovement组件
-        EnemyMovement enemyMovement = instantiate.GetComponent<EnemyMovement>();
-        if(enemyMovement == null)
+        if (!instantiate.TryGetComponent<EnemyMovement>(out EnemyMovement enemyMovement))
         {
             Debug.Log("未找到EnemyMovement组件");
+            return;
         }
         // 赋值给EnemyMovement组件中的成员
         enemyMovement.moveSpeed = moveSpeed;
@@ -123,10 +125,10 @@ public class EnemySpawner : MonoBehaviour
         enemyMovement.chainKnockbackForceMultiplier = chainKnockbackForceMultiplier;
 
         // 获取Enemy组件
-        Enemy enemy = instantiate.GetComponent<Enemy>();
-        if(enemy == null)
+        if (!instantiate.TryGetComponent<Enemy>(out Enemy enemy))
         {
             Debug.Log("未找到Enemy组件");
+            return;
         }
         // 赋值给Enemy组件中的成员
         enemy.damage = damage;
@@ -135,12 +137,28 @@ public class EnemySpawner : MonoBehaviour
         enemy.chainExplosionDelay = chainExplosionDelay;
 
         enemyList.Add(instantiate);
+        enemyCount++;
     }
 
     // 注销enemy实例
     public void RemoveEnemy(GameObject enemy)
     {
-        enemyList.Remove(enemy);
+        // 如果enemyList中包含enemy，则移除
+        if(enemyList.Contains(enemy))
+        {
+            enemyList.Remove(enemy);
+            if(enemyList.Count == 0 && enemyCount >= maxEnemyCount)
+            {
+                // 该类敌人已全部死亡
+                // TODO：瑞，达成关卡结束条件之一，是否通关应该由GameManager来判断
+            }
+        }
+        else
+        {
+            // 因为我在同一个EnemySpawnerObject中添加了多个EnemySpawner.cs脚本，分别生成蔬菜哥和敌人
+            // 调用remove时直接暴力的都调用了，所以需要判断是否包含enemy
+            Debug.Log("未找到匹配的enemy");
+        }
     }
 
     // // 生成一个随机位置,在一个半径为r的圆外

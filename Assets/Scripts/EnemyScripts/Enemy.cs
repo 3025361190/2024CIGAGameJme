@@ -67,8 +67,10 @@ public class Enemy : MonoBehaviour
     }
 
     // 敌人死亡和注销
-    public void Die()
+    // deadType: 0-正常死亡, 1-连锁死亡
+    public void Die(int deadType = 0)
     {
+        // TODO：瑞，连锁死亡时，需要播放连锁死亡的特效
         Vector3 currentPosition = transform.position; // 使用 transform.position 获取当前对象的位置
         GameObject newPrefabInstance = Instantiate(baozha, currentPosition, Quaternion.identity);
 
@@ -76,10 +78,12 @@ public class Enemy : MonoBehaviour
         GameObject spawnerObject = GameObject.Find("EnemySpawnerObject");
         if (spawnerObject != null)
         {
-            EnemySpawner enemySpawner = spawnerObject.GetComponent<EnemySpawner>();
-            if (enemySpawner != null)
+            EnemySpawner[] enemySpawners = spawnerObject.GetComponents<EnemySpawner>();
+            foreach (var enemySpawner in enemySpawners)
             {
-                enemySpawner.RemoveEnemy(gameObject); // 将当前敌人移除
+                // 暴力遍历所有EnemySpawner，并调用RemoveEnemy方法，在Remove中判断是否包含当前敌人
+                // 瑞，这里可以优化，因为我在同一个EnemySpawnerObject中添加了多个EnemySpawner.cs脚本，分别生成蔬菜哥和敌人
+                enemySpawner.RemoveEnemy(gameObject);
             }
         }
 
@@ -137,7 +141,7 @@ public class Enemy : MonoBehaviour
         // 检查对象是否还存在
         if (gameObject != null)
         {
-            Die();
+            Die(1);
         }
     }
 

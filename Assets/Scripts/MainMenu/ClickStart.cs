@@ -20,7 +20,7 @@ public class ClickStart : MonoBehaviour, IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log($"开始按钮初始化: {gameObject.name}");
+        // Debug.Log($"开始按钮初始化: {gameObject.name}");
         
         // 检查是否在Canvas下
         Canvas parentCanvas = GetComponentInParent<Canvas>();
@@ -37,7 +37,7 @@ public class ClickStart : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            Debug.Log($"按钮raycastTarget状态: {image.raycastTarget}");
+            // Debug.Log($"按钮raycastTarget状态: {image.raycastTarget}");
         }
 
         // 检查EventSystem
@@ -56,13 +56,13 @@ public class ClickStart : MonoBehaviour, IPointerClickHandler
     // 处理点击事件
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log($"OnPointerClick被触发 - 点击位置: ({eventData.position.x}, {eventData.position.y})");
+        // Debug.Log($"OnPointerClick被触发 - 点击位置: ({eventData.position.x}, {eventData.position.y})");
         
         // 检查GameManager是否存在
         if (GameManager.Instance != null)
         {
-            Debug.Log("调用GameManager跳转到第一关");
-            GameManager.Instance.jumpToLevel(1);
+            // Debug.Log("调用GameManager跳转到第一关");
+            GameManager.Instance.JumpToLevel(1);
         }
         else
         {

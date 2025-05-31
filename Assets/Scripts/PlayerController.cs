@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         skillButton = GameObject.Find("SkillButton");
         spriteRenderer = GetComponent<SpriteRenderer>();
-        UpdateBulletCount();     
+        // UpdateBulletCount();     
         currentBulletPosition = new Vector3(7f, 3.7f, 1.0f);    
         currentBullet = Instantiate(bulletPrefab, currentBulletPosition, Quaternion.identity);
         currentBullet.GetComponent<Collider2D>().enabled = false;
@@ -202,7 +202,7 @@ public class PlayerController : MonoBehaviour
             {
                 GameManager.Instance.currentBulletCount--;
             }
-            UpdateBulletCount();
+            // UpdateBulletCount();
         }
     }
     
@@ -235,14 +235,15 @@ public class PlayerController : MonoBehaviour
         nextFireTime = Time.time + fireRate;
     }
 
-    // 更新子弹数量
-    private void UpdateBulletCount()
-    {
-        if (bulletCountText != null)
-        {
-            bulletCountText.text = GameManager.Instance.currentBulletCount.ToString();
-        }
-    }
+    // 暂时用不到，子弹文本显示由BulletCountUI脚本控制，其中在update中主动调用GetRemainingBullets()获取了
+    // 更新子弹数量显示
+    // private void UpdateBulletCount()
+    // {
+    //     if (bulletCountText != null)
+    //     {
+    //         bulletCountText.text = GameManager.Instance.currentBulletCount.ToString();
+    //     }
+    // }
 
     public void RecycleBullet()
     {
