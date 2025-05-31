@@ -17,6 +17,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Assets.Scripts.Data;
+using UnityEngine.Playables;
 
 public class GameManager : MonoBehaviour
 {
@@ -110,7 +111,7 @@ public class GameManager : MonoBehaviour
         {
             // 获取EnemySpawner对象
             EnemySpawner[] enemySpawners = GameObject.Find("EnemySpawnerObject").GetComponents<EnemySpawner>();
-            if(enemySpawners.Length == 0)
+            if(enemySpawners == null)
             {
                 Debug.LogError("未找到EnemySpawner对象");
                 return;
@@ -126,9 +127,16 @@ public class GameManager : MonoBehaviour
         // 如果场景是level_scene，level为1,，且isNewPlayer为true，则播放新手教程
         if(scene.name == "level_scene" && currentLevel == 1 && playerData.isNewPlayer)
         {
+            // Debug.Log("进入新手引导");
             // TODO：瑞，播放新手教程
             // 获取teachMgr物体
-            GameObject teachMgr = GameObject.Find("teachMgr");
+            GameObject teach = GameObject.Find("teach");
+            if (teach == null)
+            {
+                Debug.LogError("未找到teach物体");
+            }
+
+            GameObject teachMgr = teach.transform.Find("teachMgr").gameObject;
             if (teachMgr == null)
             {
                 Debug.LogError("未找到teachMgr物体");

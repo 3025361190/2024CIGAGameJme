@@ -157,7 +157,7 @@ public class EnemySpawner : MonoBehaviour
         {
             // 因为我在同一个EnemySpawnerObject中添加了多个EnemySpawner.cs脚本，分别生成蔬菜哥和敌人
             // 调用remove时直接暴力的都调用了，所以需要判断是否包含enemy
-            Debug.Log("未找到匹配的enemy");
+            // Debug.Log("未找到匹配的enemy");
         }
     }
 
