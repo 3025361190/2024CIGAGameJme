@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
         HandleShooting();
         // 获取场景类型
         sceneType = skillButton.GetComponent<SkillButton>().currentSceneType;
-        // TODO：有bug,先注释2
+        // 新手教程相关（1）
         if (ispause)
         {
             NewMountSmall();
@@ -312,8 +312,7 @@ public class PlayerController : MonoBehaviour
 
     // TODO：控制子弹分裂次数（不写了.................）
     
-   //  TODO：有报错，暂时注释掉1
-     //tl相关，策划加的
+     // 新手教程相关（2）
      void NewMountSmall()
      {
          if (GameManager.Instance.currentBulletCount <= 50 )
