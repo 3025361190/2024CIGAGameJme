@@ -79,6 +79,8 @@ public class GameManager : MonoBehaviour
     public bool isAllBossDead = false;
     // 当前关卡计时是否结束
     public bool isTimeOut = false;
+    // 关卡是否已经结束（成功或失败）
+    private bool isLevelEnded = false;
 
 
     private void Awake()
@@ -119,6 +121,7 @@ public class GameManager : MonoBehaviour
     private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
     {
         Debug.Log($"场景 {scene.name} 加载完成");
+        ResumeGame();
         // 每个关卡加载后的初始化
         if(scene.name == "level_scene")
         {
@@ -296,6 +299,8 @@ public class GameManager : MonoBehaviour
     // 跳转至指定关卡
     public void JumpToLevel(int level)
     {
+        // 重置关卡结束标志
+        isLevelEnded = false;
         Debug.Log($"尝试跳转到关卡 {level}");
         
         // 检查关卡是否有效
@@ -387,19 +392,25 @@ public class GameManager : MonoBehaviour
     // 判断关卡是否结束
     public void IsLevelEnd()
     {
+        // 如果关卡已经结束，直接返回
+        if (isLevelEnded) return;
+
         // boss全死，且当前生命值大于0时，时间结束或敌人全死即关卡成功
         if((isAllEnemyDead || isTimeOut) && isAllBossDead && currentHealth > 0)
         {
+            isLevelEnded = true;
             LevelSuccess();
         }
         // 当前生命值小于0时，关卡失败
         else if(currentHealth <= 0)
         {
+            isLevelEnded = true;
             LevelFail();
         }
         // 时间结束，且boss未死，关卡失败
         else if(isTimeOut && !isAllBossDead)
         {
+            isLevelEnded = true;
             LevelFail();
         }
     }
@@ -441,8 +452,17 @@ public class GameManager : MonoBehaviour
     public void LevelFail()
     {
         Debug.LogWarning("关卡失败");
-        // TODO: 进入失败结算界面
-        RestartGame();
+        // 进入失败结算界面
+        PauseGame();
+        Transform fail = GameObject.Find("Canvas").transform.Find("失败");
+        if (fail == null)
+        {
+            Debug.LogError("未找到失败物体");
+            return;
+        }
+        fail.gameObject.SetActive(true);
+        
+        // RestartGame();
     }
 
     // Start is called before the first frame update
