@@ -5,7 +5,7 @@
 组件依赖：Rigidbody2D, SpriteRenderer, Collider2D, TrailRenderer,?????
 rigidbody2d组件需要设置为Kinematic
 */
-
+#define ENABLE_KEYBOARD_CONTROL  // 注释这行可以禁用所有键盘控制
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -147,28 +147,55 @@ public class PlayerController : MonoBehaviour
     // 处理移动逻辑
     private void HandleMovement()
     {
+        // 获取摇杆输入
         float horizontal = joystick.Horizontal;
         float vertical = joystick.Vertical;
 
+#if ENABLE_KEYBOARD_CONTROL
+        // 添加WASD键盘输入（测试用）
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+        {
+            horizontal = -1;
+        }
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+        {
+            horizontal = 1;
+        }
+
+        if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+        {
+            vertical = -1;
+        }
+        else if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        {
+            vertical = 1;
+        }
+
+        // 如果同时有键盘和摇杆输入，优先使用摇杆
+        if (joystick.Horizontal != 0 || joystick.Vertical != 0)
+        {
+            horizontal = joystick.Horizontal;
+            vertical = joystick.Vertical;
+        }
+#endif
         float fixedHorizontal = horizontal;
         float fixedVertical = vertical;
 
-        
         // 设置x边界
-        if(transform.position.x <= -8.2f)
+        if (transform.position.x <= -8.2f)
         {
             fixedHorizontal = Mathf.Max(horizontal, 0);
         }
-        else if(transform.position.x >= 8.3f)
+        else if (transform.position.x >= 8.3f)
         {
             fixedHorizontal = Mathf.Min(horizontal, 0);
         }
         // 设置y边界
-        if(transform.position.y <= -4.3f)
+        if (transform.position.y <= -4.3f)
         {
             fixedVertical = Mathf.Max(vertical, 0);
         }
-        else if(transform.position.y >= 4.3f)
+        else if (transform.position.y >= 4.3f)
         {
             fixedVertical = Mathf.Min(vertical, 0);
         }
