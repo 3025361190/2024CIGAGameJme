@@ -63,7 +63,10 @@ public class Enemy : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Turret") && canTakeDamage)
         {
-            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+            if(collision.gameObject.GetComponent<PlayerHealth>().isFlashing == false)
+            {
+                collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+            }
             // Debug.Log("Enemy hit Turret and damage");
             StartCoroutine(CollisionCooldown());  // 开始冷却协程,防止短时间内多次造成伤害
         }

@@ -21,11 +21,15 @@ public class PlayerHealth : MonoBehaviour
     private float flashDuration;                    // 闪烁持续时间
 
     public TextMeshProUGUI healthText;              // 玩家血量文本，代码在场景中查找绑定
-    private SpriteRenderer spriteRenderer;          // 玩家图片，用于闪烁效果，代码中绑定
+    public GameObject spriteRenderer;          // 玩家图片，用于闪烁效果，代码中绑定
     private Color originalColor;                    // 玩家图片原始颜色
 
     private float flashTimer = 0f;                  // 闪烁计时器
-    private bool isFlashing = false;               // 是否闪烁
+    public bool isFlashing = false;               // 是否闪烁
+
+    private float flashInterval; // 闪烁间隔时间
+    private float flashIntervalTimer = 0f; // 闪烁计时器
+    private bool isRedColor = false;    // 当前是否为红色
 
 
     private void Awake()
@@ -37,6 +41,7 @@ public class PlayerHealth : MonoBehaviour
             try
             {
                 flashDuration = globalConfig["flashDuration"].ToObject<float>();
+                flashInterval = globalConfig["flashInterval"].ToObject<float>();
             }
             catch (System.Exception e)
             {
@@ -54,11 +59,10 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 获取组件引用
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        // 用名字获取子组件引用
         if (spriteRenderer != null)
         {
-            originalColor = spriteRenderer.color;
+            originalColor = spriteRenderer.GetComponent<SpriteRenderer>().color;
         }
 
         // 查找并绑定血量文本
@@ -89,12 +93,25 @@ public class PlayerHealth : MonoBehaviour
         // 处理受伤闪烁效果
         if (isFlashing)
         {
+            Debug.Log("Flashing: " + flashTimer);
             flashTimer += Time.deltaTime;
+            flashIntervalTimer += Time.deltaTime;
+
+            // 每过一个间隔时间就切换一次颜色
+            if (flashIntervalTimer >= flashInterval)
+            {
+                isRedColor = !isRedColor; // 切换颜色状态
+                spriteRenderer.GetComponent<SpriteRenderer>().color = isRedColor ? Color.red : originalColor;
+                flashIntervalTimer = 0f; // 重置计时器
+            }
+            
             if (flashTimer >= flashDuration)
             {
-                spriteRenderer.color = originalColor;
+                spriteRenderer.GetComponent<SpriteRenderer>().color = originalColor;
                 isFlashing = false;
                 flashTimer = 0f;
+                isRedColor = false;
+                flashIntervalTimer = 0f; // 重置计时器
             }
         }
     }
@@ -115,11 +132,12 @@ public class PlayerHealth : MonoBehaviour
 
         // 触发受伤闪烁效果
         // TODO：炮台受伤闪白没效果，需修改
+        Debug.Log("TriggerFlash called: " + flashDuration);
         if (spriteRenderer != null)
         {
-            spriteRenderer.color = Color.white;
             isFlashing = true;
             flashTimer = 0f;
+            flashIntervalTimer = 0f; // 重置闪烁间隔计时器
         }
 
         // 检查是否死亡
@@ -128,6 +146,17 @@ public class PlayerHealth : MonoBehaviour
             Die();
         }
     }
+
+    // public void TriggerFlash()
+    // {
+    //     Debug.Log("TriggerFlash called: " + flashDuration);
+    //     if (spriteRenderer != null)
+    //     {
+    //         spriteRenderer.color = Color.red;
+    //         isFlashing = true;
+    //         flashTimer = 0f;
+    //     }
+    // }
 
     private void Die()
     {
