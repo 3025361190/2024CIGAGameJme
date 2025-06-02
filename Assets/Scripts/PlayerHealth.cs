@@ -131,7 +131,6 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthDisplay();
 
         // 触发受伤闪烁效果
-        // TODO：炮台受伤闪白没效果，需修改
         Debug.Log("TriggerFlash called: " + flashDuration);
         if (spriteRenderer != null)
         {
