@@ -698,6 +698,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3341779998825023791}
     m_Modifications:
+    - target: {fileID: 1730173438928365400, guid: 0ebea465870a5d541b1a915201a5e82b, type: 3}
+      propertyPath: m_Text
+      value: "\u5728\u5206\u88C2\u573A\u666F\u4E2D\uFF0C\u89E6\u78B0\u5230\u76F8\u540C\u989C\u8272\u602A\u7269\u5206\u88C2\u5B50\u5F39\u75312\u4E2A\u53D8\u4E3A3\u4E2A\n\uFF08\u6682\u672A\u5B9E\u73B0\uFF09"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730173438928365400, guid: 0ebea465870a5d541b1a915201a5e82b, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776324111583301789, guid: 0ebea465870a5d541b1a915201a5e82b, type: 3}
+      propertyPath: m_Text
+      value: "\u6781\u81F4\u5206\u88C2"
+      objectReference: {fileID: 0}
     - target: {fileID: 5478363533169108392, guid: 0ebea465870a5d541b1a915201a5e82b, type: 3}
       propertyPath: m_Name
       value: buff2
@@ -879,6 +891,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3341779998825023791}
     m_Modifications:
+    - target: {fileID: 1730173438928365400, guid: 0ebea465870a5d541b1a915201a5e82b, type: 3}
+      propertyPath: m_Text
+      value: "\u589E\u52A0\u5B50\u5F39\u5C04\u901F\n\uFF08\u6682\u672A\u5B9E\u73B0\uFF09"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730173438928365400, guid: 0ebea465870a5d541b1a915201a5e82b, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776324111583301789, guid: 0ebea465870a5d541b1a915201a5e82b, type: 3}
+      propertyPath: m_Text
+      value: "\u5F3A\u529B\u5C04\u901F"
+      objectReference: {fileID: 0}
     - target: {fileID: 5478363533169108392, guid: 0ebea465870a5d541b1a915201a5e82b, type: 3}
       propertyPath: m_Name
       value: buff1
@@ -1056,6 +1080,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3341779998825023791}
     m_Modifications:
+    - target: {fileID: 1730173438928365400, guid: 0ebea465870a5d541b1a915201a5e82b, type: 3}
+      propertyPath: m_Text
+      value: "\u589E\u52A0\u8840\u91CF\u4E0A\u9650\uFF0C\u4E14\u589E\u52A0\u8840\u91CF\u56DE\u590D\u6548\u679C\n\uFF08\u6682\u672A\u5B9E\u73B0\uFF09"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730173438928365400, guid: 0ebea465870a5d541b1a915201a5e82b, type: 3}
+      propertyPath: m_FontData.m_Alignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1776324111583301789, guid: 0ebea465870a5d541b1a915201a5e82b, type: 3}
+      propertyPath: m_Text
+      value: "\u5F3A\u52B2\u4F53\u529B"
+      objectReference: {fileID: 0}
     - target: {fileID: 5478363533169108392, guid: 0ebea465870a5d541b1a915201a5e82b, type: 3}
       propertyPath: m_Name
       value: buff3

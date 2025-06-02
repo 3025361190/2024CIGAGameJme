@@ -14,7 +14,7 @@
             "levelId" : 1,
             "isBoss" : 0,
             "bossNum" : 0,
-            "monsNum" : 10,
+            "monsNum" : 20,
             "bossTime" : 30,
             "buffId" : [1,2,3],
             "time" : 100
@@ -23,7 +23,7 @@
             "levelId" : 2,
             "isBoss" : 1,
             "bossNum" : 1,
-            "monsNum" : 101,
+            "monsNum" : 30,
             "bossTime" : 31,
             "buffId" : [1,2,4],
             "time" : 101
@@ -32,7 +32,7 @@
             "levelId" : 3,
             "isBoss" : 1,
             "bossNum" : 2,
-            "monsNum" : 102,
+            "monsNum" : 40,
             "bossTime" : 32,
             "buffId" : [1,2,5],
             "time" : 102
@@ -41,7 +41,7 @@
             "levelId" : 4,
             "isBoss" : 1,
             "bossNum" : 3,
-            "monsNum" : 103,
+            "monsNum" : 50,
             "bossTime" : 33,
             "buffId" : [1,2,6],
             "time" : 103
