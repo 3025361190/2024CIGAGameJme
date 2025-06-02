@@ -17,7 +17,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Assets.Scripts.Data;
 using UnityEngine.Playables;
-using static Unity.VisualScripting.Metadata;
+// using static Unity.VisualScripting.Metadata;
 
 public class GameManager : MonoBehaviour
 {
