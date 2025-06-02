@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Playables;
 using Newtonsoft.Json.Linq;
+using System;
 
 public class PlayerController : MonoBehaviour
 {
@@ -305,7 +306,7 @@ public class PlayerController : MonoBehaviour
         tryActivateRage = true;
         minValue = GameManager.Instance.currentBulletCount;
         currentValue = GameManager.Instance.currentBulletCount;
-        maxValue = baseBulletCount * rageThreshold;
+        maxValue = Math.Max(baseBulletCount * rageThreshold, 10);
         progressBar.value = 0.0f;
         progressBar.gameObject.SetActive(true);
         activeBullets.Clear();
