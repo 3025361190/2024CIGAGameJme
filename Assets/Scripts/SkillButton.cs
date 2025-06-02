@@ -101,6 +101,8 @@ public class SkillButton : MonoBehaviour
             isDurationActive = false;
             durationTimer = 0.0f;
             cdFlag = true;            // 设置冷却标志
+            cooldownImage.GetComponent<UnityEngine.UI.Image>().fillAmount = 1f; // 重置冷却图像填充
+            cooldownText.GetComponent<UnityEngine.UI.Text>().text = Mathf.CeilToInt(cdTime).ToString(); // 更新冷却文本
 
             // 切换动画和音效
             beijing1.SetBool("background",true);
