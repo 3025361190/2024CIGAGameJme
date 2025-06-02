@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Assets.Scripts.Data;
 using UnityEngine.Playables;
+using static Unity.VisualScripting.Metadata;
 
 public class GameManager : MonoBehaviour
 {
@@ -443,8 +444,29 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // TODO: 应该先进入选buff界面
-            NextLevel();
+            // 处理buff选择界面
+            GameObject buffChoose = GameObject.Find("buffChoose");
+            if (buffChoose != null)
+            {
+                // 激活整个buffChoose对象
+                buffChoose.SetActive(true);
+                Debug.Log("已激活buffChoose预制体");
+
+                foreach (Transform child in buffChoose.transform)
+                {
+                    child.gameObject.SetActive(true);
+                }
+
+                PauseGame(); 
+            }
+            else
+            {
+                Debug.LogWarning("未找到名为buffChoose的预制体");
+                // 即使没找到buffChoose也应该暂停游戏
+                PauseGame();
+            }
+
+            // NextLevel();
         }
     }
 
