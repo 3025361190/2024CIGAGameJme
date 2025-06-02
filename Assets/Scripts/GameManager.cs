@@ -129,6 +129,7 @@ public class GameManager : MonoBehaviour
             // 获取EnemySpawner对象
             EnemySpawner[] enemySpawners = GameObject.Find("EnemySpawnerObject").GetComponents<EnemySpawner>();
             enemyTypeTotalCount = enemySpawners.Length;
+            // Debug.Log($"当前关卡敌人种类总数: {enemyTypeTotalCount}");
             if(enemySpawners == null)
             {
                 Debug.LogError("未找到EnemySpawner对象");
@@ -384,9 +385,11 @@ public class GameManager : MonoBehaviour
     public void AKindOfEnemyAllDead()
     {
         enemyTypeDeadCount++;
+        // Debug.Log($"当前关卡已消灭敌人种类数量: {enemyTypeDeadCount}");
         if(enemyTypeDeadCount >= enemyTypeTotalCount)
         {
             isAllEnemyDead = true;
+            // Debug.Log($"当前关卡所有敌人已消灭");
         }
     }
 

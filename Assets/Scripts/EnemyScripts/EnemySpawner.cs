@@ -150,6 +150,7 @@ public class EnemySpawner : MonoBehaviour
             {
                 // 该类敌人已全部死亡
                 GameManager.Instance.AKindOfEnemyAllDead();
+                // Debug.Log($"{enemyPrefab.name}已全部死亡");
             }
         }
         else

@@ -21,7 +21,7 @@
         },
         {
             "levelId" : 2,
-            "isBoss" : 1,
+            "isBoss" : 0,
             "bossNum" : 1,
             "monsNum" : 30,
             "bossTime" : 31,
@@ -30,7 +30,7 @@
         },
         {
             "levelId" : 3,
-            "isBoss" : 1,
+            "isBoss" : 0,
             "bossNum" : 2,
             "monsNum" : 40,
             "bossTime" : 32,
@@ -39,7 +39,7 @@
         },
         {
             "levelId" : 4,
-            "isBoss" : 1,
+            "isBoss" : 0,
             "bossNum" : 3,
             "monsNum" : 50,
             "bossTime" : 33,
@@ -48,7 +48,7 @@
         },
         {
             "levelId" : 5,
-            "isBoss" : 1,
+            "isBoss" : 0,
             "bossNum" : 4,
             "monsNum" : 104,
             "bossTime" : 34,
@@ -57,7 +57,7 @@
         },
         {
             "levelId" : 6,
-            "isBoss" : 1,
+            "isBoss" : 0,
             "bossNum" : 5,
             "monsNum" : 105,
             "bossTime" : 35,
@@ -66,7 +66,7 @@
         },
         {
             "levelId" : 7,
-            "isBoss" : 1,
+            "isBoss" : 0,
             "bossNum" : 6,
             "monsNum" : 106,
             "bossTime" : 36,
