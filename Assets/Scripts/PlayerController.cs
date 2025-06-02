@@ -66,6 +66,8 @@ public class PlayerController : MonoBehaviour
     public PlayableDirector director;//tl相关，策划加的
     private bool ispause=true;
 
+    //策划加的
+    public GameObject KuangbaoEffect;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -339,6 +341,7 @@ public class PlayerController : MonoBehaviour
     // 触发狂暴
     private void TriggerRage()
     {
+        KuangbaoEffect.SetActive(true);
         if (isRageActive)
         {
             return;
@@ -355,6 +358,7 @@ public class PlayerController : MonoBehaviour
     // 退出狂暴
     private void ExitRage()
     {
+        KuangbaoEffect.SetActive(false);
         progressBar.gameObject.SetActive(false);
         fireRate = normalFireRate;
         isRageActive = false;
