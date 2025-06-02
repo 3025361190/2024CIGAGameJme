@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class SkillButton : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class SkillButton : MonoBehaviour
     private bool cdFlag = false;      // 冷却标志
     private float cdTime;      // 冷却时间设置为5秒
     private float cdTimer;            // 冷却计时器
+    public GameObject cooldownImage; // 冷却图像
+    public GameObject cooldownText; // 冷却文本
 
     // 清汤持续时间相关
     private float durationTimer;
@@ -38,7 +42,8 @@ public class SkillButton : MonoBehaviour
         var modeConfig = JsonLoader.LoadJsonAsJObject("StaticData/mode_config");
         cdTime = modeConfig["splitModeCD"].ToObject<float>();
         durationTime = modeConfig["splitModeDuration"].ToObject<float>();
-        
+        cooldownImage.GetComponent<UnityEngine.UI.Image>().fillAmount = 0f; // 初始化冷却图像填充
+        cooldownText.GetComponent<UnityEngine.UI.Text>().text = ""; // 初始化冷却文本
     }
 
 
@@ -49,10 +54,15 @@ public class SkillButton : MonoBehaviour
         if(cdFlag)
         {
             cdTimer += Time.deltaTime;
+            cooldownImage.GetComponent<UnityEngine.UI.Image>().fillAmount = 1 - (cdTimer / cdTime); // 更新冷却图像填充
+            // 精确到整数
+            cooldownText.GetComponent<UnityEngine.UI.Text>().text = Mathf.CeilToInt(cdTime - cdTimer).ToString(); // 更新冷却文本
             if(cdTimer >= cdTime)
             {
                 cdFlag = false;
                 cdTimer = 0.0f;
+                cooldownImage.GetComponent<UnityEngine.UI.Image>().fillAmount = 0f; // 重置冷却图像填充
+                cooldownText.GetComponent<UnityEngine.UI.Text>().text = ""; // 清空冷却文本
             }
         }
         if(isDurationActive)
@@ -91,7 +101,7 @@ public class SkillButton : MonoBehaviour
             isDurationActive = false;
             durationTimer = 0.0f;
             cdFlag = true;            // 设置冷却标志
-            
+
             // 切换动画和音效
             beijing1.SetBool("background",true);
             beijing2.SetTrigger("change");
