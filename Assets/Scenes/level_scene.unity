@@ -3282,6 +3282,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthText: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  isFlashing: 0
 --- !u!1 &2019175981
 GameObject:
   m_ObjectHideFlags: 0
