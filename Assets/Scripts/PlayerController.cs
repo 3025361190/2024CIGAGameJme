@@ -68,6 +68,7 @@ public class PlayerController : MonoBehaviour
 
     //策划加的
     public GameObject KuangbaoEffect;
+    public Animator KaihuoEffect;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -247,6 +248,7 @@ public class PlayerController : MonoBehaviour
     // 尝试发射子弹
     private void TryShoot(float horizontal, float vertical)
     {
+        KaihuoEffect.SetTrigger("attack");
         if (GameManager.Instance.currentBulletCount > 0 && Time.time >= nextFireTime)
         {
             Vector2 shootDirection = new Vector2(horizontal, vertical).normalized;
