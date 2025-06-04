@@ -14,7 +14,7 @@
             "levelId" : 1,
             "isBoss" : 0,
             "bossNum" : 0,
-            "monsNum" : 20,
+            "monsNum" : 3,
             "bossTime" : 30,
             "buffId" : [1,2,3],
             "time" : 100

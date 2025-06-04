@@ -17,6 +17,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Assets.Scripts.Data;
 using UnityEngine.Playables;
+using UnityEngine.UI;
 // using static Unity.VisualScripting.Metadata;
 
 public class GameManager : MonoBehaviour
@@ -142,6 +143,7 @@ public class GameManager : MonoBehaviour
             }
             // 绑定计时器
             timer = GameObject.Find("timer").GetComponent<Timer>();
+            SetLevelText();
         }
 
         // 如果场景是level_scene，level为1,，且isNewPlayer为true，则播放新手教程
@@ -448,18 +450,14 @@ public class GameManager : MonoBehaviour
         else
         {
             // 处理buff选择界面
-            GameObject buffChoose = GameObject.Find("buffChoose");
+            GameObject buffChoose = GameObject.Find("winWindow");
             if (buffChoose != null)
             {
-                // 激活整个buffChoose对象
-                buffChoose.SetActive(true);
-                Debug.Log("已激活buffChoose预制体");
-
                 foreach (Transform child in buffChoose.transform)
                 {
                     child.gameObject.SetActive(true);
                 }
-
+                buffChoose.GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
                 PauseGame(); 
             }
             else
@@ -488,6 +486,12 @@ public class GameManager : MonoBehaviour
         fail.gameObject.SetActive(true);
         
         // RestartGame();
+    }
+    void SetLevelText()
+    {
+        GameObject LevelText = GameObject.Find("LevelText");
+        Text LevelTextt = LevelText.GetComponent<Text>();
+        LevelTextt.text = currentLevel.ToString();
     }
 
     // Start is called before the first frame update
