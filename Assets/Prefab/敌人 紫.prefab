@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6635884042504001812}
   - component: {fileID: 2061933498641252554}
   m_Layer: 0
-  m_Name: "\u654C\u4EBA"
+  m_Name: "\u654C\u4EBA \u7D2B"
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,7 +264,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 49be1a685a2072b4db40f1fb47295af8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4fe845e28fefb5e48b5d4bb8e8049769, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
