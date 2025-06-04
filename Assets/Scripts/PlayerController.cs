@@ -343,6 +343,8 @@ public class PlayerController : MonoBehaviour
     // 触发狂暴
     private void TriggerRage()
     {
+        //音频
+        AudioManager.Instance.PlayBGM(1);
         KuangbaoEffect.SetActive(true);
         if (isRageActive)
         {
@@ -360,6 +362,7 @@ public class PlayerController : MonoBehaviour
     // 退出狂暴
     private void ExitRage()
     {
+        AudioManager.Instance.PlayBGM(0);
         KuangbaoEffect.SetActive(false);
         progressBar.gameObject.SetActive(false);
         fireRate = normalFireRate;

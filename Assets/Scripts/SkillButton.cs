@@ -28,7 +28,7 @@ public class SkillButton : MonoBehaviour
     private Animator beijing1;
     private Animator beijing2;
     public Animator skillbuttion;
-    public AudioSource audioSource;//音效
+  //  public AudioSource audioSource;//音效
 
     void Awake()
     {
@@ -109,7 +109,8 @@ public class SkillButton : MonoBehaviour
             beijing2.SetTrigger("change");
             
             skillbuttion.SetBool("change", false);
-            audioSource.Play();
+            AudioManager.Instance.PlaySFX(1);
+         //   audioSource.Play();
         }
         else if(currentSceneType == SceneType.HongYou)
         {
@@ -123,7 +124,8 @@ public class SkillButton : MonoBehaviour
             beijing1.SetBool("background", false);
             beijing2.SetTrigger("change");
             skillbuttion.SetBool("change", true);
-            audioSource.Play();
+            AudioManager.Instance.PlaySFX(1);
+            //  audioSource.Play();
         }
     }
 

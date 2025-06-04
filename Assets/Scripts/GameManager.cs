@@ -144,6 +144,7 @@ public class GameManager : MonoBehaviour
             // 绑定计时器
             timer = GameObject.Find("timer").GetComponent<Timer>();
             SetLevelText();
+            AudioManager.Instance.PlayBGM(0);
         }
 
         // 如果场景是level_scene，level为1,，且isNewPlayer为true，则播放新手教程
