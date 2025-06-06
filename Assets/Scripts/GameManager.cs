@@ -18,6 +18,7 @@ using Newtonsoft.Json.Linq;
 using Assets.Scripts.Data;
 using UnityEngine.Playables;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 // using static Unity.VisualScripting.Metadata;
 
 public class GameManager : MonoBehaviour
@@ -451,14 +452,20 @@ public class GameManager : MonoBehaviour
         else
         {
             // 处理buff选择界面
-            GameObject buffChoose = GameObject.Find("winWindow");
-            if (buffChoose != null)
+            GameObject winWindow = GameObject.Find("winWindow");
+            GameObject buffChoose = GameObject.Find("buffChoose");
+            if (buffChoose != null&& winWindow !=null)
             {
                 foreach (Transform child in buffChoose.transform)
                 {
                     child.gameObject.SetActive(true);
                 }
+                foreach(Transform child in winWindow.transform)
+                {
+                    child.gameObject.SetActive(true);
+                }
                 buffChoose.GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
+                winWindow.GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
                 PauseGame(); 
             }
             else

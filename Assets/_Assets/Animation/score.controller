@@ -67,7 +67,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Text (Legacy)
+  m_Name: score
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Switch
@@ -127,10 +127,10 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 6514902742173136491}
-    m_Position: {x: 440, y: 220, z: 0}
+    m_Position: {x: 340, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3198005839044889824}
-    m_Position: {x: 360, y: 120, z: 0}
+    m_Position: {x: 400, y: 110, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions:

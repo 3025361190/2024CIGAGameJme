@@ -66,10 +66,11 @@ MonoBehaviour:
   imageTransform: {fileID: 4848442166988188935}
   Turret: {fileID: 0}
   is_trace: 0
-  sceneManager: {fileID: 0}
+  skillButton: {fileID: 0}
   trailRenderer: {fileID: 7949211402530880000}
   CDflag: 0
   prefabToSpawn: {fileID: 581044435470829640, guid: 340067860597b17468819cdd2d13842b, type: 3}
+  ACFlag: 0
 --- !u!50 &9158584880856814100
 Rigidbody2D:
   serializedVersion: 4
@@ -292,7 +293,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Time: 0.2
+  m_Time: 0.15
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -302,7 +303,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5054741
+        value: 0.37616348
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -310,7 +311,7 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 1
+        time: 0.7325897
         value: 0
         inSlope: 0
         outSlope: 0
