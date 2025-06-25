@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -20,6 +21,9 @@ public class PlayerHealth : MonoBehaviour
     
     private float flashDuration;                    // 闪烁持续时间
 
+
+    public Slider healthSlider;              // 玩家血量滑动条，代码在场景中查找绑定
+    public Image healthSliderFill; // 玩家血量滑动条填充图片，代码在场景中查找绑定
     public TextMeshProUGUI healthText;              // 玩家血量文本，代码在场景中查找绑定
     public GameObject spriteRenderer;          // 玩家图片，用于闪烁效果，代码中绑定
     private Color originalColor;                    // 玩家图片原始颜色
@@ -80,6 +84,42 @@ public class PlayerHealth : MonoBehaviour
             if (healthText == null)
             {
                 Debug.LogError("未找到血量文本组件！");
+            }
+        }
+
+        // 查找并绑定血量滑动条
+        if (healthSlider == null)
+        {
+            GameObject sliderObj = GameObject.Find("healthSlider");
+            if (sliderObj != null)
+            {
+                healthSlider = sliderObj.GetComponent<Slider>();
+            }
+            else
+            {
+                Debug.LogError("未找到HealthSlider物体！");
+            }
+            if (healthSlider == null)
+            {
+                Debug.LogError("未找到血量滑动条组件！");
+            }
+        }
+
+        // 查找并绑定血量滑动条填充图片
+        if (healthSliderFill == null)
+        {
+            GameObject fillObj = GameObject.Find("healthSliderFill");
+            if (fillObj != null)
+            {
+                healthSliderFill = fillObj.GetComponent<Image>();
+            }
+            else
+            {
+                Debug.LogError("未找到HealthSliderFill物体！");
+            }
+            if (healthSliderFill == null)
+            {
+                Debug.LogError("未找到血量滑动条填充图片组件！");
             }
         }
 
@@ -173,6 +213,19 @@ public class PlayerHealth : MonoBehaviour
         if (healthText != null)
         {
             healthText.text = "HP: " + GameManager.Instance.currentHealth.ToString();
+        }
+
+
+        if (healthSlider != null)
+        {
+            healthSlider.value = GameManager.Instance.currentHealth * 1.0f / GameManager.Instance.initialHealth;
+            // 血条颜色随生命值变化而线性变化
+            float healthPercentage = GameManager.Instance.currentHealth * 1.0f / GameManager.Instance.initialHealth;
+            healthSliderFill.color = Color.Lerp(Color.red, Color.green, healthPercentage);
+        }
+        else
+        {
+            Debug.LogError("未找到血量滑动条组件！");
         }
     }
 }

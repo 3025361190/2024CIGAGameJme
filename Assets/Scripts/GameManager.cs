@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     // global_config.json中的数据
     private int initialBulletCount; // 初始子弹数量
-    private int initialHealth; // 初始生命值
+    public int initialHealth; // 初始生命值
 
 
     // 计时器,每次加载完场景后代码绑定level_scene中的timer物体中的Timer脚本
