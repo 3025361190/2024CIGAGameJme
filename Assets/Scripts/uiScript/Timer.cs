@@ -61,9 +61,11 @@ public class Timer : MonoBehaviour
     {
         if (timerText != null)
         {
-            int minutes = Mathf.FloorToInt(currentTime / 60);
-            int seconds = Mathf.FloorToInt(currentTime % 60);
-            timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            // int minutes = Mathf.FloorToInt(currentTime / 60);
+            // int seconds = Mathf.FloorToInt(currentTime % 60);
+            // timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            // 保留整数
+            timerText.text = Mathf.CeilToInt(currentTime).ToString();
         }
     }
 
