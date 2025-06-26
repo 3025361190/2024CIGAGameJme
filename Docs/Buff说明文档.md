@@ -10,15 +10,22 @@
 | `buffName` | string | Buff 名称 |
 | `buffDescription` | string | Buff 描述文本 |
 | `buffIcon` | string | Buff 图标在Resources/BuffIcon目录下的路径 |
-| `buffDuration` | float | Buff 持续时间（-1表示永久） |
+| `buffDuration` | float | Buff 持续时间（-1表示永久，0表示一次性buff） |
 | `buffStackable` | bool | 是否可叠加 |
 | `stackType` | int | 计算方式（"0"表示加法叠加，"1"表示乘法叠加） |
 | `isNormalBuff` | bool | 是否为普通buff（普通buff只在非boss关卡出现） |
 
 ## Buff详细配置
 
+### 0. 足够强大（buffId:0）
+- 说明：选择此buff n次可获得神秘大奖
+
+  | 参数 | 类型 | 说明 |
+  | --- | --- | --- |
+  | `value` | int | 选择此buff n次可获得神秘大奖 |
+
 ### 1. 强力射速（buffId:1）
-- 说明：增加子弹发射速度
+- 说明：增加子弹基础和狂暴发射速度
 
 | 参数 | 类型 | 说明 |
 | --- | --- | --- |

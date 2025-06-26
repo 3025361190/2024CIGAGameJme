@@ -12,6 +12,7 @@ public abstract class BaseBuff : MonoBehaviour
     public float buffDuration;
     public bool buffStackable;
     public int stackType;
+    public bool isNormalBuff;
 
 
     // 运行时属性
@@ -27,6 +28,12 @@ public abstract class BaseBuff : MonoBehaviour
     
     // 初始化buff，子类必须实现
     public abstract void Init();
+
+    // 更新buff效果（buff激活后每帧调用，子类可以重写）
+    public virtual void UpdateBuff()
+    {
+        // nothing
+    }
     
     // 激活buff
     public virtual void ActivateBuff()
@@ -58,32 +65,30 @@ public abstract class BaseBuff : MonoBehaviour
         currentStack = 0;
     }
     
+     // 检查buff是否激活
+    public virtual bool IsActive()
+    {
+        return isActive;
+    }
+
     // 获取当前层数
     public virtual int GetCurrentStack()
     {
         return currentStack;
     }
     
-    // 检查buff是否激活
-    public virtual bool IsActive()
-    {
-        return isActive;
-    }
-    
-    // 更新buff效果（每帧调用，子类必须实现）
-    public abstract void UpdateBuff();
-
-
-
     // MonoBehaviour的生命周期方法
-    public virtual void Start()
+    public void Start()
     {
         Init();
     }
 
-    public virtual void Update()
+    public void Update()
     {
-        UpdateBuff();
+        if(isActive)
+        {
+            UpdateBuff();
+        }
     }
 }
 

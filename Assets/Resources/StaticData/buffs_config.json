@@ -3,13 +3,14 @@
     [
         {
             "buffId": 0,
-            "buffName": "不需要",
-            "buffDescription": "选择此buff n次可获得神秘大奖",
-            "buffIcon": "不需要.png",
+            "buffName": "足够强大",
+            "buffDescription": "选择此buff 5次可获得神秘大奖",
+            "buffIcon": "足够强大.png",
             "buffDuration": -1,
             "buffStackable": true,
             "stackType": 0,
-            "isNormalBuff": true
+            "isNormalBuff": true,
+            "value": 5
         },
         {
             "buffId": 1,
@@ -19,7 +20,8 @@
             "buffDuration": -1,
             "buffStackable": true,
             "stackType": 1,
-            "isNormalBuff": true
+            "isNormalBuff": true,
+            "value": 1.1
         }
     ]
 }
