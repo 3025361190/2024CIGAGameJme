@@ -39,7 +39,8 @@ public class SkillButton : MonoBehaviour
         beijing2 = effect.GetComponent<Animator>();
         cdTimer = 0.0f;              // 初始化计时器
         durationTimer = 0.0f;       // 初始化持续时间计时器
-        var modeConfig = JsonLoader.LoadJsonAsJObject("StaticData/mode_config");
+        //var modeConfig = JsonLoader.LoadJsonAsJObject("StaticData/mode_config");
+        var modeConfig = GameManager.Instance.data.modeData;
         cdTime = modeConfig["splitModeCD"].ToObject<float>();
         durationTime = modeConfig["splitModeDuration"].ToObject<float>();
         cooldownImage.GetComponent<UnityEngine.UI.Image>().fillAmount = 0f; // 初始化冷却图像填充

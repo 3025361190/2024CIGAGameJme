@@ -80,17 +80,20 @@ public class PlayerController : MonoBehaviour
         currentBullet = Instantiate(bulletPrefab, currentBulletPosition, Quaternion.identity);
         currentBullet.GetComponent<Collider2D>().enabled = false;
         //currentBullet.SetActive(false);
-        var bulletConfig = JsonLoader.LoadJsonAsJObject("StaticData/bullet_config");
+        //var bulletConfig = JsonLoader.LoadJsonAsJObject("StaticData/bullet_config");
+        var bulletConfig = GameManager.Instance.data.bulletData;
         maxBullets = bulletConfig["maxBullets"].ToObject<int>();
         normalFireRate = bulletConfig["firingRate"].ToObject<float>();
         fireRate = normalFireRate;
         bulletSpeed = bulletConfig["bulletSpeed"].ToObject<float>();
-        var rageConfig = JsonLoader.LoadJsonAsJObject("StaticData/rage_config");
+        //var rageConfig = JsonLoader.LoadJsonAsJObject("StaticData/rage_config");
+        var rageConfig = GameManager.Instance.data.rageData;
         rageFiringRate = rageConfig["rageFiringRate"].ToObject<float>();
         rageThreshold = rageConfig["rageThreshold"].ToObject<float>();
         rageDuration = rageConfig["rageDuration"].ToObject<float>();
         rageActivateTime = rageConfig["rageActivateTime"].ToObject<float>();
-        var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
+        //var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
+        var globalConfig = GameManager.Instance.data.globalData;
         moveSpeed = globalConfig["maxMoveSpeed"].ToObject<float>();
     }
 
