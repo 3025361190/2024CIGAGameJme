@@ -27,14 +27,13 @@ public class Data
     }
     public void Init()
     {
-        buffData = JsonLoader.LoadJsonAsJObject("StaticData/buff_data");
-        bulletData = JsonLoader.LoadJsonAsJObject("StaticData/bullet_data");
-        enemyData = JsonLoader.LoadJsonAsJObject("StaticData/enemy_data");
-        globalData = JsonLoader.LoadJsonAsJObject("StaticData/global_data");
-        levelsData = JsonLoader.LoadJsonAsJObject("StaticData/levels_data");
-        modeData = JsonLoader.LoadJsonAsJObject("StaticData/mode_data");
-        rageData = JsonLoader.LoadJsonAsJObject("StaticData/rage_data");
-        settingsData = JsonLoader.LoadJsonAsJObject("StaticData/settings_data");
+        buffData = JsonLoader.LoadJsonAsJObject("StaticData/buff_config");
+        bulletData = JsonLoader.LoadJsonAsJObject("StaticData/bullet_config");
+        enemyData = JsonLoader.LoadJsonAsJObject("StaticData/enemy_config");
+        globalData = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
+        levelsData = JsonLoader.LoadJsonAsJObject("StaticData/levels_config");
+        modeData = JsonLoader.LoadJsonAsJObject("StaticData/mode_config");
+        rageData = JsonLoader.LoadJsonAsJObject("StaticData/rage_config");
         IsDataValid();
     }
 
