@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Assets.Scripts.Data;
 using UnityEngine.Playables;
 using UnityEngine.UI;
@@ -39,7 +38,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // 数据存储路径
+    // 根据设备自动创建的永久数据存储路径
     private string saveDataPath;
     // 数据类
     public Data data;
@@ -242,7 +241,7 @@ public class GameManager : MonoBehaviour
         }
 
         // 加载global_config.json
-        var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
+        var globalConfig = data.globalData;
         if (globalConfig != null)
         {   
             // 获取global_config.json中的数据
@@ -375,6 +374,8 @@ public class GameManager : MonoBehaviour
     // 重新开始
     public void RestartGame(){
         JumpToLevel(0);
+        // 重新初始化数据类
+        data.Init();
         // 重新初始化动态游戏数据
         InitializeGameData();
     }
