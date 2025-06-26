@@ -98,7 +98,8 @@ public class BulletController : MonoBehaviour
             Debug.Log("cant find turret");
         }
         trailRenderer.enabled = false;
-        var bulletConfig = JsonLoader.LoadJsonAsJObject("StaticData/bullet_config");
+        //var bulletConfig = JsonLoader.LoadJsonAsJObject("StaticData/bullet_config");
+        var bulletConfig = GameManager.Instance.data.bulletData;
         bulletCountInScreenMax = bulletConfig["bulletCountInScreenMax"].ToObject<int>();
     }
 
