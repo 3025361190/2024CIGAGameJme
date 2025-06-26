@@ -230,3 +230,6 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 }
+
+
+// TODO: 修复ad控制血条bug
