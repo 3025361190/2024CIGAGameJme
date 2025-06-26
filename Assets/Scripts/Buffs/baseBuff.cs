@@ -4,177 +4,86 @@ using UnityEngine;
 
 public abstract class BaseBuff : MonoBehaviour
 {
-
-    [Header("Buff基础属性")]
-    [SerializeField] protected int buffId;              // Buff唯一标识符
-    [SerializeField] protected string buffName;         // Buff名称
-    [SerializeField, TextArea] protected string buffDescription;  // Buff描述文本
-    [SerializeField] protected float buffDuration = -1; // Buff持续时间（-1表示永久）
-    [SerializeField] protected bool buffStackable;      // 是否可叠加
-    [SerializeField] protected int maxStack = 1;        // 最大叠加层数
-    [SerializeField] protected Sprite buffIcon;         // Buff图标
-    [SerializeField] protected int stackType;           // 叠加方式（0:加法叠加，1:乘法叠加）
+    // 基础属性
+    public int buffId;
+    public string buffName;
+    public string buffDescription;
+    public string buffIcon;
+    public float buffDuration;
+    public bool buffStackable;
+    public int stackType;
 
 
     // 运行时属性
-    [SerializeField] protected float remainingTime;    // 剩余持续时间
-    [SerializeField] protected int currentStack = 1;   // 当前叠加层数
-    [SerializeField] protected bool isActive = true;   // Buff是否激活
 
-
-    // 生命周期方法
-    protected virtual void OnEnable()
+    // 当前buff的层数
+    protected int currentStack = 0;
+    
+    // buff是否激活
+    protected bool isActive = false;
+    
+    // 目标对象
+    protected GameObject target;
+    
+    // 初始化buff，子类必须实现
+    public abstract void Init();
+    
+    // 激活buff
+    public virtual void ActivateBuff()
     {
-        remainingTime = buffDuration;
-        OnBuffApplied();
-    }
-
-    protected virtual void OnDisable()
-    {
-        OnBuffRemoved();
-    }
-
-    protected virtual void Update()
-    {
-        if (!isActive) return;
-
-        // 更新持续时间
-        if (buffDuration > 0)
+        if (isActive)
         {
-            remainingTime -= Time.deltaTime;
-            if (remainingTime <= 0)
+            // 如果buff可叠加，则增加层数
+            if (buffStackable)
             {
-                RemoveBuff();
+                currentStack++;
+            }
+            // 如果buff不可叠加，则直接激活
+            else
+            {
+                Debug.LogError($"buff {buffId} 不可叠加，无法激活");
             }
         }
-    }
-
-
-    // Buff操作方法
-
-    /// <summary>
-    /// 通过json初始化Buff属性,在子类中应该要override这个方法,把buff的专属属性值也进行初始化
-    /// </summary>
-    public virtual void InitBuffFromConfig(int buffId)
-    {
-        // // 获取JSON文本
-        // string jsonText = JsonLoader.LoadJsonText("buffs_config");
-        // if (string.IsNullOrEmpty(jsonText))
-        // {
-        //     Debug.LogError("无法加载buff配置文件");
-        //     return;
-        // }
-
-        // // 解析JSON文本
-        // var buffData = JsonUtility.FromJson<BuffConfigWrapper>(jsonText);
-        // if (buffData != null && buffData.buffs != null)
-        // {
-        //     // 查找对应ID的buff
-        //     var targetBuff = System.Array.Find(buffData.buffs, b => b.buffId == buffId);
-        //     if (targetBuff != null)
-        //     {
-        //         // 设置基础属性
-        //         this.buffId = targetBuff.buffId;
-        //         this.buffName = targetBuff.buffName;
-        //         this.buffDescription = targetBuff.buffDescription;
-        //         this.buffDuration = targetBuff.buffDuration;
-        //         this.buffStackable = targetBuff.buffStackable;
-        //         this.maxStack = targetBuff.maxStack;
-        //         this.stackType = targetBuff.stackType;
-                
-        //         // 设置运行时属性
-        //         this.remainingTime = this.buffDuration;
-        //         this.currentStack = 1;
-        //         this.isActive = true;
-        //     }
-        //     else
-        //     {
-        //         Debug.LogError($"找不到ID为{buffId}的buff配置");
-        //     }
-        // }
-    }
-
-    /// <summary>
-    /// 移除Buff效果
-    /// </summary>
-    public virtual void RemoveBuff()
-    {
-        if (!isActive) return;
-        
-        isActive = false;
-        // 是否需要销毁？还是用对象池的方式管理buff？
-        // Destroy(this);
-    }
-
-    /// <summary>
-    /// 重置Buff持续时间
-    /// </summary>
-    public virtual void RefreshDuration()
-    {
-        if (buffDuration > 0)
+        else
         {
-            remainingTime = buffDuration;
+            currentStack = 1;
+            isActive = true;
         }
     }
-
-    /// <summary>
-    /// 尝试叠加Buff
-    /// </summary>
-    /// <returns>是否叠加成功</returns>
-    public virtual bool TryStack()
+    
+    // 停用buff
+    public virtual void DeactivateBuff()
     {
-        if (!buffStackable || currentStack >= maxStack) return false;
+        isActive = false;
+        currentStack = 0;
+    }
+    
+    // 获取当前层数
+    public virtual int GetCurrentStack()
+    {
+        return currentStack;
+    }
+    
+    // 检查buff是否激活
+    public virtual bool IsActive()
+    {
+        return isActive;
+    }
+    
+    // 更新buff效果（每帧调用，子类必须实现）
+    public abstract void UpdateBuff();
 
-        currentStack++;
-        OnBuffStacked();
-        return true;
+
+
+    // MonoBehaviour的生命周期方法
+    public virtual void Start()
+    {
+        Init();
     }
 
-
-    // 虚方法 - 由子类实现具体效果
-
-    /// <summary>
-    /// Buff被应用时调用
-    /// </summary>
-    protected abstract void OnBuffApplied();
-
-    /// <summary>
-    /// Buff被移除时调用
-    /// </summary>
-    protected abstract void OnBuffRemoved();
-
-    /// <summary>
-    /// Buff叠加时调用
-    /// </summary>
-    protected virtual void OnBuffStacked()
+    public virtual void Update()
     {
-        // 默认实现为空，子类可以根据需要重写
+        UpdateBuff();
     }
-
-    // 属性访问器（即getter）
-    /*
-    等同于：
-    public int BuffId
-    {
-        get { return buffId; }
-    }
-    */
-    public int BuffId => buffId;
-    public string BuffName => buffName;
-    public string BuffDescription => buffDescription;
-    public float BuffDuration => buffDuration;
-    public bool BuffStackable => buffStackable;
-    public int MaxStack => maxStack;
-    public Sprite BuffIcon => buffIcon;
-    public int StackType => stackType;
-    public float RemainingTime => remainingTime;
-    public int CurrentStack => currentStack;
-    public bool IsActive => isActive;
 }
-
-
-// TODO: 瑞，buff的细节还需定夺
-// 如：
-// 1.buff直接加在生效的物体上，还是加在buff管理器上？
-// 2.buff的管理方式，是否销毁？还是用对象池的方式管理？
 
