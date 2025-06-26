@@ -195,6 +195,10 @@ public class GameManager : MonoBehaviour
     {
         // Debug.Log("开始加载静态游戏数据...");
         
+        // 创建Data实例
+        data = new Data();
+
+
         // 加载玩家数据
         string playerDataPath = System.IO.Path.Combine(saveDataPath, "player_data.json");
         if (File.Exists(playerDataPath))
