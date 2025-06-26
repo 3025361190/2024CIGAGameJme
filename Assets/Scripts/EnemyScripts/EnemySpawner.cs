@@ -52,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         // 从enemy_config.json中获取spawnInterval
-        var enemyConfig = JsonLoader.LoadJsonAsJObject("StaticData/enemy_config");
+        var enemyConfig = GameManager.Instance.data.enemyData;
         if (enemyConfig != null)
         {   
             // 获取enemy_config.json中的数据
