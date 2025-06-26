@@ -3,11 +3,11 @@
     [
         {
             "buffId": 0,
-            "buffName": "无效果",
-            "buffDescription": "这是一个占位符buff，没有任何实际效果",
-            "buffIcon": "",
+            "buffName": "不需要",
+            "buffDescription": "选择此buff n次可获得神秘大奖",
+            "buffIcon": "不需要.png",
             "buffDuration": -1,
-            "buffStackable": false,
+            "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true
         },
@@ -18,7 +18,7 @@
             "buffIcon": "强力射速.png",
             "buffDuration": -1,
             "buffStackable": true,
-            "stackType": 0,
+            "stackType": 1,
             "isNormalBuff": true
         }
     ]
