@@ -1,0 +1,53 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+/*
+文件名：Buff_10.cs
+编辑人：没道理啊
+文件描述：更加清汤buff
+*/
+public class Buff_10 : BaseBuff
+{
+    private float value;
+    private float originalsplitModeDuration;
+
+    public override void Init()
+    {
+        // 初始化buff参数
+        buffId = 7;
+        var buffConfig = GameManager.Instance.data.buffData[buffId];
+        buffName = buffConfig["buffName"].ToString();
+        buffDescription = buffConfig["buffDescription"].ToString();
+        buffIcon = buffConfig["buffIcon"].ToString();
+        buffDuration = buffConfig["buffDuration"].ToObject<float>();
+        buffStackable = buffConfig["buffStackable"].ToObject<bool>();
+        stackType = buffConfig["stackType"].ToObject<int>();
+        isNormalBuff = buffConfig["isNormalBuff"].ToObject<bool>();
+        value = buffConfig["value"].ToObject<float>();
+        originalsplitModeDuration = GameManager.Instance.data.modeData["splitModeDuration"].ToObject<float>();
+        // 初始化运行时参数
+        currentStack = 0;
+        isActive = false;
+        target = null;
+    }
+
+    public override void ActivateBuff()
+    {
+        // 保留父类逻辑
+        base.ActivateBuff();
+        if(stackType == 0)
+        {
+            GameManager.Instance.data.modeData["splitModeDuration"] = GameManager.Instance.data.modeData["splitModeDuration"].ToObject<float>() + value;
+        }
+        else if(stackType == 1)
+        {
+            GameManager.Instance.data.modeData["splitModeDuration"] = GameManager.Instance.data.modeData["splitModeDuration"].ToObject<float>() * value;
+        }
+    }
+
+    public override void DeactivateBuff()
+    {
+        base.DeactivateBuff();
+        GameManager.Instance.data.modeData["splitModeDuration"] = originalsplitModeDuration;
+    }    
+}
