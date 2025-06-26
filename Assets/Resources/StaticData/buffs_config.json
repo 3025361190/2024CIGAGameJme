@@ -8,7 +8,8 @@
             "buffIcon": "",
             "buffDuration": -1,
             "buffStackable": false,
-            "stackType": 0
+            "stackType": 0,
+            "isNormalBuff": true
         },
         {
             "buffId": 1,
@@ -17,7 +18,8 @@
             "buffIcon": "强力射速.png",
             "buffDuration": -1,
             "buffStackable": true,
-            "stackType": 0
+            "stackType": 0,
+            "isNormalBuff": true
         }
     ]
 }

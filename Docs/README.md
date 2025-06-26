@@ -37,6 +37,7 @@
 | `buffDuration` | float | Buff 持续时间（-1表示永久） |
 | `buffStackable` | bool | 是否可叠加 |
 | `stackType` | int | 计算方式（"0"表示加法叠加，"1"表示乘法叠加） |
+| `isNormalBuff` | bool | 是否为普通buff（普通buff只在非boss关卡出现） |
 
   其他详细参数见[buff说明文档](./Buff说明文档.md)
 
