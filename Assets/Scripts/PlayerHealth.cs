@@ -39,7 +39,8 @@ public class PlayerHealth : MonoBehaviour
     private void Awake()
     {
         // 从global_config.json中读取闪烁持续时间
-        var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
+        //var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
+        var globalConfig = GameManager.Instance.data.globalData;
         if (globalConfig != null)
         {   
             try
