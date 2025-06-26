@@ -41,7 +41,8 @@ public class GameManager : MonoBehaviour
 
     // 数据存储路径
     private string saveDataPath;
-
+    // 数据类
+    public Data data;
     // 关卡列表
     private List<levelConfig> levelList;
     // 当前关卡的配置
@@ -232,7 +233,7 @@ public class GameManager : MonoBehaviour
         // Debug.Log("加载关卡配置...");
         try
         {
-            levelList = JsonLoader.LoadJsonAsJObject("StaticData/levels_config")["levels"].ToObject<List<levelConfig>>();
+            levelList = data.levelsData["levels"].ToObject<List<levelConfig>>();
             Debug.Log($"成功加载 {levelList.Count} 个关卡配置");
         }
         catch (System.Exception e)
