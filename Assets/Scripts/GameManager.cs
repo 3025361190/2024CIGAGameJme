@@ -468,11 +468,16 @@ public class GameManager : MonoBehaviour
         GameObject winWindow = GameObject.Find("winWindow");
         if(winWindow != null)
         {
+            var winWindowAnimator = winWindow.GetComponent<Animator>();
+            if (winWindowAnimator != null)
+            {
+                winWindowAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+            }
             foreach(Transform child in winWindow.transform)
             {
                 child.gameObject.SetActive(true);
             }
-            winWindow.GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
+            
         }
         else
         {
@@ -481,6 +486,8 @@ public class GameManager : MonoBehaviour
 
         // 等待1.5秒
         yield return new WaitForSeconds(1.5f);
+        // Debug.Log("1.5秒结束");
+
 
         // 暂停游戏
         PauseGame();

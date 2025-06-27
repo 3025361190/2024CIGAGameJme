@@ -83,9 +83,27 @@ public class BuffManager : MonoBehaviour
         }
     }
 
+    // 递归设置所有层级的Animator组件为UnscaledTime
+    private void SetAnimatorUnscaledTimeRecursively(Transform transform)
+    {
+        // 设置当前物体的Animator
+        var animator = transform.GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        }
+
+        // 递归设置所有子物体
+        foreach (Transform child in transform)
+        {
+            SetAnimatorUnscaledTimeRecursively(child);
+        }
+    }
+
     // 展示选择buff界面
     public void ShowBuffChoose(bool isBossLevel)
     {
+        Debug.Log("展示buff选择界面");
         // 处理buff选择界面
         GameObject buffChoose = GameObject.Find("buffChoose");
         if (buffChoose != null)
@@ -93,13 +111,14 @@ public class BuffManager : MonoBehaviour
             // 设置buff选项
             // TODO: 根据isBossLevel设置buff选项
 
-            
-            // 显示buff选择界面
+            // 递归设置所有层级的Animator组件
+            SetAnimatorUnscaledTimeRecursively(buffChoose.transform);
+
+            // 设置buff选择界面及其子物体为激活状态
             foreach (Transform child in buffChoose.transform)
             {
                 child.gameObject.SetActive(true);
             }
-            buffChoose.GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
         }
         else
         {
