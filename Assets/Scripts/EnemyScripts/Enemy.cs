@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
 
     // Start is called before the first frame update
     private void Start() {
+        // TODO：瑞，敌人颜色逻辑要重构
         // 设置敌人颜色
         enemyColor = (ColorType)Random.Range(0, 5);
         // 根据颜色设置资源颜色
