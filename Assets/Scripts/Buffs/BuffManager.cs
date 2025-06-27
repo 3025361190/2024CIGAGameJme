@@ -117,7 +117,7 @@ public class BuffManager : MonoBehaviour
     // 展示选择buff界面
     public void ShowBuffChoose(bool isBossLevel)
     {
-        Debug.Log("展示buff选择界面");
+        // Debug.Log("展示buff选择界面");
         buffChoose = GameObject.Find("buffChoose");
         // 处理buff选择界面
         if (buffChoose != null)
@@ -149,8 +149,6 @@ public class BuffManager : MonoBehaviour
                         SetBuffCard(i+max, buffs[normalBuffIds[normalBuffIndexs[i]]]);
                     }
                 }
-
-                
             }
             else
             {
@@ -200,7 +198,7 @@ public class BuffManager : MonoBehaviour
                         if (iconSprite != null)
                         {
                             iconImage.sprite = iconSprite;
-                            Debug.Log($"buff{index+1}卡片的icon设置为{buff.buffIcon}");
+                            // Debug.Log($"buff{index+1}卡片的icon设置为{buff.buffIcon}");
                         }
                         else
                         {
