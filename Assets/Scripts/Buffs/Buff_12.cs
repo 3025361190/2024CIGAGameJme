@@ -1,7 +1,7 @@
 /*
-文件名：Buff_10.cs
+文件名：Buff_12.cs
 编辑人：没道理啊
-文件描述：更加清汤buff
+文件描述：快速回血buff
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -9,17 +9,17 @@ using UnityEngine;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
-public class Buff_10 : BaseBuff
+public class Buff_12 : BaseBuff
 {
     private float value;
-    private float originalsplitModeDuration;
+    private float originalbloodRaturnValue;
 
     public override void Init()
     {
         // 初始化buff参数
-        buffId = 10;
+        buffId = 12;
         // 在buffs数组中查找对应buffId的配置
-        var buffsArray = GameManager.Instance.data.buffData["buffs"] as JArray;
+        var buffsArray = GameManager.Instance.data.globalData["bloodRaturnValue"] as JArray;
         var buffConfig = buffsArray.FirstOrDefault(b => b["buffId"].ToObject<int>() == buffId);
         buffName = buffConfig["buffName"].ToString();
         buffDescription = buffConfig["buffDescription"].ToString();
@@ -29,7 +29,7 @@ public class Buff_10 : BaseBuff
         stackType = buffConfig["stackType"].ToObject<int>();
         isNormalBuff = buffConfig["isNormalBuff"].ToObject<bool>();
         value = buffConfig["value"].ToObject<float>();
-        originalsplitModeDuration = GameManager.Instance.data.modeData["splitModeDuration"].ToObject<float>();
+        originalbloodRaturnValue = GameManager.Instance.data.globalData["bloodRaturnValue"].ToObject<float>();
         // 初始化运行时参数
         currentStack = 0;
         isActive = false;
@@ -42,17 +42,17 @@ public class Buff_10 : BaseBuff
         base.ActivateBuff();
         if(stackType == 0)
         {
-            GameManager.Instance.data.modeData["splitModeDuration"] = GameManager.Instance.data.modeData["splitModeDuration"].ToObject<float>() + value;
+            GameManager.Instance.data.globalData["bloodRaturnValue"] = GameManager.Instance.data.globalData["bloodRaturnValue"].ToObject<float>() + value;
         }
         else if(stackType == 1)
         {
-            GameManager.Instance.data.modeData["splitModeDuration"] = GameManager.Instance.data.modeData["splitModeDuration"].ToObject<float>() * value;
+            GameManager.Instance.data.globalData["bloodRaturnValue"] = GameManager.Instance.data.globalData["bloodRaturnValue"].ToObject<float>() * value;
         }
     }
 
     public override void DeactivateBuff()
     {
         base.DeactivateBuff();
-        GameManager.Instance.data.modeData["splitModeDuration"] = originalsplitModeDuration;
+        GameManager.Instance.data.globalData["bloodRaturnValue"] = originalbloodRaturnValue;
     }    
 }
