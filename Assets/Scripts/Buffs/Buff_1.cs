@@ -3,8 +3,9 @@
 编辑人：fortunate瑞
 文件描述：强力射速buff
 */
-
 using UnityEngine;
+using System.Linq;
+using Newtonsoft.Json.Linq;
 
 public class Buff_1 : BaseBuff
 {
@@ -17,7 +18,9 @@ public class Buff_1 : BaseBuff
     {
         // 初始化buff参数
         buffId = 1;
-        var buffConfig = GameManager.Instance.data.buffData[buffId];
+        // 在buffs数组中查找对应buffId的配置
+        var buffsArray = GameManager.Instance.data.buffData["buffs"] as JArray;
+        var buffConfig = buffsArray.FirstOrDefault(b => b["buffId"].ToObject<int>() == buffId);
         buffName = buffConfig["buffName"].ToString();
         buffDescription = buffConfig["buffDescription"].ToString();
         buffIcon = buffConfig["buffIcon"].ToString();

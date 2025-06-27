@@ -1,11 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 /*
 文件名：Buff_7.cs
 编辑人：没道理啊
 文件描述：更加狂暴buff
 */
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System.Linq;
+using Newtonsoft.Json.Linq;
+
 public class Buff_7 : BaseBuff
 {
     private float value;
@@ -15,7 +18,9 @@ public class Buff_7 : BaseBuff
     {
         // 初始化buff参数
         buffId = 7;
-        var buffConfig = GameManager.Instance.data.buffData[buffId];
+        // 在buffs数组中查找对应buffId的配置
+        var buffsArray = GameManager.Instance.data.buffData["buffs"] as JArray;
+        var buffConfig = buffsArray.FirstOrDefault(b => b["buffId"].ToObject<int>() == buffId);
         buffName = buffConfig["buffName"].ToString();
         buffDescription = buffConfig["buffDescription"].ToString();
         buffIcon = buffConfig["buffIcon"].ToString();
