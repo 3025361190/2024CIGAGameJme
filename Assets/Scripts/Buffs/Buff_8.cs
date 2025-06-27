@@ -10,13 +10,55 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 
 
-//TODO: data里要不要存储一些游戏的中间值，比如子弹当前数量、人物当前血量......？？？
-// TODO：回复：运行时数据从GameManager中获取
-//这个buff是不是应该增加最大血量以及人物当前血量？？？
 public class Buff_8 : BaseBuff
 {
+    private int value;
+    private int originalinitialHealth;
+    private int originalcurrentHealth;
+
     public override void Init()
     {
-
+        // 初始化buff参数
+        buffId = 8;
+        // 在buffs数组中查找对应buffId的配置
+        var buffsArray = GameManager.Instance.data.globalData["initialHealth"] as JArray;
+        var buffConfig = buffsArray.FirstOrDefault(b => b["buffId"].ToObject<int>() == buffId);
+        buffName = buffConfig["buffName"].ToString();
+        buffDescription = buffConfig["buffDescription"].ToString();
+        buffIcon = buffConfig["buffIcon"].ToString();
+        buffDuration = buffConfig["buffDuration"].ToObject<float>();
+        buffStackable = buffConfig["buffStackable"].ToObject<bool>();
+        stackType = buffConfig["stackType"].ToObject<int>();
+        isNormalBuff = buffConfig["isNormalBuff"].ToObject<bool>();
+        value = buffConfig["value"].ToObject<int>();
+        originalinitialHealth = GameManager.Instance.data.globalData["initialHealth"].ToObject<int>();
+        originalcurrentHealth = GameManager.Instance.currentHealth;
+        // 初始化运行时参数
+        currentStack = 0;
+        isActive = false;
+        target = null;
     }
+
+    public override void ActivateBuff()
+    {
+        // 保留父类逻辑
+        base.ActivateBuff();
+        if(stackType == 0)
+        {
+            GameManager.Instance.data.globalData["initialHealth"] = GameManager.Instance.data.globalData["initialHealth"].ToObject<float>() + value;
+            GameManager.Instance.currentHealth = GameManager.Instance.currentHealth + value;
+        }
+        else if(stackType == 1)
+        {
+            GameManager.Instance.data.globalData["initialHealth"] = GameManager.Instance.data.globalData["initialHealth"].ToObject<float>() * value;
+            GameManager.Instance.currentHealth = GameManager.Instance.currentHealth * value;
+        }
+    }
+
+    public override void DeactivateBuff()
+    {
+        base.DeactivateBuff();
+        GameManager.Instance.data.globalData["initialHealth"] = originalinitialHealth;
+        GameManager.Instance.currentHealth = originalcurrentHealth;
+    }    
 }
