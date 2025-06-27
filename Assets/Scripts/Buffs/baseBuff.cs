@@ -1,3 +1,10 @@
+/*
+文件名：BaseBuff.cs
+编辑人：fortunate瑞
+文件描述：buff基类
+绑定：在BuffManager上绑定所有已实现的buff子类
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
