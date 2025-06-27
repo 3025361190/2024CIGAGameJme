@@ -3,5 +3,6 @@
     "initialHealth" : 100,
     "maxMoveSpeed" : 5,
     "flashDuration" : 1.0,
-    "flashInterval" : 0.1
+    "flashInterval" : 0.1,
+    "bloodRaturnValue" : 10.0
 }

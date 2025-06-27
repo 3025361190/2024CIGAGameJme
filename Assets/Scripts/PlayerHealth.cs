@@ -34,6 +34,9 @@ public class PlayerHealth : MonoBehaviour
     private float flashInterval; // 闪烁间隔时间
     private float flashIntervalTimer = 0f; // 闪烁计时器
     private bool isRedColor = false;    // 当前是否为红色
+    private float bloodRaturnValue;
+    private float bloodRaturnTimer = 0f; // 血量回复计时器
+    private float bloodRaturnInterval; // 血量回复间隔时间
 
 
     private void Awake()
@@ -47,6 +50,8 @@ public class PlayerHealth : MonoBehaviour
             {
                 flashDuration = globalConfig["flashDuration"].ToObject<float>();
                 flashInterval = globalConfig["flashInterval"].ToObject<float>();
+                bloodRaturnValue = globalConfig["bloodRaturnValue"].ToObject<float>();
+                bloodRaturnInterval = 60.0f / bloodRaturnValue;
             }
             catch (System.Exception e)
             {
@@ -143,6 +148,24 @@ public class PlayerHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 回复血量
+        if (GameManager.Instance.currentHealth < GameManager.Instance.initialHealth)
+        {
+            bloodRaturnTimer += Time.deltaTime;
+            if (bloodRaturnTimer >= bloodRaturnInterval)
+            {
+                GameManager.Instance.currentHealth += 1; // 每间隔回复1点血量
+                if (GameManager.Instance.currentHealth > GameManager.Instance.initialHealth)
+                {
+                    GameManager.Instance.currentHealth = GameManager.Instance.initialHealth; // 确保不超过初始值
+                }
+                UpdateHealthDisplay();
+                bloodRaturnTimer = 0f; // 重置计时器
+            }
+        }else
+        {
+            bloodRaturnTimer = 0f; // 如果血量已满，重置计时器
+        }
         // 处理受伤闪烁效果
         if (isFlashing)
         {
