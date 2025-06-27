@@ -64,10 +64,22 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = GameObject.Find("playerimg");
+            if(spriteRenderer == null)
+            {
+                Debug.LogError("未找到playerimg物体！");
+            }
+        }
+
         // 用名字获取子组件引用
         if (spriteRenderer != null)
         {
             originalColor = spriteRenderer.GetComponent<SpriteRenderer>().color;
+        }else
+        {
+            Debug.LogError("未找到playerimg物体的SpriteRenderer组件！");
         }
 
         // // 查找并绑定血量文本
