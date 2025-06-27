@@ -28,7 +28,7 @@ public class Buff_5 : BaseBuff
         stackType = buffConfig["stackType"].ToObject<int>();
         isNormalBuff = buffConfig["isNormalBuff"].ToObject<bool>();
         value = buffConfig["value"].ToObject<float>();
-        originalchainExplosionRange = GameManager.Instance.data.enemyData["chainExplosionRange"].ToObject<float>();
+        originalchainExplosionRange = GameManager.Instance.data.enemyData["chainEffectRadius"].ToObject<float>();
         // 初始化运行时参数
         currentStack = 0;
         isActive = false;
@@ -41,17 +41,17 @@ public class Buff_5 : BaseBuff
         base.ActivateBuff();
         if(stackType == 0)
         {
-            GameManager.Instance.data.enemyData["chainExplosionRange"] = GameManager.Instance.data.enemyData["chainExplosionRange"].ToObject<float>() + value;
+            GameManager.Instance.data.enemyData["chainEffectRadius"] = GameManager.Instance.data.enemyData["chainEffectRadius"].ToObject<float>() + value;
         }
         else if(stackType == 1)
         {
-            GameManager.Instance.data.enemyData["chainExplosionRange"] = GameManager.Instance.data.enemyData["chainExplosionRange"].ToObject<float>() * value;
+            GameManager.Instance.data.enemyData["chainEffectRadius"] = GameManager.Instance.data.enemyData["chainEffectRadius"].ToObject<float>() * value;
         }
     }
 
     public override void DeactivateBuff()
     {
         base.DeactivateBuff();
-        GameManager.Instance.data.enemyData["chainExplosionRange"] = originalchainExplosionRange;
+        GameManager.Instance.data.enemyData["chainEffectRadius"] = originalchainExplosionRange;
     }    
 }
