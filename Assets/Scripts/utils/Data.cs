@@ -27,7 +27,7 @@ public class Data
     }
     public void Init()
     {
-        buffData = JsonLoader.LoadJsonAsJObject("StaticData/buff_config");
+        buffData = JsonLoader.LoadJsonAsJObject("StaticData/buffs_config");
         bulletData = JsonLoader.LoadJsonAsJObject("StaticData/bullet_config");
         enemyData = JsonLoader.LoadJsonAsJObject("StaticData/enemy_config");
         globalData = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
@@ -41,7 +41,7 @@ public class Data
     {
         try
         {
-            if(buffData == null || bulletData == null || enemyData == null || globalData == null || levelsData == null || modeData == null || rageData == null || settingsData == null)
+            if(buffData == null || bulletData == null || enemyData == null || globalData == null || levelsData == null || modeData == null || rageData == null )
             {
                 throw new System.Exception("数据初始化失败");
             }

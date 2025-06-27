@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
     private string saveDataPath;
     // 数据类
     public Data data;
+    // buffmanager
+    public BuffManager buffManager;
     // 关卡列表
     private List<levelConfig> levelList;
     // 当前关卡的配置
@@ -103,7 +105,8 @@ public class GameManager : MonoBehaviour
         // 标记为切换场景时，不会被销毁的对象
         DontDestroyOnLoad(gameObject);
 
-        
+        // 绑定buffmanager
+        buffManager = GameObject.Find("BuffManager").GetComponent<BuffManager>();
 
         // 注册场景加载完成的事件监听，并绑定回调方法OnSceneLoaded
         UnityEngine.SceneManagement.SceneManager.sceneLoaded += OnSceneLoaded;
@@ -198,6 +201,7 @@ public class GameManager : MonoBehaviour
         // 创建Data实例
         data = new Data();
 
+        // 创建BuffManager实例
 
         // 加载玩家数据
         string playerDataPath = System.IO.Path.Combine(saveDataPath, "player_data.json");
@@ -319,13 +323,14 @@ public class GameManager : MonoBehaviour
             Debug.LogError($"无效的关卡编号: {level}");
             return;
         }
-        if (level > levelList.Count)
-        {
-            Debug.LogWarning("成功通关所有关卡！");
-            // TODO: 进入通关结算界面
-            RestartGame();
-            return;
-        }
+        // 移至关卡结束时判断
+        // if (level > levelList.Count)
+        // {
+        //     Debug.LogWarning("成功通关所有关卡！");
+        //     // 进入通关结算界面
+        //     RestartGame();
+        //     return;
+        // }
         
         // 更新当前关卡
         currentLevel = level;
@@ -413,7 +418,7 @@ public class GameManager : MonoBehaviour
         if((isAllEnemyDead || isTimeOut) && isAllBossDead && currentHealth > 0)
         {
             isLevelEnded = true;
-            LevelSuccess();
+            StartCoroutine(LevelSuccess());
         }
         // 当前生命值小于0时，关卡失败
         else if(currentHealth <= 0)
@@ -430,7 +435,7 @@ public class GameManager : MonoBehaviour
     }
 
     // 关卡成功结束
-    public void LevelSuccess()
+    public IEnumerator LevelSuccess()
     {
         Debug.LogWarning("关卡成功");
         // 当前场景如果是白汤，则先主动调用回收子弹
@@ -438,51 +443,50 @@ public class GameManager : MonoBehaviour
         if (skillButtonObj == null)
         {
             Debug.LogError("未找到skillButton对象！");
-            return;
+            yield break;
         }
         
         SkillButton skillButton = skillButtonObj.GetComponent<SkillButton>();
         if (skillButton == null)
         {
             Debug.LogError("skillButton对象上未找到SkillButton组件！");
-            return;
+            yield break;
         }
         
         if(skillButton.currentSceneType == SceneType.QingTang)
         {
             skillButton.SwitchSceneType();
-            // TODO: 应该先进入选buff界面
-            // 等待1秒后，再调用NextLevel
-            Invoke(nameof(NextLevel), 1.5f);
+        }
+
+        if (currentLevel == levelList.Count)
+        {
+            Debug.LogWarning("成功通关所有关卡！");
+            GameSuccess();
+            yield break;
+        }
+        // 展示胜利界面
+        GameObject winWindow = GameObject.Find("winWindow");
+        if(winWindow != null)
+        {
+            foreach(Transform child in winWindow.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+            winWindow.GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
         }
         else
         {
-            // 处理buff选择界面
-            GameObject winWindow = GameObject.Find("winWindow");
-            GameObject buffChoose = GameObject.Find("buffChoose");
-            if (buffChoose != null&& winWindow !=null)
-            {
-                foreach (Transform child in buffChoose.transform)
-                {
-                    child.gameObject.SetActive(true);
-                }
-                foreach(Transform child in winWindow.transform)
-                {
-                    child.gameObject.SetActive(true);
-                }
-                buffChoose.GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
-                winWindow.GetComponent<Animator>().updateMode = AnimatorUpdateMode.UnscaledTime;
-                PauseGame(); 
-            }
-            else
-            {
-                Debug.LogWarning("未找到名为buffChoose的预制体");
-                // 即使没找到buffChoose也应该暂停游戏
-                PauseGame();
-            }
-
-            // NextLevel();
+            Debug.LogError("未找到名为winWindow的预制体");
         }
+
+        // 等待1.5秒
+        yield return new WaitForSeconds(1.5f);
+
+        // 暂停游戏
+        PauseGame();
+
+        // 展示buff选择界面
+        buffManager.ShowBuffChoose(currentLevelConfig.isBoss == 1);
     }
 
     // 关卡失败结束
@@ -501,6 +505,15 @@ public class GameManager : MonoBehaviour
         
         // RestartGame();
     }
+
+    // 游戏通关
+    public void GameSuccess()
+    {
+        Debug.LogWarning("游戏通关");
+        // TODO: 进入通关结算界面
+        RestartGame();
+    }
+
     void SetLevelText()
     {
         GameObject LevelText = GameObject.Find("LevelText");
