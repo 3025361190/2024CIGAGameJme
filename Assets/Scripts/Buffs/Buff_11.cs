@@ -11,7 +11,6 @@ using Newtonsoft.Json.Linq;
 public class Buff_11 : BaseBuff
 {
     private int value;
-    private int originalinitialBulletCount;
     private int originalcurrentBulletCount;
 
     public override void Init()
@@ -29,7 +28,6 @@ public class Buff_11 : BaseBuff
         stackType = buffConfig["stackType"].ToObject<int>();
         isNormalBuff = buffConfig["isNormalBuff"].ToObject<bool>();
         value = buffConfig["value"].ToObject<int>();
-        originalinitialBulletCount = GameManager.Instance.data.globalData["initialBulletCount"].ToObject<int>();
         originalcurrentBulletCount = GameManager.Instance.currentBulletCount;
         // 初始化运行时参数
         currentStack = 0;
@@ -43,12 +41,10 @@ public class Buff_11 : BaseBuff
         base.ActivateBuff();
         if(stackType == 0)
         {
-            GameManager.Instance.data.globalData["initialBulletCount"] = GameManager.Instance.data.globalData["initialBulletCount"].ToObject<float>() + value;
             GameManager.Instance.currentBulletCount = GameManager.Instance.currentBulletCount + value;
         }
         else if(stackType == 1)
         {
-            GameManager.Instance.data.globalData["initialBulletCount"] = GameManager.Instance.data.globalData["initialBulletCount"].ToObject<float>() * value;
             GameManager.Instance.currentBulletCount = GameManager.Instance.currentBulletCount * value;
         }
     }
@@ -56,7 +52,6 @@ public class Buff_11 : BaseBuff
     public override void DeactivateBuff()
     {
         base.DeactivateBuff();
-        GameManager.Instance.data.globalData["initialBulletCount"] = originalinitialBulletCount;
         GameManager.Instance.currentBulletCount = originalcurrentBulletCount;
     }    
 }
