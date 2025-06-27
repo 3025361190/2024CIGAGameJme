@@ -2,7 +2,7 @@
 
 
 
-TODO： buff图标bar，
-TODO：新增设计方式？
+TODO：瑞，buff图标bar，
+TODO：新增射击方式？
 TODO：设置界面
-TODO：新手教程手动开关
+TODO：瑞，新手教程手动开关
