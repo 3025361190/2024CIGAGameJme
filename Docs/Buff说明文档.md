@@ -9,7 +9,7 @@
 | `buffId` | int | Buff 唯一标识符 |
 | `buffName` | string | Buff 名称 |
 | `buffDescription` | string | Buff 描述文本 |
-| `buffIcon` | string | Buff 图标在Resources/BuffIcon目录下的路径 |
+| `buffIcon` | string | Buff 图标在Resources/BuffIcon目录下的路径，不包含后缀 |
 | `buffDuration` | float | Buff 持续时间（-1表示永久，0表示一次性buff） |
 | `buffStackable` | bool | 是否可叠加 |
 | `stackType` | int | 计算方式（"0"表示加法叠加，"1"表示乘法叠加） |
