@@ -70,23 +70,23 @@ public class PlayerHealth : MonoBehaviour
             originalColor = spriteRenderer.GetComponent<SpriteRenderer>().color;
         }
 
-        // 查找并绑定血量文本
-        if (healthText == null)
-        {
-            GameObject healthObj = GameObject.Find("health");
-            if (healthObj != null)
-            {
-                healthText = healthObj.GetComponent<TextMeshProUGUI>();
-            }
-            else
-            {
-                Debug.LogError("未找到health物体！");
-            }
-            if (healthText == null)
-            {
-                Debug.LogError("未找到血量文本组件！");
-            }
-        }
+        // // 查找并绑定血量文本
+        // if (healthText == null)
+        // {
+        //     GameObject healthObj = GameObject.Find("health");
+        //     if (healthObj != null)
+        //     {
+        //         healthText = healthObj.GetComponent<TextMeshProUGUI>();
+        //     }
+        //     else
+        //     {
+        //         Debug.LogError("未找到health物体！");
+        //     }
+        //     if (healthText == null)
+        //     {
+        //         Debug.LogError("未找到血量文本组件！");
+        //     }
+        // }
 
         // 查找并绑定血量滑动条
         if (healthSlider == null)
