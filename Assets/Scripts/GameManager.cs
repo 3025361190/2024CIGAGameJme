@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
 
 
         instance = this;
-        Debug.Log("GameManager初始化");
+        // Debug.Log("GameManager初始化");
         // 标记为切换场景时，不会被销毁的对象
         DontDestroyOnLoad(gameObject);
 
@@ -120,13 +120,13 @@ public class GameManager : MonoBehaviour
         // 初始化动态游戏数据
         InitializeGameData();
         
-        Debug.Log("GameManager初始化完成");
+        // Debug.Log("GameManager初始化完成");
     }
 
     // 每次场景加载完成时，都会执行的回调方法
     private void OnSceneLoaded(UnityEngine.SceneManagement.Scene scene, UnityEngine.SceneManagement.LoadSceneMode mode)
     {
-        Debug.Log($"场景 {scene.name} 加载完成");
+        // Debug.Log($"场景 {scene.name} 加载完成");
         ResumeGame();
         // 每个关卡加载后的初始化
         if(scene.name == "level_scene")
@@ -262,7 +262,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.LogError($"读取初始子弹数量失败: {e.Message}");
             }
-            Debug.Log("全局配置加载完成");
+            // Debug.Log("全局配置加载完成");
         }
         else
         {
@@ -273,12 +273,12 @@ public class GameManager : MonoBehaviour
     // 初始化游戏数据
     private void InitializeGameData()
     {
-        Debug.Log("初始化游戏数据...");
+        // Debug.Log("初始化游戏数据...");
         // 初始化子弹数量
         currentBulletCount = initialBulletCount;
         // 初始化生命值
         currentHealth = initialHealth;
-        Debug.Log($"初始化完成: 当前子弹数量={currentBulletCount}, 当前生命值={currentHealth}");
+        // Debug.Log($"初始化完成: 当前子弹数量={currentBulletCount}, 当前生命值={currentHealth}");
     }
 
     // 保存玩家数据
@@ -334,7 +334,7 @@ public class GameManager : MonoBehaviour
         
         // 更新当前关卡
         currentLevel = level;
-        Debug.Log($"更新当前关卡为: {level}");
+        // Debug.Log($"更新当前关卡为: {level}");
         
         // 保存当前数据
         SaveAllData();
@@ -352,7 +352,8 @@ public class GameManager : MonoBehaviour
         }
         isTimeOut = false;
         // 重置buffManager关卡初始化
-        buffManager.LevelInit();
+        // TODO: 瑞，有bug，暂时注释
+        // buffManager.LevelInit();
 
         // 加载场景
         if(level == 0)

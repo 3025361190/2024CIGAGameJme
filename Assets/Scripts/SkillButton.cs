@@ -33,7 +33,7 @@ public class SkillButton : MonoBehaviour
     void Awake()
     {
         currentSceneType = SceneType.HongYou;
-        Debug.Log("currentSceneType in manager AWAKE is " + currentSceneType);
+        // Debug.Log("currentSceneType in manager AWAKE is " + currentSceneType);
         turret =  GameObject.FindGameObjectsWithTag("Turret")[0];
         beijing1 = background.GetComponent<Animator>();
         beijing2 = effect.GetComponent<Animator>();
