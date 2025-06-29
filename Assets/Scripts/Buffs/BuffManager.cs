@@ -30,8 +30,7 @@ public class BuffManager : MonoBehaviour
         }
     }
 
-    // buff选择界面
-    private GameObject buffChoose;
+    
 
     // 用来存储绑定在当前GameObject上的buff（即已经实现的buff，buffid作为key）
     private Dictionary<int, BaseBuff> buffs = new();
@@ -48,6 +47,8 @@ public class BuffManager : MonoBehaviour
     private List<int> activeBuffIds = new();
 
     // 运行时（单个关卡）
+    // buff选择界面
+    private GameObject buffChoose;
     // 一个List记录当前展示的buff卡面和buffid的映射，index从1开始，0位置不使用
     private List<int> showBuffIds = new() { -1 };  // 初始化时放入一个占位值
     // 记录当前选中的buff卡面index
@@ -112,9 +113,12 @@ public class BuffManager : MonoBehaviour
     // 关卡初始化
     public void LevelInit()
     {
+        // 清空所有状态
         choosenBuffCardIndex = 0;
         showBuffIds.Clear();
         showBuffIds.Add(-1);  // 重新添加占位值
+        // 清空buffChoose
+        buffChoose = null;
     }
 
     // 递归设置所有层级的Animator组件为UnscaledTime

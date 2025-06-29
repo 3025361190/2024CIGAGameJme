@@ -201,8 +201,6 @@ public class GameManager : MonoBehaviour
         // 创建Data实例
         data = new Data();
 
-        // 创建BuffManager实例
-
         // 加载玩家数据
         string playerDataPath = System.IO.Path.Combine(saveDataPath, "player_data.json");
         if (File.Exists(playerDataPath))
@@ -352,8 +350,7 @@ public class GameManager : MonoBehaviour
         }
         isTimeOut = false;
         // 重置buffManager关卡初始化
-        // TODO: 瑞，有bug，暂时注释
-        // buffManager.LevelInit();
+        buffManager.LevelInit();
 
         // 加载场景
         if(level == 0)
