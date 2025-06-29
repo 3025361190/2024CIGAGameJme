@@ -351,6 +351,8 @@ public class GameManager : MonoBehaviour
             isAllBossDead = true;
         }
         isTimeOut = false;
+        // 重置buffManager关卡初始化
+        buffManager.LevelInit();
 
         // 加载场景
         if(level == 0)
@@ -385,6 +387,7 @@ public class GameManager : MonoBehaviour
         JumpToLevel(0);
         // 重新初始化数据类
         data.Init();
+        buffManager.Init();
         // 重新初始化动态游戏数据
         InitializeGameData();
     }
