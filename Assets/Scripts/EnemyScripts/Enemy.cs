@@ -29,29 +29,28 @@ public class Enemy : MonoBehaviour
 
     // Start is called before the first frame update
     private void Start() {
-        // TODO：瑞，敌人颜色逻辑要重构
-        // 设置敌人颜色
-        enemyColor = (ColorType)Random.Range(0, 5);
-        // 根据颜色设置资源颜色
-        Transform childTransform = transform.Find("body");
-        switch (enemyColor)
-        {
-            case ColorType.Red:
-                childTransform.GetComponent<SpriteRenderer>().color = new Color(255f / 255f, 126f / 255f, 191f / 255f);
-                break;
-            case ColorType.Yellow:
-                childTransform.GetComponent<SpriteRenderer>().color = new Color(234f / 255f, 253f / 255f, 3f / 255f);
-                break;
-            case ColorType.Blue:
-                childTransform.GetComponent<SpriteRenderer>().color = new Color(151f / 255f, 255f / 255f, 239f / 255f);
-                break;
-            case ColorType.White:
-                childTransform.GetComponent<SpriteRenderer>().color = new Color(253f / 255f, 255f / 255f, 255f / 255f);
-                break;
-            case ColorType.Purple:
-                childTransform.GetComponent<SpriteRenderer>().color = new Color(197f / 255f, 156f / 255f, 255f / 255f);
-                break;
-        }
+        // // 设置敌人颜色
+        // enemyColor = (ColorType)Random.Range(0, 5);
+        // // 根据颜色设置资源颜色
+        // Transform childTransform = transform.Find("body");
+        // switch (enemyColor)
+        // {
+        //     case ColorType.Red:
+        //         childTransform.GetComponent<SpriteRenderer>().color = new Color(255f / 255f, 126f / 255f, 191f / 255f);
+        //         break;
+        //     case ColorType.Yellow:
+        //         childTransform.GetComponent<SpriteRenderer>().color = new Color(234f / 255f, 253f / 255f, 3f / 255f);
+        //         break;
+        //     case ColorType.Blue:
+        //         childTransform.GetComponent<SpriteRenderer>().color = new Color(151f / 255f, 255f / 255f, 239f / 255f);
+        //         break;
+        //     case ColorType.White:
+        //         childTransform.GetComponent<SpriteRenderer>().color = new Color(253f / 255f, 255f / 255f, 255f / 255f);
+        //         break;
+        //     case ColorType.Purple:
+        //         childTransform.GetComponent<SpriteRenderer>().color = new Color(197f / 255f, 156f / 255f, 255f / 255f);
+        //         break;
+        // }
     }
 
 

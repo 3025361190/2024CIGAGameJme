@@ -2719,7 +2719,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1220350304}
   - component: {fileID: 1220350303}
-  - component: {fileID: 1220350305}
   m_Layer: 0
   m_Name: EnemySpawnerObject
   m_TagString: Untagged
@@ -2739,7 +2738,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef7f0bf13884d144eb1306775ec86ec1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 3747182641045328299, guid: e7ce947f02011674bab0f124c73aa7b9, type: 3}
+  enemyPrefab_red: {fileID: 3747182641045328299, guid: f1c3efb39f7f2a441940788cebc4139a, type: 3}
+  enemyPrefab_yellow: {fileID: 3747182641045328299, guid: 46ebe13d41d0db940a1cd9f904bda2f7, type: 3}
+  enemyPrefab_blue: {fileID: 3747182641045328299, guid: 5fafb9360adfe2b42946b7d4de70e848, type: 3}
+  enemyPrefab_purple: {fileID: 3747182641045328299, guid: cc2709c502ea2aa4498128990bb0b955, type: 3}
+  enemyPrefab_white: {fileID: 3747182641045328299, guid: e7ce947f02011674bab0f124c73aa7b9, type: 3}
   spawnInterval: 0
   moveSpeed: 0
   damage: 0
@@ -2768,32 +2771,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1220350305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1220350302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef7f0bf13884d144eb1306775ec86ec1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 6728352704617954252, guid: fada65bbbddc6d5419d70c7ab6e586cd, type: 3}
-  spawnInterval: 0
-  moveSpeed: 0
-  damage: 0
-  randomRange: 0
-  changeDirectionInterval: 0
-  knockbackBaseForce: 0
-  knockbackTime: 0
-  bufferTime: 0
-  attackCooldownTime: 0
-  chainExplosionRange: 0
-  chainExplosionDelay: 0
-  chainKnockbackForceMultiplier: 0
-  maxEnemyCount: 0
 --- !u!1 &1222688029 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7907751207514412309, guid: dd0dea413b74c764c98685c53e041b7b, type: 3}

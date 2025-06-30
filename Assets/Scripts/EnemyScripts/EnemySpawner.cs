@@ -12,7 +12,11 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;          // 敌人预制体, 在unity编辑器中拖动赋值
+    public GameObject enemyPrefab_red;          // 敌人预制体, 在unity编辑器中拖动赋值
+    public GameObject enemyPrefab_yellow;          // 敌人预制体, 在unity编辑器中拖动赋值
+    public GameObject enemyPrefab_blue;          // 敌人预制体, 在unity编辑器中拖动赋值
+    public GameObject enemyPrefab_purple;          // 敌人预制体, 在unity编辑器中拖动赋值
+    public GameObject enemyPrefab_white;          // 敌人预制体, 在unity编辑器中拖动赋值
     public float spawnInterval;             // 生成敌人的间隔时间
     // 敌人移动参数,生成enemy后，赋值给enemy的EnemyMovement组件中的成员
     public float moveSpeed;                 // 移动速度
@@ -81,7 +85,7 @@ public class EnemySpawner : MonoBehaviour
         {
             Debug.LogError("加载敌人生成配置失败！");
         }
-        Debug.Log($"将会生成 {maxEnemyCount}个{enemyPrefab.name}");
+        Debug.Log($"将会生成 {maxEnemyCount}个小怪");
     }
 
 
@@ -103,16 +107,40 @@ public class EnemySpawner : MonoBehaviour
         // Vector2 spawnPosition = GetRandomPositionOutsideCircle(radius);
         // 随机选择一个生成点
         Vector2 spawnPosition = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        // 设置敌人颜色
+        var enemyColor = (ColorType)Random.Range(0, 5);
+        GameObject enemyPrefab = null;
+        switch (enemyColor)
+        {
+            case ColorType.Red:
+                enemyPrefab = enemyPrefab_red;
+                break;
+            case ColorType.Yellow:
+                enemyPrefab = enemyPrefab_yellow;
+                break;
+            case ColorType.Blue:
+                enemyPrefab = enemyPrefab_blue;
+                break;
+            case ColorType.Purple:
+                enemyPrefab = enemyPrefab_purple;
+                break;
+            case ColorType.White:
+                enemyPrefab = enemyPrefab_white;
+                break;
+            default:
+                Debug.LogError($"未找到{enemyColor}小怪预制体");
+                return;
+        }
         // 实例化敌人并注册到enemyList
         GameObject instantiate = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
         if(instantiate == null)
         {
-            Debug.Log("未找到instantiate");
+            Debug.Log("未找到小怪instantiate");
         }
         // 获取EnemyMovement组件
         if (!instantiate.TryGetComponent<EnemyMovement>(out EnemyMovement enemyMovement))
         {
-            Debug.Log("未找到EnemyMovement组件");
+            Debug.Log("未找到小怪EnemyMovement组件");
             return;
         }
         // 赋值给EnemyMovement组件中的成员
@@ -131,6 +159,7 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
         // 赋值给Enemy组件中的成员
+        enemy.enemyColor = enemyColor;
         enemy.damage = damage;
         enemy.cooldownTime = attackCooldownTime;
         enemy.ChainEffectRadius = chainExplosionRange;
