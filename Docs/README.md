@@ -12,7 +12,7 @@
   | --- | --- |
   | `levelId` | 关卡ID |
   | `isBoss` | 是否为BOSS关卡 |
-  | `bossNum` | BOSS数量 |
+  | `bossHealthPoint` | BOSS血量 |
   | `monsNum` | 小怪数量 |
   | `bossTime` | BOSS出现时间 |
   | `buffId` | 可能出现的buff ID |

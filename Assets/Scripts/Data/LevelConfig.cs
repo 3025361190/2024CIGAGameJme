@@ -15,7 +15,7 @@ namespace Assets.Scripts.Data
     {
         public int levelId { get; set; }
         public int isBoss { get; set; }
-        public int bossNum { get; set; }
+        public int bossHealthPoint { get; set; }
         public int monsNum { get; set; }
         public int bossTime { get; set; }
         public List<int> buffId { get; set; }

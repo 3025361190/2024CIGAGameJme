@@ -4,7 +4,7 @@
         {
             "levelId" : 0,
             "isBoss" : 0,
-            "bossNum" : 0,
+            "bossHealthPoint" : 100,
             "monsNum" : 0,
             "bossTime" : 0,
             "buffId" : [],
@@ -13,7 +13,7 @@
         {
             "levelId" : 1,
             "isBoss" : 0,
-            "bossNum" : 0,
+            "bossHealthPoint" : 100,
             "monsNum" : 2,
             "bossTime" : 30,
             "buffId" : [1,2,4,5],
@@ -22,7 +22,7 @@
         {
             "levelId" : 2,
             "isBoss" : 0,
-            "bossNum" : 1,
+            "bossHealthPoint" : 100,
             "monsNum" : 30,
             "bossTime" : 31,
             "buffId" : [1,2,4,5],
@@ -31,7 +31,7 @@
         {
             "levelId" : 3,
             "isBoss" : 0,
-            "bossNum" : 2,
+            "bossHealthPoint" : 100,
             "monsNum" : 40,
             "bossTime" : 32,
             "buffId" : [1,2,4,5],
@@ -40,7 +40,7 @@
         {
             "levelId" : 4,
             "isBoss" : 0,
-            "bossNum" : 3,
+            "bossHealthPoint" : 100,
             "monsNum" : 50,
             "bossTime" : 33,
             "buffId" : [1,2,4,5],
@@ -49,7 +49,7 @@
         {
             "levelId" : 5,
             "isBoss" : 0,
-            "bossNum" : 4,
+            "bossHealthPoint" : 100,
             "monsNum" : 104,
             "bossTime" : 34,
             "buffId" : [1,2,4,5],
@@ -58,7 +58,7 @@
         {
             "levelId" : 6,
             "isBoss" : 0,
-            "bossNum" : 5,
+            "bossHealthPoint" : 100,
             "monsNum" : 105,
             "bossTime" : 35,
             "buffId" : [1,2,4,5],
@@ -67,7 +67,7 @@
         {
             "levelId" : 7,
             "isBoss" : 0,
-            "bossNum" : 6,
+            "bossHealthPoint" : 100,
             "monsNum" : 106,
             "bossTime" : 36,
             "buffId" : [1,2,4,5],
