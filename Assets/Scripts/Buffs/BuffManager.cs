@@ -149,6 +149,9 @@ public class BuffManager : MonoBehaviour
             // 设置buff选项
             if (isBossLevel)
             {
+                // Boss关卡
+                
+                // TODO： 应该读表，忘了，记得改
                 int max = bossBuffIds.Count;
                 if(max >= 3)
                 {
@@ -173,6 +176,7 @@ public class BuffManager : MonoBehaviour
             }
             else
             {
+                // 普通关卡
                 List<int> normalBuffIndexs = new();
                 int max = normalBuffIds.Count;
                 normalBuffIndexs = RandomUtils.GetUniqueRandomIntegers(0, max, 3);
@@ -315,7 +319,8 @@ public class BuffManager : MonoBehaviour
     // TODO：激活指定buff
     public void ActivateBuff(int buffId)
     {
-        Debug.Log($"激活buff：{buffId}");
+        // Debug.Log($"激活buff：{buffId}");
+
     }
 
     // Update is called once per frame
