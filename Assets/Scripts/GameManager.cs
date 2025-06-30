@@ -349,8 +349,6 @@ public class GameManager : MonoBehaviour
             isAllBossDead = true;
         }
         isTimeOut = false;
-        // 重置buffManager关卡初始化
-        buffManager.LevelInit();
 
         // 加载场景
         if(level == 0)
@@ -494,7 +492,7 @@ public class GameManager : MonoBehaviour
         PauseGame();
 
         // 展示buff选择界面
-        buffManager.ShowBuffChoose(currentLevelConfig.isBoss == 1);
+        buffManager.ShowBuffChoose(currentLevelConfig.isBoss == 1, currentLevelConfig.buffId);
     }
 
     // 关卡失败结束

@@ -63,6 +63,7 @@ public abstract class BaseBuff : MonoBehaviour
             currentStack = 1;
             isActive = true;
         }
+        Debug.Log($"激活buff：{buffId}：{buffName}，当前层数：{currentStack}");
     }
     
     // 停用buff

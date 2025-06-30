@@ -7,6 +7,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;  // 添加UI组件的命名空间
 
@@ -43,14 +44,14 @@ public class BuffManager : MonoBehaviour
     // 一个list存储当前可以选择的boss buff id
     private List<int> bossBuffIds = new();
 
-    // 一个list存储当前已经激活且持续的buffid
+    // 一个list存储当前已经激活的buffid
     private List<int> activeBuffIds = new();
 
     // 运行时（单个关卡）
     // buff选择界面
     private GameObject buffChoose;
-    // 一个List记录当前展示的buff卡面和buffid的映射，index从1开始，0位置不使用
-    private List<int> showBuffIds = new() { -1 };  // 初始化时放入一个占位值
+    // 一个List记录当前展示的buff卡面和buffid的映射
+    private List<int> showBuffIds = new();
     // 记录当前选中的buff卡面index
     private int choosenBuffCardIndex = 0;
 
@@ -84,7 +85,6 @@ public class BuffManager : MonoBehaviour
         activeBuffIds.Clear();
         buffs.Clear();
         showBuffIds.Clear();
-        showBuffIds.Add(-1);  // 重新添加占位值
         // 获取当前GameObject上绑定的所有component
         Component[] allComponents = GetComponents<Component>();
         foreach (var comp in allComponents)
@@ -106,6 +106,8 @@ public class BuffManager : MonoBehaviour
                 }
             }
         }
+        // Debug.Log($"normalBuffIds: {string.Join(", ", normalBuffIds)}");
+        // Debug.Log($"bossBuffIds: {string.Join(", ", bossBuffIds)}");
         LevelInit();
     }
 
@@ -116,7 +118,6 @@ public class BuffManager : MonoBehaviour
         // 清空所有状态
         choosenBuffCardIndex = 0;
         showBuffIds.Clear();
-        showBuffIds.Add(-1);  // 重新添加占位值
         // 清空buffChoose
         buffChoose = null;
     }
@@ -139,8 +140,11 @@ public class BuffManager : MonoBehaviour
     }
 
     // 展示选择buff界面
-    public void ShowBuffChoose(bool isBossLevel)
+    public void ShowBuffChoose(bool isBossLevel, List<int> levelBuffIds)
     {
+        // 初始化状态
+        LevelInit();
+        
         // Debug.Log("展示buff选择界面");
         buffChoose = GameObject.Find("buffChoose");
         // 处理buff选择界面
@@ -150,39 +154,58 @@ public class BuffManager : MonoBehaviour
             if (isBossLevel)
             {
                 // Boss关卡
-                
-                // TODO： 应该读表，忘了，记得改
-                int max = bossBuffIds.Count;
-                if(max >= 3)
+                // 获取levelBuffIds和bossBuffIds的交集
+                var intersectionBuffIds = levelBuffIds.Intersect(bossBuffIds).ToList();
+                // 如果交集大于3，则随机选择3个buff
+                if(intersectionBuffIds.Count >= 3)
                 {
-                    var bossBuffIndexs = RandomUtils.GetUniqueRandomIntegers(0, max, 3);
-                    SetBuffCard(0,buffs[bossBuffIds[bossBuffIndexs[0]]]);
-                    SetBuffCard(1,buffs[bossBuffIds[bossBuffIndexs[1]]]);
-                    SetBuffCard(2,buffs[bossBuffIds[bossBuffIndexs[2]]]);
+                    var bossBuffIndexs = RandomUtils.GetUniqueRandomIntegers(0, intersectionBuffIds.Count, 3);
+                    for(int i = 0; i < 3; i++)
+                    {
+                        SetBuffCard(i, buffs[intersectionBuffIds[bossBuffIndexs[i]]]);
+                    }
                 }
                 else
                 {
-                    for(int i = 0; i < max; i++)
+                    // 如果交集小于3，用普通buff补足
+                    Debug.LogWarning("关卡指定buff中可用的boss buff不足，用随机可用普通buff补足");
+                    for(int i = 0;i < intersectionBuffIds.Count;i++)
                     {
-                        SetBuffCard(i, buffs[bossBuffIds[i]]);
+                        SetBuffCard(i, buffs[intersectionBuffIds[i]]);
                     }
-                    int n = 3-max;
+                    int n = 3-intersectionBuffIds.Count;
+                    if(normalBuffIds.Count < n)
+                    {
+                        Debug.LogError($"可用的普通buff数量不足以补充！");
+                        Debug.Break();  // 让编辑器暂停游戏（仅在编辑器中有效）
+                        return;
+                    }
                     var normalBuffIndexs = RandomUtils.GetUniqueRandomIntegers(0, normalBuffIds.Count, n);
                     for(int i = 0; i < n; i++)
                     {
-                        SetBuffCard(i+max, buffs[normalBuffIds[normalBuffIndexs[i]]]);
+                        SetBuffCard(i+intersectionBuffIds.Count, buffs[normalBuffIds[normalBuffIndexs[i]]]);
                     }
                 }
             }
             else
             {
                 // 普通关卡
-                List<int> normalBuffIndexs = new();
-                int max = normalBuffIds.Count;
-                normalBuffIndexs = RandomUtils.GetUniqueRandomIntegers(0, max, 3);
-                for(int i = 0; i < 3; i++)
+                // 获取levelBuffIds和normalBuffIds的交集
+                var intersectionBuffIds = levelBuffIds.Intersect(normalBuffIds).ToList();
+                // 如果交集大于3，则随机选择3个buff
+                if(intersectionBuffIds.Count >= 3)
                 {
-                    SetBuffCard(i, buffs[normalBuffIds[normalBuffIndexs[i]]]);
+                    var normalBuffIndexs = RandomUtils.GetUniqueRandomIntegers(0, intersectionBuffIds.Count, 3);
+                    for(int i = 0; i < 3; i++)
+                    {
+                        SetBuffCard(i, buffs[intersectionBuffIds[normalBuffIndexs[i]]]);
+                    }
+                }
+                else
+                {
+                    Debug.LogError("关卡指定buff中可用的普通buff不足!");
+                    Debug.Break();  // 让编辑器暂停游戏（仅在编辑器中有效）
+                    return;
                 }
             }
             
@@ -269,9 +292,9 @@ public class BuffManager : MonoBehaviour
                 Debug.LogError($"未找到buff{index+1}卡片的describe");
             }
             // 通过index记录当前展示的buff卡面
-            showBuffIds.Insert(index + 1, buff.buffId);
+            showBuffIds.Insert(index, buff.buffId);
             // 为卡面添加click事件
-            buffCard.GetComponent<Button>().onClick.AddListener(() => BuffCardChoosen(index + 1));
+            buffCard.GetComponent<Button>().onClick.AddListener(() => BuffCardChoosen(index));
         }
         else
         {
@@ -282,9 +305,10 @@ public class BuffManager : MonoBehaviour
     // buff卡片被选中
     public void BuffCardChoosen(int cardIndex)
     {
-        // Debug.Log($"buff卡片被选中：{cardIndex}");
+        // Debug.Log($"buff卡片被选中：{cardIndex+1}");
         // 记录当前选中的buff卡面
         choosenBuffCardIndex = cardIndex;
+        // Debug.Log($"choosenBuffCardIndex：{choosenBuffCardIndex}");
         
         // 激活并绑定NextLevelBtn
         if (buffChoose != null)
@@ -293,7 +317,7 @@ public class BuffManager : MonoBehaviour
             if (nextLevelBtn != null)
             {
                 nextLevelBtn.gameObject.SetActive(true);
-                nextLevelBtn.GetComponent<Button>().onClick.RemoveAllListeners(); // 清除可能的旧监听器
+                nextLevelBtn.GetComponent<Button>().onClick.RemoveListener(BuffChooseConfirm); // 清除旧的BuffChooseConfirm监听器
                 nextLevelBtn.GetComponent<Button>().onClick.AddListener(BuffChooseConfirm);
             }
             else
@@ -306,21 +330,46 @@ public class BuffManager : MonoBehaviour
     // 确认选择buff
     public void BuffChooseConfirm()
     {
-        if(choosenBuffCardIndex == 1 || choosenBuffCardIndex == 2 || choosenBuffCardIndex == 3)
+        Debug.Log($"确认选择buff，当前选中的卡面index：{choosenBuffCardIndex}，showBuffIds：{string.Join(", ", showBuffIds)}");
+        if(choosenBuffCardIndex == 0 || choosenBuffCardIndex == 1 || choosenBuffCardIndex == 2)
         {
             ActivateBuff(showBuffIds[choosenBuffCardIndex]);
         }
         else
         {
-            Debug.LogError($"无效的buff卡面index：{choosenBuffCardIndex}，正确的输入应该为1、2或3");
+            Debug.LogError($"无效的buff卡面index：{choosenBuffCardIndex+1}，正确的输入应该为1、2或3");
         }
     }
 
-    // TODO：激活指定buff
+    // 激活指定buff
     public void ActivateBuff(int buffId)
     {
         // Debug.Log($"激活buff：{buffId}");
-
+        if(buffs.ContainsKey(buffId))
+        {
+            BaseBuff buff = buffs[buffId];
+            buff.ActivateBuff();
+            activeBuffIds.Add(buffId);
+            int currentStack = buff.GetCurrentStack();
+            bool isStackable = buff.buffStackable;
+            if(!isStackable && currentStack == 1)
+            {
+                if(buff.isNormalBuff)
+                {
+                    normalBuffIds.Remove(buffId);
+                    // Debug.Log($"normalBuffIds: {string.Join(", ", normalBuffIds)}");
+                }
+                else
+                {
+                    bossBuffIds.Remove(buffId);
+                    // Debug.Log($"bossBuffIds: {string.Join(", ", bossBuffIds)}");
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError($"未找到buff：{buffId}");
+        }
     }
 
     // Update is called once per frame
