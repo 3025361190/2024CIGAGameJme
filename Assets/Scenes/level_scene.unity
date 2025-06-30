@@ -3612,15 +3612,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3605689000103026075, guid: e4884a10d666f9546aeece1fb13ad167, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.23
+      value: -8.58
       objectReference: {fileID: 0}
     - target: {fileID: 4279737912816339994, guid: e4884a10d666f9546aeece1fb13ad167, type: 3}
       propertyPath: m_LocalScale.x
       value: 23.6796
       objectReference: {fileID: 0}
+    - target: {fileID: 4279737912816339994, guid: e4884a10d666f9546aeece1fb13ad167, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4279737912816339994, guid: e4884a10d666f9546aeece1fb13ad167, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6.24
+      objectReference: {fileID: 0}
     - target: {fileID: 4620166790188726925, guid: e4884a10d666f9546aeece1fb13ad167, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.38
+      value: 10.81
       objectReference: {fileID: 0}
     - target: {fileID: 4696594773924303506, guid: e4884a10d666f9546aeece1fb13ad167, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3665,6 +3673,10 @@ PrefabInstance:
     - target: {fileID: 5571886677080900933, guid: e4884a10d666f9546aeece1fb13ad167, type: 3}
       propertyPath: m_Name
       value: AirWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 6820825691210921199, guid: e4884a10d666f9546aeece1fb13ad167, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
