@@ -3,14 +3,14 @@
     [
         {
             "buffId": 0,
-            "buffName": "足够强大",
-            "buffDescription": "选择此buff 5次可获得神秘大奖",
+            "buffName": "占位",
+            "buffDescription": "占位",
             "buffIcon": "default",
             "buffDuration": -1,
-            "buffStackable": true,
+            "buffStackable": false,
             "stackType": 0,
-            "isNormalBuff": true,
-            "value": 5
+            "isNormalBuff": false,
+            "value": 0
         },
         {
             "buffId": 1,
@@ -40,7 +40,7 @@
             "buffDescription": "子弹有概率暴击，无视颜色直接连爆",
             "buffIcon": "boom",
             "buffDuration": -1,
-            "buffStackable": true,
+            "buffStackable": false,
             "stackType": 0,
             "isNormalBuff": true,
             "value": 5
@@ -62,7 +62,7 @@
             "buffDescription": "连爆范围更大",
             "buffIcon": "boom",
             "buffDuration": -1,
-            "buffStackable": true,
+            "buffStackable": false,
             "stackType": 0,
             "isNormalBuff": true,
             "value": 5
@@ -146,6 +146,17 @@
         },
         {
             "buffId": 13,
+            "buffName": "足够强大",
+            "buffDescription": "无任何效果。选择此buff五次可获得一个奖杯",
+            "buffIcon": "player",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "stackType": 0,
+            "isNormalBuff": true,
+            "value": 5
+        },
+        {
+            "buffId": 14,
             "buffName": "我要变小",
             "buffDescription": "缩小人物体型",
             "buffIcon": "player",
@@ -156,7 +167,7 @@
             "value": 5
         },
         {
-            "buffId": 14,
+            "buffId": 15,
             "buffName": "远离敌人",
             "buffDescription": "boss获得击退效果",
             "buffIcon": "monster",
@@ -167,7 +178,7 @@
             "value": 5
         },
         {
-            "buffId": 15,
+            "buffId": 16,
             "buffName": "足够倒霉",
             "buffDescription": "无任何效果，遇到我算你倒霉",
             "buffIcon": "default",
@@ -178,7 +189,7 @@
             "value": 5
         },
         {
-            "buffId": 16,
+            "buffId": 17,
             "buffName": "碰碰运气",
             "buffDescription": "下一关有70%几率使子弹数乘5倍，但也有30%失去一半的子弹",
             "buffIcon": "default",
@@ -189,7 +200,7 @@
             "value": 5
         },
         {
-            "buffId": 17,
+            "buffId": 18,
             "buffName": "克制敌人",
             "buffDescription": "大幅降低boss的移动速度",
             "buffIcon": "monster",
@@ -200,7 +211,7 @@
             "value": 5
         },
         {
-            "buffId": 18,
+            "buffId": 19,
             "buffName": "多多清汤",
             "buffDescription": "减少进入清汤锅的冷却时间",
             "buffIcon": "default",
@@ -211,7 +222,7 @@
             "value": 5
         },
         {
-            "buffId": 19,
+            "buffId": 20,
             "buffName": "伤害增加",
             "buffDescription": "选择此buff 5次可获得神秘大奖",
             "buffIcon": "attack",
