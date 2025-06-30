@@ -207,7 +207,7 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthDisplay();
 
         // 触发受伤闪烁效果
-        Debug.Log("TriggerFlash called: " + flashDuration);
+        // Debug.Log("TriggerFlash called: " + flashDuration);
         if (spriteRenderer != null)
         {
             isFlashing = true;
