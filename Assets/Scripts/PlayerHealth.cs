@@ -169,7 +169,7 @@ public class PlayerHealth : MonoBehaviour
         // 处理受伤闪烁效果
         if (isFlashing)
         {
-            Debug.Log("Flashing: " + flashTimer);
+            // Debug.Log("Flashing: " + flashTimer);
             flashTimer += Time.deltaTime;
             flashIntervalTimer += Time.deltaTime;
 
