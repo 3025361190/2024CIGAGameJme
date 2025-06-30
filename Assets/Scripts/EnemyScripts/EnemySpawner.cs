@@ -37,7 +37,6 @@ public class EnemySpawner : MonoBehaviour
     // 预定义的生成点
     private readonly Vector2[] spawnPoints = new Vector2[]
     {
-        // TODO:瑞,因为屏幕尺寸变化,需要修改出生点位置
         new(-10, -5),    // 左下
         new(10, -5),     // 右下
         new(-10, 5),     // 左上
