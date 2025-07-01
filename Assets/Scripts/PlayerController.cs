@@ -232,8 +232,9 @@ public class PlayerController : MonoBehaviour
         float shootVertical = shootJoystick.Vertical;
 
         // 检查是否有触摸
-        if (Input.GetMouseButtonDown(0)) // 0为左键或单指触摸
+        if (Input.GetMouseButton(0)) // 0为左键或单指触摸
         {
+            //Debug.Log("检测到鼠标点击");
             Vector2 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             if(shootJoystick.Horizontal == 0 || shootJoystick.Vertical == 0)
