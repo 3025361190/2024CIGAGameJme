@@ -82,6 +82,18 @@
   | `chainExplosionDelay` | float | 连锁爆炸的传递延迟时间 |
   | `chainKnockbackForceMultiplier` | float | 连锁击退的力系数 |
 
+### 8. `boss_config.json` ：
+  | 参数 | 类型 | 说明 |
+  | --- | --- | --- |
+  | `moveSpeed` | float | BOSS移动速度 |
+  | `damage` | int | BOSS伤害值 |
+  | `randomRange` | float | BOSS随机移动范围 |
+  | `changeDirectionInterval` | float | BOSS改变方向的间隔时间 |
+  | `knockbackBaseForce` | float | BOSS击退力基础值 |
+  | `knockbackTime` | float | BOSS击退持续时间 |
+  | `bufferTime` | float | BOSS击退后的缓冲时间 |
+  | `attackCooldownTime` | float | BOSS伤害冷却时间 |
+  | `chainKnockbackForceMultiplier` | float | BOSS连锁击退的力系数 |
 
 
 

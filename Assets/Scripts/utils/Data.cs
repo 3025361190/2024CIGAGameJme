@@ -17,7 +17,7 @@ public class Data
     public JObject levelsData;
     public JObject modeData;
     public JObject rageData;
-    public JObject settingsData;
+    public JObject bossData;
 
 
     // 初始化数据
@@ -34,6 +34,7 @@ public class Data
         levelsData = JsonLoader.LoadJsonAsJObject("StaticData/levels_config");
         modeData = JsonLoader.LoadJsonAsJObject("StaticData/mode_config");
         rageData = JsonLoader.LoadJsonAsJObject("StaticData/rage_config");
+        bossData = JsonLoader.LoadJsonAsJObject("StaticData/boss_config");
         IsDataValid();
     }
 
@@ -41,7 +42,7 @@ public class Data
     {
         try
         {
-            if(buffData == null || bulletData == null || enemyData == null || globalData == null || levelsData == null || modeData == null || rageData == null )
+            if(buffData == null || bulletData == null || enemyData == null || globalData == null || levelsData == null || modeData == null || rageData == null || bossData == null)
             {
                 throw new System.Exception("数据初始化失败");
             }
