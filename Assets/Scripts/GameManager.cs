@@ -462,12 +462,7 @@ public class GameManager : MonoBehaviour
             skillButton.SwitchSceneType();
         }
 
-        if (currentLevel == levelList.Count)
-        {
-            Debug.LogWarning("成功通关所有关卡！");
-            GameSuccess();
-            yield break;
-        }
+        
         // 展示胜利界面
         GameObject winWindow = GameObject.Find("winWindow");
         if(winWindow != null)
@@ -496,6 +491,15 @@ public class GameManager : MonoBehaviour
         // 暂停游戏
         PauseGame();
 
+
+        // 如果当前关卡是最后一关，则直接通关，不需要选buff
+        if (currentLevel == levelList.Count - 1)
+        {
+            Debug.LogWarning("成功通关所有关卡！");
+            GameSuccess();
+            yield break;
+        }
+
         // 展示buff选择界面
         buffManager.ShowBuffChoose(currentLevelConfig.isBoss == 1, currentLevelConfig.buffId);
     }
@@ -521,7 +525,7 @@ public class GameManager : MonoBehaviour
     public void GameSuccess()
     {
         Debug.LogWarning("游戏通关");
-        // TODO: 瑞，进入通关结算界面
+        // TODO: 当前是restartgame，需要改成进入通关结算界面
         RestartGame();
     }
 

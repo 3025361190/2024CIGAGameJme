@@ -345,6 +345,11 @@ public class BulletController : MonoBehaviour
             Destroy(bullet);
 
         }
+        else if(collision.gameObject.CompareTag("Boss") && !state)
+        {
+            collision.gameObject.GetComponent<BossHealth>().HandleHit();
+            Destroy(bullet);
+        }
 
 
 

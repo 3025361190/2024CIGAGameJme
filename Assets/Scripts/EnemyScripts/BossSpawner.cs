@@ -126,9 +126,19 @@ public class BossSpawner : MonoBehaviour
             Debug.Log("未找到Boss组件");
         }
         // 赋值给Boss组件中的成员
-
         boss.damage = damage;
         boss.cooldownTime = attackCooldownTime;
+
+        // 获取BossHealth组件
+        if (!instantiate.TryGetComponent<BossHealth>(out BossHealth bossHealth))
+        {
+            Debug.Log("未找到BossHealth组件");
+        }
+        // 赋值给BossHealth组件中的成员
+        bossHealth.SetBossHealthPoint(bossHealthPoint);
+
+
+
 
         bossList.Add(instantiate);
         bossCount++;

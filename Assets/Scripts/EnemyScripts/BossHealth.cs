@@ -19,6 +19,7 @@ public class BossHealth : MonoBehaviour
     private Color originalColor;                // boss图片原始颜色
     private float flashDuration;                    // 闪烁持续时间
 
+    // TODO: 葛，绑定死亡动画
     public GameObject deadAnimation;               // 死亡动画的预制体，在unity编辑器中拖动赋值
     
 
@@ -111,6 +112,13 @@ public class BossHealth : MonoBehaviour
         UpdateHealthDisplay();
     }
 
+    public void SetBossHealthPoint(int healthPoint)
+    {
+        bossHealthPoint = healthPoint;
+        currentHealth = bossHealthPoint;
+        UpdateHealthDisplay();
+    }
+
 
     private void UpdateHealthDisplay()
     {
@@ -157,22 +165,16 @@ public class BossHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+     // boss被子弹击中时,处理击中事件,由子弹调用
+    public void HandleHit()
     {
-        // 从 GameManager 获取当前生命值并减少
-        currentHealth -= damage;
-        
+        currentHealth -= 1;
         // 确保生命值不会小于0
         if (currentHealth < 0)
         {
             currentHealth = 0;
         }
-
-        // 更新血量显示
         UpdateHealthDisplay();
-
-        // 触发受伤闪烁效果
-        // Debug.Log("TriggerFlash called: " + flashDuration);
         if (spriteRenderer != null)
         {
             isFlashing = true;
@@ -181,7 +183,7 @@ public class BossHealth : MonoBehaviour
         }
 
         // 检查是否死亡
-        if (currentHealth <= 0)
+        if (GameManager.Instance.currentHealth <= 0)
         {
             Die();
         }
@@ -213,6 +215,8 @@ public class BossHealth : MonoBehaviour
         }
 
         Destroy(gameObject); // 销毁当前敌人对象
-        // 是否补充死亡动画
     }
 }
+
+
+// TODO: 血条跟随boss移动无法实现，现在和player血条在同一位置，详情查看boss预制体

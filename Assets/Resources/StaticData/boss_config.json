@@ -1,7 +1,7 @@
 {
   "moveSpeed": 5.0,
   "damage": 5,
-  "randomRange": 5.0,
+  "randomRange": 0.3,
   "changeDirectionInterval": 1.0,
   "knockbackBaseForce": 10.0,
   "knockbackTime": 0.5,

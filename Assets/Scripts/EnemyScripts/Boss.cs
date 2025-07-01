@@ -49,41 +49,6 @@ public class Boss : MonoBehaviour
         canTakeDamage = true;  // 冷却完毕，可以再次造成伤害
     }
 
-    // TODO: 瑞，移到bossHealth.cs中
-    // public void HandleHit(ColorType bulletColor)
-    // {
-    //     // Debug.Log("Enemy hit by bullet");
-    //     if (bulletColor == enemyColor && !isChaining)
-    //     {
-    //         TriggerChainEffect(enemyColor);
-    //     }
-    //     else
-    //     {
-    //         // 敌人被击中,但是颜色不匹配,或者已经触发过连锁。则不触发连锁效果,敌人立即死亡
-    //         Die();
-    //     }
-    // }
-
-    // public void Die()
-    // {
-    //     Vector3 currentPosition = transform.position; // 使用 transform.position 获取当前对象的位置
-    //     GameObject newPrefabInstance = Instantiate(bossBaozha, currentPosition, Quaternion.identity);
-
-    //     // 获取 BossSpawner 的引用并调用 RemoveBoss 方法
-    //     GameObject spawnerObject = GameObject.Find("BossSpawnerObject");
-    //     if (spawnerObject != null)
-    //     {
-    //         BossSpawner[] bossSpawners = spawnerObject.GetComponents<BossSpawner>();
-    //         foreach (var bossSpawner in bossSpawners)
-    //         {
-    //             // 暴力遍历所有BossSpawner，并调用RemoveBoss方法，在Remove中判断是否包含当前boss
-    //             bossSpawner.RemoveBoss(gameObject);
-    //         }
-    //     }
-
-    //     Destroy(gameObject); // 销毁当前敌人对象
-    // }
-
     // Update is called once per frame
     void Update()
     {
