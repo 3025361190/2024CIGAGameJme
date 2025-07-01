@@ -1,7 +1,7 @@
 /*
 文件名：Buff_18.cs
 编辑人：没道理啊
-文件描述：更加清汤buff
+文件描述：多多清汤buff
 */
 using System.Collections;
 using System.Collections.Generic;
