@@ -156,14 +156,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5431722583439510489}
-  - component: {fileID: 4196091102221293215}
-  - component: {fileID: 3297812194761331955}
   - component: {fileID: 6385417194641242877}
   - component: {fileID: 6635884042504001812}
   - component: {fileID: 2061933498641252554}
+  - component: {fileID: -1319648626515428928}
+  - component: {fileID: -3123958680250522255}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Enemy
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -186,44 +186,6 @@ Transform:
   - {fileID: 1432063541346197722}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4196091102221293215
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3747182641045328299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49348d924aaf7a144975cc3d529e7e71, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPosition: {x: 0, y: 0}
-  moveSpeed: 0.3
-  randomRange: 0.3
-  changeDirectionInterval: 3
-  knockbackBaseForce: 0
-  knockbackTime: 1
-  bufferTime: 2
-  chainKnockbackForceMultiplier: 0
---- !u!114 &3297812194761331955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3747182641045328299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cae3a9a770d5d8b4b80a5e4e470bacf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyColor: 0
-  damage: 0
-  ChainEffectRadius: 2
-  chainExplosionDelay: 0
-  cooldownTime: 1
-  baozha: {fileID: 581044435470829640, guid: 340067860597b17468819cdd2d13842b, type: 3}
 --- !u!50 &6385417194641242877
 Rigidbody2D:
   serializedVersion: 4
@@ -338,6 +300,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1319648626515428928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3747182641045328299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cf4554ddd418e74cbe5444e5fa75f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3123958680250522255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3747182641045328299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49348d924aaf7a144975cc3d529e7e71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPosition: {x: 0, y: 0}
+  moveSpeed: 0
+  randomRange: 0
+  changeDirectionInterval: 0
+  knockbackBaseForce: 0
+  knockbackTime: 0
+  bufferTime: 0
+  chainKnockbackForceMultiplier: 0
 --- !u!1 &6074555438061851407
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - Infinity
   - SwitchEntry
+  - Boss
   layers:
   - Default
   - TransparentFX
