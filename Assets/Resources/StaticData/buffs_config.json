@@ -98,7 +98,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 5
+            "value": 500
         },
         {
             "buffId": 9,
@@ -129,9 +129,9 @@
             "buffIcon": "attack",
             "buffDuration": -1,
             "buffStackable": true,
-            "stackType": 0,
+            "stackType": 1,
             "isNormalBuff": true,
-            "value": 5
+            "value": 3
         },
         {
             "buffId": 12,
@@ -142,7 +142,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 5
+            "value": 2
         },
         {
             "buffId": 13,
@@ -179,8 +179,8 @@
         },
         {
             "buffId": 16,
-            "buffName": "足够倒霉",
-            "buffDescription": "无任何效果，遇到我算你倒霉",
+            "buffName": "碰碰运气",
+            "buffDescription": "下一关有70%几率使子弹数乘5倍，但也有30%失去一半的子弹",
             "buffIcon": "default",
             "buffDuration": -1,
             "buffStackable": true,
@@ -190,8 +190,8 @@
         },
         {
             "buffId": 17,
-            "buffName": "碰碰运气",
-            "buffDescription": "下一关有70%几率使子弹数乘5倍，但也有30%失去一半的子弹",
+            "buffName": "足够倒霉",
+            "buffDescription": "无任何效果，遇到我算你倒霉",
             "buffIcon": "default",
             "buffDuration": -1,
             "buffStackable": true,

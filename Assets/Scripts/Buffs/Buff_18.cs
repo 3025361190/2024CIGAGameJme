@@ -42,7 +42,7 @@ public class Buff_18 : BaseBuff
         base.ActivateBuff();
         if(stackType == 0)
         {
-            GameManager.Instance.data.modeData["splitModeCD"] = GameManager.Instance.data.modeData["splitModeCD"].ToObject<float>() + value;
+            GameManager.Instance.data.modeData["splitModeCD"] = GameManager.Instance.data.modeData["splitModeCD"].ToObject<float>() - value;
         }
         else if(stackType == 1)
         {
