@@ -7,5 +7,7 @@
   "knockbackTime": 0.5,
   "bufferTime": 1.0,
   "attackCooldownTime": 1.5,
-  "chainKnockbackForceMultiplier": 1.2
+  "chainKnockbackForceMultiplier": 1.2,
+  "flashDuration": 0.5,
+  "flashInterval": 0.1
 }

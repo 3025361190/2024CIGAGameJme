@@ -94,6 +94,8 @@
   | `bufferTime` | float | BOSS击退后的缓冲时间 |
   | `attackCooldownTime` | float | BOSS伤害冷却时间 |
   | `chainKnockbackForceMultiplier` | float | BOSS连锁击退的力系数 |
+  | `flashDuration` | float | BOSS闪烁持续时间 |
+  | `flashInterval` | float | BOSS闪烁间隔时间 |
 
 
 
