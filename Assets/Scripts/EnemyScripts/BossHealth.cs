@@ -1,13 +1,13 @@
 /*
-文件名：Boss.cs
+文件名：BossHealth.cs
 编辑人：Fortunate瑞
-文件描述：boss类,用于管理boss的逻辑,挂载在boss预制体上
+文件描述：boss血量类,用于管理boss的血量
 */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boss : MonoBehaviour
+public class BossHealth : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -21,6 +21,3 @@ public class Boss : MonoBehaviour
         
     }
 }
-
-
-// TODO: 瑞，Boss.cs,BossSpawner.cs,BossMovement.cs ,boss应当由血条逻辑
