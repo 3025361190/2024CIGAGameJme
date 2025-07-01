@@ -44,7 +44,7 @@ public class Buff_2 : BaseBuff
         base.ActivateBuff();
         if(stackType == 0)
         {
-            GameManager.Instance.data.enemyData["moveSpeed"] = GameManager.Instance.data.enemyData["moveSpeed"].ToObject<float>() + value;
+            GameManager.Instance.data.enemyData["moveSpeed"] = GameManager.Instance.data.enemyData["moveSpeed"].ToObject<float>() - value;
         }
         else if(stackType == 1)
         {
