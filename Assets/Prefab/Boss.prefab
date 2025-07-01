@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 2061933498641252554}
   - component: {fileID: -1319648626515428928}
   - component: {fileID: -3123958680250522255}
+  - component: {fileID: 1740349028921153942}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Boss
@@ -312,6 +313,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cf4554ddd418e74cbe5444e5fa75f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossHealthPoint: 0
+  healthSlider: {fileID: 0}
+  healthSliderFill: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  deadAnimation: {fileID: 0}
+  isFlashing: 0
 --- !u!114 &-3123958680250522255
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +339,22 @@ MonoBehaviour:
   knockbackTime: 0
   bufferTime: 0
   chainKnockbackForceMultiplier: 0
+--- !u!114 &1740349028921153942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3747182641045328299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca3501d8cc787184a913e15716fa97ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  ChainEffectRadius: 0
+  chainExplosionDelay: 0
+  cooldownTime: 0
 --- !u!1 &6074555438061851407
 GameObject:
   m_ObjectHideFlags: 0
