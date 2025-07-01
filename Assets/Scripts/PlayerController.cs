@@ -231,6 +231,19 @@ public class PlayerController : MonoBehaviour
         float shootHorizontal = shootJoystick.Horizontal;
         float shootVertical = shootJoystick.Vertical;
 
+        // 检查是否有触摸
+        if (Input.GetMouseButtonDown(0)) // 0为左键或单指触摸
+        {
+            Vector2 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            if(shootJoystick.Horizontal == 0 || shootJoystick.Vertical == 0)
+            {
+                shootHorizontal = touchPos.x - transform.position.x;
+                shootVertical = touchPos.y - transform.position.y;
+            }
+        }
+        
+
         if (shootHorizontal != 0 || shootVertical != 0)
         {
             RotatePlayer(shootHorizontal, shootVertical);
