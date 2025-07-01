@@ -406,6 +406,11 @@ public class GameManager : MonoBehaviour
             // Debug.Log($"当前关卡所有敌人已消灭");
         }
     }
+    // 获取当前关卡已经经过的时间
+    public float GetPassedTime()
+    {
+        return timer.GetPassedTime();
+    }
 
     // 判断关卡是否结束
     public void IsLevelEnd()

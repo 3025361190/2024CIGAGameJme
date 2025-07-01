@@ -97,4 +97,9 @@ public class Timer : MonoBehaviour
         currentTime = newTime;
         UpdateTimerDisplay();
     }
+
+    public float GetPassedTime()
+    {
+        return maxTime - currentTime;
+    }
 }
