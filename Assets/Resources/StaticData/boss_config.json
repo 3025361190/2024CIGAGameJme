@@ -3,11 +3,11 @@
   "damage": 5,
   "randomRange": 0.3,
   "changeDirectionInterval": 1.0,
-  "knockbackBaseForce": 10.0,
-  "knockbackTime": 0.5,
-  "bufferTime": 0.2,
+  "knockbackBaseForce": 2.5,
+  "knockbackTime": 0.3,
+  "bufferTime": 0.5,
   "attackCooldownTime": 1.5,
-  "chainKnockbackForceMultiplier": 1.2,
+  "chainKnockbackForceMultiplier": 0.9,
   "flashDuration": 0.5,
   "flashInterval": 0.9
 }

@@ -134,6 +134,7 @@ public class BossSpawner : MonoBehaviour
         {
             Debug.Log("未找到BossHealth组件");
         }
+        // Debug.Log("bossSpawner中调用SetBossHealthPoint");
         // 赋值给BossHealth组件中的成员
         bossHealth.SetBossHealthPoint(bossHealthPoint);
 

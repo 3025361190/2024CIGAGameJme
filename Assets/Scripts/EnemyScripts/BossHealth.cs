@@ -33,7 +33,53 @@ public class BossHealth : MonoBehaviour
     private bool isRedColor = false;    // 当前是否为红色
 
 
-
+    void Awake()
+    {
+        if(spriteRenderer == null)
+        {
+            spriteRenderer = GameObject.Find("body");
+            if(spriteRenderer == null)
+            {
+                Debug.LogError("未找到body物体！");
+            }
+        }
+        // 用名字获取子组件引用
+        if (spriteRenderer != null)
+        {
+            originalColor = spriteRenderer.GetComponent<SpriteRenderer>().color;
+        }else
+        {
+            Debug.LogError("未找到body物体的SpriteRenderer组件！");
+        }
+        // 查找并绑定血量滑动条和填充图片
+        Transform sliderTransform = transform.Find("Canvas/healthSlider");
+        if (sliderTransform != null)
+        {
+            healthSlider = sliderTransform.GetComponent<Slider>();
+            if (healthSlider == null)
+            {
+                Debug.LogError("未找到 Slider 组件！");
+            }
+            Transform fillTransform = sliderTransform.Find("Fill Area/healthSliderFill");
+            if (fillTransform != null)
+            {
+                healthSliderFill = fillTransform.GetComponent<Image>();
+                if (healthSliderFill == null)
+                {
+                    Debug.LogError("未找到 Image 组件！");
+                }
+            }
+            else
+            {
+                Debug.LogError("未找到 Fill Area/healthSliderFill 子物体！");
+            }
+            
+        }
+        else
+        {
+            Debug.LogError("找不到 Canvas/healthSlider 子物体！");
+        }
+    }
 
 
     // Start is called before the first frame update
@@ -56,64 +102,15 @@ public class BossHealth : MonoBehaviour
         {
             Debug.LogError("加载全局配置失败！");
         }
-        if(spriteRenderer == null)
-        {
-            spriteRenderer = GameObject.Find("body");
-            if(spriteRenderer == null)
-            {
-                Debug.LogError("未找到body物体！");
-            }
-        }
-        // 用名字获取子组件引用
-        if (spriteRenderer != null)
-        {
-            originalColor = spriteRenderer.GetComponent<SpriteRenderer>().color;
-        }else
-        {
-            Debug.LogError("未找到body物体的SpriteRenderer组件！");
-        }
-        // 查找并绑定血量滑动条
-        if (healthSlider == null)
-        {
-            GameObject sliderObj = GameObject.Find("healthSlider");
-            if (sliderObj != null)
-            {
-                healthSlider = sliderObj.GetComponent<Slider>();
-            }
-            else
-            {
-                Debug.LogError("未找到HealthSlider物体！");
-            }
-            if (healthSlider == null)
-            {
-                Debug.LogError("未找到血量滑动条组件！");
-            }
-        }
-
-        // 查找并绑定血量滑动条填充图片
-        if (healthSliderFill == null)
-        {
-            GameObject fillObj = GameObject.Find("healthSliderFill");
-            if (fillObj != null)
-            {
-                healthSliderFill = fillObj.GetComponent<Image>();
-            }
-            else
-            {
-                Debug.LogError("未找到HealthSliderFill物体！");
-            }
-            if (healthSliderFill == null)
-            {
-                Debug.LogError("未找到血量滑动条填充图片组件！");
-            }
-        }
-
+        
+        // Debug.Log("初始化中调用UpdateHealthDisplay");
         // 初始化显示
         UpdateHealthDisplay();
     }
 
     public void SetBossHealthPoint(int healthPoint)
     {
+        // Debug.Log("SetBossHealthPoint被调用，healthPoint: " + healthPoint);
         bossHealthPoint = healthPoint;
         currentHealth = bossHealthPoint;
         UpdateHealthDisplay();
@@ -122,12 +119,14 @@ public class BossHealth : MonoBehaviour
 
     private void UpdateHealthDisplay()
     {
+        // Debug.Log("UpdateHealthDisplay被调用");
         if (healthSlider != null)
         {
             healthSlider.value = currentHealth * 1.0f / bossHealthPoint;
             // 血条颜色随生命值变化而线性变化
             float healthPercentage = currentHealth * 1.0f / bossHealthPoint;
             healthSliderFill.color = Color.Lerp(Color.red, Color.green, healthPercentage);
+            // Debug.Log("healthSlider.value: " + healthSlider.value);
         }
         else
         {
@@ -168,7 +167,9 @@ public class BossHealth : MonoBehaviour
      // boss被子弹击中时,处理击中事件,由子弹调用
     public void HandleHit()
     {
+        
         currentHealth -= 1;
+        // Debug.Log("boss被击中！，当前血量：" + currentHealth + "/" + bossHealthPoint);
         // 确保生命值不会小于0
         if (currentHealth < 0)
         {
@@ -183,7 +184,7 @@ public class BossHealth : MonoBehaviour
         }
 
         // 检查是否死亡
-        if (GameManager.Instance.currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             Die();
         }
@@ -199,7 +200,7 @@ public class BossHealth : MonoBehaviour
         }
         else
         {
-            Debug.LogError("未绑定死亡动画预制体！");
+            Debug.LogWarning("未绑定死亡动画预制体！");
         }
 
         // 获取 BossSpawner 的引用并调用 RemoveBoss 方法
