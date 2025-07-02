@@ -4,7 +4,7 @@
         {
             "levelId" : 0,
             "isBoss" : 0,
-            "bossHealthPoint" : 100,
+            "bossHealthPoint" : 0,
             "monsNum" : 0,
             "bossTime" : 0,
             "buffId" : [],
@@ -13,7 +13,7 @@
         {
             "levelId" : 1,
             "isBoss" : 0,
-            "bossHealthPoint" : 100,
+            "bossHealthPoint" : 10,
             "monsNum" : 2,
             "bossTime" : 30,
             "buffId" : [1,2,4,5],
@@ -22,8 +22,8 @@
         {
             "levelId" : 2,
             "isBoss" : 1,
-            "bossHealthPoint" : 100,
-            "monsNum" : 30,
+            "bossHealthPoint" : 10,
+            "monsNum" : 5,
             "bossTime" : 2,
             "buffId" : [1,2,4,5],
             "time" : 101
