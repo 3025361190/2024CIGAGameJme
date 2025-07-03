@@ -27,51 +27,6 @@
             "bossTime" : 2,
             "buffId" : [1,2,4,5],
             "time" : 101
-        },
-        {
-            "levelId" : 3,
-            "isBoss" : 0,
-            "bossHealthPoint" : 100,
-            "monsNum" : 40,
-            "bossTime" : 32,
-            "buffId" : [1,2,4,5],
-            "time" : 102
-        },
-        {
-            "levelId" : 4,
-            "isBoss" : 0,
-            "bossHealthPoint" : 100,
-            "monsNum" : 50,
-            "bossTime" : 33,
-            "buffId" : [1,2,4,5],
-            "time" : 103
-        },
-        {
-            "levelId" : 5,
-            "isBoss" : 0,
-            "bossHealthPoint" : 100,
-            "monsNum" : 104,
-            "bossTime" : 34,
-            "buffId" : [1,2,4,5],
-            "time" : 104
-        },
-        {
-            "levelId" : 6,
-            "isBoss" : 0,
-            "bossHealthPoint" : 100,
-            "monsNum" : 105,
-            "bossTime" : 35,
-            "buffId" : [1,2,4,5],
-            "time" : 105
-        },
-        {
-            "levelId" : 7,
-            "isBoss" : 0,
-            "bossHealthPoint" : 100,
-            "monsNum" : 106,
-            "bossTime" : 36,
-            "buffId" : [1,2,4,5],
-            "time" : 106
         }
     ]
 }

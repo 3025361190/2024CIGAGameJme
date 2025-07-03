@@ -477,16 +477,11 @@ public class GameManager : MonoBehaviour
         GameObject winWindow = GameObject.Find("winWindow");
         if(winWindow != null)
         {
-            var winWindowAnimator = winWindow.GetComponent<Animator>();
-            if (winWindowAnimator != null)
-            {
-                winWindowAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
-            }
+            SetAnimatorUnscaledTimeRecursively(winWindow.transform);
             foreach(Transform child in winWindow.transform)
             {
                 child.gameObject.SetActive(true);
             }
-            
         }
         else
         {
@@ -537,7 +532,7 @@ public class GameManager : MonoBehaviour
             }
             
             // 找到Button并绑定点击事件
-            Button restartButton = tongguanWindow.transform.Find("Tongguo/bg/Button (Legacy)").GetComponent<Button>();
+            Button restartButton = tongguanWindow.transform.Find("Tongguo/Button (Legacy)").GetComponent<Button>();
             if(restartButton != null)
             {
                 restartButton.onClick.AddListener(RestartGame);
