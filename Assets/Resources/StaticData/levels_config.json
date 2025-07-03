@@ -27,6 +27,15 @@
             "bossTime" : 2,
             "buffId" : [1,2,4,5],
             "time" : 101
+        },
+        {
+            "levelId" : 3,
+            "isBoss" : 1,
+            "bossHealthPoint" : 10,
+            "monsNum" : 5,
+            "bossTime" : 2,
+            "buffId" : [1,2,4,5],
+            "time" : 101
         }
     ]
 }

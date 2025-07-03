@@ -634,6 +634,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1935fd823cadf9478e0b0185f068064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buffChoosed: {fileID: 4905426656125869981, guid: 5ea1d54e9ab74ae4f9c95a120497a2d5, type: 3}
+  buffShow: {fileID: 1394581760760393769, guid: aa09a7f381a2edc4c97a2c331b5efdb2, type: 3}
 --- !u!4 &435753952
 Transform:
   m_ObjectHideFlags: 0

@@ -3,6 +3,8 @@
 编辑人：fortunate瑞
 文件描述：用于管理buff，暂定继承MonoBehaviour
 绑定：在Mainmenu场景创建BuffManager对象，并绑定在BuffManager上
+      将buffChoosed预制体绑定在BuffManager上
+      将buffshow预制体绑定在BuffManager上
 */
 
 using System.Collections;
@@ -30,6 +32,11 @@ public class BuffManager : MonoBehaviour
             return instance;
         }
     }
+
+    // 绑定在BuffManager上的buffChoosed预制体
+    public GameObject buffChoosed;
+    // 绑定在BuffManager上的buffShow预制体
+    public GameObject buffShow;
 
     
 
@@ -67,6 +74,15 @@ public class BuffManager : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
+        // 检查预制体是否绑定
+        if(buffChoosed == null)
+        {
+            Debug.LogError("未绑定buffChoosed预制体");
+        }
+        if(buffShow == null)
+        {
+            Debug.LogError("未绑定buffShow预制体");
+        }
     }
 
     // Start is called before the first frame update
