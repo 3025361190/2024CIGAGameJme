@@ -218,8 +218,3 @@ public class BossHealth : MonoBehaviour
         Destroy(gameObject); // 销毁当前敌人对象
     }
 }
-
-
-// TODO: 血条跟随boss移动无法实现，现在和player血条在同一位置，详情查看boss预制体
-// TODO：re:因为没有独立的Canvas，所以血条无法跟随boss移动，
-// 需要在boss预制体中添加一个Canvas，并将血条放在Canvas中，

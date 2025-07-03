@@ -18,6 +18,8 @@ using Assets.Scripts.Data;
 using UnityEngine.Playables;
 using UnityEngine.UI;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
+using Newtonsoft.Json.Linq;
 // using static Unity.VisualScripting.Metadata;
 
 public class GameManager : MonoBehaviour
@@ -442,6 +444,14 @@ public class GameManager : MonoBehaviour
     public IEnumerator LevelSuccess()
     {
         Debug.LogWarning("关卡成功");
+        // 如果当前关卡是最后一关，则直接显示通关界面，不需要剩余操作
+        if (currentLevel == levelList.Count - 1)
+        {
+            Debug.LogWarning("成功通关所有关卡！");
+            PauseGame();
+            GameSuccess();
+            yield break;
+        }
         // 当前场景如果是白汤，则先主动调用回收子弹
         GameObject skillButtonObj = GameObject.Find("SkillButton");
         if (skillButtonObj == null)
@@ -483,22 +493,13 @@ public class GameManager : MonoBehaviour
             Debug.LogError("未找到名为winWindow的预制体");
         }
 
-        // 等待1.5秒
-        yield return new WaitForSeconds(1.5f);
-        // Debug.Log("1.5秒结束");
+        // 等待1秒
+        yield return new WaitForSeconds(1.0f);
+        // Debug.Log("1秒等待结束");
 
 
         // 暂停游戏
         PauseGame();
-
-
-        // 如果当前关卡是最后一关，则直接通关，不需要选buff
-        if (currentLevel == levelList.Count - 1)
-        {
-            Debug.LogWarning("成功通关所有关卡！");
-            GameSuccess();
-            yield break;
-        }
 
         // 展示buff选择界面
         buffManager.ShowBuffChoose(currentLevelConfig.isBoss == 1, currentLevelConfig.buffId);
@@ -525,8 +526,47 @@ public class GameManager : MonoBehaviour
     public void GameSuccess()
     {
         Debug.LogWarning("游戏通关");
-        // TODO: 当前是restartgame，需要改成进入通关结算界面
-        RestartGame();
+         // 展示通关界面
+        GameObject tongguanWindow = GameObject.Find("tongguanWindow");
+        if(tongguanWindow != null)
+        {
+            SetAnimatorUnscaledTimeRecursively(tongguanWindow.transform);
+            foreach(Transform child in tongguanWindow.transform)
+            {
+                child.gameObject.SetActive(true);
+            }
+            
+            // 找到Button并绑定点击事件
+            Button restartButton = tongguanWindow.transform.Find("Tongguo/bg/Button (Legacy)").GetComponent<Button>();
+            if(restartButton != null)
+            {
+                restartButton.onClick.AddListener(RestartGame);
+            }
+            else
+            {
+                Debug.LogError("未找到通关界面的回到主界面按钮");
+            }
+        }
+        else
+        {
+            Debug.LogError("未找到名为tongguanWindow的物体");
+        }
+    }
+
+    private void SetAnimatorUnscaledTimeRecursively(Transform transform)
+    {
+        // 设置当前物体的Animator
+        var animator = transform.GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.updateMode = AnimatorUpdateMode.UnscaledTime;
+        }
+
+        // 递归设置所有子物体
+        foreach (Transform child in transform)
+        {
+            SetAnimatorUnscaledTimeRecursively(child);
+        }
     }
 
     void SetLevelText()
