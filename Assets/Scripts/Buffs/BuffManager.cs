@@ -61,6 +61,10 @@ public class BuffManager : MonoBehaviour
     private List<int> showBuffIds = new();
     // 记录当前选中的buff卡面index
     private int choosenBuffCardIndex = 0;
+    // 记录当前已选buff界面实例
+    private GameObject buffChoosedInstance;
+    // 记录当前Canvas
+    private GameObject Canvas;
 
 
 
@@ -136,6 +140,13 @@ public class BuffManager : MonoBehaviour
         showBuffIds.Clear();
         // 清空buffChoose
         buffChoose = null;
+        if(buffChoosedInstance != null)
+        {
+            Destroy(buffChoosedInstance);
+            buffChoosedInstance = null;
+        }
+        // 获取Canvas
+        Canvas = GameObject.Find("Canvas");
     }
 
     // 递归设置所有层级的Animator组件为UnscaledTime
@@ -238,6 +249,16 @@ public class BuffManager : MonoBehaviour
             if (nextLevelBtn != null)
             {
                 nextLevelBtn.gameObject.SetActive(false);
+            }
+            // 给按钮绑定事件
+            Transform showBuffChoosedBtn = buffChoose.transform.Find("buffChoose/showBuffChoosedBtn");
+            if (showBuffChoosedBtn != null)
+            {
+                showBuffChoosedBtn.GetComponent<Button>().onClick.AddListener(ShowChoosedBuff);
+            }
+            else
+            {
+                Debug.LogError("未找到showBuffChoosedBtn");
             }
         }
         else
@@ -365,7 +386,11 @@ public class BuffManager : MonoBehaviour
         {
             BaseBuff buff = buffs[buffId];
             buff.ActivateBuff();
-            activeBuffIds.Add(buffId);
+            // 检查buffId是否已经存在
+            if(!activeBuffIds.Contains(buffId))
+            {
+                activeBuffIds.Add(buffId);
+            }
             int currentStack = buff.GetCurrentStack();
             bool isStackable = buff.buffStackable;
             if(!isStackable && currentStack == 1)
@@ -386,6 +411,83 @@ public class BuffManager : MonoBehaviour
         {
             Debug.LogError($"未找到buff：{buffId}");
         }
+    }
+
+
+    // 展示已选buff界面
+    public void ShowChoosedBuff()
+    {
+        // 避免重复点击showBuffChoosedBtn
+        if(buffChoosedInstance != null)
+        {
+            return;
+        }
+        // 创建buffchoosed实例
+        buffChoosedInstance = Instantiate(buffChoosed,Canvas.transform);
+        // 获取关闭按钮
+        Transform closeBtn = buffChoosedInstance.transform.Find("GameObject/close (1)");
+        if (closeBtn != null)
+        {
+            closeBtn.GetComponent<Button>().onClick.AddListener(CloseChoosedBuff);
+        }
+        else
+        {
+            Debug.LogError("未找到closeBtn");
+        }
+        // 获取buffchoosed实例下的layout的Transform
+        Transform layout = buffChoosedInstance.transform.Find("Viewport/Content/layout");
+        if(layout != null)
+        {
+            // 在layout下创建buffshow实例
+            foreach(int buffId in activeBuffIds)
+            {
+                BaseBuff buff = buffs[buffId];
+                GameObject buffShowInstance = Instantiate(buffShow, layout);
+                // 设置buff图标
+                var iconImage = buffShowInstance.transform.Find("icon").GetComponent<Image>();
+                if (!string.IsNullOrEmpty(buff.buffIcon))
+                {
+                    Sprite iconSprite = Resources.Load<Sprite>($"BuffIcon/{buff.buffIcon}");
+                    if (iconSprite != null)
+                    {
+                        iconImage.sprite = iconSprite;
+                        // Debug.Log($"buff{index+1}卡片的icon设置为{buff.buffIcon}");
+                    }
+                    else
+                    {
+                        Debug.LogError($"iconSprite不正确，buffIcon:{buff.buffIcon}，使用了占位图标");
+                    }
+                }
+                // 设置buff名称
+                var describeTitle = buffShowInstance.transform.Find("describeTitle");
+                if (describeTitle != null)
+                {
+                    describeTitle.GetComponent<Text>().text = buff.buffName;
+                }
+                // 设置buff描述
+                var describe = buffShowInstance.transform.Find("describe");
+                if (describe != null)
+                {
+                    describe.GetComponent<Text>().text = buff.buffDescription;
+                }
+                // 设置buff层数
+                var stack = buffShowInstance.transform.Find("num");
+                if (stack != null)
+                {
+                    stack.GetComponent<Text>().text = buff.GetCurrentStack().ToString();
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("未找到layout");
+        }
+    }
+    // 关闭已选buff界面
+    public void CloseChoosedBuff()
+    {
+        Destroy(buffChoosedInstance);
+        buffChoosedInstance = null;
     }
 
     // Update is called once per frame
