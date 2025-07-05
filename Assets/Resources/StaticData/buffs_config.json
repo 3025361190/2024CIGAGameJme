@@ -30,9 +30,9 @@
             "buffIcon": "monster",
             "buffDuration": -1,
             "buffStackable": true,
-            "stackType": 0,
+            "stackType": 1,
             "isNormalBuff": true,
-            "value": 5
+            "value": 0.5
         },
                 {
             "buffId": 3,
@@ -52,9 +52,9 @@
             "buffIcon": "player",
             "buffDuration": -1,
             "buffStackable": true,
-            "stackType": 0,
+            "stackType": 1,
             "isNormalBuff": true,
-            "value": 5
+            "value": 1.5
         },
         {
             "buffId": 5,
@@ -63,9 +63,9 @@
             "buffIcon": "boom",
             "buffDuration": -1,
             "buffStackable": false,
-            "stackType": 0,
+            "stackType": 1,
             "isNormalBuff": true,
-            "value": 5
+            "value": 1.5
         },
         {
             "buffId": 6,
