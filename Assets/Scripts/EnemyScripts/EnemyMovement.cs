@@ -40,7 +40,7 @@ public class EnemyMovement : MonoBehaviour
         }
 
         // 冻结旋转
-       rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         
 
         // 初始化方向为朝向目标位置的方向

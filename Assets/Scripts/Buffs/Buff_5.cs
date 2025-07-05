@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 public class Buff_5 : BaseBuff
 {
     private float value;
-    private float originalchainExplosionRange;
+    private float originalChainEffectRadius;
 
     public override void Init()
     {
@@ -28,7 +28,7 @@ public class Buff_5 : BaseBuff
         stackType = buffConfig["stackType"].ToObject<int>();
         isNormalBuff = buffConfig["isNormalBuff"].ToObject<bool>();
         value = buffConfig["value"].ToObject<float>();
-        originalchainExplosionRange = GameManager.Instance.data.enemyData["chainEffectRadius"].ToObject<float>();
+        originalChainEffectRadius = GameManager.Instance.data.enemyData["chainEffectRadius"].ToObject<float>();
         // 初始化运行时参数
         currentStack = 0;
         isActive = false;
@@ -52,6 +52,6 @@ public class Buff_5 : BaseBuff
     public override void DeactivateBuff()
     {
         base.DeactivateBuff();
-        GameManager.Instance.data.enemyData["chainEffectRadius"] = originalchainExplosionRange;
+        GameManager.Instance.data.enemyData["chainEffectRadius"] = originalChainEffectRadius;
     }    
 }

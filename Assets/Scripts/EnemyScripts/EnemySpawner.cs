@@ -27,7 +27,7 @@ public class EnemySpawner : MonoBehaviour
     public float knockbackTime;             // 击退持续时间
     public float bufferTime;                // 缓冲时间
     public float attackCooldownTime;        // 伤害冷却时间
-    public float chainExplosionRange;       // 连锁爆炸范围
+    public float chainEffectRadius;         // 连锁效果半径
     public float chainExplosionDelay;       // 连锁爆炸延迟
     public float chainKnockbackForceMultiplier;           // 连锁击退的力系数
     public int maxEnemyCount;                // 最大敌人数量
@@ -70,7 +70,7 @@ public class EnemySpawner : MonoBehaviour
                 knockbackTime = enemyConfig["knockbackTime"].ToObject<float>();
                 bufferTime = enemyConfig["bufferTime"].ToObject<float>();
                 attackCooldownTime = enemyConfig["attackCooldownTime"].ToObject<float>();
-                chainExplosionRange = enemyConfig["chainEffectRadius"].ToObject<float>();
+                chainEffectRadius = enemyConfig["chainEffectRadius"].ToObject<float>();
                 chainExplosionDelay = enemyConfig["chainExplosionDelay"].ToObject<float>();
                 chainKnockbackForceMultiplier = enemyConfig["chainKnockbackForceMultiplier"].ToObject<float>();
             }
@@ -161,7 +161,7 @@ public class EnemySpawner : MonoBehaviour
         enemy.enemyColor = enemyColor;
         enemy.damage = damage;
         enemy.cooldownTime = attackCooldownTime;
-        enemy.ChainEffectRadius = chainExplosionRange;
+        enemy.ChainEffectRadius = chainEffectRadius;
         enemy.chainExplosionDelay = chainExplosionDelay;
 
         enemyList.Add(instantiate);

@@ -113,6 +113,7 @@ public class BossSpawner : MonoBehaviour
         }
         // 赋值给EnemyMovement组件中的成员
         enemyMovement.moveSpeed = moveSpeed;
+        Debug.Log($"bossSpawner中赋值moveSpeed: {moveSpeed}");
         enemyMovement.randomRange = randomRange;
         enemyMovement.changeDirectionInterval = changeDirectionInterval;
         enemyMovement.knockbackBaseForce = knockbackBaseForce;
