@@ -535,6 +535,7 @@ GameObject:
   - component: {fileID: 435753949}
   - component: {fileID: 435753948}
   - component: {fileID: 435753947}
+  - component: {fileID: 435753953}
   m_Layer: 0
   m_Name: BuffManager
   m_TagString: Untagged
@@ -634,7 +635,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1935fd823cadf9478e0b0185f068064, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffChoosed: {fileID: 4905426656125869981, guid: 5ea1d54e9ab74ae4f9c95a120497a2d5, type: 3}
   buffShow: {fileID: 1394581760760393769, guid: aa09a7f381a2edc4c97a2c331b5efdb2, type: 3}
 --- !u!4 &435753952
 Transform:
@@ -651,6 +651,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &435753953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435753946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 574e51bf1e8860b4785e6f03149bb558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffId: 0
+  buffName: 
+  buffDescription: 
+  buffIcon: 
+  buffDuration: 0
+  buffStackable: 0
+  stackType: 0
+  isNormalBuff: 0
 --- !u!1 &511685965
 GameObject:
   m_ObjectHideFlags: 0
