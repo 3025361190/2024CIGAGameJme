@@ -3,7 +3,6 @@
 编辑人：fortunate瑞
 文件描述：用于管理buff，暂定继承MonoBehaviour
 绑定：在Mainmenu场景创建BuffManager对象，并绑定在BuffManager上
-      将buffChoosed预制体绑定在BuffManager上
       将buffshow预制体绑定在BuffManager上
 */
 
@@ -33,8 +32,7 @@ public class BuffManager : MonoBehaviour
         }
     }
 
-    // 绑定在BuffManager上的buffChoosed预制体
-    public GameObject buffChoosed;
+
     // 绑定在BuffManager上的buffShow预制体
     public GameObject buffShow;
 
@@ -61,10 +59,9 @@ public class BuffManager : MonoBehaviour
     private List<int> showBuffIds = new();
     // 记录当前选中的buff卡面index
     private int choosenBuffCardIndex = 0;
-    // 记录当前已选buff界面实例
-    private GameObject buffChoosedInstance;
-    // 记录当前Canvas
-    private GameObject Canvas;
+
+    // 代码中绑定场景中的buffChoosed
+    private GameObject buffChoosed;
 
 
 
@@ -78,11 +75,6 @@ public class BuffManager : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(gameObject);
-        // 检查预制体是否绑定
-        if(buffChoosed == null)
-        {
-            Debug.LogError("未绑定buffChoosed预制体");
-        }
         if(buffShow == null)
         {
             Debug.LogError("未绑定buffShow预制体");
@@ -138,15 +130,10 @@ public class BuffManager : MonoBehaviour
         // 清空所有状态
         choosenBuffCardIndex = 0;
         showBuffIds.Clear();
-        // 清空buffChoose
+        // 解除buffChoose的绑定
         buffChoose = null;
-        if(buffChoosedInstance != null)
-        {
-            Destroy(buffChoosedInstance);
-            buffChoosedInstance = null;
-        }
-        // 获取Canvas
-        Canvas = GameObject.Find("Canvas");
+        // 解除buffChoosed的绑定
+        buffChoosed = null;
     }
 
     // 递归设置所有层级的Animator组件为UnscaledTime
@@ -260,6 +247,8 @@ public class BuffManager : MonoBehaviour
             {
                 Debug.LogError("未找到showBuffChoosedBtn");
             }
+            buffChoosed = buffChoose.transform.Find("buffChoose/buffChoosed").gameObject;
+            buffChoosed.SetActive(false);
         }
         else
         {
@@ -417,27 +406,21 @@ public class BuffManager : MonoBehaviour
     // 展示已选buff界面
     public void ShowChoosedBuff()
     {
-        // 避免重复点击showBuffChoosedBtn
-        if(buffChoosedInstance != null)
+        if(buffChoosed == null)
         {
+            Debug.LogError("未绑定buffChoosed");
             return;
         }
-        // 创建buffchoosed实例
-        buffChoosedInstance = Instantiate(buffChoosed,Canvas.transform);
-        // 获取关闭按钮
-        Transform closeBtn = buffChoosedInstance.transform.Find("GameObject/close (1)");
-        if (closeBtn != null)
-        {
-            closeBtn.GetComponent<Button>().onClick.AddListener(CloseChoosedBuff);
-        }
-        else
-        {
-            Debug.LogError("未找到closeBtn");
-        }
+        buffChoosed.SetActive(true);
         // 获取buffchoosed实例下的layout的Transform
-        Transform layout = buffChoosedInstance.transform.Find("Viewport/Content/layout");
+        Transform layout = buffChoosed.transform.Find("Viewport/Content/layout");
         if(layout != null)
         {
+            // 清空layout下的所有子物体
+            foreach(Transform child in layout)
+            {
+                Destroy(child.gameObject);
+            }
             // 在layout下创建buffshow实例
             foreach(int buffId in activeBuffIds)
             {
@@ -482,12 +465,6 @@ public class BuffManager : MonoBehaviour
         {
             Debug.LogError("未找到layout");
         }
-    }
-    // 关闭已选buff界面
-    public void CloseChoosedBuff()
-    {
-        Destroy(buffChoosedInstance);
-        buffChoosedInstance = null;
     }
 
     // Update is called once per frame
