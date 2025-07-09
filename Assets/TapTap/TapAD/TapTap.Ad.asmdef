@@ -1,0 +1,16 @@
+{
+    "name": "TapTap.Ad",
+    "references": [
+        "GUID:cffef248f453b47da98744cd467fdc6d",
+        "GUID:78b4eab872eac4aac8c45425f1f51c80"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
