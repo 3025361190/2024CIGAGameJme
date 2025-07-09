@@ -19,7 +19,6 @@ public class BossHealth : MonoBehaviour
     private Color originalColor;                // boss图片原始颜色
     private float flashDuration;                    // 闪烁持续时间
 
-    // TODO: 葛，绑定死亡动画
     public GameObject deadAnimation;               // 死亡动画的预制体，在unity编辑器中拖动赋值
     
 

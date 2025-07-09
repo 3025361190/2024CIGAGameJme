@@ -527,7 +527,7 @@ MonoBehaviour:
   healthSlider: {fileID: 0}
   healthSliderFill: {fileID: 0}
   spriteRenderer: {fileID: 0}
-  deadAnimation: {fileID: 0}
+  deadAnimation: {fileID: 129842386710503081, guid: f7298f697e8064a4c8c8e195960f303e, type: 3}
   isFlashing: 0
 --- !u!114 &-3123958680250522255
 MonoBehaviour:
