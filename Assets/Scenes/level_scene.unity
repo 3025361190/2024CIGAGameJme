@@ -2842,7 +2842,7 @@ MonoBehaviour:
   knockbackTime: 0
   bufferTime: 0
   attackCooldownTime: 0
-  chainExplosionRange: 0
+  chainEffectRadius: 0
   chainExplosionDelay: 0
   chainKnockbackForceMultiplier: 0
   maxEnemyCount: 0

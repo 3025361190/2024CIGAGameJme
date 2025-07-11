@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.unity3d.player"
+    xmlns:tools="http://schemas.android.com/tools">
+
+		<!-- TapAd 必须的权限-开始  -->
+		<!-- TargetVersion 31 及以上 通过时，需要该权限) deviceName 和下面的 BLUETOOTEH 互斥-->
+		<uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+		<!-- 广告获取坐标（经度、纬度、精度半径（米）、获取时间 毫秒）精准推送 -->
+		<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+		<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+		<!-- IMEI 、序列号、MEID 、IMSI 、 ICCID 等信息。TargetSdkVersion 4 以及更高需要申请 -->
+		<uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+		<!-- TapAd 必须的权限-结束  -->
+
+		<!-- TapAd 可选择权限-开始   -->
+		<!-- 获取网络状态信息   -->
+		<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+		<!-- 获取安装应用列表  Android 11 及以上版本才需声明，Android 11 以下版本无需申请 -->
+		<uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+		<!-- （targetVersion 31 以下）deviceName 和上面的 BLUETOOTH_CONNECT 互斥-->
+		<uses-permission android:name="android.permission.BLUETOOTH"/>
+		<!-- 允许应用请求安装软件包 -->
+		<uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES"/>
+		<!-- TapAd 可选择权限-结束   -->
+
+		<provider
+			android:authorities="${applicationId}.com.tds.ad.fileprovider"
+			android:name="com.tapsdk.tapad.internal.TapADFileProvider"
+			android:exported="false"
+			android:grantUriPermissions="true">
+			<meta-data
+				android:name="android.support.FILE_PROVIDER_PATHS"
+				android:resource="@xml/tapad_ad_file_path"/>
+		</provider>
+		<application>
+        <activity android:name="com.unity3d.player.UnityPlayerActivity"
+                  android:theme="@style/UnityThemeSelector">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+        </activity>
+    </application>
+</manifest>
