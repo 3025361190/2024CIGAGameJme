@@ -15,7 +15,7 @@ public class Buff_2 : BaseBuff
 {
     private float value;
     private float originalSpeed;
-    private float originalBossSpeed;
+    // private float originalBossSpeed;
 
     public override void Init()
     {
@@ -32,8 +32,7 @@ public class Buff_2 : BaseBuff
         stackType = buffConfig["stackType"].ToObject<int>();
         isNormalBuff = buffConfig["isNormalBuff"].ToObject<bool>();
         value = buffConfig["value"].ToObject<float>();
-        originalSpeed = GameManager.Instance.data.enemyData["moveSpeed"].ToObject<float>();
-        originalBossSpeed = GameManager.Instance.data.bossData["moveSpeed"].ToObject<float>();
+        // originalBossSpeed = GameManager.Instance.data.bossData["moveSpeed"].ToObject<float>();
         // 初始化运行时参数
         currentStack = 0;
         isActive = false;
@@ -44,15 +43,16 @@ public class Buff_2 : BaseBuff
     {
         // 保留父类逻辑
         base.ActivateBuff();
+        originalSpeed = GameManager.Instance.data.enemyData["moveSpeed"].ToObject<float>();
         if(stackType == 0)
         {
             GameManager.Instance.data.enemyData["moveSpeed"] = GameManager.Instance.data.enemyData["moveSpeed"].ToObject<float>() + value;
-            GameManager.Instance.data.bossData["moveSpeed"] = GameManager.Instance.data.bossData["moveSpeed"].ToObject<float>() + value;
+            // GameManager.Instance.data.bossData["moveSpeed"] = GameManager.Instance.data.bossData["moveSpeed"].ToObject<float>() + value;
         }
         else if(stackType == 1)
         {
             GameManager.Instance.data.enemyData["moveSpeed"] = GameManager.Instance.data.enemyData["moveSpeed"].ToObject<float>() * value;
-            GameManager.Instance.data.bossData["moveSpeed"] = GameManager.Instance.data.bossData["moveSpeed"].ToObject<float>() * value;
+            // GameManager.Instance.data.bossData["moveSpeed"] = GameManager.Instance.data.bossData["moveSpeed"].ToObject<float>() * value;
         }
     }
 
@@ -61,6 +61,6 @@ public class Buff_2 : BaseBuff
     {
         base.DeactivateBuff();
         GameManager.Instance.data.enemyData["moveSpeed"] = originalSpeed;
-        GameManager.Instance.data.bossData["moveSpeed"] = originalBossSpeed;
+        // GameManager.Instance.data.bossData["moveSpeed"] = originalBossSpeed;
     }    
 }

@@ -26,7 +26,7 @@
         {
             "buffId": 2,
             "buffName": "不要靠近",
-            "buffDescription": "减少怪移动速度",
+            "buffDescription": "减少小怪移动速度",
             "buffIcon": "monster",
             "buffDuration": -1,
             "buffStackable": true,
@@ -208,9 +208,9 @@
             "buffIcon": "monster",
             "buffDuration": -1,
             "buffStackable": true,
-            "stackType": 0,
+            "stackType": 1,
             "isNormalBuff": true,
-            "value": 5
+            "value": 0.5
         },
         {
             "buffId": 19,
