@@ -134,7 +134,9 @@
 
 | 参数 | 类型 | 说明 |
 | --- | --- | --- |
-| `value` | float | 成功概率（0.7） |
+| `value` | float | 成功概率 |
+| `value_win` | float | 赌中后子弹数倍率 |
+| `value_lose` | float | 赌输后子弹数倍率 |
 
 ### 18. 克制敌人（buffId:18）
 - 说明：大幅降低boss的移动速度
