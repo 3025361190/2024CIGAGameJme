@@ -356,7 +356,7 @@ public class BuffManager : MonoBehaviour
     // 确认选择buff
     public void BuffChooseConfirm()
     {
-        Debug.Log($"确认选择buff，当前选中的卡面index：{choosenBuffCardIndex}，showBuffIds：{string.Join(", ", showBuffIds)}");
+        // Debug.Log($"确认选择buff，当前选中的卡面index：{choosenBuffCardIndex}，showBuffIds：{string.Join(", ", showBuffIds)}");
         if(choosenBuffCardIndex == 0 || choosenBuffCardIndex == 1 || choosenBuffCardIndex == 2)
         {
             ActivateBuff(showBuffIds[choosenBuffCardIndex]);

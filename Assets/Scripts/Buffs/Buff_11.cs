@@ -18,7 +18,7 @@ public class Buff_11 : BaseBuff
         // 初始化buff参数
         buffId = 11;
         // 在buffs数组中查找对应buffId的配置
-        var buffsArray = GameManager.Instance.data.globalData["initialBulletCount"] as JArray;
+        var buffsArray = GameManager.Instance.data.buffData["buffs"] as JArray;
         var buffConfig = buffsArray.FirstOrDefault(b => b["buffId"].ToObject<int>() == buffId);
         buffName = buffConfig["buffName"].ToString();
         buffDescription = buffConfig["buffDescription"].ToString();
