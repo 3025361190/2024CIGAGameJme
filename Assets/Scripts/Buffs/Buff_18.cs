@@ -1,7 +1,7 @@
 /*
-文件名：Buff_2.cs
-编辑人：没道理啊
-文件描述：不要靠近buff
+文件名：Buff_18.cs
+编辑人：fortunate瑞
+文件描述：克制敌人buff
 */
 using System.Collections;
 using System.Collections.Generic;
