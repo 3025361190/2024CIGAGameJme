@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 435753956}
   - component: {fileID: 435753957}
   - component: {fileID: 435753958}
+  - component: {fileID: 435753960}
   - component: {fileID: 435753959}
   m_Layer: 0
   m_Name: BuffManager
@@ -787,6 +788,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0841c9de160a1b4dad2381f3fbd8365, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffId: 0
+  buffName: 
+  buffDescription: 
+  buffIcon: 
+  buffDuration: 0
+  buffStackable: 0
+  stackType: 0
+  isNormalBuff: 0
+--- !u!114 &435753960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435753946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5332fb5244f2cd44a157ea1f22b4e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buffId: 0
