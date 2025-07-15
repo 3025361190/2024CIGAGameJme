@@ -10,7 +10,7 @@ using System.Linq;
 using Newtonsoft.Json.Linq;
 
 
-public class Buff_16 : BaseBuff
+public class Buff_17 : BaseBuff
 {
     private float value;
     private float value_win;
