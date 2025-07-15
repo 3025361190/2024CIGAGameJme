@@ -7,7 +7,7 @@
     "knockbackTime": 0.3,
     "bufferTime": 0.5,
     "spawnInterval": 2.0,
-    "attackCooldownTime": 1.0,
+    "attackCooldownTime": 0.5,
     "chainEffectRadius": 1.8,
     "chainExplosionDelay": 0.5,
     "chainKnockbackForceMultiplier": 0.9

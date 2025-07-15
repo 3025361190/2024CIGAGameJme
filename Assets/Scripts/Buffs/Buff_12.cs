@@ -19,7 +19,7 @@ public class Buff_12 : BaseBuff
         // 初始化buff参数
         buffId = 12;
         // 在buffs数组中查找对应buffId的配置
-        var buffsArray = GameManager.Instance.data.globalData["bloodRaturnValue"] as JArray;
+        var buffsArray = GameManager.Instance.data.buffData["buffs"] as JArray;
         var buffConfig = buffsArray.FirstOrDefault(b => b["buffId"].ToObject<int>() == buffId);
         buffName = buffConfig["buffName"].ToString();
         buffDescription = buffConfig["buffDescription"].ToString();

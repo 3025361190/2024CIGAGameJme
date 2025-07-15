@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     public int damage;                          // 敌人伤害值
     public float ChainEffectRadius;             // 连锁效果半径
     public float chainExplosionDelay;           // 连锁爆炸延迟
-    public float cooldownTime;                  // 伤害冷却时间，由spawner赋值
+    public float attackCooldownTime;            // 伤害冷却时间，由spawner赋值
 
 
 
@@ -154,7 +154,7 @@ public class Enemy : MonoBehaviour
     private IEnumerator CollisionCooldown()
     {
         canTakeDamage = false;  // 设置不能造成伤害
-        yield return new WaitForSeconds(cooldownTime);  // 等待冷却时间
+        yield return new WaitForSeconds(attackCooldownTime);  // 等待冷却时间
         canTakeDamage = true;  // 冷却完毕，可以再次造成伤害
     }
 

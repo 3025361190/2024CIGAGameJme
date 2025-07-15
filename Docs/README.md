@@ -26,7 +26,7 @@
   | `maxMoveSpeed` | float | 玩家最大移动速度 |
   | `flashDuration` | float | 玩家受伤闪烁持续时间 |
   | `flashInterval` | float | 玩家受伤闪烁间隔时间 |
-  | `bloodRaturnValue` | float | 玩家回血参数 |
+  | `bloodRaturnValue` | float | 玩家回血参数（每60/bloodRaturnValue秒回复1点血量） |
 
 ### 3. `buffs_config.json` ：
   | 属性 | 类型 | 说明 |

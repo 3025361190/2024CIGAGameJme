@@ -160,7 +160,7 @@ public class EnemySpawner : MonoBehaviour
         // 赋值给Enemy组件中的成员
         enemy.enemyColor = enemyColor;
         enemy.damage = damage;
-        enemy.cooldownTime = attackCooldownTime;
+        enemy.attackCooldownTime = attackCooldownTime;
         enemy.ChainEffectRadius = chainEffectRadius;
         enemy.chainExplosionDelay = chainExplosionDelay;
 

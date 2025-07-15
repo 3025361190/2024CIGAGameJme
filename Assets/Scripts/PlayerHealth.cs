@@ -161,10 +161,8 @@ public class PlayerHealth : MonoBehaviour
                 }
                 UpdateHealthDisplay();
                 bloodRaturnTimer = 0f; // 重置计时器
+                Debug.Log("回复血量：" + GameManager.Instance.currentHealth);
             }
-        }else
-        {
-            bloodRaturnTimer = 0f; // 如果血量已满，重置计时器
         }
         // 处理受伤闪烁效果
         if (isFlashing)

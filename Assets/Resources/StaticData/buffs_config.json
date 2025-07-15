@@ -136,7 +136,7 @@
         {
             "buffId": 12,
             "buffName": "快速回血",
-            "buffDescription": "增加回血数",
+            "buffDescription": "增加回血频率",
             "buffIcon": "player",
             "buffDuration": -1,
             "buffStackable": true,
