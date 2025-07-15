@@ -221,7 +221,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 5
+            "value": -1.0
         },
         {
             "buffId": 20,

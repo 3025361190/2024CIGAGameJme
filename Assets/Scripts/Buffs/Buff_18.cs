@@ -1,7 +1,7 @@
 /*
-文件名：Buff_18.cs
+文件名：Buff_2.cs
 编辑人：没道理啊
-文件描述：多多清汤buff
+文件描述：不要靠近buff
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -9,15 +9,18 @@ using UnityEngine;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
+
+
 public class Buff_18 : BaseBuff
 {
     private float value;
-    private float originalsplitModeCD;
+    private float originalSpeed;
+    private float originalBossSpeed;
 
     public override void Init()
     {
         // 初始化buff参数
-        buffId = 7;
+        buffId = 2;
         // 在buffs数组中查找对应buffId的配置
         var buffsArray = GameManager.Instance.data.buffData["buffs"] as JArray;
         var buffConfig = buffsArray.FirstOrDefault(b => b["buffId"].ToObject<int>() == buffId);
@@ -29,7 +32,8 @@ public class Buff_18 : BaseBuff
         stackType = buffConfig["stackType"].ToObject<int>();
         isNormalBuff = buffConfig["isNormalBuff"].ToObject<bool>();
         value = buffConfig["value"].ToObject<float>();
-        originalsplitModeCD = GameManager.Instance.data.modeData["splitModeCD"].ToObject<float>();
+        originalSpeed = GameManager.Instance.data.enemyData["moveSpeed"].ToObject<float>();
+        originalBossSpeed = GameManager.Instance.data.bossData["moveSpeed"].ToObject<float>();
         // 初始化运行时参数
         currentStack = 0;
         isActive = false;
@@ -42,17 +46,21 @@ public class Buff_18 : BaseBuff
         base.ActivateBuff();
         if(stackType == 0)
         {
-            GameManager.Instance.data.modeData["splitModeCD"] = GameManager.Instance.data.modeData["splitModeCD"].ToObject<float>() - value;
+            GameManager.Instance.data.enemyData["moveSpeed"] = GameManager.Instance.data.enemyData["moveSpeed"].ToObject<float>() + value;
+            GameManager.Instance.data.bossData["moveSpeed"] = GameManager.Instance.data.bossData["moveSpeed"].ToObject<float>() + value;
         }
         else if(stackType == 1)
         {
-            GameManager.Instance.data.modeData["splitModeCD"] = GameManager.Instance.data.modeData["splitModeCD"].ToObject<float>() * value;
+            GameManager.Instance.data.enemyData["moveSpeed"] = GameManager.Instance.data.enemyData["moveSpeed"].ToObject<float>() * value;
+            GameManager.Instance.data.bossData["moveSpeed"] = GameManager.Instance.data.bossData["moveSpeed"].ToObject<float>() * value;
         }
     }
 
+    // 取消buff所有层数，恢复原始速度
     public override void DeactivateBuff()
     {
         base.DeactivateBuff();
-        GameManager.Instance.data.modeData["splitModeCD"] = originalsplitModeCD;
+        GameManager.Instance.data.enemyData["moveSpeed"] = originalSpeed;
+        GameManager.Instance.data.bossData["moveSpeed"] = originalBossSpeed;
     }    
 }
