@@ -71,8 +71,8 @@ public class SkillButton : MonoBehaviour
             durationTimer += Time.deltaTime;
             if(durationTimer >= durationTime)
             {
-                // isDurationActive = false;
-                // durationTimer = 0.0f;
+                isDurationActive = false;
+                durationTimer = 0.0f;
                 SwitchSceneType();
             }
         }
