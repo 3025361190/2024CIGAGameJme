@@ -153,6 +153,21 @@ public class BuffManager : MonoBehaviour
         }
     }
 
+
+    // 获取指定buff的当前层数,0表示未激活或不存在
+    public int GetBuffStack(int buffId)
+    {
+        if(buffs.ContainsKey(buffId))
+        {
+            return buffs[buffId].GetCurrentStack();
+        }
+        else
+        {
+            Debug.LogError($"GetBuffStack未找到buff：{buffId}");
+            return 0;
+        }
+    }
+
     // 展示选择buff界面
     public void ShowBuffChoose(bool isBossLevel, List<int> levelBuffIds)
     {
