@@ -92,7 +92,7 @@ public class Enemy : MonoBehaviour
                 enemySpawner.RemoveEnemy(gameObject);
             }
         }
-
+        AudioManager.Instance.PlaySFX(0);
         Destroy(gameObject); // 销毁当前敌人对象
     }
 
@@ -147,6 +147,7 @@ public class Enemy : MonoBehaviour
         // 检查对象是否还存在
         if (gameObject != null)
         {
+            AudioManager.Instance.PlaySFX(5);
             Die(1);
         }
     }

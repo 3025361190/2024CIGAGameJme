@@ -158,6 +158,7 @@ public class BulletController : MonoBehaviour
             // Debug.Log(newPosition);
             // ʹ�� MovePosition �����ƶ�����
             rb.MovePosition(newPosition);
+            
         }
     }
 
@@ -241,6 +242,7 @@ public class BulletController : MonoBehaviour
     //���պ���
     public void Recycle()
     {
+        
         is_trace = true;
         speed = recycleSpeed;
         // Debug.Log("���� by bullet");
@@ -250,6 +252,7 @@ public class BulletController : MonoBehaviour
         // }
         foreach (var bullet in nextBullet)
         {
+            
             bullet.GetComponent<BulletController>().Recycle();
         }
     }
@@ -373,6 +376,7 @@ public class BulletController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Turret") && is_trace == true)
         {
+            
             //������̨�ӵ�����+1�ĺ���
             //............
             //............
@@ -382,7 +386,8 @@ public class BulletController : MonoBehaviour
             // StartCoroutine(WaitSomeSecondsToDestory(100.0f));
             Instantiate(prefabToSpawn, transform.position, transform.rotation);
             Destroy(bullet);
-            
+
+
         }
     }
 

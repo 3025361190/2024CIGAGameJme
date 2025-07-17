@@ -327,6 +327,7 @@ public class PlayerController : MonoBehaviour
         foreach (var bullet in activeBullets)
         {
             // 处理回收子弹的逻辑
+
             bullet.GetComponent<BulletController>().Recycle();
         }
         tryActivateRage = true;
