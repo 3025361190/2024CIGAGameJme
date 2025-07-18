@@ -258,6 +258,7 @@ public class PlayerController : MonoBehaviour
             // 检查所有触摸
             if (Input.touchCount > 0)
             {
+                Debug.Log("触摸控制模式");
                 for (int i = 0; i < Input.touchCount; i++)
                 {
                     Touch touch = Input.GetTouch(i);
