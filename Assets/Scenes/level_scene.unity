@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9472,6 +9471,10 @@ PrefabInstance:
     - target: {fileID: 3986992889073042025, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3987809804403048496, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
+      propertyPath: m_Name
+      value: Pause
       objectReference: {fileID: 0}
     - target: {fileID: 4900023621583053574, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
       propertyPath: m_Name

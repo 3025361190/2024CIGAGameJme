@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
 
     private SceneType sceneType;
     private GameObject skillButton;
+    private GameObject pauseButton;
 
     public PlayableDirector director;//tl相关，策划加的
     private bool ispause=true;
@@ -78,6 +79,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         skillButton = GameObject.Find("SkillButton");
+        pauseButton = GameObject.Find("PauseButton");
         spriteRenderer = GetComponent<SpriteRenderer>();
         // UpdateBulletCount();     
         currentBulletPosition = new Vector3(7f, 3.7f, 1.0f);    
@@ -155,26 +157,13 @@ public class PlayerController : MonoBehaviour
             NewMountSmall();
         }
     }
-    // 判断是否点击在 joystick 上
-    private bool IsPointerOverJoystick(Vector2 position)
+
+    private bool IsPointerOverSomething(RectTransform rectTransform, Vector2 position)
     {
-        if (joystick == null) return false;
-
-        RectTransform joystickRect = joystick.GetComponent<RectTransform>();
+        if (rectTransform == null) return false;
+        
         return RectTransformUtility.RectangleContainsScreenPoint(
-            joystickRect,
-            position,
-            null
-        );
-    }
-
-    private bool IsPointerOverShootJoystick(Vector2 position)
-    {
-        if (shootJoystick == null) return false;
-
-        RectTransform joystickRect = shootJoystick.GetComponent<RectTransform>();
-        return RectTransformUtility.RectangleContainsScreenPoint(
-            joystickRect,
+            rectTransform,
             position,
             null
         );
@@ -252,8 +241,57 @@ public class PlayerController : MonoBehaviour
     // 处理射击逻辑
     private void HandleShooting()
     {
-        float shootHorizontal = shootJoystick.Horizontal;
-        float shootVertical = shootJoystick.Vertical;
+        float shootHorizontal = 0;
+        float shootVertical = 0;
+        if(!GameManager.Instance.GetControllMode())
+        {
+            // 如果是摇杆控制模式，直接使用射击摇杆的输入
+            if (shootJoystick.Horizontal != 0 || shootJoystick.Vertical != 0)
+            {
+                shootHorizontal = shootJoystick.Horizontal;
+                shootVertical = shootJoystick.Vertical;
+            }
+        }
+        else
+        {
+            // 如果是触摸控制模式，使用屏幕触控输入
+            // 检查所有触摸
+            if (Input.touchCount > 0)
+            {
+                for (int i = 0; i < Input.touchCount; i++)
+                {
+                    Touch touch = Input.GetTouch(i);
+                    
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        // 检查是否点击在UI元素上
+                        bool isOnMoveJoystick = IsPointerOverSomething(joystick.GetComponent<RectTransform>(), touch.position);
+                        bool isOnSkillButton = IsPointerOverSomething(skillButton.GetComponent<RectTransform>(), touch.position);
+                        bool isOnPauseButton = IsPointerOverSomething(pauseButton.GetComponent<RectTransform>(), touch.position);
+                        touchStartedOnJoystick[touch.fingerId] = isOnMoveJoystick || isOnSkillButton || isOnPauseButton;
+                    }
+                    
+                    // 如果这个触摸没有开始于摇杆区域，就处理射击
+                    if (!touchStartedOnJoystick[touch.fingerId])
+                    {
+                        Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+                        shootHorizontal = touchPos.x - transform.position.x;
+                        shootVertical = touchPos.y - transform.position.y;
+                        
+                        // 如果是触摸开始，立即尝试射击
+                        if (touch.phase == TouchPhase.Began)
+                        {
+                            TryShoot(shootHorizontal, shootVertical);
+                        }
+                    }
+                    
+                    if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+                    {
+                        touchStartedOnJoystick.Remove(touch.fingerId);
+                    }
+                }
+            }
+        }
 
         // // 处理鼠标点击
         // if (Input.GetMouseButton(0)) // 左键点击
@@ -266,49 +304,6 @@ public class PlayerController : MonoBehaviour
         //         TryShoot(shootHorizontal, shootVertical);
         //     }
         // }
-
-        // 检查所有触摸
-        if (Input.touchCount > 0)
-        {
-            for (int i = 0; i < Input.touchCount; i++)
-            {
-                Touch touch = Input.GetTouch(i);
-                
-                if (touch.phase == TouchPhase.Began)
-                {
-                    // 检查是否点击在任何摇杆上（包括移动摇杆和射击摇杆）
-                    bool isOnMoveJoystick = IsPointerOverJoystick(touch.position);
-                    bool isOnShootJoystick = IsPointerOverShootJoystick(touch.position);
-                    touchStartedOnJoystick[touch.fingerId] = isOnMoveJoystick || isOnShootJoystick;
-                }
-                
-                // 如果这个触摸没有开始于摇杆区域，就处理射击
-                if (!touchStartedOnJoystick[touch.fingerId])
-                {
-                    Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
-                    shootHorizontal = touchPos.x - transform.position.x;
-                    shootVertical = touchPos.y - transform.position.y;
-                    
-                    // 如果是触摸开始，立即尝试射击
-                    if (touch.phase == TouchPhase.Began)
-                    {
-                        TryShoot(shootHorizontal, shootVertical);
-                    }
-                }
-                
-                if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
-                {
-                    touchStartedOnJoystick.Remove(touch.fingerId);
-                }
-            }
-        }
-
-        // 射击摇杆的输入优先级更高
-        if (shootJoystick.Horizontal != 0 || shootJoystick.Vertical != 0)
-        {
-            shootHorizontal = shootJoystick.Horizontal;
-            shootVertical = shootJoystick.Vertical;
-        }
 
         // 持续射击（来自射击摇杆）
         if (shootHorizontal != 0 || shootVertical != 0)
