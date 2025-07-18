@@ -175,7 +175,8 @@ public class PlayerHealth : MonoBehaviour
             if (flashIntervalTimer >= flashInterval)
             {
                 isRedColor = !isRedColor; // 切换颜色状态
-                spriteRenderer.GetComponent<SpriteRenderer>().color = isRedColor ? Color.red : originalColor;
+                spriteRenderer.GetComponent<SpriteRenderer>().color = isRedColor? new Color(originalColor.r, 0.58f, 0.77f, 0.5f)  // 透明度50%
+    : originalColor;  // 恢复原始颜色（包括原始透明度）
                 flashIntervalTimer = 0f; // 重置计时器
             }
             
@@ -255,7 +256,7 @@ public class PlayerHealth : MonoBehaviour
             healthSlider.value = GameManager.Instance.currentHealth * 1.0f / GameManager.Instance.initialHealth;
             // 血条颜色随生命值变化而线性变化
             float healthPercentage = GameManager.Instance.currentHealth * 1.0f / GameManager.Instance.initialHealth;
-            healthSliderFill.color = Color.Lerp(Color.red, Color.green, healthPercentage);
+           // healthSliderFill.color = Color.Lerp(Color.red, Color.green, healthPercentage);
         }
         else
         {
