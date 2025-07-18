@@ -89,6 +89,8 @@ public class GameManager : MonoBehaviour
     // 关卡是否已经结束（成功或失败）
     private bool isLevelEnded = false;
 
+    // 操控方式：false 为全摇杆控制；true 为摇杆控制方向，触屏控制射击
+    private bool controllMode = false;
 
     private void Awake()
     {
@@ -570,6 +572,12 @@ public class GameManager : MonoBehaviour
         Text LevelTextt = LevelText.GetComponent<Text>();
         LevelTextt.text = currentLevel.ToString();
     }
+
+    public bool GetControllMode()
+    {
+        return controllMode;
+    }
+
 
     // Start is called before the first frame update
     void Start()
