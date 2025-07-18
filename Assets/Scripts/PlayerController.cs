@@ -7,6 +7,7 @@ rigidbody2d组件需要设置为Kinematic
 */
 #define ENABLE_KEYBOARD_CONTROL  // 注释这行可以禁用所有键盘控制
 using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine.Playables;
@@ -47,6 +48,9 @@ public class PlayerController : MonoBehaviour
 
     //JObject globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
     //private int remainingBullets;             // 剩余子弹数量
+    
+    // 触摸的起始位置
+    private Dictionary<int, bool> touchStartedOnJoystick = new Dictionary<int, bool>();
 
     
     private List<GameObject> activeBullets = new List<GameObject>(); // 添加子弹列表
@@ -151,6 +155,30 @@ public class PlayerController : MonoBehaviour
             NewMountSmall();
         }
     }
+    // 判断是否点击在 joystick 上
+    private bool IsPointerOverJoystick(Vector2 position)
+    {
+        if (joystick == null) return false;
+
+        RectTransform joystickRect = joystick.GetComponent<RectTransform>();
+        return RectTransformUtility.RectangleContainsScreenPoint(
+            joystickRect,
+            position,
+            null
+        );
+    }
+
+    private bool IsPointerOverShootJoystick(Vector2 position)
+    {
+        if (shootJoystick == null) return false;
+
+        RectTransform joystickRect = shootJoystick.GetComponent<RectTransform>();
+        return RectTransformUtility.RectangleContainsScreenPoint(
+            joystickRect,
+            position,
+            null
+        );
+    }
 
     // 处理移动逻辑
     private void HandleMovement()
@@ -224,37 +252,70 @@ public class PlayerController : MonoBehaviour
     // 处理射击逻辑
     private void HandleShooting()
     {
-        // float movehorizontal = joystick.Horizontal;
-        // float movevertical = joystick.Vertical;
-
         float shootHorizontal = shootJoystick.Horizontal;
         float shootVertical = shootJoystick.Vertical;
 
-        // 检查是否有触摸
-        if (Input.GetMouseButton(0) && (shootJoystick.Horizontal == 0 || shootJoystick.Vertical == 0)) // 0为左键或单指触摸
-        {
-            //Debug.Log("检测到鼠标点击");
-            Vector2 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // // 处理鼠标点击
+        // if (Input.GetMouseButton(0)) // 左键点击
+        // {
+        //     if (!IsPointerOverJoystick(Input.mousePosition) && !IsPointerOverShootJoystick(Input.mousePosition))
+        //     {
+        //         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //         shootHorizontal = mousePos.x - transform.position.x;
+        //         shootVertical = mousePos.y - transform.position.y;
+        //         TryShoot(shootHorizontal, shootVertical);
+        //     }
+        // }
 
-            shootHorizontal = touchPos.x - transform.position.x;
-            shootVertical = touchPos.y - transform.position.y;
+        // 检查所有触摸
+        if (Input.touchCount > 0)
+        {
+            for (int i = 0; i < Input.touchCount; i++)
+            {
+                Touch touch = Input.GetTouch(i);
+                
+                if (touch.phase == TouchPhase.Began)
+                {
+                    // 检查是否点击在任何摇杆上（包括移动摇杆和射击摇杆）
+                    bool isOnMoveJoystick = IsPointerOverJoystick(touch.position);
+                    bool isOnShootJoystick = IsPointerOverShootJoystick(touch.position);
+                    touchStartedOnJoystick[touch.fingerId] = isOnMoveJoystick || isOnShootJoystick;
+                }
+                
+                // 如果这个触摸没有开始于摇杆区域，就处理射击
+                if (!touchStartedOnJoystick[touch.fingerId])
+                {
+                    Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+                    shootHorizontal = touchPos.x - transform.position.x;
+                    shootVertical = touchPos.y - transform.position.y;
+                    
+                    // 如果是触摸开始，立即尝试射击
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        TryShoot(shootHorizontal, shootVertical);
+                    }
+                }
+                
+                if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled)
+                {
+                    touchStartedOnJoystick.Remove(touch.fingerId);
+                }
+            }
         }
 
-        if( shootJoystick.Horizontal != 0 || shootJoystick.Vertical != 0)
+        // 射击摇杆的输入优先级更高
+        if (shootJoystick.Horizontal != 0 || shootJoystick.Vertical != 0)
         {
             shootHorizontal = shootJoystick.Horizontal;
             shootVertical = shootJoystick.Vertical;
         }
-        
 
+        // 持续射击（来自射击摇杆）
         if (shootHorizontal != 0 || shootVertical != 0)
         {
             RotatePlayer(shootHorizontal, shootVertical);
             TryShoot(shootHorizontal, shootVertical);
         }
-
-        // 清理已销毁的子弹
-        //CleanupBullets();
     }
 
     // 旋转角色
