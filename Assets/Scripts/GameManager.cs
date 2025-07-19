@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
     private bool isLevelEnded = false;
 
     // 操控方式：false 为全摇杆控制；true 为摇杆控制方向，触屏控制射击
+    // TODO: 瑞，编写控制方式切换逻辑
     private bool controllMode = false;
 
     private void Awake()
