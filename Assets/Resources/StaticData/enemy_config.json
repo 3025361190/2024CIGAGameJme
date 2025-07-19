@@ -1,6 +1,6 @@
 {
-    "moveSpeed": 0.6,
-    "damage":1,
+    "moveSpeed": 1.0,
+    "damage":1.0,
     "randomRange": 0.3,
     "changeDirectionInterval": 1.0,
     "knockbackBaseForce": 2.5,

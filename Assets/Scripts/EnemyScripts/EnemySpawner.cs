@@ -19,8 +19,8 @@ public class EnemySpawner : MonoBehaviour
     public GameObject enemyPrefab_white;          // 敌人预制体, 在unity编辑器中拖动赋值
     public float spawnInterval;             // 生成敌人的间隔时间
     // 敌人移动参数,生成enemy后，赋值给enemy的EnemyMovement组件中的成员
-    public float moveSpeed;                 // 移动速度
-    public int damage;                      // 敌人伤害值
+    public float moveSpeed;                 // 移动速度,由GameManager在每关开始时赋值
+    public int damage;                      // 敌人伤害值,由GameManager在每关开始时赋值
     public float randomRange;               // 随机移动的幅度
     public float changeDirectionInterval;   // 改变随机方向的时间间隔
     public float knockbackBaseForce;        // 击退力基础值
@@ -62,8 +62,10 @@ public class EnemySpawner : MonoBehaviour
             try
             {
                 spawnInterval = enemyConfig["spawnInterval"].ToObject<float>();
-                moveSpeed = enemyConfig["moveSpeed"].ToObject<float>();
-                damage = enemyConfig["damage"].ToObject<int>();
+                // 乘以系数
+                moveSpeed = enemyConfig["moveSpeed"].ToObject<float>()*moveSpeed;
+                // 乘以系数
+                damage = enemyConfig["damage"].ToObject<int>()*damage;
                 randomRange = enemyConfig["randomRange"].ToObject<float>();
                 changeDirectionInterval = enemyConfig["changeDirectionInterval"].ToObject<float>();
                 knockbackBaseForce = enemyConfig["knockbackBaseForce"].ToObject<float>();
@@ -150,6 +152,9 @@ public class EnemySpawner : MonoBehaviour
         enemyMovement.knockbackTime = knockbackTime;
         enemyMovement.bufferTime = bufferTime;
         enemyMovement.chainKnockbackForceMultiplier = chainKnockbackForceMultiplier;
+        // TODO: enemy和boss的参数改为每个level单独配置
+        // 目前的思路是保留原来的config文件，需要给level单的配置的变量改为系数，变成1.0
+        // 实际应用的时候乘以系数，这样buff仍然能通过修改全局的config来控制，缺点是只能通过乘法，在buff的加法中进行报错
 
         // 获取Enemy组件
         if (!instantiate.TryGetComponent<Enemy>(out Enemy enemy))

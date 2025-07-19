@@ -150,6 +150,27 @@ public class GameManager : MonoBehaviour
             {
                 enemySpawner.maxEnemyCount = currentLevelConfig.monsNum/enemyTypeTotalCount;
             }
+            // 赋值moveSpeed和damage
+            foreach (var enemySpawner in enemySpawners)
+            {
+                enemySpawner.moveSpeed = currentLevelConfig.enemyMoveSpeed;
+                enemySpawner.damage = currentLevelConfig.enemyDamage;
+            }
+
+            // 获取BossSpawner对象
+            BossSpawner[] bossSpawners = GameObject.Find("BossSpawnerObject").GetComponents<BossSpawner>();
+            if(bossSpawners == null)
+            {
+                Debug.LogError("未找到BossSpawner对象");
+                return;
+            }
+            // 赋值moveSpeed和damage
+            foreach (var bossSpawner in bossSpawners)
+            {
+                bossSpawner.moveSpeed = currentLevelConfig.bossMoveSpeed;
+                bossSpawner.damage = currentLevelConfig.bossDamage;
+            }
+
             // 绑定计时器
             timer = GameObject.Find("timer").GetComponent<Timer>();
             SetLevelText();

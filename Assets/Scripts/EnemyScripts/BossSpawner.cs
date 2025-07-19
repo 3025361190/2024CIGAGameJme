@@ -15,8 +15,8 @@ public class BossSpawner : MonoBehaviour
     // boss预制体,在unity编辑器中拖动赋值
     public GameObject bossPrefab;
     public int bossHealthPoint;             // boss max 血量
-    public float moveSpeed;                 // 移动速度
-    public int damage;                      // 敌人伤害值
+    public float moveSpeed;                 // 移动速度，由GameManager在每关开始时赋值
+    public int damage;                      // 敌人伤害值，由GameManager在每关开始时赋值
     public float randomRange;               // 随机移动的幅度
     public float changeDirectionInterval;   // 改变随机方向的时间间隔
     public float knockbackBaseForce;        // 击退力基础值
@@ -56,8 +56,10 @@ public class BossSpawner : MonoBehaviour
             // 获取boss_config.json中的数据
             try
             {
-                moveSpeed = bossConfig["moveSpeed"].ToObject<float>();
-                damage = bossConfig["damage"].ToObject<int>();
+                // 乘以系数
+                moveSpeed = bossConfig["moveSpeed"].ToObject<float>()*moveSpeed;
+                // 乘以系数
+                damage = bossConfig["damage"].ToObject<int>()*damage;
                 randomRange = bossConfig["randomRange"].ToObject<float>();
                 changeDirectionInterval = bossConfig["changeDirectionInterval"].ToObject<float>();
                 knockbackBaseForce = bossConfig["knockbackBaseForce"].ToObject<float>();

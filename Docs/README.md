@@ -18,7 +18,7 @@
   | `buffId` | int | 可能出现的buff ID |
   | `time` | int | 关卡时间 |
   | `enemyFrequency` | int | 敌人出现频率 |
-  | `enemyMovSpeed` | float | 敌人移动速度 |
+  | `enemyMoveSpeed` | float | 敌人移动速度 |
   | `enemyDamage` | int | 敌人伤害 |
   | `bossMoveSpeed` | float | BOSS移动速度 |
   | `bossDamage` | int | BOSS伤害 |
@@ -75,8 +75,8 @@
 ### 7. `enemy_config.json` ：
   | 参数 | 类型 | 说明 |
   | --- | --- | --- |
-  | `moveSpeed` | float | 敌人基础移动速度 |
-  | `damage` | int | 敌人伤害值 |
+  | `moveSpeed` | float | 敌人移动速度系数（已迭代为运行时参数，策划请勿修改，如需配置请在`level_config.json`中配置） |
+  | `damage` | int | 敌人伤害系数（已迭代为运行时参数，策划请勿修改，如需配置请在`level_config.json`中配置） |
   | `randomRange` | float | 敌人随机移动范围 |
   | `changeDirectionInterval` | float | 敌人改变方向的间隔时间 |
   | `knockbackBaseForce` | float | 击退力基础值 |
@@ -91,8 +91,8 @@
 ### 8. `boss_config.json` ：
   | 参数 | 类型 | 说明 |
   | --- | --- | --- |
-  | `moveSpeed` | float | BOSS移动速度 |
-  | `damage` | int | BOSS伤害值 |
+  | `moveSpeed` | float | BOSS移动速度系数（已迭代为运行时参数，策划请勿修改，如需配置请在`level_config.json`中配置） |
+  | `damage` | int | BOSS伤害系数（已迭代为运行时参数，策划请勿修改，如需配置请在`level_config.json`中配置） |
   | `randomRange` | float | BOSS随机移动范围 |
   | `changeDirectionInterval` | float | BOSS改变方向的间隔时间 |
   | `knockbackBaseForce` | float | BOSS击退力基础值 |
