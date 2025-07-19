@@ -589,11 +589,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(BuffManager.Instance.GetBuffStack(23) > 0 && currentBulletCount == 0)
-        {
-            currentBulletCount = 500;
-            //TODO: 触发之后取消激活
-        }
         IsLevelEnd();
     }
 }

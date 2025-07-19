@@ -417,6 +417,29 @@ public class BuffManager : MonoBehaviour
         }
     }
 
+    // 移除指定已激活的buff
+    public void RemoveBuff(int buffId)
+    {
+        if(!activeBuffIds.Contains(buffId))
+        {
+            Debug.LogError($"未找到已激活的buff：{buffId}");
+            return;
+        }
+        if(buffs.ContainsKey(buffId))
+        {
+            buffs[buffId].DeactivateBuff();
+            activeBuffIds.Remove(buffId);
+            if(buffs[buffId].isNormalBuff)
+            {
+                normalBuffIds.Add(buffId);
+            }
+            else
+            {
+                bossBuffIds.Add(buffId);
+            }
+        }
+    }
+
 
     // 展示已选buff界面
     public void ShowChoosedBuff()

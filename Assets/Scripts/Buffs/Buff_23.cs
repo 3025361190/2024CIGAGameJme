@@ -44,5 +44,14 @@ public class Buff_23 : BaseBuff
     public override void DeactivateBuff()
     {
         base.DeactivateBuff();
-    }    
+    }
+
+    public override void UpdateBuff()
+    {
+        if( GameManager.Instance.currentBulletCount == 0)
+        {
+            GameManager.Instance.currentBulletCount = 500;
+            BuffManager.Instance.RemoveBuff(buffId);
+        }
+    }
 }
