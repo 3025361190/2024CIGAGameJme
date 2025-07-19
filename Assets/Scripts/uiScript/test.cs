@@ -40,4 +40,12 @@ public class SignalTest : MonoBehaviour
         director.playableGraph.GetRootPlayable(0).SetSpeed(1);
         Debug.Log(" ±º‰÷·ª÷∏¥≤•∑≈");
     }
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+    public void ResumeGame()
+    {
+        Time.timeScale = 1;
+    }
 }
