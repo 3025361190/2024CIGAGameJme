@@ -233,6 +233,61 @@
             "stackType": 0,
             "isNormalBuff": true,
             "value": 5
+        },
+        {
+            "buffId": 21,
+            "buffName": "稀有buff1",
+            "buffDescription": "子弹变为散射，增加后背方向射出",
+            "buffIcon": "attack",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "stackType": 0,
+            "isNormalBuff": false,
+            "value": 5
+        },
+        {
+            "buffId": 22,
+            "buffName": "稀有buff2",
+            "buffDescription": "清汤场景储备子弹模式，相同颜色子弹分裂变为多倍",
+            "buffIcon": "attack",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "stackType": 0,
+            "isNormalBuff": false,
+            "value": 5
+        },
+        {
+            "buffId": 23,
+            "buffName": "稀有buff3",
+            "buffDescription": "子弹清0后，立刻获得500子弹",
+            "buffIcon": "attack",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "stackType": 0,
+            "isNormalBuff": false,
+            "value": 5
+        },
+        {
+            "buffId": 24,
+            "buffName": "稀有buff4",
+            "buffDescription": "每次切换到清汤锅只有5秒的时间，但是分裂倍率变成5倍",
+            "buffIcon": "attack",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "stackType": 0,
+            "isNormalBuff": false,
+            "value": 5
+        },
+        {
+            "buffId": 25,
+            "buffName": "稀有buff5",
+            "buffDescription": "每次射击有5%概率发射一个大炮弹，不会消失。能穿过沿路敌人，且碰到墙壁反弹，场内最多大炮弹数不超过10个。进入下一关卡清空上一关场内大炮弹。",
+            "buffIcon": "attack",
+            "buffDuration": -1,
+            "buffStackable": true,
+            "stackType": 0,
+            "isNormalBuff": false,
+            "value": 5
         }
     ]
 }
