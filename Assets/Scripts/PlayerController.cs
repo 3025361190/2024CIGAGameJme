@@ -324,7 +324,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.currentBulletCount > 0 && Time.time >= nextFireTime)
         {
             
-        KaihuoEffect.SetTrigger("attack");
+            KaihuoEffect.SetTrigger("attack");
             Vector2 shootDirection = new Vector2(horizontal, vertical).normalized;
             SpawnBullet(shootDirection);
             if(!isRageActive)
@@ -332,6 +332,8 @@ public class PlayerController : MonoBehaviour
                 ScoreAnim.SetTrigger("Switch");
                 GameManager.Instance.currentBulletCount--;
             }
+            // TODO: 稀有buff1，清汤散射
+
             // UpdateBulletCount();
         }
     }
