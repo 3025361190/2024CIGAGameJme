@@ -3,5 +3,6 @@
     "firingRate" : 0.2,
     "bulletSpeed" : 10.0,
     "bulletCountInScreenMax" : 100,
-    "speedAfterSplit": 10.0
+    "speedAfterSplit": 10.0,
+    "splitNum": 1
 }

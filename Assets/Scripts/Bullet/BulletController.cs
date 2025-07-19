@@ -18,6 +18,8 @@ public class BulletController : MonoBehaviour
     //�ӵ��ĸ���
     public Rigidbody2D rb;
 
+    public int splitNum;
+
     //�ӵ�Ŀǰ���ٶ�
     public float speed;
 
@@ -91,6 +93,7 @@ public class BulletController : MonoBehaviour
         bulletCountInScreenMax = bulletConfig["bulletCountInScreenMax"].ToObject<int>();
         normalSpeed = bulletConfig["bulletSpeed"].ToObject<float>();
         speedAfterSplit = bulletConfig["speedAfterSplit"].ToObject<float>();
+        splitNum = bulletConfig["splitNum"].ToObject<int>();
 
         //��ʼ���ٶ�
         speed = normalSpeed;
@@ -405,22 +408,24 @@ public class BulletController : MonoBehaviour
 
             if(!CDflag && Turret.GetComponent<PlayerController>().bulletCountInScreen < bulletCountInScreenMax)
             {
-                Turret.GetComponent<PlayerController>().bulletCountInScreen++;
-                // Debug.Log("try to split bullet");
-                GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
-                temp.transform.localScale = new Vector3(1f, 1f, 1f);
-                temp.GetComponent<BulletController>().trailRenderer.enabled = true;
-                if (temp == null)
+                for(int i = 0; i < splitNum; i++)
                 {
-                    Debug.Log("cant split bullet");
+                    Turret.GetComponent<PlayerController>().bulletCountInScreen++;
+                    // Debug.Log("try to split bullet");
+                    GameObject temp = Instantiate(bullet, transform.position, transform.rotation);
+                    temp.transform.localScale = new Vector3(1f, 1f, 1f);
+                    temp.GetComponent<BulletController>().trailRenderer.enabled = true;
+                    if (temp == null)
+                    {
+                        Debug.Log("cant split bullet");
+                    }
+                    nextBullet.Push(temp);
+                    temp.GetComponent<BulletController>().SetRandomDirection();
+                    childNum++;
+                    StartCoroutine(temp.GetComponent<BulletController>().WaitTwoSeconds());
                 }
-                nextBullet.Push(temp);
                 SetRandomDirection();
                 bullet.transform.localScale = new Vector3(1f, 1f, 1f);
-                temp.GetComponent<BulletController>().SetRandomDirection();
-                childNum++;
-
-                StartCoroutine(temp.GetComponent<BulletController>().WaitTwoSeconds());
                 StartCoroutine(WaitTwoSeconds());
 
             }
