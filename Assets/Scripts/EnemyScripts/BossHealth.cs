@@ -166,7 +166,7 @@ public class BossHealth : MonoBehaviour
      // boss被子弹击中时,处理击中事件,由子弹调用
     public void HandleHit()
     {
-        
+        AudioManager.Instance.PlaySFX(0);
         currentHealth -= 1;
         // Debug.Log("boss被击中！，当前血量：" + currentHealth + "/" + bossHealthPoint);
         // 确保生命值不会小于0
