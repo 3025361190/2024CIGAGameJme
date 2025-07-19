@@ -8,20 +8,26 @@
 
 ## 详细说明：
 ### 1. `levels_config.json` ：
-  | 参数 | 说明 |
-  | --- | --- |
-  | `levelId` | 关卡ID |
-  | `isBoss` | 是否为BOSS关卡 |
-  | `bossHealthPoint` | BOSS血量 |
-  | `monsNum` | 小怪数量 |
-  | `bossTime` | BOSS出现时间 |
-  | `buffId` | 可能出现的buff ID |
-  | `time` | 关卡时间 |
+  | 参数 | 类型 | 说明 |
+  | --- | --- | --- |
+  | `levelId` | int | 关卡ID |
+  | `isBoss` | int | 是否为BOSS关卡 |
+  | `bossHealthPoint` | int | BOSS血量 |
+  | `monsNum` | int | 小怪数量 |
+  | `bossTime` | int | BOSS出现时间 |
+  | `buffId` | int | 可能出现的buff ID |
+  | `time` | int | 关卡时间 |
+  | `enemyFrequency` | int | 敌人出现频率 |
+  | `enemyMovSpeed` | float | 敌人移动速度 |
+  | `enemyDamage` | int | 敌人伤害 |
+  | `bossMoveSpeed` | float | BOSS移动速度 |
+  | `bossDamage` | int | BOSS伤害 |
+  
 
 ### 2. `global_config.json` ：
-  | 参数 | 说明 |
-  | --- | --- |
-  | `initialBulletCount` | 初始子弹数量 |
+  | 参数 | 类型 | 说明 |
+  | --- | --- | --- |
+  | `initialBulletCount` | int | 初始子弹数量 |
   | `initialHealth` | int | 玩家初始生命值 |
   | `maxMoveSpeed` | float | 玩家最大移动速度 |
   | `flashDuration` | float | 玩家受伤闪烁持续时间 |
@@ -43,28 +49,28 @@
   其他详细参数见[buff说明文档](./Buff说明文档.md)
 
 ### 4. `mode_config.json` ：
-  | 参数 | 说明 |
-  | --- | --- |
-  | `splitModeCD` | 分裂模式（进入白汤）的技能CD（白汤进红汤不需要CD） |
-  | `splitModeDuration` | 分裂模式最长持续时间 |
+  | 参数 | 类型 | 说明 |
+  | --- | --- | --- |
+  | `splitModeCD` | int | 分裂模式（进入白汤）的技能CD（白汤进红汤不需要CD） |
+  | `splitModeDuration` | int | 分裂模式最长持续时间 |
 
 
 ### 5. `rage_config.json` ：
-  | 参数 | 说明 |
-  | --- | --- |
-  | `rageFiringRate` | 狂暴模式下子弹的射速 |
-  | `rageThreshold` | 进入狂暴模式的阈值（清汤结束时收回的子弹数量与清汤持续时发射的子弹数量的比值） |
-  | `rageActivateTime` | 尝试进入狂暴状态的时间（等待子弹收回的时间） |
-  | `rageDuration` | 狂暴模式持续的时间 |
+  | 参数 | 类型 | 说明 |
+  | --- | --- | --- |
+  | `rageFiringRate` | int | 狂暴模式下子弹的射速 |
+  | `rageThreshold` | int | 进入狂暴模式的阈值（清汤结束时收回的子弹数量与清汤持续时发射的子弹数量的比值） |
+  | `rageActivateTime` | float | 尝试进入狂暴状态的时间（等待子弹收回的时间） |
+  | `rageDuration` | float | 狂暴模式持续的时间 |
 
 
 ### 6. `bullet_config.json` ：
-  | 参数 | 说明 |
-  | --- | --- |
-  | `maxBullets` | 最大子弹数量 |
-  | `firingRate` | 射击频率 |
-  | `bulletSpeed` | 子弹速度 |
-  | `bulletCountInScreenMax` | 屏幕中子弹的最大存在数量 |
+  | 参数 | 类型 | 说明 |
+  | --- | --- | --- |
+  | `maxBullets` | int | 最大子弹数量 |
+  | `firingRate` | float | 射击频率 |
+  | `bulletSpeed` | float | 子弹速度 |
+  | `bulletCountInScreenMax` | int | 屏幕中子弹的最大存在数量 |
 
 ### 7. `enemy_config.json` ：
   | 参数 | 类型 | 说明 |

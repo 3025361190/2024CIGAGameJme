@@ -8,7 +8,12 @@
             "monsNum" : 0,
             "bossTime" : 0,
             "buffId" : [],
-            "time" : 0
+            "time" : 0,
+            "enemyFrequency" : 0,
+            "enemyMovSpeed" : 0,
+            "enemyDamage" : 0,
+            "bossMoveSpeed" : 0,
+            "bossDamage" : 0
         },
         {
             "levelId" : 1,
@@ -16,17 +21,27 @@
             "bossHealthPoint" : 10,
             "monsNum" : 2,
             "bossTime" : 30,
-            "buffId" : [1,2,4,5],
-            "time" : 100
+            "buffId" : [1,2,18],
+            "time" : 100,
+            "enemyFrequency" : 2,
+            "enemyMovSpeed" : 0.6,
+            "enemyDamage" : 1,
+            "bossMoveSpeed" : 5,
+            "bossDamage" : 5
         },
         {
             "levelId" : 2,
-            "isBoss" : 1,
+            "isBoss" : 0,
             "bossHealthPoint" : 10,
             "monsNum" : 5,
             "bossTime" : 2,
-            "buffId" : [1,2,4,5],
-            "time" : 101
+            "buffId" : [1,2,18],
+            "time" : 101,
+            "enemyFrequency" : 2,
+            "enemyMovSpeed" : 0.6,
+            "enemyDamage" : 1,
+            "bossMoveSpeed" : 5,
+            "bossDamage" : 5
         },
         {
             "levelId" : 3,
@@ -34,8 +49,27 @@
             "bossHealthPoint" : 10,
             "monsNum" : 5,
             "bossTime" : 2,
-            "buffId" : [1,2,4,5],
-            "time" : 101
+            "buffId" : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+            "time" : 101,
+            "enemyFrequency" : 2,
+            "enemyMovSpeed" : 0.6,
+            "enemyDamage" : 1,
+            "bossMoveSpeed" : 5,
+            "bossDamage" : 5
+        },
+        {
+            "levelId" : 4,
+            "isBoss" : 0,
+            "bossHealthPoint" : 10,
+            "monsNum" : 100,
+            "bossTime" : 0,
+            "buffId" : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+            "time" : 3600,
+            "enemyFrequency" : 2,
+            "enemyMovSpeed" : 0.6,
+            "enemyDamage" : 1,
+            "bossMoveSpeed" : 5,
+            "bossDamage" : 5
         }
     ]
 }
