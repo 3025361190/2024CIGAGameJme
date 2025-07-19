@@ -1,7 +1,7 @@
 /*
-文件名：Buff_19.cs
+文件名：Buff_21.cs
 编辑人：没道理啊
-文件描述：多多清汤buff
+文件描述：稀有buff1，清汤散射
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -9,15 +9,15 @@ using UnityEngine;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 
-public class Buff_19 : BaseBuff
+
+public class Buff_21 : BaseBuff
 {
     private float value;
-    private float originalsplitModeCD;
 
     public override void Init()
     {
         // 初始化buff参数
-        buffId = 19;
+        buffId = 21;
         // 在buffs数组中查找对应buffId的配置
         var buffsArray = GameManager.Instance.data.buffData["buffs"] as JArray;
         var buffConfig = buffsArray.FirstOrDefault(b => b["buffId"].ToObject<int>() == buffId);
@@ -29,7 +29,7 @@ public class Buff_19 : BaseBuff
         stackType = buffConfig["stackType"].ToObject<int>();
         isNormalBuff = buffConfig["isNormalBuff"].ToObject<bool>();
         value = buffConfig["value"].ToObject<float>();
-        originalsplitModeCD = GameManager.Instance.data.modeData["splitModeCD"].ToObject<float>();
+        
         // 初始化运行时参数
         currentStack = 0;
         isActive = false;
@@ -40,20 +40,10 @@ public class Buff_19 : BaseBuff
     {
         // 保留父类逻辑
         base.ActivateBuff();
-        
-        if(stackType == 0)
-        {
-            GameManager.Instance.data.modeData["splitModeCD"] = GameManager.Instance.data.modeData["splitModeCD"].ToObject<float>() + value;
-        }
-        else if(stackType == 1)
-        {
-            GameManager.Instance.data.modeData["splitModeCD"] = GameManager.Instance.data.modeData["splitModeCD"].ToObject<float>() * value;
-        }
     }
 
     public override void DeactivateBuff()
     {
         base.DeactivateBuff();
-        GameManager.Instance.data.modeData["splitModeCD"] = originalsplitModeCD;
     }    
 }

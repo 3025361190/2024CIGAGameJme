@@ -332,7 +332,43 @@ public class PlayerController : MonoBehaviour
                 ScoreAnim.SetTrigger("Switch");
                 GameManager.Instance.currentBulletCount--;
             }
-            // TODO: 稀有buff1，清汤散射
+            // 将方向向量顺时针旋转10度
+            if(BuffManager.Instance.GetBuffStack(21) > 0)
+            {
+                if(GameManager.Instance.currentBulletCount > 1)
+                {
+                    float angleInRadians = -10f * Mathf.Deg2Rad; // 负号表示顺时针旋转
+                    Vector2 rotatedDirection = new Vector2(
+                        shootDirection.x * Mathf.Cos(angleInRadians) - shootDirection.y * Mathf.Sin(angleInRadians),
+                        shootDirection.x * Mathf.Sin(angleInRadians) + shootDirection.y * Mathf.Cos(angleInRadians)
+                    );
+                    SpawnBullet(rotatedDirection);
+                    angleInRadians = 10f * Mathf.Deg2Rad;
+                    rotatedDirection = new Vector2(
+                        shootDirection.x * Mathf.Cos(angleInRadians) - shootDirection.y * Mathf.Sin(angleInRadians),
+                        shootDirection.x * Mathf.Sin(angleInRadians) + shootDirection.y * Mathf.Cos(angleInRadians)
+                    );
+                    SpawnBullet(rotatedDirection);
+                    if(!isRageActive)
+                    {
+                        ScoreAnim.SetTrigger("Switch");
+                        GameManager.Instance.currentBulletCount -= 2;
+                    }
+                }
+                if(GameManager.Instance.currentBulletCount > 0)
+                {
+                    Vector2 oppositeDirection = -shootDirection; // 相反方向
+                    SpawnBullet(oppositeDirection);
+                    if(!isRageActive)
+                    {
+                        ScoreAnim.SetTrigger("Switch");
+                        GameManager.Instance.currentBulletCount--;
+                    }
+                }
+            }
+            
+            
+
 
             // UpdateBulletCount();
         }
