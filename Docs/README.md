@@ -17,7 +17,7 @@
   | `bossTime` | int | BOSS出现时间 |
   | `buffId` | int | 可能出现的buff ID |
   | `time` | int | 关卡时间 |
-  | `enemyFrequency` | int | 敌人出现频率 |
+  | `enemySpawnInterval` | float | 敌人出现时间间隔 |
   | `enemyMoveSpeed` | float | 敌人移动速度 |
   | `enemyDamage` | int | 敌人伤害 |
   | `bossMoveSpeed` | float | BOSS移动速度 |
@@ -82,7 +82,7 @@
   | `knockbackBaseForce` | float | 击退力基础值 |
   | `knockbackTime` | float | 击退持续时间 |
   | `bufferTime` | float | 击退后的缓冲时间 |
-  | `spawnInterval` | float | 敌人生成的时间间隔 |
+  | `spawnInterval` | float | 敌人生成的时间间隔系数（已迭代为运行时参数，策划请勿修改，如需配置请在`level_config.json`中配置） |
   | `attackCooldownTime` | float | 敌人伤害冷却时间 |
   | `chainEffectRadius` | float | 连锁爆炸范围半径 |
   | `chainExplosionDelay` | float | 连锁爆炸的传递延迟时间 |

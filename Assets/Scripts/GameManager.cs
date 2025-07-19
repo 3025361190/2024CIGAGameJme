@@ -155,6 +155,7 @@ public class GameManager : MonoBehaviour
             {
                 enemySpawner.moveSpeed = currentLevelConfig.enemyMoveSpeed;
                 enemySpawner.damage = currentLevelConfig.enemyDamage;
+                enemySpawner.spawnInterval = currentLevelConfig.enemySpawnInterval;
             }
 
             // 获取BossSpawner对象

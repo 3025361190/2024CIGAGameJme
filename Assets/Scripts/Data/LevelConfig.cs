@@ -20,7 +20,7 @@ namespace Assets.Scripts.Data
         public int bossTime { get; set; }
         public List<int> buffId { get; set; }
         public int time { get; set; }
-        public int enemyFrequency { get; set; }
+        public float enemySpawnInterval { get; set; }
         public float enemyMoveSpeed { get; set; }
         public int enemyDamage { get; set; }
         public float bossMoveSpeed { get; set; }

@@ -61,7 +61,8 @@ public class EnemySpawner : MonoBehaviour
             // 获取enemy_config.json中的数据
             try
             {
-                spawnInterval = enemyConfig["spawnInterval"].ToObject<float>();
+                // 乘以系数
+                spawnInterval = enemyConfig["spawnInterval"].ToObject<float>()*spawnInterval;
                 // 乘以系数
                 moveSpeed = enemyConfig["moveSpeed"].ToObject<float>()*moveSpeed;
                 // 乘以系数
