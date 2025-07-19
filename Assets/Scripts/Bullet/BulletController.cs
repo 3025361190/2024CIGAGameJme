@@ -21,11 +21,13 @@ public class BulletController : MonoBehaviour
     //�ӵ�Ŀǰ���ٶ�
     public float speed;
 
+    public float speedAfterSplit;
+
     //�ӵ����յ��ٶ�
     public float recycleSpeed = 25.0f;
 
     //�ӵ��������ٶ�
-    public float normalSpeed = 10.0f;
+    public float normalSpeed;
     //�ӵ��񱩵��ٶ�
     public float furySpeed = 20.0f;
 
@@ -83,6 +85,13 @@ public class BulletController : MonoBehaviour
     {
         //��ȡmanagerʵ��
         skillButton = GameObject.Find("SkillButton");
+
+        //var bulletConfig = JsonLoader.LoadJsonAsJObject("StaticData/bullet_config");
+        var bulletConfig = GameManager.Instance.data.bulletData;
+        bulletCountInScreenMax = bulletConfig["bulletCountInScreenMax"].ToObject<int>();
+        normalSpeed = bulletConfig["bulletSpeed"].ToObject<float>();
+        speedAfterSplit = bulletConfig["speedAfterSplit"].ToObject<float>();
+
         //��ʼ���ٶ�
         speed = normalSpeed;
         //�󶨸���
@@ -98,9 +107,6 @@ public class BulletController : MonoBehaviour
             Debug.Log("cant find turret");
         }
         trailRenderer.enabled = false;
-        //var bulletConfig = JsonLoader.LoadJsonAsJObject("StaticData/bullet_config");
-        var bulletConfig = GameManager.Instance.data.bulletData;
-        bulletCountInScreenMax = bulletConfig["bulletCountInScreenMax"].ToObject<int>();
     }
 
     void Start()
@@ -196,7 +202,7 @@ public class BulletController : MonoBehaviour
     public void SetRandomDirection()
     {
         Vector2 temp = Random.insideUnitCircle.normalized;
-        rb.velocity = temp * speed;
+        rb.velocity = temp * speedAfterSplit;
         // Debug.Log(temp);
     }
 

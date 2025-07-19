@@ -2,5 +2,6 @@
     "maxBullets" : 10000,
     "firingRate" : 0.2,
     "bulletSpeed" : 10.0,
-    "bulletCountInScreenMax" : 100
+    "bulletCountInScreenMax" : 100,
+    "speedAfterSplit": 10.0
 }
