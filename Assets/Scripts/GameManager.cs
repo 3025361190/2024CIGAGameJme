@@ -124,7 +124,7 @@ public class GameManager : MonoBehaviour
 
         // 初始化动态游戏数据
         InitializeGameData();
-        
+        AudioManager.Instance.PlayBGM(2);
         // Debug.Log("GameManager初始化完成");
     }
 
