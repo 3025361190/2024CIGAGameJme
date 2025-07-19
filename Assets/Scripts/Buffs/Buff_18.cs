@@ -14,7 +14,7 @@ using Newtonsoft.Json.Linq;
 public class Buff_18 : BaseBuff
 {
     private float value;
-    private float originalBossSpeed;
+    // private float originalBossSpeed;
 
     public override void Init()
     {
@@ -41,10 +41,11 @@ public class Buff_18 : BaseBuff
     {
         // 保留父类逻辑
         base.ActivateBuff();
-        originalBossSpeed = GameManager.Instance.data.bossData["moveSpeed"].ToObject<float>();
+        // originalBossSpeed = GameManager.Instance.data.bossData["moveSpeed"].ToObject<float>();
         if(stackType == 0)
         {
-            GameManager.Instance.data.bossData["moveSpeed"] = GameManager.Instance.data.bossData["moveSpeed"].ToObject<float>() + value;
+            // GameManager.Instance.data.bossData["moveSpeed"] = GameManager.Instance.data.bossData["moveSpeed"].ToObject<float>() + value;
+            Debug.LogError("Buff_18不允许加法叠加，请修改配置文件");
         }
         else if(stackType == 1)
         {
@@ -56,6 +57,6 @@ public class Buff_18 : BaseBuff
     public override void DeactivateBuff()
     {
         base.DeactivateBuff();
-        GameManager.Instance.data.bossData["moveSpeed"] = originalBossSpeed;
+        GameManager.Instance.data.bossData["moveSpeed"] = 1.0f;
     }    
 }
