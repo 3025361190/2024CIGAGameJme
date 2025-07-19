@@ -429,6 +429,7 @@ public class BuffManager : MonoBehaviour
         {
             buffs[buffId].DeactivateBuff();
             activeBuffIds.Remove(buffId);
+            
             if(buffs[buffId].isNormalBuff)
             {
                 normalBuffIds.Add(buffId);

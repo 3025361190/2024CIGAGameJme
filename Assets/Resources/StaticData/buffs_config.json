@@ -262,7 +262,7 @@
             "buffDescription": "子弹清0后，立刻获得500子弹",
             "buffIcon": "attack",
             "buffDuration": -1,
-            "buffStackable": true,
+            "buffStackable": false,
             "stackType": 0,
             "isNormalBuff": false,
             "value": 5
