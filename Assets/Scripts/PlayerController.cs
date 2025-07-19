@@ -321,9 +321,10 @@ public class PlayerController : MonoBehaviour
     // 尝试发射子弹
     private void TryShoot(float horizontal, float vertical)
     {
+        
         if (GameManager.Instance.currentBulletCount > 0 && Time.time >= nextFireTime)
         {
-            
+            AudioManager.Instance.PlaySFX(0);
             KaihuoEffect.SetTrigger("attack");
             Vector2 shootDirection = new Vector2(horizontal, vertical).normalized;
             SpawnBullet(shootDirection);

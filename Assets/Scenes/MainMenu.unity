@@ -1107,11 +1107,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588539028}
   m_CullTransparentMesh: 1
---- !u!82 &626276152 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 4575637580411952278, guid: 7f64a42b04eac904197d51e5248e1e3c, type: 3}
-  m_PrefabInstance: {fileID: 1377421329}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &627272189
 GameObject:
   m_ObjectHideFlags: 0
@@ -2384,14 +2379,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1082086766791831820, guid: 7f64a42b04eac904197d51e5248e1e3c, type: 3}
-      propertyPath: bgm.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1082086766791831820, guid: 7f64a42b04eac904197d51e5248e1e3c, type: 3}
-      propertyPath: bgm.Array.data[2]
-      value: 
-      objectReference: {fileID: 626276152}
     - target: {fileID: 3640057087268214765, guid: 7f64a42b04eac904197d51e5248e1e3c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.0186543
@@ -2435,10 +2422,6 @@ PrefabInstance:
     - target: {fileID: 4212191242240316048, guid: 7f64a42b04eac904197d51e5248e1e3c, type: 3}
       propertyPath: m_Name
       value: AudioManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4575637580411952278, guid: 7f64a42b04eac904197d51e5248e1e3c, type: 3}
-      propertyPath: Loop
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
