@@ -79,7 +79,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         skillButton = GameObject.Find("SkillButton");
-        pauseButton = GameObject.Find("PauseButton");
+        pauseButton = GameObject.Find("Pause");
+        // bulletCountText = GameObject.Find("BulletCountText").GetComponent<Text>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         // UpdateBulletCount();     
         currentBulletPosition = new Vector3(7f, 3.7f, 1.0f);    
@@ -245,7 +246,7 @@ public class PlayerController : MonoBehaviour
         float shootVertical = 0;
         if(!GameManager.Instance.GetControllMode())
         {
-            // 如果是摇杆控制模式，直接使用射击摇杆的输入
+            // 摇杆控制模式
             if (shootJoystick.Horizontal != 0 || shootJoystick.Vertical != 0)
             {
                 shootHorizontal = shootJoystick.Horizontal;
@@ -254,11 +255,9 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            // 如果是触摸控制模式，使用屏幕触控输入
-            // 检查所有触摸
+            // 触摸控制模式
             if (Input.touchCount > 0)
             {
-                Debug.Log("触摸控制模式");
                 for (int i = 0; i < Input.touchCount; i++)
                 {
                     Touch touch = Input.GetTouch(i);
@@ -266,20 +265,29 @@ public class PlayerController : MonoBehaviour
                     if (touch.phase == TouchPhase.Began)
                     {
                         // 检查是否点击在UI元素上
-                        bool isOnMoveJoystick = IsPointerOverSomething(joystick.GetComponent<RectTransform>(), touch.position);
-                        bool isOnSkillButton = IsPointerOverSomething(skillButton.GetComponent<RectTransform>(), touch.position);
-                        bool isOnPauseButton = IsPointerOverSomething(pauseButton.GetComponent<RectTransform>(), touch.position);
-                        touchStartedOnJoystick[touch.fingerId] = isOnMoveJoystick || isOnSkillButton || isOnPauseButton;
+                        bool isOnUI = false;
+                        if (joystick != null && joystick.gameObject.activeInHierarchy)
+                        {
+                            isOnUI |= IsPointerOverSomething(joystick.GetComponent<RectTransform>(), touch.position);
+                        }
+                        if (skillButton != null && skillButton.activeInHierarchy)
+                        {
+                            isOnUI |= IsPointerOverSomething(skillButton.GetComponent<RectTransform>(), touch.position);
+                        }
+                        if (pauseButton != null && pauseButton.activeInHierarchy)
+                        {
+                            isOnUI |= IsPointerOverSomething(pauseButton.GetComponent<RectTransform>(), touch.position);
+                        }
+                        touchStartedOnJoystick[touch.fingerId] = isOnUI;
                     }
                     
-                    // 如果这个触摸没有开始于摇杆区域，就处理射击
-                    if (!touchStartedOnJoystick[touch.fingerId])
+                    // 如果这个触摸没有开始于UI元素上，就处理射击
+                    if (!touchStartedOnJoystick.ContainsKey(touch.fingerId) || !touchStartedOnJoystick[touch.fingerId])
                     {
                         Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
                         shootHorizontal = touchPos.x - transform.position.x;
                         shootVertical = touchPos.y - transform.position.y;
                         
-                        // 如果是触摸开始，立即尝试射击
                         if (touch.phase == TouchPhase.Began)
                         {
                             TryShoot(shootHorizontal, shootVertical);
@@ -294,19 +302,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // // 处理鼠标点击
-        // if (Input.GetMouseButton(0)) // 左键点击
-        // {
-        //     if (!IsPointerOverJoystick(Input.mousePosition) && !IsPointerOverShootJoystick(Input.mousePosition))
-        //     {
-        //         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //         shootHorizontal = mousePos.x - transform.position.x;
-        //         shootVertical = mousePos.y - transform.position.y;
-        //         TryShoot(shootHorizontal, shootVertical);
-        //     }
-        // }
-
-        // 持续射击（来自射击摇杆）
+        // 持续射击（来自射击摇杆或触摸）
         if (shootHorizontal != 0 || shootVertical != 0)
         {
             RotatePlayer(shootHorizontal, shootVertical);
