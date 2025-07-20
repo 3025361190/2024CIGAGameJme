@@ -336,7 +336,7 @@ public class PlayerController : MonoBehaviour
             // 将方向向量顺时针旋转10度
             if(BuffManager.Instance.GetBuffStack(21) > 0)
             {
-                if(GameManager.Instance.currentBulletCount > 1)
+                if(GameManager.Instance.currentBulletCount > 1 && sceneType == SceneType.QingTang)
                 {
                     float angleInRadians = -10f * Mathf.Deg2Rad; // 负号表示顺时针旋转
                     Vector2 rotatedDirection = new Vector2(
@@ -356,7 +356,7 @@ public class PlayerController : MonoBehaviour
                         GameManager.Instance.currentBulletCount -= 2;
                     }
                 }
-                if(GameManager.Instance.currentBulletCount > 0)
+                if(GameManager.Instance.currentBulletCount > 0 && sceneType == SceneType.QingTang)
                 {
                     Vector2 oppositeDirection = -shootDirection; // 相反方向
                     SpawnBullet(oppositeDirection);
