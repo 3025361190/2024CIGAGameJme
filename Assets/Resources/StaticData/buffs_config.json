@@ -48,7 +48,7 @@
         {
             "buffId": 4,
             "buffName": "移速增加",
-            "buffDescription": "增加玩家人物的移动速度",
+            "buffDescription": "增加玩家的移动速度",
             "buffIcon": "player",
             "buffDuration": -1,
             "buffStackable": true,
@@ -92,7 +92,7 @@
         {
             "buffId": 8,
             "buffName": "强劲体力",
-            "buffDescription": "人物血量增加",
+            "buffDescription": "人物血量上限增加",
             "buffIcon": "attack",
             "buffDuration": -1,
             "buffStackable": true,
@@ -114,7 +114,7 @@
         {
             "buffId": 10,
             "buffName": "更加清汤",
-            "buffDescription": "在清汤场景时间限制延长，可以分裂更多子弹",
+            "buffDescription": "能够停留在清汤场景时间延长，可以分裂更多子弹",
             "buffIcon": "attack",
             "buffDuration": -1,
             "buffStackable": true,
@@ -147,7 +147,7 @@
         {
             "buffId": 13,
             "buffName": "足够强大",
-            "buffDescription": "无任何效果。选择此buff五次可获得一个奖杯",
+            "buffDescription": "无任何效果/n选择此buff五次可获得一个奖杯",
             "buffIcon": "player",
             "buffDuration": -1,
             "buffStackable": true,
@@ -226,7 +226,7 @@
         {
             "buffId": 20,
             "buffName": "伤害增加",
-            "buffDescription": "选择此buff 5次可获得神秘大奖",
+            "buffDescription": "增加子弹对boss伤害",
             "buffIcon": "attack",
             "buffDuration": -1,
             "buffStackable": true,
@@ -236,8 +236,8 @@
         },
         {
             "buffId": 21,
-            "buffName": "稀有buff1",
-            "buffDescription": "子弹变为散射，增加后背方向射出",
+            "buffName": "狂暴射击",
+            "buffDescription": "在清汤场景中，子弹变为散射，增加后背方向射出",
             "buffIcon": "attack",
             "buffDuration": -1,
             "buffStackable": true,
@@ -247,8 +247,8 @@
         },
         {
             "buffId": 22,
-            "buffName": "稀有buff2",
-            "buffDescription": "清汤场景储备子弹模式，相同颜色子弹分裂变为多倍",
+            "buffName": "超级分裂",
+            "buffDescription": "清汤场景下/n相同颜色子弹分裂变为多倍",
             "buffIcon": "attack",
             "buffDuration": -1,
             "buffStackable": true,
@@ -258,7 +258,7 @@
         },
         {
             "buffId": 23,
-            "buffName": "稀有buff3",
+            "buffName": "起死回生",
             "buffDescription": "子弹清0后，立刻获得500子弹",
             "buffIcon": "attack",
             "buffDuration": -1,
@@ -269,7 +269,7 @@
         },
         {
             "buffId": 24,
-            "buffName": "稀有buff4",
+            "buffName": "等价交换",
             "buffDescription": "每次切换到清汤锅只有5秒的时间，但是分裂倍率变成5倍",
             "buffIcon": "attack",
             "buffDuration": -1,

@@ -452,7 +452,7 @@ public class BuffManager : MonoBehaviour
         }
         buffChoosed.SetActive(true);
         // 获取buffchoosed实例下的layout的Transform
-        Transform layout = buffChoosed.transform.Find("Viewport/Content/layout");
+        Transform layout = buffChoosed.transform.Find("Viewport/layout");
         if(layout != null)
         {
             // 清空layout下的所有子物体
