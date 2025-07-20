@@ -386,6 +386,20 @@ public class BulletController : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         Destroy(bullet);
     }
+    public void DisableBullet()
+    {
+        // 禁用碰撞器
+        GetComponent<Collider2D>().enabled = false;
+        // 禁用刚体
+        rb.simulated = false;
+        // 禁用渲染
+        sprite.enabled = false;
+        // 禁用拖尾效果
+        if (trailRenderer != null)
+            trailRenderer.enabled = false;
+        // 停止所有运动
+        rb.velocity = Vector2.zero;
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -400,7 +414,7 @@ public class BulletController : MonoBehaviour
             // sprite.enabled = false;
             // StartCoroutine(WaitSomeSecondsToDestory(100.0f));
             Instantiate(prefabToSpawn, transform.position, transform.rotation);
-            bullet.SetActive(false);
+            DisableBullet();
 
             StartCoroutine(DestroyBulletWithDelay());
 
