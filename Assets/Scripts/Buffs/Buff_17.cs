@@ -20,7 +20,7 @@ public class Buff_17 : BaseBuff
     public override void Init()
     {
         // 初始化buff参数
-        buffId = 16;
+        buffId = 17;
         // 在buffs数组中查找对应buffId的配置
         var buffsArray = GameManager.Instance.data.buffData["buffs"] as JArray;
         var buffConfig = buffsArray.FirstOrDefault(b => b["buffId"].ToObject<int>() == buffId);
