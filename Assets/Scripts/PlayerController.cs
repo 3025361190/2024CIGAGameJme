@@ -133,6 +133,7 @@ public class PlayerController : MonoBehaviour
         {
             rageActivateTimer += Time.deltaTime;
             progressBar.value = (currentValue - minValue) / maxValue;
+            // TODO：增加数量条件
             if (progressBar.value >= 1.0f && !isRageActive)
             {
                 TriggerRage();

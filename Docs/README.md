@@ -60,6 +60,7 @@
   | --- | --- | --- |
   | `rageFiringRate` | int | 狂暴模式下子弹的射速 |
   | `rageThreshold` | int | 进入狂暴模式的阈值（清汤结束时收回的子弹数量与清汤持续时发射的子弹数量的比值） |
+  | `rageMinValue` | int | 进入狂暴模式最少需要回收的子弹数量 |
   | `rageActivateTime` | float | 尝试进入狂暴状态的时间（等待子弹收回的时间） |
   | `rageDuration` | float | 狂暴模式持续的时间 |
 
@@ -71,6 +72,8 @@
   | `firingRate` | float | 射击频率 |
   | `bulletSpeed` | float | 子弹速度 |
   | `bulletCountInScreenMax` | int | 屏幕中子弹的最大存在数量 |
+  | `speedAfterSplit` | int | 分裂后子弹的速度，一般初始等于子弹速度（bulletSpeed） |
+  | `splitNum` | int | 初始子弹每次分裂的数量 |
 
 ### 7. `enemy_config.json` ：
   | 参数 | 类型 | 说明 |
