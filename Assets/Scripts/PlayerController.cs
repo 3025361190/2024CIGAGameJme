@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour
     private int baseBulletCount;            //清汤时发射的子弹数量
     private float rageFiringRate;           //狂暴射速
     private float rageThreshold;            //狂暴触发阈值
+    private int rageMinValue;            //狂暴模式最小回收的子弹数量
     private bool isRageActive = false;      // 狂暴模式标志
     private float rageDuration;             //狂暴持续时间
     private float rageTimer = 0.0f;         // 狂暴模式计时器
@@ -97,6 +98,7 @@ public class PlayerController : MonoBehaviour
         var rageConfig = GameManager.Instance.data.rageData;
         rageFiringRate = rageConfig["rageFiringRate"].ToObject<float>();
         rageThreshold = rageConfig["rageThreshold"].ToObject<float>();
+        rageMinValue = rageConfig["rageMinValue"].ToObject<int>();
         rageDuration = rageConfig["rageDuration"].ToObject<float>();
         rageActivateTime = rageConfig["rageActivateTime"].ToObject<float>();
         //var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
@@ -133,8 +135,7 @@ public class PlayerController : MonoBehaviour
         {
             rageActivateTimer += Time.deltaTime;
             progressBar.value = (currentValue - minValue) / maxValue;
-            // TODO：增加数量条件
-            if (progressBar.value >= 1.0f && !isRageActive)
+            if (progressBar.value >= 1.0f && currentValue - minValue >= rageMinValue && !isRageActive)
             {
                 TriggerRage();
             }
