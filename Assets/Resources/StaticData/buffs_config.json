@@ -186,9 +186,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 0.7,
-            "value_win": 5,
-            "value_lose": 0.5
+            "value": 1.0
         },
         {
             "buffId": 17,
@@ -199,7 +197,9 @@
             "buffStackable": true,
             "stackType": 1,
             "isNormalBuff": true,
-            "value": 5
+            "value": 0.7,
+            "value_win": 5,
+            "value_lose": 0.5
         },
         {
             "buffId": 18,
