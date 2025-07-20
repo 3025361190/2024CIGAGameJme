@@ -33,7 +33,7 @@ public class Buff_14 : BaseBuff
         stackType = buffConfig["stackType"].ToObject<int>();
         isNormalBuff = buffConfig["isNormalBuff"].ToObject<bool>();
         value = buffConfig["value"].ToObject<float>();
-        originalScaleX = GameManager.Instance.data.globalData["playerScalex"].ToObject<float>(); // 获取原始缩放比例X
+        originalScaleX = GameManager.Instance.data.globalData["playerScaleX"].ToObject<float>(); // 获取原始缩放比例X
         originalScaleY = GameManager.Instance.data.globalData["playerScaleY"].ToObject<float>(); // 获取原始缩放比例Y
         originalScaleZ = GameManager.Instance.data.globalData["playerScaleZ"].ToObject<float>(); // 获取原始缩放比例Z
         originalColliderRadius = GameManager.Instance.data.globalData["playerColliderRadius"].ToObject<float>(); // 获取原始碰撞器半径
