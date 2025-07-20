@@ -21,7 +21,7 @@
             "bossHealthPoint" : 10,
             "monsNum" : 30,
             "bossTime" : 30,
-            "buffId" : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,16,17,19],
+            "buffId" : [1,17,19],
             "time" : 1,
             "enemySpawnInterval" : 1,
             "enemyMoveSpeed" : 0.6,

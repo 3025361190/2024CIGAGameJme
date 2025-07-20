@@ -179,26 +179,26 @@
         },
         {
             "buffId": 16,
-            "buffName": "碰碰运气",
-            "buffDescription": "下一关有70%几率使子弹数乘5倍，但也有30%失去一半的子弹",
-            "buffIcon": "default",
-            "buffDuration": -1,
-            "buffStackable": true,
-            "stackType": 1,
-            "isNormalBuff": true,
-            "value": 0.7
-            
-        },
-        {
-            "buffId": 17,
             "buffName": "足够倒霉",
             "buffDescription": "无任何效果，遇到我算你倒霉",
             "buffIcon": "default",
             "buffDuration": -1,
             "buffStackable": true,
+            "stackType": 1,
+            "isNormalBuff": true,
+            "value": 1.0
+            
+        },
+        {
+            "buffId": 17,
+            "buffName": "碰碰运气",
+            "buffDescription": "下一关有70%几率使子弹数乘5倍，但也有30%失去一半的子弹",
+            "buffIcon": "default",
+            "buffDuration": -1,
+            "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 5,
+            "value": 0.3,
             "value_win": 5,
             "value_lose": 0.5
         },
