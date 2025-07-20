@@ -335,7 +335,8 @@ public class BuffManager : MonoBehaviour
             // 通过index记录当前展示的buff卡面
             showBuffIds.Insert(index, buff.buffId);
             // 为卡面添加click事件
-            buffCard.GetComponent<Button>().onClick.AddListener(() => BuffCardChoosen(index));
+            Button button = buffCard.GetComponent<Button>();
+            button.onClick.AddListener(() => BuffCardChoosen(index,button));
         }
         else
         {
@@ -344,11 +345,12 @@ public class BuffManager : MonoBehaviour
     }
 
     // buff卡片被选中
-    public void BuffCardChoosen(int cardIndex)
+    public void BuffCardChoosen(int cardIndex,Button button)
     {
         // Debug.Log($"buff卡片被选中：{cardIndex+1}");
         // 记录当前选中的buff卡面
         choosenBuffCardIndex = cardIndex;
+        
         // Debug.Log($"choosenBuffCardIndex：{choosenBuffCardIndex}");
         
         // 激活并绑定NextLevelBtn
