@@ -13,8 +13,9 @@ using Newtonsoft.Json.Linq;
 public class Buff_14 : BaseBuff
 {
     private float value;
-    private GameObject player;
-    private Vector3 originalScale;
+    private float originalScaleX;
+    private float originalScaleY;
+    private float originalScaleZ;
     private float originalColliderRadius;
 
     public override void Init()
@@ -32,9 +33,10 @@ public class Buff_14 : BaseBuff
         stackType = buffConfig["stackType"].ToObject<int>();
         isNormalBuff = buffConfig["isNormalBuff"].ToObject<bool>();
         value = buffConfig["value"].ToObject<float>();
-        player = GameObject.FindWithTag("Player");
-        originalScale = player.transform.localScale; // 假设玩家的缩放是均匀的
-        originalColliderRadius = player.GetComponent<CircleCollider2D>().radius; // 获取原始碰撞器半径
+        originalScaleX = GameManager.Instance.data.globalData[""].ToObject<float>(); // 获取原始缩放比例X
+        originalScaleY = GameManager.Instance.data.globalData["playerScaleY"].ToObject<float>(); // 获取原始缩放比例Y
+        originalScaleZ = GameManager.Instance.data.globalData["playerScaleZ"].ToObject<float>(); // 获取原始缩放比例Z
+        originalColliderRadius = GameManager.Instance.data.globalData["playerColliderRadius"].ToObject<float>(); // 获取原始碰撞器半径
         // 初始化运行时参数
         currentStack = 0;
         isActive = false;
@@ -45,14 +47,18 @@ public class Buff_14 : BaseBuff
     {
         // 保留父类逻辑
         base.ActivateBuff();
-        player.transform.localScale *= 0.5f;
-        player.GetComponent<CircleCollider2D>().radius *= 0.5f;
+        GameManager.Instance.data.globalData["playerScaleX"] = GameManager.Instance.data.globalData["playerScaleX"].ToObject<float>() * 0.5f; // 缩放比例X
+        GameManager.Instance.data.globalData["playerScaleY"] = GameManager.Instance.data.globalData["playerScaleY"].ToObject<float>() * 0.5f; // 缩放比例Y
+        GameManager.Instance.data.globalData["playerScaleZ"] = GameManager.Instance.data.globalData["playerScaleZ"].ToObject<float>() * 0.5f; // 缩放比例Z
+        GameManager.Instance.data.globalData["playerColliderRadius"] = GameManager.Instance.data.globalData["playerColliderRadius"].ToObject<float>() * 0.5f; // 缩放碰撞器半径
     }
 
     public override void DeactivateBuff()
     {
         base.DeactivateBuff();
-        player.transform.localScale = originalScale; // 恢复原始缩放比例
-        player.GetComponent<CircleCollider2D>().radius = originalColliderRadius; // 恢复原始碰撞器半径
+        GameManager.Instance.data.globalData["playerScaleX"] = originalScaleX; // 恢复原始缩放比例X
+        GameManager.Instance.data.globalData["playerScaleY"] = originalScaleY; // 恢复原始缩放比例Y
+        GameManager.Instance.data.globalData["playerScaleZ"] = originalScaleZ; // 恢复原始缩放比例Z
+        GameManager.Instance.data.globalData["playerColliderRadius"] = originalColliderRadius; // 恢复原始碰撞器半径
     }    
 }

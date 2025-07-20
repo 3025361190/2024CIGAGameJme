@@ -22,6 +22,10 @@ public class PlayerController : MonoBehaviour
     // private Vector2 shootDirection;
     public GameObject bulletPrefab;             // 子弹预制体
     public float moveSpeed;                     // 移动速度
+    private float playerScaleX;               // 玩家缩放比例X
+    private float playerScaleY;               // 玩家缩放比例Y
+    private float playerScaleZ;               // 玩家缩放比例Z
+    private float playerColliderRadius;       // 玩家碰撞器半径
     public float bulletSpeed;                   // 子弹速度
     public float fireRate;                      // 射击间隔
     public float normalFireRate;                // 正常射击间隔
@@ -104,7 +108,15 @@ public class PlayerController : MonoBehaviour
         //var globalConfig = JsonLoader.LoadJsonAsJObject("StaticData/global_config");
         var globalConfig = GameManager.Instance.data.globalData;
         moveSpeed = globalConfig["maxMoveSpeed"].ToObject<float>();
+        playerScaleX = globalConfig["playerScaleX"].ToObject<float>();
+        playerScaleY = globalConfig["playerScaleY"].ToObject<float>();
+        playerScaleZ = globalConfig["playerScaleZ"].ToObject<float>();
+        playerColliderRadius = globalConfig["playerColliderRadius"].ToObject<float>();
+
+        transform.localScale = new Vector3(playerScaleX, playerScaleY, playerScaleZ);
+        GetComponent<CircleCollider2D>().radius = playerColliderRadius;
     }
+
 
     void FixedUpdate()
     {
