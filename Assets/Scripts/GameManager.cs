@@ -177,28 +177,20 @@ public class GameManager : MonoBehaviour
             SetLevelText();
             AudioManager.Instance.PlayBGM(0);
 
-            // 给切换按钮绑定点击事件
-            // Transform parent = GameObject.Find("Canvas").transform;
-            // Transform yaoganTransform = parent.Find("settingsWindow/btn_yaogan");
-            // GameObject yaoganBtn = yaoganTransform.gameObject;
-            // if(yaoganBtn == null)
-            // {
-            //     Debug.LogError("未找到yaogan按钮");
-            // }
-            // else
-            // {
-            //     yaoganBtn.GetComponent<Button>().onClick.AddListener(ChangeShootingModeToClick);
-            // }
-            // Transform clickTransform = yaoganTransform.Find("btn_click");
-            // GameObject clickBtn = clickTransform.gameObject;
-            // if(clickBtn == null)
-            // {
-            //     Debug.LogError("未找到click按钮");
-            // }
-            // else
-            // {
-            //     clickBtn.GetComponent<Button>().onClick.AddListener(ChangeShootingModeToJoystick);
-            // }
+            // 根据当前射击模式设置摇杆状态
+            GameObject player = GameObject.Find("player");
+            if (player != null)
+            {
+                PlayerController playerController = player.GetComponent<PlayerController>();
+                if (playerController != null && playerController.shootJoystick != null)
+                {
+                    // 如果当前是点击模式，隐藏摇杆；如果是摇杆模式，显示摇杆
+                    playerController.shootJoystick.gameObject.SetActive(!gameSettings.shootingMode);
+                }
+            }
+
+            // TODO：瑞，给切换按钮设置初始值
+           
         }
 
         // 如果场景是level_scene，level为1,，且isNewPlayer为true，则播放新手教程
@@ -347,18 +339,38 @@ public class GameManager : MonoBehaviour
     public void ChangeShootingModeToClick()
     {
         gameSettings.shootingMode = true;
-        GetControllMode();
-        Debug.Log("gameSettings.shootingMode:"+gameSettings.shootingMode+" gameManagerId:"+gameManagerId);
+        // Debug.Log("gameSettings.shootingMode:"+gameSettings.shootingMode+" gameManagerId:"+gameManagerId);
         SaveGameSettings();
+        
+        // 隐藏射击摇杆
+        GameObject player = GameObject.Find("player");
+        if (player != null)
+        {
+            PlayerController playerController = player.GetComponent<PlayerController>();
+            if (playerController != null && playerController.shootJoystick != null)
+            {
+                playerController.shootJoystick.gameObject.SetActive(false);
+            }
+        }
     }
     
     // 修改射击模式为摇杆射击
     public void ChangeShootingModeToJoystick()
     {
         gameSettings.shootingMode = false; 
-        GetControllMode();
-        Debug.Log("gameSettings.shootingMode:"+gameSettings.shootingMode+" gameManagerId:"+gameManagerId);
+        // Debug.Log("gameSettings.shootingMode:"+gameSettings.shootingMode+" gameManagerId:"+gameManagerId);
         SaveGameSettings();
+        
+        // 显示射击摇杆
+        GameObject player = GameObject.Find("player");
+        if (player != null)
+        {
+            PlayerController playerController = player.GetComponent<PlayerController>();
+            if (playerController != null && playerController.shootJoystick != null)
+            {
+                playerController.shootJoystick.gameObject.SetActive(true);
+            }
+        }
     }
 
     // 保存所有数据
