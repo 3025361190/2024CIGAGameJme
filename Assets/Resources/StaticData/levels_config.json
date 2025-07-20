@@ -144,7 +144,7 @@
         {
             "levelId" : 10,
             "isBoss" : 1,
-            "bossHealthPoint" : 100,
+            "bossHealthPoint" : 50,
             "monsNum" : 120,
             "bossTime" : 10,
             "buffId" : [21,22,23,24],
@@ -164,7 +164,7 @@
             "buffId" : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
             "time" : 50,
             "enemySpawnInterval" : 2,
-            "enemyMoveSpeed" : 0.6,
+            "enemyMoveSpeed" : 0.8,
             "enemyDamage" : 1,
             "bossMoveSpeed" : 5,
             "bossDamage" : 5
@@ -178,7 +178,7 @@
             "buffId" : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
             "time" : 3600,
             "enemySpawnInterval" : 2,
-            "enemyMoveSpeed" : 0.6,
+            "enemyMoveSpeed" :0.8,
             "enemyDamage" : 1,
             "bossMoveSpeed" : 5,
             "bossDamage" : 5
@@ -192,7 +192,7 @@
             "buffId" : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
             "time" : 50,
             "enemySpawnInterval" : 2,
-            "enemyMoveSpeed" : 0.6,
+            "enemyMoveSpeed" : 0.8,
             "enemyDamage" : 1,
             "bossMoveSpeed" : 5,
             "bossDamage" : 5
@@ -206,7 +206,7 @@
             "buffId" : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
             "time" : 60,
             "enemySpawnInterval" : 2,
-            "enemyMoveSpeed" : 0.6,
+            "enemyMoveSpeed" : 0.8,
             "enemyDamage" : 1,
             "bossMoveSpeed" : 5,
             "bossDamage" : 5
@@ -214,13 +214,13 @@
         {
             "levelId" : 15,
             "isBoss" : 1,
-            "bossHealthPoint" : 10,
+            "bossHealthPoint" : 80,
             "monsNum" : 120,
-            "bossTime" : 0,
+            "bossTime" : 10,
             "buffId" : [21,22,23,24],
             "time" : 99,
             "enemySpawnInterval" : 2,
-            "enemyMoveSpeed" : 0.6,
+            "enemyMoveSpeed" : 0.8,
             "enemyDamage" : 1,
             "bossMoveSpeed" : 5,
             "bossDamage" : 5
@@ -234,7 +234,7 @@
             "buffId" : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
             "time" : 60,
             "enemySpawnInterval" : 2,
-            "enemyMoveSpeed" : 0.6,
+            "enemyMoveSpeed" : 1,
             "enemyDamage" : 1,
             "bossMoveSpeed" : 5,
             "bossDamage" : 5
@@ -248,7 +248,7 @@
             "buffId" : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
             "time" : 60,
             "enemySpawnInterval" : 2,
-            "enemyMoveSpeed" : 0.6,
+            "enemyMoveSpeed" : 1,
             "enemyDamage" : 1,
             "bossMoveSpeed" : 5,
             "bossDamage" : 5
@@ -262,7 +262,7 @@
             "buffId" : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
             "time" : 60,
             "enemySpawnInterval" : 2,
-            "enemyMoveSpeed" : 0.6,
+            "enemyMoveSpeed" : 1,
             "enemyDamage" : 1,
             "bossMoveSpeed" : 5,
             "bossDamage" : 5
@@ -276,7 +276,7 @@
             "buffId" : [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
             "time" : 60,
             "enemySpawnInterval" : 2,
-            "enemyMoveSpeed" : 0.6,
+            "enemyMoveSpeed" : 1,
             "enemyDamage" : 1,
             "bossMoveSpeed" : 5,
             "bossDamage" : 5
@@ -284,13 +284,13 @@
         {
             "levelId" : 20,
             "isBoss" : 1,
-            "bossHealthPoint" : 10,
+            "bossHealthPoint" : 100,
             "monsNum" : 200,
             "bossTime" : 20,
             "buffId" : [21,22,23,24],
-            "time" : 99,
-            "enemySpawnInterval" : 0.4,
-            "enemyMoveSpeed" : 0.6,
+            "time" : 120,
+            "enemySpawnInterval" : 0.3,
+            "enemyMoveSpeed" : 1.2,
             "enemyDamage" : 1,
             "bossMoveSpeed" : 5,
             "bossDamage" : 5

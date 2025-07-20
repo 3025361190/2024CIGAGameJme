@@ -9719,6 +9719,10 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 886078418907837112, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 886078418907837112, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
       propertyPath: m_fontSize
       value: 50
       objectReference: {fileID: 0}
