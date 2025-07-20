@@ -8,6 +8,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;  // 添加UI组件的命名空间
@@ -62,6 +63,8 @@ public class BuffManager : MonoBehaviour
 
     // 代码中绑定场景中的buffChoosed
     private GameObject buffChoosed;
+
+    private Button[] buffCardButtons = new Button[3];
 
 
 
@@ -134,6 +137,11 @@ public class BuffManager : MonoBehaviour
         buffChoose = null;
         // 解除buffChoosed的绑定
         buffChoosed = null;
+        // 清空buffCardButtons
+        for(int i = 0; i < 3; i++)
+        {
+            buffCardButtons[i] = null;
+        }
     }
 
     // 递归设置所有层级的Animator组件为UnscaledTime
@@ -336,7 +344,8 @@ public class BuffManager : MonoBehaviour
             showBuffIds.Insert(index, buff.buffId);
             // 为卡面添加click事件
             Button button = buffCard.GetComponent<Button>();
-            button.onClick.AddListener(() => BuffCardChoosen(index,button));
+            buffCardButtons[index] = button;
+            button.onClick.AddListener(() => BuffCardChoosen(index));
         }
         else
         {
@@ -345,11 +354,20 @@ public class BuffManager : MonoBehaviour
     }
 
     // buff卡片被选中
-    public void BuffCardChoosen(int cardIndex,Button button)
+    public void BuffCardChoosen(int cardIndex)
     {
         // Debug.Log($"buff卡片被选中：{cardIndex+1}");
         // 记录当前选中的buff卡面
         choosenBuffCardIndex = cardIndex;
+        // EventSystem.current.SetSelectedGameObject(button.gameObject);
+        // 将所有buff卡片的颜色重置为正常颜色，选中的卡片设置为selected color
+        for(int i = 0; i < 3; i++)
+        {
+            buffCardButtons[i].image.color = buffCardButtons[i].colors.normalColor;
+        }
+       buffCardButtons[cardIndex].image.color = buffCardButtons[cardIndex].colors.selectedColor;
+
+
         
         // Debug.Log($"choosenBuffCardIndex：{choosenBuffCardIndex}");
         
