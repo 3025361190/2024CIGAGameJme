@@ -21,7 +21,7 @@
             "buffStackable": true,
             "stackType": 1,
             "isNormalBuff": true,
-            "value": 1.1
+            "value": 0.8
         },
         {
             "buffId": 2,
@@ -32,7 +32,7 @@
             "buffStackable": true,
             "stackType": 1,
             "isNormalBuff": true,
-            "value": 0.5
+            "value": 0.7
         },
                 {
             "buffId": 3,
@@ -76,7 +76,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 5
+            "value": 10
         },
         {
             "buffId": 7,
@@ -87,7 +87,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 5
+            "value": 2
         },
         {
             "buffId": 8,
@@ -98,7 +98,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 500
+            "value": 5
         },
         {
             "buffId": 9,
@@ -114,13 +114,13 @@
         {
             "buffId": 10,
             "buffName": "更加清汤",
-            "buffDescription": "能够停留在清汤场景时间延长，可以分裂更多子弹",
+            "buffDescription": "能够停留在清汤场景时间延长",
             "buffIcon": "attack",
             "buffDuration": -1,
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 5
+            "value": 3
         },
         {
             "buffId": 11,
@@ -142,7 +142,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 2
+            "value": 4
         },
         {
             "buffId": 13,
@@ -186,8 +186,7 @@
             "buffStackable": true,
             "stackType": 1,
             "isNormalBuff": true,
-            "value": 0.7
-            
+            "value": 5
         },
         {
             "buffId": 17,
@@ -198,7 +197,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 5,
+            "value": 0.7,
             "value_win": 5,
             "value_lose": 0.5
         },
@@ -228,7 +227,7 @@
             "buffId": 20,
             "buffName": "伤害增加",
             "buffDescription": "增加子弹对boss伤害",
-            "buffIcon": "attack",
+            "buffIcon": "monster",
             "buffDuration": -1,
             "buffStackable": true,
             "stackType": 0,
@@ -272,7 +271,7 @@
             "buffId": 24,
             "buffName": "等价交换",
             "buffDescription": "每次切换到清汤锅只有5秒的时间，但是分裂倍率变成5倍",
-            "buffIcon": "attack",
+            "buffIcon": "default",
             "buffDuration": -1,
             "buffStackable": true,
             "stackType": 0,

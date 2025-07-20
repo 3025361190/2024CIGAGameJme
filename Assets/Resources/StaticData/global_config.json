@@ -1,10 +1,10 @@
 {
     "initialBulletCount" : 60,
     "initialHealth" : 10,
-    "maxMoveSpeed" : 5,
+    "maxMoveSpeed" : 4,
     "flashDuration" : 1.0,
     "flashInterval" : 0.1,
-    "bloodRaturnValue" : 10.0,
+    "bloodRaturnValue" : 6.0,
     "playerScaleX" : 1.0,
     "playerScaleY" : 1.0,
     "playerScaleZ" : 1.0,

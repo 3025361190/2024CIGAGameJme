@@ -1,7 +1,7 @@
 {
-    "rageFiringRate" : 0.05,
+    "rageFiringRate" : 0.1,
     "rageThreshold" : 2.0,
-    "rageMinValue" : 100,
+    "rageMinValue" : 50,
     "rageActivateTime" : 2.0,
-    "rageDuration" : 3.0
+    "rageDuration" : 4.0
 }
