@@ -9758,6 +9758,14 @@ PrefabInstance:
       propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1495493933908606235, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
+      propertyPath: m_FontData.m_BestFit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495493933908606235, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1696048090774826002, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
       propertyPath: m_Name
       value: back
@@ -9817,6 +9825,14 @@ PrefabInstance:
     - target: {fileID: 3008973218529513447, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
       propertyPath: m_Name
       value: continue
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427938433268321344, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 2.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3427938433268321344, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -34.4
       objectReference: {fileID: 0}
     - target: {fileID: 3834182110459680532, guid: 3219877a2eab27c44a7a92afe88f5ebc, type: 3}
       propertyPath: targetGameObject
