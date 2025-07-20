@@ -437,6 +437,10 @@ public class PlayerController : MonoBehaviour
             {
                 bullet.GetComponent<BulletController>().Recycle();
             }
+            else
+            {
+                Debug.Log("Bullet is null, removing from activeBullets list.");
+            }
         }
         tryActivateRage = true;
         minValue = GameManager.Instance.currentBulletCount;

@@ -380,6 +380,12 @@ public class BulletController : MonoBehaviour
             
         // }
     }
+    // 添加新的协程方法
+    private IEnumerator DestroyBulletWithDelay()
+    {
+        yield return new WaitForSeconds(0.1f);
+        Destroy(bullet);
+    }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -394,7 +400,9 @@ public class BulletController : MonoBehaviour
             // sprite.enabled = false;
             // StartCoroutine(WaitSomeSecondsToDestory(100.0f));
             Instantiate(prefabToSpawn, transform.position, transform.rotation);
-            Destroy(bullet);
+            bullet.SetActive(false);
+
+            StartCoroutine(DestroyBulletWithDelay());
 
 
         }
