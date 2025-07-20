@@ -24,6 +24,8 @@ using Newtonsoft.Json.Linq;
 
 public class GameManager : MonoBehaviour
 {
+    // GameManager id，用于排查有没有预期外的gamemanager实例
+    public int gameManagerId;
     // 单例实例
     private static GameManager instance;
     public static GameManager Instance
@@ -56,8 +58,7 @@ public class GameManager : MonoBehaviour
     public PlayerData PlayerData => playerData;
 
     // 游戏设置
-    private GameSettings gameSettings;
-    public GameSettings GameSettings => gameSettings;
+    public GameSettings gameSettings;
 
 
     // global_config.json中的数据
@@ -92,6 +93,8 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        gameManagerId = Random.Range(100000000, 999999999);
+        Debug.LogWarning($"GameManager实例ID: {gameManagerId}");
         // 确保单例
         if (instance != null && instance != this)
         {
@@ -173,6 +176,29 @@ public class GameManager : MonoBehaviour
             timer = GameObject.Find("timer").GetComponent<Timer>();
             SetLevelText();
             AudioManager.Instance.PlayBGM(0);
+
+            // 给切换按钮绑定点击事件
+            // Transform parent = GameObject.Find("Canvas").transform;
+            // Transform yaoganTransform = parent.Find("settingsWindow/btn_yaogan");
+            // GameObject yaoganBtn = yaoganTransform.gameObject;
+            // if(yaoganBtn == null)
+            // {
+            //     Debug.LogError("未找到yaogan按钮");
+            // }
+            // else
+            // {
+            //     yaoganBtn.GetComponent<Button>().onClick.AddListener(ChangeShootingModeToClick);
+            // }
+            // Transform clickTransform = yaoganTransform.Find("btn_click");
+            // GameObject clickBtn = clickTransform.gameObject;
+            // if(clickBtn == null)
+            // {
+            //     Debug.LogError("未找到click按钮");
+            // }
+            // else
+            // {
+            //     clickBtn.GetComponent<Button>().onClick.AddListener(ChangeShootingModeToJoystick);
+            // }
         }
 
         // 如果场景是level_scene，level为1,，且isNewPlayer为true，则播放新手教程
@@ -321,13 +347,17 @@ public class GameManager : MonoBehaviour
     public void ChangeShootingModeToClick()
     {
         gameSettings.shootingMode = true;
+        GetControllMode();
+        Debug.Log("gameSettings.shootingMode:"+gameSettings.shootingMode+" gameManagerId:"+gameManagerId);
         SaveGameSettings();
     }
     
     // 修改射击模式为摇杆射击
     public void ChangeShootingModeToJoystick()
     {
-        gameSettings.shootingMode = false;
+        gameSettings.shootingMode = false; 
+        GetControllMode();
+        Debug.Log("gameSettings.shootingMode:"+gameSettings.shootingMode+" gameManagerId:"+gameManagerId);
         SaveGameSettings();
     }
 
@@ -609,6 +639,7 @@ public class GameManager : MonoBehaviour
 
     public bool GetControllMode()
     {
+        // Debug.Log("gameSettings.shootingMode:"+gameSettings.shootingMode+" gameManagerId:"+gameManagerId);
         return gameSettings.shootingMode;
     }
 

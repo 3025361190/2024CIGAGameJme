@@ -3324,6 +3324,7 @@ GameObject:
   - component: {fileID: 728829035}
   - component: {fileID: 728829034}
   - component: {fileID: 728829033}
+  - component: {fileID: 728829036}
   m_Layer: 5
   m_Name: byn_click
   m_TagString: Untagged
@@ -3456,6 +3457,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 728829031}
   m_CullTransparentMesh: 1
+--- !u!114 &728829036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 728829031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aafb749399ed8964db2584d6a46ac181, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &730108797
 GameObject:
   m_ObjectHideFlags: 0
@@ -5050,6 +5063,7 @@ GameObject:
   - component: {fileID: 1140410253}
   - component: {fileID: 1140410252}
   - component: {fileID: 1140410251}
+  - component: {fileID: 1140410254}
   m_Layer: 5
   m_Name: btn_yaogan
   m_TagString: Untagged
@@ -5183,6 +5197,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1140410249}
   m_CullTransparentMesh: 1
+--- !u!114 &1140410254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1140410249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f454201bc2e34f241ad70db937fbe04e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1172251821
 GameObject:
   m_ObjectHideFlags: 0
