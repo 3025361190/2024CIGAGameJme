@@ -89,9 +89,6 @@ public class GameManager : MonoBehaviour
     // 关卡是否已经结束（成功或失败）
     private bool isLevelEnded = false;
 
-    // 操控方式：false 为全摇杆控制；true 为摇杆控制方向，触屏控制射击
-    // TODO: 瑞，编写控制方式切换逻辑
-    private bool controllMode = false;
 
     private void Awake()
     {
@@ -318,6 +315,20 @@ public class GameManager : MonoBehaviour
     {
         string json = JsonConvert.SerializeObject(gameSettings, Formatting.Indented);
         File.WriteAllText(System.IO.Path.Combine(saveDataPath, "game_settings.json"), json);
+    }
+
+    // 修改射击模式为点击屏幕射击
+    public void ChangeShootingModeToClick()
+    {
+        gameSettings.shootingMode = true;
+        SaveGameSettings();
+    }
+    
+    // 修改射击模式为摇杆射击
+    public void ChangeShootingModeToJoystick()
+    {
+        gameSettings.shootingMode = false;
+        SaveGameSettings();
     }
 
     // 保存所有数据
@@ -598,7 +609,7 @@ public class GameManager : MonoBehaviour
 
     public bool GetControllMode()
     {
-        return controllMode;
+        return gameSettings.shootingMode;
     }
 
 
