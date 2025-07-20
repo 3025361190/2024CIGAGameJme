@@ -147,7 +147,6 @@ public class Enemy : MonoBehaviour
         // 检查对象是否还存在
         if (gameObject != null)
         {
-            AudioManager.Instance.PlaySFX(5);
             Die(1);
         }
     }
