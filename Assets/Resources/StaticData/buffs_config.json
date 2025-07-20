@@ -76,7 +76,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 10
+            "value": 5
         },
         {
             "buffId": 7,

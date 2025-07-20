@@ -3325,7 +3325,7 @@ GameObject:
   - component: {fileID: 728829034}
   - component: {fileID: 728829033}
   m_Layer: 5
-  m_Name: Image
+  m_Name: byn_click
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5051,7 +5051,7 @@ GameObject:
   - component: {fileID: 1140410252}
   - component: {fileID: 1140410251}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: btn_yaogan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

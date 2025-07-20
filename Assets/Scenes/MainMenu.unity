@@ -1378,7 +1378,7 @@ GameObject:
   - component: {fileID: 663166726}
   - component: {fileID: 663166725}
   m_Layer: 5
-  m_Name: Image
+  m_Name: btn_click
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1697,6 +1697,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f63710c801546454488c8fbbffb9278c, type: 3}
+--- !u!114 &886113378 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8776671508292792717, guid: f63710c801546454488c8fbbffb9278c, type: 3}
+  m_PrefabInstance: {fileID: 886113377}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58709ea7e6a176a479bc02c085771356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &925276366
 GameObject:
   m_ObjectHideFlags: 0
@@ -3900,7 +3911,7 @@ GameObject:
   - component: {fileID: 1841580569}
   - component: {fileID: 1841580568}
   m_Layer: 5
-  m_Name: Button (Legacy)
+  m_Name: btn_yaogan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3970,10 +3981,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 663166723}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 886113378}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: ChangeShootingModeToJoystick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
