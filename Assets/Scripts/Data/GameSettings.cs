@@ -15,6 +15,6 @@ namespace Assets.Scripts.Data
         public bool isVibration { get; set; } = true;
 
         // true表示点击屏幕射击，false表示摇杆射击
-        public bool shootingMode { get; set; } = true;
+        public bool shootingMode { get; set; } = false;
     }
 } 
