@@ -1050,7 +1050,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5DE6\u8FB9\u6447\u6746\u63A7\u5236\u5C04\u51FB\u65B9\u5411"
+  m_Text: "\u53F3\u8FB9\u6447\u6746\u63A7\u5236\u5C04\u51FB\u65B9\u5411"
 --- !u!222 &191861910
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2279,7 +2279,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u53F3\u8FB9\u6447\u6746\u63A7\u5236\u79FB\u52A8"
+  m_Text: "\u5DE6\u8FB9\u6447\u6746\u63A7\u5236\u79FB\u52A8"
 --- !u!222 &527484176
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7631,7 +7631,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -42.329}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 885.7987, y: 499.07788}
+  m_AnchoredPosition: {x: 588, y: 501}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1624754954
