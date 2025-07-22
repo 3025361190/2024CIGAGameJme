@@ -9219,6 +9219,10 @@ PrefabInstance:
       propertyPath: m_Navigation.m_Mode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1382600532195128350, guid: 713aa9b2fa63eff43853b7f885e2ead4, type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1812117585280260371, guid: 713aa9b2fa63eff43853b7f885e2ead4, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
