@@ -21,7 +21,7 @@
             "buffStackable": true,
             "stackType": 1,
             "isNormalBuff": true,
-            "value": 0.8
+            "value": 0.7
         },
         {
             "buffId": 2,
@@ -32,7 +32,7 @@
             "buffStackable": true,
             "stackType": 1,
             "isNormalBuff": true,
-            "value": 0.7
+            "value": 0.6
         },
                 {
             "buffId": 3,
@@ -76,7 +76,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 5
+            "value": 4
         },
         {
             "buffId": 7,
@@ -142,7 +142,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 4
+            "value": 6
         },
         {
             "buffId": 13,
@@ -164,7 +164,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": 5
+            "value": 3
         },
         {
             "buffId": 15,
@@ -221,7 +221,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": true,
-            "value": -1.0
+            "value": -3.0
         },
         {
             "buffId": 20,
@@ -254,7 +254,7 @@
             "buffStackable": true,
             "stackType": 0,
             "isNormalBuff": false,
-            "value": 5
+            "value": 3
         },
         {
             "buffId": 23,
