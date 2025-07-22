@@ -21,7 +21,7 @@
             "buffStackable": true,
             "stackType": 1,
             "isNormalBuff": true,
-            "value": 0.7
+            "value": 0.8
         },
         {
             "buffId": 2,
@@ -54,7 +54,7 @@
             "buffStackable": true,
             "stackType": 1,
             "isNormalBuff": true,
-            "value": 1.5
+            "value": 1.3
         },
         {
             "buffId": 5,
