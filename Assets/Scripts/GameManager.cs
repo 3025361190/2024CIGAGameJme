@@ -510,6 +510,28 @@ public class GameManager : MonoBehaviour
             isLevelEnded = true;
             LevelFail();
         }
+        // 当前场景为红汤且没有buff23且子弹为0，关卡失败
+        else if(currentBulletCount == 0 && buffManager.GetBuffStack(23) == 0)
+        {
+            // 找skillbutton
+            GameObject skillButtonObj = GameObject.Find("JoystickCanvas/SkillButton");
+            if(skillButtonObj != null)
+            {
+                SkillButton skillButton = skillButtonObj.GetComponent<SkillButton>();
+                if(skillButton != null)
+                {
+                    if(skillButton.GetCurrentSceneType() == SceneType.HongYou)
+                    {
+                        isLevelEnded = true;
+                        LevelFail();
+                    }
+                }
+            }
+            else
+            {
+                // Debug.LogError("未找到skillButton对象！");
+            }
+        }
         // 时间结束，且boss未死，关卡失败
         else if(isTimeOut && !isAllBossDead)
         {
