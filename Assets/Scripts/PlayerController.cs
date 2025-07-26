@@ -510,7 +510,7 @@ public class PlayerController : MonoBehaviour
      // 新手教程相关（2）
      void NewMountSmall()
      {
-         if (GameManager.Instance.currentBulletCount <= 50 )
+         if (GameManager.Instance.currentBulletCount <= 180 )
          {
     
              director.playableGraph.GetRootPlayable(0).SetSpeed(1);

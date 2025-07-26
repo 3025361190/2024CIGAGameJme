@@ -376,7 +376,7 @@ GameObject:
   - component: {fileID: 339731502}
   - component: {fileID: 339731501}
   m_Layer: 5
-  m_Name: "\u5236\u4F5C\u56E2\u961F"
+  m_Name: zhizuotuandui
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

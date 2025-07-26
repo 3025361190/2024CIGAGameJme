@@ -248,7 +248,7 @@
         {
             "buffId": 22,
             "buffName": "超级分裂",
-            "buffDescription": "清汤场景下/n相同颜色子弹分裂变为多倍",
+            "buffDescription": "清汤场景下\n相同颜色子弹分裂变为多倍",
             "buffIcon": "attack",
             "buffDuration": -1,
             "buffStackable": true,

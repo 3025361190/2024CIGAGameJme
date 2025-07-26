@@ -1,5 +1,5 @@
 {
-    "initialBulletCount" : 60,
+    "initialBulletCount" : 200,
     "initialHealth" : 10,
     "maxMoveSpeed" : 4,
     "flashDuration" : 1.0,

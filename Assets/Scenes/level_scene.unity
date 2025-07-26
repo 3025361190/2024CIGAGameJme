@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5B50\u5F39\u5FEB\u6CA1\u4E86\uFF01\n\u70B9\u51FB\u5207\u6362\u573A\u666F\u6309\u94AE\uFF0C\u53BB\u83B7\u53D6\u5B50\u5F39\u2193"
+  m_Text: "\u60F3\u8981\u66F4\u591A\u5B50\u5F39\uFF1F\n\u70B9\u51FB\u5207\u6362\u573A\u666F\u6309\u94AE\uFF0C\u53BB\u83B7\u53D6\u5B50\u5F39\u2193"
 --- !u!222 &3959229
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2633,7 +2633,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 561094715}
   m_LocalRotation: {x: 0.020584075, y: -0, z: -0, w: 0.9997881}
-  m_LocalPosition: {x: 0, y: 0, z: 9.3207}
+  m_LocalPosition: {x: 0, y: 0, z: 8.4596}
   m_LocalScale: {x: 1.0239098, y: 1.1133249, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2641,8 +2641,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 2.359, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 124.14578, y: -77.25771}
-  m_SizeDelta: {x: 496.6506, y: 86.0027}
+  m_AnchoredPosition: {x: 124.14578, y: -98.15994}
+  m_SizeDelta: {x: 496.6506, y: 123.5837}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &561094717
 MonoBehaviour:
@@ -4862,7 +4862,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 989282785}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -4931,8 +4931,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 123.49464, y: -75.1}
-  m_SizeDelta: {x: 682.1192, y: 69.9937}
+  m_AnchoredPosition: {x: 123.49464, y: -97.132095}
+  m_SizeDelta: {x: 682.1192, y: 114.0578}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1113809014
 MonoBehaviour:
@@ -4967,7 +4967,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u2190\u8FD9\u91CC\u4F1A\u663E\u793A\u4F60\u7684\u5B50\u5F39\u6570\u548C\u8840\u91CF\n\uFF08\u5B50\u5F39\u6570\u548C\u8840\u91CF\u6BCF\u4E00\u5173\u4F1A\u7EE7\u627F\u54E6\uFF09"
+  m_Text: "\u2190\u8FD9\u91CC\u4F1A\u663E\u793A\u4F60\u7684\u5B50\u5F39\u6570\u548C\u8840\u91CF\n\u8840\u91CF\u6216\u5B50\u5F39\u6570\u4E3A0\u5219\u6E38\u620F\u5931\u8D25\n\uFF08\u5B50\u5F39\u6570\u548C\u8840\u91CF\u6BCF\u4E00\u5173\u4F1A\u7EE7\u627F\u54E6\uFF09"
 --- !u!222 &1113809015
 CanvasRenderer:
   m_ObjectHideFlags: 0
